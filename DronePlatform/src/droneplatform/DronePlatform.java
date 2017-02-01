@@ -29,6 +29,8 @@ public class DronePlatform {
         //Testing 5
         
         // Test 6
+        
+        // Dobbeltest
     }
     
     
