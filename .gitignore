@@ -52,3 +52,5 @@ DronePlatform/dist/DronePlatform.jar
 *.properties
 *.properties
 *.properties
+*.TXT
+*.properties
