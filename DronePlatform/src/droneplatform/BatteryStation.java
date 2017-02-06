@@ -74,14 +74,15 @@ public class BatteryStation {
     }
 
     /**
-     * Setting the docking status of the station
+     * Setting the docking status of the station If battery is docked, the timer
+     * starts running. of the battery is out of docking, the timer pstops and
+     * resets
      *
      * @param value boolean value , true if battery is in docking, and false if
-     * staion is empty
+     * station is empty
      */
     public void setDocked(boolean value) {
         if (value == true) {
-
             tTask = new TimerTask() {
                 public void run() {
                     secondsPassed++;
@@ -196,10 +197,10 @@ public class BatteryStation {
         zValue = (byte) newZValue;
     }
 
-    public void start() {
-
-    }
-
+    /**
+     * Returns the number of seconds the batterystation has batteri on charging
+     * returns 0 if batterDocking is false
+     */
     public int getNumberOfSecondsCharged() {
         return secondsPassed;
     }
