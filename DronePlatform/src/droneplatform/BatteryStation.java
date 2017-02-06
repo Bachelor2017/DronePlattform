@@ -7,27 +7,30 @@ package droneplatform;
  * and open the template in the editor.
  */
 /**
- *Batteristation for batteri charging
- * 
+ * Batteristation for batteri charging
+ *
  */
 public class BatteryStation {
 
     private boolean isDocked;
     private int batteryLevel;
     private int batteryStatus;
+    private int xValue;
+    private int yValue;
+    private int zValue;
+    private byte[] stationLocation;
 
-    
-    
     public BatteryStation() {
         batteryStatus = 0;
         batteryLevel = 0;
         isDocked = false;
+        this.stationLocation = new byte[3];
     }
 
-    
     /**
-     * Sets the batterycharged value. makes sure the value uios not below 0 
-     * or above 100 
+     * Sets the batterycharged value. makes sure the value uios not below 0 or
+     * above 100
+     *
      * @param value the value of batterycharging status
      */
     public void setBatteryLevel(int value) {
@@ -40,10 +43,9 @@ public class BatteryStation {
         }
     }
 
-    
     /**
-     * 
-     * @return the value of the battery 
+     *
+     * @return the value of the battery
      */
     public int getBatteryLevel() {
         return batteryLevel;
@@ -51,9 +53,10 @@ public class BatteryStation {
 
     /**
      * Check if there is battery docked to station
-     * @return boolean signal that staes if there is battery in station (true) 
+     *
+     * @return boolean signal that staes if there is battery in station (true)
      * or not (false)
-     * 
+     *
      */
     public boolean isDocked() {
         return isDocked;
@@ -61,8 +64,9 @@ public class BatteryStation {
 
     /**
      * Setting the docking status of the station
-     * @param value boolean value , true if battery is in docking, 
-     * and false if staion is empty
+     *
+     * @param value boolean value , true if battery is in docking, and false if
+     * staion is empty
      */
     public void setDocked(boolean value) {
         isDocked = value;
@@ -70,7 +74,8 @@ public class BatteryStation {
 
     /**
      * get the batterystatus from the station
-     * @return 
+     *
+     * @return
      */
     public int getBatteryStatus() {
         return batteryStatus;
@@ -78,10 +83,87 @@ public class BatteryStation {
 
     /**
      * Setting the batterystatus to the station
+     *
      * @param value a integer for the batterystatus
      */
     public void setBatteryStatus(int value) {
         batteryStatus = value;
     }
 
+    /**
+     * Returning the X-Value of the charger
+     *
+     * @return xValue of the charger
+     */
+    public int getxValue() {
+        return xValue;
+    }
+
+    /**
+     * Setting the X-Value of the station
+     *
+     * @param xValue setting xValue of station
+     */
+    public void setxValue(int xValue) {
+        this.xValue = xValue;
+    }
+
+    /**
+     * Returning the Y-Value of the charger
+     *
+     * @return yValue of the charger
+     */
+    public int getyValue() {
+        return yValue;
+    }
+
+    /**
+     * Setting the Y-Value of the station
+     *
+     * @param yValue setting xValue of station
+     */
+    public void setyValue(int yValue) {
+        this.yValue = yValue;
+    }
+
+    /**
+     * Returning the Z-Value of the charger
+     *
+     * @return zValue of the charger
+     */
+    public int getzValue() {
+        return zValue;
+    }
+
+    /**
+     * Setting the Z-Value of the station
+     *
+     * @param zValue setting xValue of station
+     */
+    public void setzValue(int zValue) {
+        this.zValue = zValue;
+    }
+
+    /**
+     * returns the location in X,Y and Z direction of the station
+     * @return stationLocation
+     */
+    public byte[] getBatteryStationLocation() {
+        stationLocation[0] = (byte) xValue;
+        stationLocation[1] = (byte) yValue;
+        stationLocation[2] = (byte) zValue;
+        return stationLocation;
+    }
+    
+    /**
+     * Setting the location of the batteryStation
+     * @param newXValue, xvalue of the station
+     * @param newYValue  yvalue of the station
+     * @param newZValue  zvalue of the station
+     */
+    public void setBatteryStationLocation(int newXValue,int newYValue,int newZValue) {
+        xValue = (byte) newXValue;
+        yValue = (byte) newYValue;
+        zValue = (byte) newZValue;   
+    }
 }

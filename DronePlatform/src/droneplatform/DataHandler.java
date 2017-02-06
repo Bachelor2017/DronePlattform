@@ -1,23 +1,29 @@
 package droneplatform;
 
+import java.util.Arrays;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
- * 
+ *
  */
 public class DataHandler {
 
     private SerialCom serialCom;
+    private BatteryStation batteryStation1;
+    private BatteryStation batteryStation2;
 
     public DataHandler() {
-        //serialCom = new SerialCom("/dev/ttyUSB0", this);
+
+        testBatteryStation();
+        serialCom = new SerialCom("/dev/ttyUSB0", this);
         serialCom = new SerialCom("COM7", this);
-        serialCom.connect();
+        //  serialCom.connect();
+
     }
 
     public byte[] dataToArduino() {
@@ -30,6 +36,15 @@ public class DataHandler {
         data[5] = 6;
         data[6] = 123;
         return data;
+    }
+
+    public void testBatteryStation() {
+        batteryStation1 = new BatteryStation();
+        batteryStation2 = new BatteryStation();
+        batteryStation1.setBatteryStationLocation(100, 10, 10);
+        batteryStation2.setBatteryStationLocation(50, 50, 50);
+        System.out.println("location battery 1: " + Arrays.toString(batteryStation1.getBatteryStationLocation()));
+        System.out.println("location battery 2: " + Arrays.toString(batteryStation2.getBatteryStationLocation()));
     }
 
 }

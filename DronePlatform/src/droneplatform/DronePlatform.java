@@ -10,11 +10,15 @@ package droneplatform;
  * @author Olav Rune
  */
 public class DronePlatform {
+   
+   
+    
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        DataHandler dh = new DataHandler();
         // TODO code application logic here
         
         // testing testing testing
