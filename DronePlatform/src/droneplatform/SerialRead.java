@@ -24,14 +24,21 @@ public class SerialRead implements Runnable {
     public byte[] dataArduino = new byte[25];
     int increment;
     
-
+  /**
+     * Setting ut the serialCommunication reading thread. 
+     * @param serialCom the serialcommunicator class
+     * @param s The semaphore added to the communication
+     * @param sp  the serial communication port 
+     */
     public SerialRead(SerialCom serialCom, Semaphore s, SerialPort sp) {
         this.semaphore = s;
         this.serialPort = sp;
         this.serialCom = serialCom;
     }
 
-
+/**
+ * aquires semaphore, reads data and stors it to bytearray data..
+ */
     public void run() {
         try {
             while (true) {
@@ -107,6 +114,12 @@ public class SerialRead implements Runnable {
         return realData;
     }
 
+    /** 
+     * Making sure the byte array is in right order. looking for -128 as 
+     * first byte
+     * @param data received bytearray
+     * @return bytearray in fixed order
+     */
     public byte[] checkDataArrangementTest(byte[] data) {
         byte[] realData = new byte[25];
         for (int x = 0; x < realData.length; x++) {
