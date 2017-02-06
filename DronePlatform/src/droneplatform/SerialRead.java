@@ -14,7 +14,7 @@ import java.util.concurrent.Semaphore;
  */
 /**
  *
- * 
+ * her kan det skrives inn test
  */
 public class SerialRead implements Runnable {
 
