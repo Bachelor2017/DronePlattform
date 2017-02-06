@@ -1,7 +1,7 @@
 package droneplatform;
 
-
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,21 +10,29 @@ import java.util.ArrayList;
  */
 /**
  *
- * 
+ *
  */
 public class BatteryStationLogic {
 
     private ArrayList<BatteryStation> batteries;
     private BatteryStation battery;
 
+    ///
+    private java.util.Timer timer;
+    private TimerTask tTask;
+    private int batteryPossition;
+    public int secondsPassed;
+    ///
+
     public BatteryStationLogic() {
         batteries = new ArrayList<>();
         fillList();
+        testing();
     }
 
     private void fillList() {
         for (int i = 0; i < 16; i++) {
-           // battery = new BatteryStation();
+            battery = new BatteryStation(i);
             batteries.add(battery);
         }
     }
@@ -67,4 +75,46 @@ public class BatteryStationLogic {
             System.out.println("Bat Nr: " + i + " " + batteries.get(i).getBatteryLevel());
         }
     }
+
+    public void testing() {
+
+        secondsPassed = 0;
+        BatteryStation batr1 = new BatteryStation(1);
+        batteries.get(0).setDocked(true);
+        tTask = new TimerTask() {
+            public void run() {
+
+                if (secondsPassed == 5) {
+                     batteries.get(0).setDocked(false);
+                }
+                if (secondsPassed == 8) {
+                     batteries.get(0).setDocked(true);
+                     batteries.get(1).setDocked(true);
+                }
+                if (secondsPassed == 12) {
+                     batteries.get(0).setDocked(false);
+                     batteries.get(1).setDocked(false);
+                     batteries.get(2).setDocked(true);
+                }
+                if (secondsPassed == 15) {
+                     batteries.get(3).setDocked(true);
+                     batteries.get(4).setDocked(true);
+                     batteries.get(5).setDocked(true);
+                     batteries.get(6).setDocked(true);
+                     batteries.get(7).setDocked(true);
+
+                }
+
+            
+            secondsPassed++;
+            }
+        };
+        timer  = new java.util.Timer();
+
+    timer.scheduleAtFixedRate (tTask,
+            
+
+1000, 1000);
+    }
+
 }
