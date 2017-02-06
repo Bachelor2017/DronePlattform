@@ -1,5 +1,8 @@
 package droneplatform;
 
+import java.util.TimerTask;
+import java.util.Timer;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,12 +22,19 @@ public class BatteryStation {
     private int yValue;
     private int zValue;
     private byte[] stationLocation;
+    private int secondsPassed;
+    private Timer timer;
+    private TimerTask tTask;
+    private int batteryPossition;
 
-    public BatteryStation() {
+    public BatteryStation(int batteryPossition) {
+
+        this.batteryPossition = batteryPossition;
         batteryStatus = 0;
         batteryLevel = 0;
         isDocked = false;
         this.stationLocation = new byte[3];
+
     }
 
     /**
@@ -40,6 +50,7 @@ public class BatteryStation {
             batteryLevel = 100;
         } else {
             batteryLevel = value;
+
         }
     }
 
@@ -69,6 +80,22 @@ public class BatteryStation {
      * staion is empty
      */
     public void setDocked(boolean value) {
+        if (value == true) {
+
+            tTask = new TimerTask() {
+                public void run() {
+                    secondsPassed++;
+                    System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
+                }
+            };
+            timer = new Timer();
+            timer.scheduleAtFixedRate(tTask, 1000, 1000);
+
+        } else {
+            timer.cancel();
+            timer.purge();
+            secondsPassed = 0;
+        }
         isDocked = value;
     }
 
@@ -146,6 +173,7 @@ public class BatteryStation {
 
     /**
      * returns the location in X,Y and Z direction of the station
+     *
      * @return stationLocation
      */
     public byte[] getBatteryStationLocation() {
@@ -154,16 +182,26 @@ public class BatteryStation {
         stationLocation[2] = (byte) zValue;
         return stationLocation;
     }
-    
+
     /**
      * Setting the location of the batteryStation
+     *
      * @param newXValue, xvalue of the station
-     * @param newYValue  yvalue of the station
-     * @param newZValue  zvalue of the station
+     * @param newYValue yvalue of the station
+     * @param newZValue zvalue of the station
      */
-    public void setBatteryStationLocation(int newXValue,int newYValue,int newZValue) {
+    public void setBatteryStationLocation(int newXValue, int newYValue, int newZValue) {
         xValue = (byte) newXValue;
         yValue = (byte) newYValue;
-        zValue = (byte) newZValue;   
+        zValue = (byte) newZValue;
     }
+
+    public void start() {
+
+    }
+
+    public int getNumberOfSecondsCharged() {
+        return secondsPassed;
+    }
+
 }

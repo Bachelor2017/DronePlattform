@@ -24,7 +24,7 @@ public class BatteryStationLogic {
 
     private void fillList() {
         for (int i = 0; i < 16; i++) {
-            battery = new BatteryStation();
+           // battery = new BatteryStation();
             batteries.add(battery);
         }
     }
