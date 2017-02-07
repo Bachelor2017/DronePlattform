@@ -15,7 +15,7 @@ import java.util.Timer;
  */
 public class BatteryStation {
 
-    private boolean isDocked;
+    private boolean dockingStatus;
     private int batteryLevel;
     private int batteryStatus;
     private int xValue;
@@ -32,7 +32,7 @@ public class BatteryStation {
         this.batteryPossition = batteryPossition;
         batteryStatus = 0;
         batteryLevel = 0;
-        isDocked = false;
+        dockingStatus = false;
         this.stationLocation = new byte[3];
 
     }
@@ -55,10 +55,12 @@ public class BatteryStation {
     }
 
     /**
-     *
-     * @return the value of the battery
+     * The value is calculated from the soconds in docking to 
+     * seconds to full carge ratio
+     * @return the value of the battery in persentage
      */
     public int getBatteryLevel() {
+        batteryLevel = (secondsPassed/3600)*100;
         return batteryLevel;
     }
 
@@ -70,7 +72,7 @@ public class BatteryStation {
      *
      */
     public boolean isDocked() {
-        return isDocked;
+        return dockingStatus;
     }
 
     /**
@@ -97,7 +99,7 @@ public class BatteryStation {
             timer.purge();
             secondsPassed = 0;
         }
-        isDocked = value;
+        dockingStatus = value;
     }
 
     /**
@@ -204,5 +206,6 @@ public class BatteryStation {
     public int getNumberOfSecondsCharged() {
         return secondsPassed;
     }
-
+    
+    
 }

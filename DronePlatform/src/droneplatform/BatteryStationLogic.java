@@ -111,10 +111,15 @@ public class BatteryStationLogic {
         };
         timer  = new java.util.Timer();
 
-    timer.scheduleAtFixedRate (tTask,
-            
-
-1000, 1000);
+    timer.scheduleAtFixedRate (tTask,1000, 1000);
     }
 
+    
+    public int getTheLastBatteryPlacement()
+    {
+        
+    }
+    
+    
+    
 }
