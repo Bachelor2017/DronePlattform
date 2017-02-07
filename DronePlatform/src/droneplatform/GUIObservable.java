@@ -1,6 +1,5 @@
 package droneplatform;
 
-
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -10,12 +9,12 @@ import java.util.Observer;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
- * 
+ *
  */
 public class GUIObservable extends Observable {
+
     private String textArea1;
     private String textArea2;
     private String textArea3;
@@ -26,25 +25,23 @@ public class GUIObservable extends Observable {
     private String textArea8;
     private String textArea9;
     private String textArea10;
-    
-   private FaultHandler faultHandler;
-   private BatteryStationLogic batteryStationLogic;
-   private ArrayList<BatteryStation> batteries;
-    
-    public GUIObservable(FaultHandler faultHandler){
+
+    private FaultHandler faultHandler;
+    private BatteryStationLogic batteryStationLogic;
+    private ArrayList<BatteryStation> batteries;
+
+    public GUIObservable(FaultHandler faultHandler,BatteryStationLogic batteryStationLogic) {
         this.faultHandler = faultHandler;
-        this.batteryStationLogic = new BatteryStationLogic();
+       this.batteryStationLogic = batteryStationLogic;
     }
-    
-     @Override
+
+    @Override
     public synchronized void addObserver(Observer o) {
         super.addObserver(o); //To change body of generated methods, choose Tools | Templates.
-        
-        
+
     }
-    
-    public void setData()
-    {
+
+    public void setData() {
         String[] faultArray = faultHandler.guiFaultList();
         this.textArea1 = faultArray[0];
         this.textArea2 = faultArray[1];
@@ -57,103 +54,96 @@ public class GUIObservable extends Observable {
         this.textArea9 = faultArray[8];
         this.textArea10 = faultArray[9];
         batteries = batteryStationLogic.getArrayListBatteries();
-        
+
         setChanged();
         notifyObservers();
     }
-    
-    
-    public String getFaultTextArea1(){
-       
+
+    public String getFaultTextArea1() {
+
         return this.textArea1;
     }
-    
-    public String getFaultTextArea2(){
-       
+
+    public String getFaultTextArea2() {
+
         return this.textArea2;
     }
-    public String getFaultTextArea3(){
-       
+
+    public String getFaultTextArea3() {
+
         return this.textArea3;
     }
-    public String getFaultTextArea4(){
-       
+
+    public String getFaultTextArea4() {
+
         return this.textArea4;
     }
-    public String getFaultTextArea5(){
-       
+
+    public String getFaultTextArea5() {
+
         return this.textArea5;
     }
-    public String getFaultTextArea6(){
-       
+
+    public String getFaultTextArea6() {
+
         return this.textArea6;
     }
-    public String getFaultTextArea7(){
-       
+
+    public String getFaultTextArea7() {
+
         return this.textArea7;
     }
-    public String getFaultTextArea8(){
-       
+
+    public String getFaultTextArea8() {
+
         return this.textArea8;
     }
-    public String getFaultTextArea9(){
-       
+
+    public String getFaultTextArea9() {
+
         return this.textArea9;
     }
-    public String getFaultTextArea10(){
-       
+
+    public String getFaultTextArea10() {
+
         return this.textArea10;
     }
-    
-    
+
     ///////////////////////////////////////////////////
     //to battery GUI
     
-      
-    public int getBatteryLevel(int x)
-    {
-        int batteryChargingLevel = 0;
-       batteryChargingLevel = batteries.get(x).getNumberOfSecondsCharged();
-      //  int batteryLevel = 0;
-        String batteryLevelString = null;
-        //batteries = batteryStationLogic.getArrayListBatteries();
-       // batteryLevel = batteryStationLogic.getActiveBatteryChargingLevel(x);
-       // batteryLevelString = Integer.toString(batteryChargingLevel);
-         
-        return batteryChargingLevel;
-    }
-    
-     public boolean getBatteryStationDockingStatus(int x)
-    {
+
+    public boolean getBatteryStationDockingStatus(int x) {
         boolean isBatteryDockedInStation = false;
-       isBatteryDockedInStation = batteries.get(x).isDocked();
-     
-         
+        isBatteryDockedInStation = batteries.get(x).isDocked();
+
         return isBatteryDockedInStation;
     }
-     
-     public void setSpesificBatteryToDocking(int x)
-     {
-        // batteries.get(x).setDocked(false);
-        batteries.get(x).setDocked(true);
-     }
-     
-     public void releaseSpesificBatteryFromDocking(int x)
-     {
-        // batteries.get(x).setDocked(false);
-        batteries.get(x).setDocked(false);
-     }
-     
-     
-     public void setBatteryToDocking()
-     {
-         
-     }
-     
-     public int getLastDockedBattery()
-     {
-         return batteryStationLogic.getActiveBatteryPlacement();
-     }
-   
+
+    public void setSpesificBatteryToDocking(int x) {
+        batteryStationLogic.settBatteryToChargeInStation(x);
+    }
+
+    public void releaseSpesificBatteryFromDocking(int x) {
+
+        batteryStationLogic.releaseBatteryFromChargeInStation(x);
+    }
+
+    public int getLastDockedBattery() {
+        return batteryStationLogic.getActiveBatteryPlacement();
+    }
+
     
+    
+    
+    ////////////////////////////////////
+    //Utgår når vi tar i bruk I2C
+    ////////////////////////////
+    public int getBatteryLevel(int x) {
+        int batteryChargingLevel = 0;
+        batteryChargingLevel = batteries.get(x).getNumberOfSecondsCharged();
+        String batteryLevelString = null;
+    
+        return batteryChargingLevel;
+    }
 }
