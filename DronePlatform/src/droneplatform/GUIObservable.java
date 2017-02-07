@@ -131,6 +131,29 @@ public class GUIObservable extends Observable {
          
         return isBatteryDockedInStation;
     }
+     
+     public void setSpesificBatteryToDocking(int x)
+     {
+        // batteries.get(x).setDocked(false);
+        batteries.get(x).setDocked(true);
+     }
+     
+     public void releaseSpesificBatteryFromDocking(int x)
+     {
+        // batteries.get(x).setDocked(false);
+        batteries.get(x).setDocked(false);
+     }
+     
+     
+     public void setBatteryToDocking()
+     {
+         
+     }
+     
+     public int getLastDockedBattery()
+     {
+         return batteryStationLogic.getActiveBatteryPlacement();
+     }
    
     
 }
