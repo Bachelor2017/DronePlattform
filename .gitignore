@@ -59,3 +59,4 @@ DronePlatform/dist/DronePlatform.jar
 /DronePlatform/dist/
 *.properties
 *.properties
+*.class
