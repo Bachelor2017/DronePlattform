@@ -26,6 +26,7 @@ public class BatteryStation {
     private Timer timer;
     private TimerTask tTask;
     private int batteryPossition;
+    private int chargingTimeToMax;
 
     public BatteryStation(int batteryPossition) {
 
@@ -34,6 +35,7 @@ public class BatteryStation {
         batteryLevel = 0;
         dockingStatus = false;
         this.stationLocation = new byte[3];
+        chargingTimeToMax =100;   //3600 oringalt
 
     }
 
@@ -60,7 +62,7 @@ public class BatteryStation {
      * @return the value of the battery in persentage
      */
     public int getBatteryLevel() {
-        batteryLevel = (secondsPassed/3600)*100;
+        batteryLevel = (secondsPassed/chargingTimeToMax)*100;
         return batteryLevel;
     }
 

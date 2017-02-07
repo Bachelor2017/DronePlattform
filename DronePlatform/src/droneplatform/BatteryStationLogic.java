@@ -16,16 +16,21 @@ public class BatteryStationLogic {
 
     private ArrayList<BatteryStation> batteries;
     private BatteryStation battery;
+    private byte[] batteriStationLocation;
+
+    private int batteryStationNumberPossition;
+    private int batteryStationYPossition;
+    private int batteryStationChargingLevel;
 
     ///
     private java.util.Timer timer;
     private TimerTask tTask;
-    private int batteryPossition;
     public int secondsPassed;
     ///
 
     public BatteryStationLogic() {
         batteries = new ArrayList<>();
+        batteryStationNumberPossition = 0;
         fillList();
         testing();
     }
@@ -85,41 +90,59 @@ public class BatteryStationLogic {
             public void run() {
 
                 if (secondsPassed == 5) {
-                     batteries.get(0).setDocked(false);
+                    batteries.get(0).setDocked(false);
                 }
                 if (secondsPassed == 8) {
-                     batteries.get(0).setDocked(true);
-                     batteries.get(1).setDocked(true);
+                    batteries.get(0).setDocked(true);
+                    batteries.get(1).setDocked(true);
                 }
                 if (secondsPassed == 12) {
-                     batteries.get(0).setDocked(false);
-                     batteries.get(1).setDocked(false);
-                     batteries.get(2).setDocked(true);
+                    batteries.get(0).setDocked(false);
+                    batteries.get(1).setDocked(false);
+                    batteries.get(2).setDocked(true);
                 }
                 if (secondsPassed == 15) {
-                     batteries.get(3).setDocked(true);
-                     batteries.get(4).setDocked(true);
-                     batteries.get(5).setDocked(true);
-                     batteries.get(6).setDocked(true);
-                     batteries.get(7).setDocked(true);
+                    batteries.get(3).setDocked(true);
+                    batteries.get(4).setDocked(true);
+                    batteries.get(5).setDocked(true);
+                    batteries.get(6).setDocked(true);
+                    batteries.get(7).setDocked(true);
 
                 }
 
-            
-            secondsPassed++;
+                secondsPassed++;
             }
         };
-        timer  = new java.util.Timer();
+        timer = new java.util.Timer();
 
-    timer.scheduleAtFixedRate (tTask,1000, 1000);
+        timer.scheduleAtFixedRate(tTask, 1000, 1000);
     }
 
+    public int getActiveBatteryPlacement() {
+        batteryStationNumberPossition++;
+        if (batteryStationNumberPossition > 16) {
+            batteryStationNumberPossition = 0;
+        }
+        return batteryStationNumberPossition;
+    }
+
+    public byte[] getActiveBatteryXYZLocation(int x) {
+        this.batteriStationLocation = new byte[3];
+        batteriStationLocation = batteries.get(x).getBatteryStationLocation();
+        return batteriStationLocation;
+    }
+
+    public int getActiveBatteryChargingLevel(int x) {
+        batteryStationChargingLevel = batteries.get(x).getBatteryLevel();
+        return batteryStationChargingLevel;
+    }
     
-    public int getTheLastBatteryPlacement()
+    public void settBatteryToChargeInStation(int x)
     {
-        
+        batteries.get(x).setDocked(true);
     }
     
     
     
 }
+

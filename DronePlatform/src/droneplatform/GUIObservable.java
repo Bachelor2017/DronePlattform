@@ -1,6 +1,7 @@
 package droneplatform;
 
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,9 +28,12 @@ public class GUIObservable extends Observable {
     private String textArea10;
     
    private FaultHandler faultHandler;
+   private BatteryStationLogic batteryStationLogic;
+   private ArrayList<BatteryStation> batteries;
     
     public GUIObservable(FaultHandler faultHandler){
         this.faultHandler = faultHandler;
+        this.batteryStationLogic = new BatteryStationLogic();
     }
     
      @Override
@@ -52,7 +56,7 @@ public class GUIObservable extends Observable {
         this.textArea8 = faultArray[7];
         this.textArea9 = faultArray[8];
         this.textArea10 = faultArray[9];
-        
+        batteries = batteryStationLogic.getArrayListBatteries();
         
         setChanged();
         notifyObservers();
@@ -101,6 +105,32 @@ public class GUIObservable extends Observable {
         return this.textArea10;
     }
     
- 
+    
+    ///////////////////////////////////////////////////
+    //to battery GUI
+    
+      
+    public int getBatteryLevel(int x)
+    {
+        int batteryChargingLevel = 0;
+       batteryChargingLevel = batteries.get(x).getNumberOfSecondsCharged();
+      //  int batteryLevel = 0;
+        String batteryLevelString = null;
+        //batteries = batteryStationLogic.getArrayListBatteries();
+       // batteryLevel = batteryStationLogic.getActiveBatteryChargingLevel(x);
+       // batteryLevelString = Integer.toString(batteryChargingLevel);
+         
+        return batteryChargingLevel;
+    }
+    
+     public boolean getBatteryStationDockingStatus(int x)
+    {
+        boolean isBatteryDockedInStation = false;
+       isBatteryDockedInStation = batteries.get(x).isDocked();
+     
+         
+        return isBatteryDockedInStation;
+    }
+   
     
 }
