@@ -32,4 +32,18 @@ public class DataHandler {
         return data;
     }
     
+    
+    public byte[] getDataFromArduino(){
+        byte[] data = new byte[64];
+        data[0] = 100;
+        data[1] = 2;
+        data[2] = 3;
+        data[3] = 4;
+        data[4] = 5;
+        data[5] = 6;
+        data[6] = 123;
+        return data;
+        
+        
+    }
 }

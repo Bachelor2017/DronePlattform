@@ -27,6 +27,9 @@ public class BatteryStation {
     private TimerTask tTask;
     private int batteryPossition;
     private int chargingTimeToMax;
+    private int temperature;
+    private int timeToMaxBattery;
+    private int chargedPercentage;
 
     public BatteryStation(int batteryPossition) {
 
@@ -203,6 +206,71 @@ public class BatteryStation {
         zValue = (byte) newZValue;
     }
 
+   
+    /**
+     * sett the temperature of the battery
+     * @param temp of battery
+     */
+    public void setTemperature(int temp)
+    {
+        temperature = temp;
+    }
+    
+    /**
+     * returning the battery temperature
+     * @return battery temperature int
+     */
+    public int getTemperature()
+    {
+        return temperature;
+    }
+    
+    
+    /**
+     * Setting the time to battery is fully charged
+     * @param time to battery is fully charged int
+     */
+    public void setTimeToMaxBattery(int time)
+    {
+        timeToMaxBattery = time;
+    }
+    
+    /**
+     * returns the time for the battery is fully charged
+     * @return timeToMaxBattery
+     */
+    public int returnTimeToMaxBattery()
+    {
+        return timeToMaxBattery;
+    }
+    
+    /**
+     * returns the battery charging percentage
+     * @param percentage of charged battery
+     */
+    public void setPercentageCharged(int percentage)
+    {
+        this.chargedPercentage = percentage;
+    }
+    
+    /**
+     * returns the percentage of the charged battery
+     * @return percetage of battery
+     */
+    public int getChargedPercentage()
+    {
+        return chargedPercentage;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * Returns the number of seconds the batterystation has batteri on charging
      * returns 0 if batterDocking is false
