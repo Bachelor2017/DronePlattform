@@ -29,21 +29,20 @@ public class DronePlatform {
         //screen.setFullScreenWindow(gui);
         
         Semaphore semaphore = new Semaphore(1,true);
-        BatteryStationLogic bsg = new BatteryStationLogic(dataHandler,semaphore);  
-        bsg.start();
-        SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
-        sysLog.start();
-        FaultHandler faultHandler = new FaultHandler();
-        GUIObservable observable = new GUIObservable(faultHandler,bsg);
-        faultHandler.testing();
-        observable.addObserver(gui);
-        
+     //  BatteryStationLogic bsg = new BatteryStationLogic(dataHandler,semaphore);  
+               //SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
+        //sysLog.start();
+      //  FaultHandler faultHandler = new FaultHandler();
+      //  GUIObservable observable = new GUIObservable(faultHandler,bsg);
+      //  faultHandler.testing();
+      //  observable.addObserver(gui);
+        /*
          
         while(true){
             observable.setData();
 //            faultHandler.testing();
         }
-       
+       */
        
     }
     

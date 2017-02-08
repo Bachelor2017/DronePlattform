@@ -17,7 +17,7 @@ import java.util.concurrent.Semaphore;
  * between serial read and send to make sure on is running at the time
  *
  */
-public class SerialCom {
+public class SerialComArduino implements Runnable {
 
     private SerialPort serialPort;
     Semaphore semaPhore = new Semaphore(1, true);
@@ -26,17 +26,27 @@ public class SerialCom {
     public byte[] dataFromArduino = new byte[23];
     public byte[] dataToArduino = new byte[6];
     DataHandler dataHandler;
-
+    int increment;
+private Thread t;
     /**
      *
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialCom(String comPort, DataHandler dataHandler) {
+    public SerialComArduino(String comPort, DataHandler dataHandler) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
     }
+    
+    /**
+     * start a new thread containing the batterystationLogic
+     */
+    public void start() {
+        t = new Thread(this, "BatteryStationLogic thread");
+        t.start();
+    }
+
 
     /**
      * Creats and starts the threads read and send.
@@ -46,10 +56,8 @@ public class SerialCom {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
                 getSerialPort().setParams(9600, 8, 1, 0);
-                reader = new Thread(new SerialRead(this, semaPhore, serialPort, dataHandler));
-                sender = new Thread(new SerialSend(this, semaPhore, serialPort));
-                sender.start();
-                reader.start();
+               // reader = new Thread(new SerialReadArduino(this, semaPhore, serialPort, dataHandler));         
+               // reader.start();
             }
         } catch (SerialPortException e) {
             System.out.println("No Port Found On: " + System.getProperty("os.name"));
@@ -119,6 +127,37 @@ public class SerialCom {
 
     public Semaphore getSemaphore() {
         return semaPhore;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true) {
+               // semaphore.acquire();
+               byte[] data = serialPort.readBytes(1);
+               if (data[0]==-128)
+               {
+                     byte[] data1 = serialPort.readBytes(144);
+                increment++;
+                //System.out.println("Read Serial " + Arrays.toString(data));
+                //if (data.length > 0) {
+                   // byte[] arrangedData = checkDataArrangementTest(data);
+                   // this.dataArduino = arrangedData;
+                   // serialCom.dataFromArduino = arrangedData;
+                  //  dataHandler.setDataFromArduino(arrangedData);
+                    System.out.println("received: " + increment);
+                    System.out.println("Read Arranged " + Arrays.toString(data1));
+               // }
+
+             //   semaphore.release();
+
+            }
+               }
+              
+        } catch (SerialPortException ex) {
+            System.out.println("SerialPortException i SerialRead");
+        }
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -18,6 +18,7 @@ public class DataHandler {
     private byte[] dataFromArduino;
     private byte[] dataToArduino;
     private BatteryStationLogic batteryStationLogic;
+    private SerialComArduino serialComArduino;
 
     ///
     private java.util.Timer timer;
@@ -27,12 +28,15 @@ public class DataHandler {
 
     public DataHandler() {
         //serialCom = new SerialCom("/dev/ttyUSB0", this);
-        serialCom = new SerialCom("COM7", this);
-        serialCom.connect();
-        byte[] dataFromArduino = new byte[64];
+        //serialCom = new SerialCom("COM3", this);
+       // serialCom.connect();
+        serialComArduino = new SerialComArduino("COM3", this);
+        serialComArduino.start();
+        byte[] dataFromArduino = new byte[10];
         byte[] dataToArduino = new byte[64];
-        settTestDataFromArduino();
-        testing();   //starts a timer to change the data to se if GUI reacts
+        // settTestDataFromArduino();
+        //testing();   //starts a timer to change the data to se if GUI reacts
+
     }
 
     /**
@@ -42,7 +46,6 @@ public class DataHandler {
      */
     public byte[] getDataFromArduino() {
         return dataFromArduino;
-
     }
 
     /**
@@ -67,31 +70,24 @@ public class DataHandler {
     }
 
     /**
-     * setting a testread from the arduino controller to test the GUI data,
-     * should read 1,2,3,4,5->65
-     */
-    public void settTestDataFromArduino() {
-        byte[] testByte = new byte[65];
-        this.dataFromArduino = testByte;
-        for (int x = 0; x < 65; x++) {
-            dataFromArduino[x] = (byte) x;
-        }
-    }
-
-    /**
      * starts a timer to change the data to se if GUI reacts
      */
     public void testing() {
-        secondsPassed = 0;
+        byte[] testByte = new byte[5];
+        this.dataFromArduino = testByte;
+        // secondsPassed = 0;
+
         tTask = new TimerTask() {
             public void run() {
-                for(int x = 0; x<64;x++)
-                {
-                    dataFromArduino[x] = (byte) secondsPassed;
-             
-                }
+                for (int x = 0; x < 15; x++) {
 
-                secondsPassed++;
+                    dataFromArduino[0] = (byte) x;
+                    dataFromArduino[1] = (byte) x;
+                    dataFromArduino[2] = (byte) x;
+                    dataFromArduino[3] = (byte) x;
+                    dataFromArduino[4] = (byte) x;
+
+                }
             }
         };
         timer = new java.util.Timer();

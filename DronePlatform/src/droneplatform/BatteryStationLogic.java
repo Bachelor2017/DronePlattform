@@ -44,7 +44,7 @@ public class BatteryStationLogic implements Runnable {
         batteryStationNumberPossition = 0;
         this.dh = dh;
         fillList();
-        byte[] dataFromArduino = new byte[65];
+        byte[] dataFromArduino = new byte[10];
         //testing();
     }
 
@@ -253,6 +253,29 @@ public class BatteryStationLogic implements Runnable {
      */
     public void setDataFromArduino() {
         dataFromArduino = dh.getDataFromArduino();
+        int batteryNumber = dataFromArduino[0];
+        batteries.get(batteryNumber).setTemperature(dataFromArduino[1]);
+        batteries.get(batteryNumber).setBatteryCycles(dataFromArduino[2]);
+        batteries.get(batteryNumber).setTimeToMaxBattery(dataFromArduino[3]);
+        batteries.get(batteryNumber).setPercentageCharged(dataFromArduino[4]);
+            batteries.get(batteryNumber).setTemperature(dataFromArduino[5]);
+        batteries.get(batteryNumber).setBatteryCycles(dataFromArduino[6]);
+        batteries.get(batteryNumber).setTimeToMaxBattery(dataFromArduino[7]);
+        batteries.get(batteryNumber).setPercentageCharged(dataFromArduino[8]);
+            batteries.get(batteryNumber).setTemperature(dataFromArduino[9]);
+  
+
+
+    }
+
+    /**
+     * gets the data read from the arduino and adds the information to the
+     * spesific battery Adds the temperature, batterycychle,timetomax and
+     * percentage information
+     */
+    public void setDataFromArduinoTest() {
+        dataFromArduino = dh.getDataFromArduino();
+        int batteryNumber = dataFromArduino[0];
         int i = 1;
         for (int x = 0; x < 16; x++) {
             batteries.get(x).setTemperature(dataFromArduino[i]);
@@ -272,72 +295,7 @@ public class BatteryStationLogic implements Runnable {
         i = 0;
     }
 
-    /*
-        setBatteryChargingPercentage(0, dataFromArduino[1]);
-        setActiveBatteryTemperature(0, dataFromArduino[2]);
-        setTimeToMaxChargingLevel(0, dataFromArduino[3]);
-        //battery2
-        setBatteryChargingPercentage(1, dataFromArduino[4]);
-        setActiveBatteryTemperature(1, dataFromArduino[5]);
-        setTimeToMaxChargingLevel(1, dataFromArduino[6]);
-        //battery3
-        setBatteryChargingPercentage(2, dataFromArduino[7]);
-        setActiveBatteryTemperature(2, dataFromArduino[8]);
-        setTimeToMaxChargingLevel(2, dataFromArduino[9]);
-        //battery4
-        setBatteryChargingPercentage(3, dataFromArduino[10]);
-        setActiveBatteryTemperature(3, dataFromArduino[11]);
-        setTimeToMaxChargingLevel(3, dataFromArduino[12]);
-        //battery5
-        setBatteryChargingPercentage(4, dataFromArduino[13]);
-        setActiveBatteryTemperature(4, dataFromArduino[14]);
-        setTimeToMaxChargingLevel(4, dataFromArduino[15]);
-        //battery6
-        setBatteryChargingPercentage(5, dataFromArduino[16]);
-        setActiveBatteryTemperature(5, dataFromArduino[17]);
-        setTimeToMaxChargingLevel(5, dataFromArduino[18]);
-        //battery7
-        setBatteryChargingPercentage(6, dataFromArduino[19]);
-        setActiveBatteryTemperature(6, dataFromArduino[20]);
-        setTimeToMaxChargingLevel(6, dataFromArduino[21]);
-        //battery8
-        setBatteryChargingPercentage(7, dataFromArduino[22]);
-        setActiveBatteryTemperature(7, dataFromArduino[23]);
-        setTimeToMaxChargingLevel(7, dataFromArduino[24]);
-        //battery9
-        setBatteryChargingPercentage(8, dataFromArduino[25]);
-        setActiveBatteryTemperature(8, dataFromArduino[26]);
-        setTimeToMaxChargingLevel(8, dataFromArduino[27]);
-        //battery10
-        setBatteryChargingPercentage(9, dataFromArduino[28]);
-        setActiveBatteryTemperature(9, dataFromArduino[29]);
-        setTimeToMaxChargingLevel(9, dataFromArduino[30]);
-        //battery11
-        setBatteryChargingPercentage(10, dataFromArduino[31]);
-        setActiveBatteryTemperature(10, dataFromArduino[32]);
-        setTimeToMaxChargingLevel(10, dataFromArduino[33]);
-        //battery12
-        setBatteryChargingPercentage(11, dataFromArduino[34]);
-        setActiveBatteryTemperature(11, dataFromArduino[35]);
-        setTimeToMaxChargingLevel(11, dataFromArduino[36]);
-        //battery13
-        setBatteryChargingPercentage(12, dataFromArduino[37]);
-        setActiveBatteryTemperature(12, dataFromArduino[38]);
-        setTimeToMaxChargingLevel(12, dataFromArduino[39]);
-        //battery14
-        setBatteryChargingPercentage(13, dataFromArduino[40]);
-        setActiveBatteryTemperature(13, dataFromArduino[41]);
-        setTimeToMaxChargingLevel(13, dataFromArduino[42]);
-        //battery15
-        setBatteryChargingPercentage(14, dataFromArduino[43]);
-        setActiveBatteryTemperature(14, dataFromArduino[44]);
-        setTimeToMaxChargingLevel(14, dataFromArduino[45]);
-        //battery16
-        setBatteryChargingPercentage(15, dataFromArduino[46]);
-        setActiveBatteryTemperature(15, dataFromArduino[47]);
-        setTimeToMaxChargingLevel(15, dataFromArduino[47]);
-    }
-     */
+   
     ///////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     //det under trenger vi ikke etter vi har satt inn i2C
@@ -345,8 +303,6 @@ public class BatteryStationLogic implements Runnable {
         return batteries.get(x).getBatteryLevel();
     }
 
-    
-    
     public void setBatteriesLevel(int x, int value) {
         batteries.get(x).setBatteryLevel(value);
     }
