@@ -45,7 +45,7 @@ public class SerialCom {
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(19200, 8, 1, 0);
+                getSerialPort().setParams(9600, 8, 1, 0);
                 reader = new Thread(new SerialRead(this, semaPhore, serialPort, dataHandler));
                 sender = new Thread(new SerialSend(this, semaPhore, serialPort));
                 sender.start();

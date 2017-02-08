@@ -16,12 +16,12 @@ import java.util.concurrent.Semaphore;
  *
  * her kan det skrives inn test
  */
-public class SerialRead implements Runnable {
+public class SerialReadArduino implements Runnable {
 
-    SerialCom serialCom;
+    SerialComArduino serialCom;
     Semaphore semaphore;
     SerialPort serialPort;
-    public byte[] dataArduino = new byte[25];
+    public byte[] dataArduino = new byte[10];
     int increment;
     DataHandler dataHandler;
 
@@ -32,7 +32,7 @@ public class SerialRead implements Runnable {
      * @param s The semaphore added to the communication
      * @param sp the serial communication port
      */
-    public SerialRead(SerialCom serialCom, Semaphore s, SerialPort sp, DataHandler dh) {
+    public SerialReadArduino(SerialComArduino serialCom, Semaphore s, SerialPort sp, DataHandler dh) {
         this.semaphore = s;
         this.serialPort = sp;
         this.serialCom = serialCom;
@@ -46,28 +46,27 @@ public class SerialRead implements Runnable {
     public void run() {
         try {
             while (true) {
-                semaphore.acquire();
-                byte[] data = serialPort.readBytes(25);
-                increment++;
+               // semaphore.acquire();
+                byte[] data = serialPort.readBytes(10);
+               // increment++;
                 //System.out.println("Read Serial " + Arrays.toString(data));
-                if (data.length > 0) {
-                    byte[] arrangedData = checkDataArrangementTest(data);
-                    this.dataArduino = arrangedData;
-                    serialCom.dataFromArduino = arrangedData;
-                    dataHandler.setDataFromArduino(arrangedData);
-                    System.out.println("received: " + increment);
-                    System.out.println("Read Arranged " + Arrays.toString(arrangedData));
-                }
+                //if (data.length > 0) {
+                   // byte[] arrangedData = checkDataArrangementTest(data);
+                   // this.dataArduino = arrangedData;
+                   // serialCom.dataFromArduino = arrangedData;
+                  //  dataHandler.setDataFromArduino(arrangedData);
+                 //   System.out.println("received: " + increment);
+                    System.out.println("Read Arranged " + Arrays.toString(data));
+               // }
 
-                semaphore.release();
+             //   semaphore.release();
 
             }
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");
-        } catch (InterruptedException e) {
-            System.out.println("InterruptedException i SerialRead");
         }
-    }
+        }
+    
 
     public byte[] checkDataArrangement(byte[] data) {
         byte[] realData = new byte[6];

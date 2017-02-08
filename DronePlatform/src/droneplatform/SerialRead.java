@@ -21,7 +21,7 @@ public class SerialRead implements Runnable {
     SerialCom serialCom;
     Semaphore semaphore;
     SerialPort serialPort;
-    public byte[] dataArduino = new byte[25];
+    public byte[] dataArduino = new byte[10];
     int increment;
     DataHandler dataHandler;
 
@@ -47,17 +47,17 @@ public class SerialRead implements Runnable {
         try {
             while (true) {
                 semaphore.acquire();
-                byte[] data = serialPort.readBytes(25);
-                increment++;
+                byte[] data = serialPort.readBytes(10);
+               // increment++;
                 //System.out.println("Read Serial " + Arrays.toString(data));
-                if (data.length > 0) {
-                    byte[] arrangedData = checkDataArrangementTest(data);
-                    this.dataArduino = arrangedData;
-                    serialCom.dataFromArduino = arrangedData;
-                    dataHandler.setDataFromArduino(arrangedData);
-                    System.out.println("received: " + increment);
-                    System.out.println("Read Arranged " + Arrays.toString(arrangedData));
-                }
+                //if (data.length > 0) {
+                   // byte[] arrangedData = checkDataArrangementTest(data);
+                   // this.dataArduino = arrangedData;
+                   // serialCom.dataFromArduino = arrangedData;
+                  //  dataHandler.setDataFromArduino(arrangedData);
+                 //   System.out.println("received: " + increment);
+                    System.out.println("Read Arranged " + Arrays.toString(data));
+               // }
 
                 semaphore.release();
 
