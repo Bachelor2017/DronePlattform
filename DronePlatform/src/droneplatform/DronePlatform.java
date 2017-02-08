@@ -19,9 +19,9 @@ public class DronePlatform {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //test.testPrint();
+   
         DataHandler dataHandler = new DataHandler();
-            
+        
         GUI gui = new GUI();
         gui.setVisible(true);
         //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -31,6 +31,8 @@ public class DronePlatform {
         Semaphore semaphore = new Semaphore(1,true);
         BatteryStationLogic bsg = new BatteryStationLogic(dataHandler,semaphore);  
         bsg.start();
+        SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
+        sysLog.start();
         FaultHandler faultHandler = new FaultHandler();
         GUIObservable observable = new GUIObservable(faultHandler,bsg);
         faultHandler.testing();

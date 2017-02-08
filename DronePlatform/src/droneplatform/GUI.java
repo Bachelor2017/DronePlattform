@@ -30,37 +30,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     public void update(Observable o, Object arg) {
         if (o instanceof GUIObservable) {
             receive = (GUIObservable) o;
-            //receive.setData();
-            // System.out.println(receive.getFaultTextArea1());
-            this.textLabel1.setText(receive.getFaultText(0));
-            this.textLabel2.setText(receive.getFaultText(1));
-            this.textLabel3.setText(receive.getFaultText(2));
-            this.textLabel4.setText(receive.getFaultText(3));
-            this.textLabel5.setText(receive.getFaultText(4));
-            this.textLabel6.setText(receive.getFaultText(5));
-            this.textLabel7.setText(receive.getFaultText(6));
-            this.textLabel8.setText(receive.getFaultText(7));
-            this.textLabel9.setText(receive.getFaultText(8));
-            this.textLabel10.setText(receive.getFaultText(9));
-            this.progressbarB1.setValue(receive.getBatteryLevel(0));
-            this.progressbarB2.setValue(receive.getBatteryLevel(1));
-            this.progressbarB3.setValue(receive.getBatteryLevel(2));
-            this.progressbarB4.setValue(receive.getBatteryLevel(3));
-            this.progressbarB5.setValue(receive.getBatteryLevel(4));
-            this.progressbarB6.setValue(receive.getBatteryLevel(5));
-            this.progressbarB7.setValue(receive.getBatteryLevel(6));
-            this.progressbarB8.setValue(receive.getBatteryLevel(7));
-            this.progressbarB9.setValue(receive.getBatteryLevel(8));
-            this.progressbarB10.setValue(receive.getBatteryLevel(9));
-            this.progressbarB11.setValue(receive.getBatteryLevel(10));
-            this.progressbarB12.setValue(receive.getBatteryLevel(11));
-            this.progressbarB13.setValue(receive.getBatteryLevel(12));
-            this.progressbarB14.setValue(receive.getBatteryLevel(13));
-            this.progressbarB15.setValue(receive.getBatteryLevel(14));
-            this.progressbarB16.setValue(receive.getBatteryLevel(15));
+            this.setFaultMessages(receive);
+            this.setProgressBarValue(receive);
             isBatteryInStation(receive);
             settBatteryInformation(receive);
-
         }
     }
 
@@ -1706,6 +1679,12 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * setting led light in GUI. checks if the battery is docked, set green if
+     * true, and red if false
+     *
+     * @param receive
+     */
     public void isBatteryInStation(GUIObservable receive) {
         boolean isBatteryDockedInStation = false;
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(0);
@@ -1807,73 +1786,120 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
     }
 
+    /**
+     * setting the battery information in the GUI
+     *
+     * @param receive
+     */
     public void settBatteryInformation(GUIObservable receive) {
         this.receive = receive;
+        this.temp1.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(0)) + " .C");
+        this.temp2.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(1)) + " .C");
+        this.temp3.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(2)) + " .C");
+        this.temp4.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(3)) + " .C");
+        this.temp5.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(4)) + " .C");
+        this.temp6.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(5)) + " .C");
+        this.temp7.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(6)) + " .C");
+        this.temp8.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(7)) + " .C");
+        this.temp9.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(8)) + " .C");
+        this.temp10.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(9)) + " .C");
+        this.temp11.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(10)) + " .C");
+        this.temp12.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(11)) + " .C");
+        this.temp13.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(12)) + " .C");
+        this.temp14.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(13)) + " .C");
+        this.temp15.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(14)) + " .C");
+        this.temp16.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(15)) + " .C");
+        this.cycle1.setText(convertIntToString(receive.getSpescificBatterySyclecount(0)) + ": Times");
+        this.cycle2.setText(convertIntToString(receive.getSpescificBatterySyclecount(1)) + ": Times");
+        this.cycle3.setText(convertIntToString(receive.getSpescificBatterySyclecount(2)) + ": Times");
+        this.cycle4.setText(convertIntToString(receive.getSpescificBatterySyclecount(3)) + ": Times");
+        this.cycle5.setText(convertIntToString(receive.getSpescificBatterySyclecount(4)) + ": Times");
+        this.cycle6.setText(convertIntToString(receive.getSpescificBatterySyclecount(5)) + ": Times");
+        this.cycle7.setText(convertIntToString(receive.getSpescificBatterySyclecount(6)) + ": Times");
+        this.cycle8.setText(convertIntToString(receive.getSpescificBatterySyclecount(7)) + ": Times");
+        this.cycle9.setText(convertIntToString(receive.getSpescificBatterySyclecount(8)) + ": Times");
+        this.cycle10.setText(convertIntToString(receive.getSpescificBatterySyclecount(9)) + ": Times");
+        this.cycle11.setText(convertIntToString(receive.getSpescificBatterySyclecount(10)) + ": Times");
+        this.cycle12.setText(convertIntToString(receive.getSpescificBatterySyclecount(11)) + ": Times");
+        this.cycle13.setText(convertIntToString(receive.getSpescificBatterySyclecount(12)) + ": Times");
+        this.cycle14.setText(convertIntToString(receive.getSpescificBatterySyclecount(13)) + ": Times");
+        this.cycle15.setText(convertIntToString(receive.getSpescificBatterySyclecount(14)) + ": Times");
+        this.cycle16.setText(convertIntToString(receive.getSpescificBatterySyclecount(15)) + ": Times");
+        this.mintofull1.setText(convertIntToString(receive.getSpescificBatteryMinToFull(0)) + ": min");
+        this.mintofull2.setText(convertIntToString(receive.getSpescificBatteryMinToFull(1)) + ": min");
+        this.mintofull3.setText(convertIntToString(receive.getSpescificBatteryMinToFull(2)) + ": min");
+        this.mintofull4.setText(convertIntToString(receive.getSpescificBatteryMinToFull(3)) + ": min");
+        this.mintofull5.setText(convertIntToString(receive.getSpescificBatteryMinToFull(4)) + ": min");
+        this.mintofull6.setText(convertIntToString(receive.getSpescificBatteryMinToFull(5)) + ": min");
+        this.mintofull7.setText(convertIntToString(receive.getSpescificBatteryMinToFull(6)) + ": min");
+        this.mintofull8.setText(convertIntToString(receive.getSpescificBatteryMinToFull(7)) + ": min");
+        this.mintofull9.setText(convertIntToString(receive.getSpescificBatteryMinToFull(8)) + ": min");
+        this.mintofull10.setText(convertIntToString(receive.getSpescificBatteryMinToFull(9)) + ": min");
+        this.mintofull11.setText(convertIntToString(receive.getSpescificBatteryMinToFull(10)) + ": min");
+        this.mintofull12.setText(convertIntToString(receive.getSpescificBatteryMinToFull(11)) + ": min");
+        this.mintofull13.setText(convertIntToString(receive.getSpescificBatteryMinToFull(12)) + ": min");
+        this.mintofull14.setText(convertIntToString(receive.getSpescificBatteryMinToFull(13)) + ": min");
+        this.mintofull15.setText(convertIntToString(receive.getSpescificBatteryMinToFull(14)) + ": min");
+        this.mintofull16.setText(convertIntToString(receive.getSpescificBatteryMinToFull(15)) + ": min");
+        this.percentage1.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(0)) + "V");
+        this.percentage2.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(1)) + "V");
+        this.percentage3.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(2)) + "V");
+        this.percentage4.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(3)) + "V");
+        this.percentage5.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(4)) + "V");
+        this.percentage6.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(5)) + "V");
+        this.percentage7.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(6)) + "V");
+        this.percentage8.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(7)) + "V");
+        this.percentage9.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(8)) + "V");
+        this.percentage10.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(9)) + "V");
+        this.percentage11.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(10)) + "V");
+        this.percentage12.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(11)) + "V");
+        this.percentage13.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(12)) + "V");
+        this.percentage14.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(13)) + "V");
+        this.percentage15.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(14)) + "V");
+        this.percentage16.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(15)) + "V");
 
-        this.temp1.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(0)) +" .C");
-        this.temp2.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(1)) +" .C");
-        this.temp3.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(2)) +" .C");
-        this.temp4.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(3)) +" .C");
-        this.temp5.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(4)) +" .C");
-        this.temp6.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(5)) +" .C");
-        this.temp7.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(6)) +" .C");
-        this.temp8.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(7)) +" .C");
-        this.temp9.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(8)) +" .C");
-        this.temp10.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(9)) +" .C");
-        this.temp11.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(10)) +" .C");
-        this.temp12.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(11)) +" .C");
-        this.temp13.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(12)) +" .C");
-        this.temp14.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(13)) +" .C");
-        this.temp15.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(14)) +" .C");
-        this.temp16.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(15)) +" .C");
-        this.cycle1.setText(convertIntToString(receive.getSpescificBatterySyclecount(0))+": Times");
-        this.cycle2.setText(convertIntToString(receive.getSpescificBatterySyclecount(1))+": Times");
-        this.cycle3.setText(convertIntToString(receive.getSpescificBatterySyclecount(2))+": Times");
-        this.cycle4.setText(convertIntToString(receive.getSpescificBatterySyclecount(3))+": Times");
-        this.cycle5.setText(convertIntToString(receive.getSpescificBatterySyclecount(4))+": Times");
-        this.cycle6.setText(convertIntToString(receive.getSpescificBatterySyclecount(5))+": Times");
-        this.cycle7.setText(convertIntToString(receive.getSpescificBatterySyclecount(6))+": Times");
-        this.cycle8.setText(convertIntToString(receive.getSpescificBatterySyclecount(7))+": Times");
-        this.cycle9.setText(convertIntToString(receive.getSpescificBatterySyclecount(8))+": Times");
-        this.cycle10.setText(convertIntToString(receive.getSpescificBatterySyclecount(9))+": Times");
-        this.cycle11.setText(convertIntToString(receive.getSpescificBatterySyclecount(10))+": Times");
-        this.cycle12.setText(convertIntToString(receive.getSpescificBatterySyclecount(11))+": Times");
-        this.cycle13.setText(convertIntToString(receive.getSpescificBatterySyclecount(12))+": Times");
-        this.cycle14.setText(convertIntToString(receive.getSpescificBatterySyclecount(13))+": Times");
-        this.cycle15.setText(convertIntToString(receive.getSpescificBatterySyclecount(14))+": Times");
-        this.cycle16.setText(convertIntToString(receive.getSpescificBatterySyclecount(15))+": Times");
-        this.mintofull1.setText(convertIntToString(receive.getSpescificBatteryMinToFull(0))+": min");
-        this.mintofull2.setText(convertIntToString(receive.getSpescificBatteryMinToFull(1))+": min");
-        this.mintofull3.setText(convertIntToString(receive.getSpescificBatteryMinToFull(2))+": min");
-        this.mintofull4.setText(convertIntToString(receive.getSpescificBatteryMinToFull(3))+": min");
-        this.mintofull5.setText(convertIntToString(receive.getSpescificBatteryMinToFull(4))+": min");
-        this.mintofull6.setText(convertIntToString(receive.getSpescificBatteryMinToFull(5))+": min");
-        this.mintofull7.setText(convertIntToString(receive.getSpescificBatteryMinToFull(6))+": min");
-        this.mintofull8.setText(convertIntToString(receive.getSpescificBatteryMinToFull(7))+": min");
-        this.mintofull9.setText(convertIntToString(receive.getSpescificBatteryMinToFull(8))+": min");
-        this.mintofull10.setText(convertIntToString(receive.getSpescificBatteryMinToFull(9))+": min");
-        this.mintofull11.setText(convertIntToString(receive.getSpescificBatteryMinToFull(10))+": min");
-        this.mintofull12.setText(convertIntToString(receive.getSpescificBatteryMinToFull(11))+": min");
-        this.mintofull13.setText(convertIntToString(receive.getSpescificBatteryMinToFull(12))+": min");
-        this.mintofull14.setText(convertIntToString(receive.getSpescificBatteryMinToFull(13))+": min");
-        this.mintofull15.setText(convertIntToString(receive.getSpescificBatteryMinToFull(14))+": min");
-        this.mintofull16.setText(convertIntToString(receive.getSpescificBatteryMinToFull(15))+": min");
-        this.percentage1.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(0))+"V");
-        this.percentage2.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(1))+"V");
-        this.percentage3.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(2))+"V");
-        this.percentage4.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(3))+"V");
-        this.percentage5.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(4))+"V");
-        this.percentage6.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(5))+"V");
-        this.percentage7.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(6))+"V");
-        this.percentage8.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(7))+"V");
-        this.percentage9.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(8))+"V");
-        this.percentage10.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(9))+"V");
-        this.percentage11.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(10))+"V");
-        this.percentage12.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(11))+"V");
-        this.percentage13.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(12))+"V");
-        this.percentage14.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(13))+"V");
-        this.percentage15.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(14))+"V");
-        this.percentage16.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(15))+"V");
+    }
+
+    /**
+     * setting the progressbar value in the GUI
+     *
+     * @param receive
+     */
+    public void setProgressBarValue(GUIObservable receive) {
+        this.progressbarB1.setValue(receive.getSpesificBatteryChargingLevel(0));
+        this.progressbarB2.setValue(receive.getSpesificBatteryChargingLevel(1));
+        this.progressbarB3.setValue(receive.getSpesificBatteryChargingLevel(2));
+        this.progressbarB4.setValue(receive.getSpesificBatteryChargingLevel(3));
+        this.progressbarB5.setValue(receive.getSpesificBatteryChargingLevel(4));
+        this.progressbarB6.setValue(receive.getSpesificBatteryChargingLevel(5));
+        this.progressbarB7.setValue(receive.getSpesificBatteryChargingLevel(6));
+        this.progressbarB8.setValue(receive.getSpesificBatteryChargingLevel(7));
+        this.progressbarB9.setValue(receive.getSpesificBatteryChargingLevel(8));
+        this.progressbarB10.setValue(receive.getSpesificBatteryChargingLevel(9));
+        this.progressbarB11.setValue(receive.getSpesificBatteryChargingLevel(10));
+        this.progressbarB12.setValue(receive.getSpesificBatteryChargingLevel(11));
+        this.progressbarB13.setValue(receive.getSpesificBatteryChargingLevel(12));
+        this.progressbarB14.setValue(receive.getSpesificBatteryChargingLevel(13));
+        this.progressbarB15.setValue(receive.getSpesificBatteryChargingLevel(14));
+        this.progressbarB16.setValue(receive.getSpesificBatteryChargingLevel(15));
+    }
+
+    /**
+     * setting the fault messages to the GUI
+     *
+     * @param receive
+     */
+    public void setFaultMessages(GUIObservable receive) {
+        this.textLabel1.setText(receive.getFaultText(0));
+        this.textLabel2.setText(receive.getFaultText(1));
+        this.textLabel3.setText(receive.getFaultText(2));
+        this.textLabel4.setText(receive.getFaultText(3));
+        this.textLabel5.setText(receive.getFaultText(4));
+        this.textLabel6.setText(receive.getFaultText(5));
+        this.textLabel7.setText(receive.getFaultText(6));
+        this.textLabel8.setText(receive.getFaultText(7));
+        this.textLabel9.setText(receive.getFaultText(8));
+        this.textLabel10.setText(receive.getFaultText(9));
 
     }
 

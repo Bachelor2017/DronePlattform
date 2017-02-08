@@ -62,7 +62,7 @@ public class BatteryStationLogic implements Runnable {
             try {
                 semaphore.acquire();
                 dataFromArduino = dh.getDataFromArduino();
-                System.out.println("dette er test");
+                //System.out.println("dette er test");
                 setDataFromArduino();
                 semaphore.release();
             } catch (InterruptedException ex) {
@@ -345,6 +345,8 @@ public class BatteryStationLogic implements Runnable {
         return batteries.get(x).getBatteryLevel();
     }
 
+    
+    
     public void setBatteriesLevel(int x, int value) {
         batteries.get(x).setBatteryLevel(value);
     }

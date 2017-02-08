@@ -112,6 +112,7 @@ public class BatteryStation {
             timer.cancel();
             timer.purge();
             secondsPassed = 0;
+            chargedPercentage=0;
         }
         dockingStatus = value;
     }
