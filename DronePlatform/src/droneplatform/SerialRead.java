@@ -23,6 +23,7 @@ public class SerialRead implements Runnable {
     SerialPort serialPort;
     public byte[] dataArduino = new byte[25];
     int increment;
+    DataHandler dataHandler;
     
   /**
      * Setting ut the serialCommunication reading thread. 
@@ -30,10 +31,12 @@ public class SerialRead implements Runnable {
      * @param s The semaphore added to the communication
      * @param sp  the serial communication port 
      */
-    public SerialRead(SerialCom serialCom, Semaphore s, SerialPort sp) {
+    public SerialRead(SerialCom serialCom, Semaphore s, SerialPort sp,DataHandler dh) {
         this.semaphore = s;
         this.serialPort = sp;
         this.serialCom = serialCom;
+        this.dataHandler = dh;
+        
     }
 
 /**
@@ -50,11 +53,13 @@ public class SerialRead implements Runnable {
                 byte[] arrangedData = checkDataArrangementTest(data);
                 this.dataArduino = arrangedData; 
                 serialCom.dataFromArduino = arrangedData;
+                dataHandler.setDataFromArduino(arrangedData);
                     System.out.println("received: " + increment);
                 System.out.println("Read Arranged " + Arrays.toString(arrangedData));
                 }
                 
                 semaphore.release();
+          
             }
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");

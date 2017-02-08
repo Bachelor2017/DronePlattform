@@ -10,29 +10,19 @@ import java.util.Observer;
  * and open the template in the editor.
  */
 /**
- *
+ * an observer updating the fields in the GUI
  *
  */
 public class GUIObservable extends Observable {
 
-    private String textArea1;
-    private String textArea2;
-    private String textArea3;
-    private String textArea4;
-    private String textArea5;
-    private String textArea6;
-    private String textArea7;
-    private String textArea8;
-    private String textArea9;
-    private String textArea10;
-
     private FaultHandler faultHandler;
     private BatteryStationLogic batteryStationLogic;
     private ArrayList<BatteryStation> batteries;
+    private String[] faultArray;
 
-    public GUIObservable(FaultHandler faultHandler,BatteryStationLogic batteryStationLogic) {
+    public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic) {
         this.faultHandler = faultHandler;
-       this.batteryStationLogic = batteryStationLogic;
+        this.batteryStationLogic = batteryStationLogic;
     }
 
     @Override
@@ -41,78 +31,65 @@ public class GUIObservable extends Observable {
 
     }
 
+    /**
+     * setting the data retrieved from system
+     */
     public void setData() {
-        String[] faultArray = faultHandler.guiFaultList();
-        this.textArea1 = faultArray[0];
-        this.textArea2 = faultArray[1];
-        this.textArea3 = faultArray[2];
-        this.textArea4 = faultArray[3];
-        this.textArea5 = faultArray[4];
-        this.textArea6 = faultArray[5];
-        this.textArea7 = faultArray[6];
-        this.textArea8 = faultArray[7];
-        this.textArea9 = faultArray[8];
-        this.textArea10 = faultArray[9];
+
+        faultArray = faultHandler.guiFaultList();
         batteries = batteryStationLogic.getArrayListBatteries();
 
         setChanged();
         notifyObservers();
     }
 
-    public String getFaultTextArea1() {
-
-        return this.textArea1;
+    public String getFaultText(int x) {
+        return faultArray[x];
     }
 
     public String getFaultTextArea2() {
-
-        return this.textArea2;
+        return faultArray[1];
     }
 
     public String getFaultTextArea3() {
-
-        return this.textArea3;
+        return faultArray[2];
     }
 
     public String getFaultTextArea4() {
-
-        return this.textArea4;
+        return faultArray[3];
     }
 
     public String getFaultTextArea5() {
-
-        return this.textArea5;
+        return faultArray[4];
     }
 
     public String getFaultTextArea6() {
 
-        return this.textArea6;
+        return faultArray[5];
     }
 
     public String getFaultTextArea7() {
 
-        return this.textArea7;
+        return faultArray[6];
     }
 
     public String getFaultTextArea8() {
 
-        return this.textArea8;
+        return faultArray[7];
     }
 
     public String getFaultTextArea9() {
 
-        return this.textArea9;
+        return faultArray[8];
     }
 
     public String getFaultTextArea10() {
 
-        return this.textArea10;
+        return faultArray[9];
     }
 
     ///////////////////////////////////////////////////
     //to battery GUI
-    
-
     public boolean getBatteryStationDockingStatus(int x) {
         boolean isBatteryDockedInStation = false;
         isBatteryDockedInStation = batteries.get(x).isDocked();
@@ -133,9 +110,23 @@ public class GUIObservable extends Observable {
         return batteryStationLogic.getActiveBatteryPlacement();
     }
 
-    
-    
-    
+    public int getSpesificBatteryChargingLevel(int x) {
+        return this.batteryStationLogic.getBatteryChargingPercentage(x);
+
+    }
+
+    public int getSpescificBatteryTempertureLevel(int x) {
+        return this.batteryStationLogic.getActiveBatteryTemperature(x);
+    }
+
+    public int getSpescificBatterySyclecount(int x) {
+        return this.batteryStationLogic.getBatteryChargingCycle(x);
+    }
+
+    public int getSpescificBatteryMinToFull(int x) {
+        return this.batteryStationLogic.getTimeToMaxChargingLevel(x);
+    }
+
     ////////////////////////////////////
     //Utgår når vi tar i bruk I2C
     ////////////////////////////
@@ -143,7 +134,7 @@ public class GUIObservable extends Observable {
         int batteryChargingLevel = 0;
         batteryChargingLevel = batteries.get(x).getNumberOfSecondsCharged();
         String batteryLevelString = null;
-    
+
         return batteryChargingLevel;
     }
 }

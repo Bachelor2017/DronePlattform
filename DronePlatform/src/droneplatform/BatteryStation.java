@@ -30,7 +30,14 @@ public class BatteryStation {
     private int temperature;
     private int timeToMaxBattery;
     private int chargedPercentage;
+    private int batteryCycles;
 
+    /**
+     * constructor of batteryStation class
+     *
+     * @param batteryPossition a integer describing number in line of battery.
+     * not in use later. CAN DELETE
+     */
     public BatteryStation(int batteryPossition) {
 
         this.batteryPossition = batteryPossition;
@@ -206,71 +213,78 @@ public class BatteryStation {
         zValue = (byte) newZValue;
     }
 
-   
     /**
      * sett the temperature of the battery
+     *
      * @param temp of battery
      */
-    public void setTemperature(int temp)
-    {
+    public void setTemperature(int temp) {
         temperature = temp;
     }
-    
+
     /**
      * returning the battery temperature
+     *
      * @return battery temperature int
      */
-    public int getTemperature()
-    {
+    public int getTemperature() {
         return temperature;
     }
-    
-    
+
     /**
      * Setting the time to battery is fully charged
+     *
      * @param time to battery is fully charged int
      */
-    public void setTimeToMaxBattery(int time)
-    {
+    public void setTimeToMaxBattery(int time) {
         timeToMaxBattery = time;
     }
-    
+
     /**
      * returns the time for the battery is fully charged
+     *
      * @return timeToMaxBattery
      */
-    public int returnTimeToMaxBattery()
-    {
+    public int returnTimeToMaxBattery() {
         return timeToMaxBattery;
     }
-    
+
     /**
      * returns the battery charging percentage
+     *
      * @param percentage of charged battery
      */
-    public void setPercentageCharged(int percentage)
-    {
+    public void setPercentageCharged(int percentage) {
         this.chargedPercentage = percentage;
     }
-    
+
     /**
      * returns the percentage of the charged battery
+     *
      * @return percetage of battery
      */
-    public int getChargedPercentage()
-    {
+    public int getChargedPercentage() {
         return chargedPercentage;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    /**
+     * setting number of cychles the battery has been charged
+     *
+     * @param numberOfSycles the amount of times the battery has been charged
+     */
+    public void setBatteryCycles(int numberOfSycles) {
+        this.batteryCycles = numberOfSycles;
+    }
+
+    /**
+     * returning the amount of charging cychles of the battery
+     *
+     * @return an int describing number of charging cychles
+     */
+    public int getNumberOfChargingCycles() {
+        return batteryCycles;
+    }
+
     /**
      * Returns the number of seconds the batterystation has batteri on charging
      * returns 0 if batterDocking is false

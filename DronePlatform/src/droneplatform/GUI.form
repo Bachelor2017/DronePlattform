@@ -375,7 +375,7 @@
                       <Component id="jButton7" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="jButton10" min="-2" pref="113" max="-2" attributes="0"/>
-                      <EmptySpace pref="88" max="32767" attributes="0"/>
+                      <EmptySpace pref="133" max="32767" attributes="0"/>
                   </Group>
                   <Component id="textPanel" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -531,7 +531,7 @@
             <Component class="javax.swing.JButton" name="jButton7">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/droneplatform/start.png"/>
+                  <Image iconType="3" name="/images/start.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -541,7 +541,7 @@
             <Component class="javax.swing.JButton" name="jButton10">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/droneplatform/stop_1.png"/>
+                  <Image iconType="3" name="/images/stop_1.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -612,7 +612,7 @@
                                   <Component id="jButton9" min="-2" pref="48" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="110" max="32767" attributes="0"/>
+                          <EmptySpace pref="155" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -635,7 +635,7 @@
                               <Component id="jButton2" max="32767" attributes="0"/>
                               <Component id="jLabel17" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="46" max="32767" attributes="0"/>
+                          <EmptySpace pref="66" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jButton3" max="32767" attributes="0"/>
                               <Component id="jLabel19" min="-2" pref="39" max="-2" attributes="0"/>
@@ -687,7 +687,7 @@
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/run.png"/>
+                      <Image iconType="3" name="/images/run.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -697,7 +697,7 @@
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/up.PNG"/>
+                      <Image iconType="3" name="/images/up.PNG"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -707,28 +707,28 @@
                 <Component class="javax.swing.JButton" name="jButton3">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/run.png"/>
+                      <Image iconType="3" name="/images/run.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton5">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/run.png"/>
+                      <Image iconType="3" name="/images/run.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton6">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/down.PNG"/>
+                      <Image iconType="3" name="/images/down.PNG"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton8">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/up.PNG"/>
+                      <Image iconType="3" name="/images/up.PNG"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -738,14 +738,14 @@
                 <Component class="javax.swing.JButton" name="jButton9">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/down.PNG"/>
+                      <Image iconType="3" name="/images/down.PNG"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton4">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/droneplatform/emergency_stop.png"/>
+                      <Image iconType="3" name="/images/start.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -781,12 +781,11 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel22" min="-2" pref="82" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="26" max="32767" attributes="0"/>
-                                      <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="temp1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="cycle1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="mintofull1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
@@ -797,15 +796,10 @@
                                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace type="separate" max="32767" attributes="0"/>
-                                      <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
+                                  <Component id="percentage1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -816,195 +810,195 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel33" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel39" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel45" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel50" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel51" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel52" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel53" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel54" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel55" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel56" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel57" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel58" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel59" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel60" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel61" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel62" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel63" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel64" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel65" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel66" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel67" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel68" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel69" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel70" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel71" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel72" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel73" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel74" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel75" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel76" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel77" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel78" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel79" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel80" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel81" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel82" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel83" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel84" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp10" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle10" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel85" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel86" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel87" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel88" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel89" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel90" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel91" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel92" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel93" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel94" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel95" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel96" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp12" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle12" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull12" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel97" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage12" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel98" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel99" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel100" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel101" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel102" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp13" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle13" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull13" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel103" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage13" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel104" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel105" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel106" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel107" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel108" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp14" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle14" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel109" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel110" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel111" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel112" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel113" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel114" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp15" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle15" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel115" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel116" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel117" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="jLabel118" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel119" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jLabel120" min="-2" max="-2" attributes="0"/>
+                              <Component id="temp16" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="cycle16" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="mintofull16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel121" min="-2" max="-2" attributes="0"/>
+                              <Component id="percentage16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel122" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1027,145 +1021,145 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel55" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel56" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel57" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel58" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel59" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel60" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel61" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel62" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel63" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel64" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel65" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel66" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel67" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel68" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel69" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel70" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel71" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel72" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel73" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel74" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel75" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel76" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel77" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel78" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel79" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel80" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel81" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel82" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel83" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel84" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel85" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel86" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel87" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel88" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel89" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel90" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel91" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage11" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel92" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel93" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel94" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel95" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel96" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel97" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage12" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel98" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel99" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel100" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel101" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel102" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel103" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage13" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel104" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel105" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel106" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel107" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel108" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel109" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage14" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel110" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel111" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel112" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel113" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel114" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel115" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage15" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel116" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel117" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel118" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel119" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel120" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel121" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="temp16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cycle16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mintofull16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="percentage16" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel122" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="99" max="32767" attributes="0"/>
@@ -1197,7 +1191,7 @@
                 <Property name="text" type="java.lang.String" value="Status:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel26">
+            <Component class="javax.swing.JLabel" name="temp1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1212,17 +1206,19 @@
                 <Property name="text" type="java.lang.String" value="%:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel29">
+            <Component class="javax.swing.JLabel" name="cycle1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel30">
+            <Component class="javax.swing.JLabel" name="mintofull1">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
+                <Property name="horizontalTextPosition" type="int" value="2"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel31">
+            <Component class="javax.swing.JLabel" name="percentage1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1240,22 +1236,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.2:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel34">
+            <Component class="javax.swing.JLabel" name="temp2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel35">
+            <Component class="javax.swing.JLabel" name="cycle2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel36">
+            <Component class="javax.swing.JLabel" name="mintofull2">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel37">
+            <Component class="javax.swing.JLabel" name="percentage2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1273,22 +1270,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.3:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel40">
+            <Component class="javax.swing.JLabel" name="temp3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel41">
+            <Component class="javax.swing.JLabel" name="cycle3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel42">
+            <Component class="javax.swing.JLabel" name="mintofull3">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel43">
+            <Component class="javax.swing.JLabel" name="percentage3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1306,22 +1304,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.4:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel46">
+            <Component class="javax.swing.JLabel" name="temp4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel47">
+            <Component class="javax.swing.JLabel" name="cycle4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel48">
+            <Component class="javax.swing.JLabel" name="mintofull4">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel49">
+            <Component class="javax.swing.JLabel" name="percentage4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1339,22 +1338,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.5:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel52">
+            <Component class="javax.swing.JLabel" name="temp5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel53">
+            <Component class="javax.swing.JLabel" name="cycle5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel54">
+            <Component class="javax.swing.JLabel" name="mintofull5">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel55">
+            <Component class="javax.swing.JLabel" name="percentage5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1372,22 +1372,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.6:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel58">
+            <Component class="javax.swing.JLabel" name="temp6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel59">
+            <Component class="javax.swing.JLabel" name="cycle6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel60">
+            <Component class="javax.swing.JLabel" name="mintofull6">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel61">
+            <Component class="javax.swing.JLabel" name="percentage6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1405,22 +1406,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.7:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel64">
+            <Component class="javax.swing.JLabel" name="temp7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel65">
+            <Component class="javax.swing.JLabel" name="cycle7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel66">
+            <Component class="javax.swing.JLabel" name="mintofull7">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel67">
+            <Component class="javax.swing.JLabel" name="percentage7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1438,22 +1440,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.8:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel70">
+            <Component class="javax.swing.JLabel" name="temp8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel71">
+            <Component class="javax.swing.JLabel" name="cycle8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel72">
+            <Component class="javax.swing.JLabel" name="mintofull8">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel73">
+            <Component class="javax.swing.JLabel" name="percentage8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1471,22 +1474,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.9:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel76">
+            <Component class="javax.swing.JLabel" name="temp9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel77">
+            <Component class="javax.swing.JLabel" name="cycle9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel78">
+            <Component class="javax.swing.JLabel" name="mintofull9">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel79">
+            <Component class="javax.swing.JLabel" name="percentage9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1504,22 +1508,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.10:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel82">
+            <Component class="javax.swing.JLabel" name="temp10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel83">
+            <Component class="javax.swing.JLabel" name="cycle10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel84">
+            <Component class="javax.swing.JLabel" name="mintofull10">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel85">
+            <Component class="javax.swing.JLabel" name="percentage10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1537,22 +1542,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.11:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel88">
+            <Component class="javax.swing.JLabel" name="temp11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel89">
+            <Component class="javax.swing.JLabel" name="cycle11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel90">
+            <Component class="javax.swing.JLabel" name="mintofull11">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel91">
+            <Component class="javax.swing.JLabel" name="percentage11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1570,22 +1576,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.12:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel94">
+            <Component class="javax.swing.JLabel" name="temp12">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel95">
+            <Component class="javax.swing.JLabel" name="cycle12">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel96">
+            <Component class="javax.swing.JLabel" name="mintofull12">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel97">
+            <Component class="javax.swing.JLabel" name="percentage12">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1603,22 +1610,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.13:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel100">
+            <Component class="javax.swing.JLabel" name="temp13">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel101">
+            <Component class="javax.swing.JLabel" name="cycle13">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel102">
+            <Component class="javax.swing.JLabel" name="mintofull13">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel103">
+            <Component class="javax.swing.JLabel" name="percentage13">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1636,22 +1644,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.14:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel106">
+            <Component class="javax.swing.JLabel" name="temp14">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel107">
+            <Component class="javax.swing.JLabel" name="cycle14">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel108">
+            <Component class="javax.swing.JLabel" name="mintofull14">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel109">
+            <Component class="javax.swing.JLabel" name="percentage14">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1669,22 +1678,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.15:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel112">
+            <Component class="javax.swing.JLabel" name="temp15">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel113">
+            <Component class="javax.swing.JLabel" name="cycle15">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel114">
+            <Component class="javax.swing.JLabel" name="mintofull15">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel115">
+            <Component class="javax.swing.JLabel" name="percentage15">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1702,22 +1712,23 @@
                 <Property name="text" type="java.lang.String" value="Battery No.16:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel118">
+            <Component class="javax.swing.JLabel" name="temp16">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel119">
+            <Component class="javax.swing.JLabel" name="cycle16">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel120">
+            <Component class="javax.swing.JLabel" name="mintofull16">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel121">
+            <Component class="javax.swing.JLabel" name="percentage16">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel26"/>
               </Properties>
@@ -1943,112 +1954,112 @@
     <Component class="javax.swing.JLabel" name="BatteryButton1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton10">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton6">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton7">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton8">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton9">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton11">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton12">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton5">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton13">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton14">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton15">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="BatteryButton16">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/droneplatform/green_button.png"/>
+          <Image iconType="3" name="/images/green_button.png"/>
         </Property>
       </Properties>
     </Component>

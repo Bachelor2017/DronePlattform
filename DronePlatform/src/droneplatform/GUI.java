@@ -15,7 +15,7 @@ import java.util.Observer;
  *
  */
 public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
-    
+
     GUIObservable receive;
 
     /**
@@ -25,23 +25,23 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         initComponents();
         addKeyListener(this);
     }
-    
+
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof GUIObservable) {
             receive = (GUIObservable) o;
             //receive.setData();
             // System.out.println(receive.getFaultTextArea1());
-            this.textLabel1.setText(receive.getFaultTextArea1());
-            this.textLabel2.setText(receive.getFaultTextArea2());
-            this.textLabel3.setText(receive.getFaultTextArea3());
-            this.textLabel4.setText(receive.getFaultTextArea4());
-            this.textLabel5.setText(receive.getFaultTextArea5());
-            this.textLabel6.setText(receive.getFaultTextArea6());
-            this.textLabel7.setText(receive.getFaultTextArea7());
-            this.textLabel8.setText(receive.getFaultTextArea8());
-            this.textLabel9.setText(receive.getFaultTextArea9());
-            this.textLabel10.setText(receive.getFaultTextArea10());
+            this.textLabel1.setText(receive.getFaultText(0));
+            this.textLabel2.setText(receive.getFaultText(1));
+            this.textLabel3.setText(receive.getFaultText(2));
+            this.textLabel4.setText(receive.getFaultText(3));
+            this.textLabel5.setText(receive.getFaultText(4));
+            this.textLabel6.setText(receive.getFaultText(5));
+            this.textLabel7.setText(receive.getFaultText(6));
+            this.textLabel8.setText(receive.getFaultText(7));
+            this.textLabel9.setText(receive.getFaultText(8));
+            this.textLabel10.setText(receive.getFaultText(9));
             this.progressbarB1.setValue(receive.getBatteryLevel(0));
             this.progressbarB2.setValue(receive.getBatteryLevel(1));
             this.progressbarB3.setValue(receive.getBatteryLevel(2));
@@ -59,10 +59,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             this.progressbarB15.setValue(receive.getBatteryLevel(14));
             this.progressbarB16.setValue(receive.getBatteryLevel(15));
             isBatteryInStation(receive);
-            
+            settBatteryInformation(receive);
+
         }
     }
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -114,102 +115,102 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        temp1 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        cycle1 = new javax.swing.JLabel();
+        mintofull1 = new javax.swing.JLabel();
+        percentage1 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
+        temp2 = new javax.swing.JLabel();
+        cycle2 = new javax.swing.JLabel();
+        mintofull2 = new javax.swing.JLabel();
+        percentage2 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
+        temp3 = new javax.swing.JLabel();
+        cycle3 = new javax.swing.JLabel();
+        mintofull3 = new javax.swing.JLabel();
+        percentage3 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
+        temp4 = new javax.swing.JLabel();
+        cycle4 = new javax.swing.JLabel();
+        mintofull4 = new javax.swing.JLabel();
+        percentage4 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
+        temp5 = new javax.swing.JLabel();
+        cycle5 = new javax.swing.JLabel();
+        mintofull5 = new javax.swing.JLabel();
+        percentage5 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
-        jLabel58 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
-        jLabel60 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
+        temp6 = new javax.swing.JLabel();
+        cycle6 = new javax.swing.JLabel();
+        mintofull6 = new javax.swing.JLabel();
+        percentage6 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
-        jLabel64 = new javax.swing.JLabel();
-        jLabel65 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
+        temp7 = new javax.swing.JLabel();
+        cycle7 = new javax.swing.JLabel();
+        mintofull7 = new javax.swing.JLabel();
+        percentage7 = new javax.swing.JLabel();
         jLabel68 = new javax.swing.JLabel();
         jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        jLabel73 = new javax.swing.JLabel();
+        temp8 = new javax.swing.JLabel();
+        cycle8 = new javax.swing.JLabel();
+        mintofull8 = new javax.swing.JLabel();
+        percentage8 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
         jLabel75 = new javax.swing.JLabel();
-        jLabel76 = new javax.swing.JLabel();
-        jLabel77 = new javax.swing.JLabel();
-        jLabel78 = new javax.swing.JLabel();
-        jLabel79 = new javax.swing.JLabel();
+        temp9 = new javax.swing.JLabel();
+        cycle9 = new javax.swing.JLabel();
+        mintofull9 = new javax.swing.JLabel();
+        percentage9 = new javax.swing.JLabel();
         jLabel80 = new javax.swing.JLabel();
         jLabel81 = new javax.swing.JLabel();
-        jLabel82 = new javax.swing.JLabel();
-        jLabel83 = new javax.swing.JLabel();
-        jLabel84 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
+        temp10 = new javax.swing.JLabel();
+        cycle10 = new javax.swing.JLabel();
+        mintofull10 = new javax.swing.JLabel();
+        percentage10 = new javax.swing.JLabel();
         jLabel86 = new javax.swing.JLabel();
         jLabel87 = new javax.swing.JLabel();
-        jLabel88 = new javax.swing.JLabel();
-        jLabel89 = new javax.swing.JLabel();
-        jLabel90 = new javax.swing.JLabel();
-        jLabel91 = new javax.swing.JLabel();
+        temp11 = new javax.swing.JLabel();
+        cycle11 = new javax.swing.JLabel();
+        mintofull11 = new javax.swing.JLabel();
+        percentage11 = new javax.swing.JLabel();
         jLabel92 = new javax.swing.JLabel();
         jLabel93 = new javax.swing.JLabel();
-        jLabel94 = new javax.swing.JLabel();
-        jLabel95 = new javax.swing.JLabel();
-        jLabel96 = new javax.swing.JLabel();
-        jLabel97 = new javax.swing.JLabel();
+        temp12 = new javax.swing.JLabel();
+        cycle12 = new javax.swing.JLabel();
+        mintofull12 = new javax.swing.JLabel();
+        percentage12 = new javax.swing.JLabel();
         jLabel98 = new javax.swing.JLabel();
         jLabel99 = new javax.swing.JLabel();
-        jLabel100 = new javax.swing.JLabel();
-        jLabel101 = new javax.swing.JLabel();
-        jLabel102 = new javax.swing.JLabel();
-        jLabel103 = new javax.swing.JLabel();
+        temp13 = new javax.swing.JLabel();
+        cycle13 = new javax.swing.JLabel();
+        mintofull13 = new javax.swing.JLabel();
+        percentage13 = new javax.swing.JLabel();
         jLabel104 = new javax.swing.JLabel();
         jLabel105 = new javax.swing.JLabel();
-        jLabel106 = new javax.swing.JLabel();
-        jLabel107 = new javax.swing.JLabel();
-        jLabel108 = new javax.swing.JLabel();
-        jLabel109 = new javax.swing.JLabel();
+        temp14 = new javax.swing.JLabel();
+        cycle14 = new javax.swing.JLabel();
+        mintofull14 = new javax.swing.JLabel();
+        percentage14 = new javax.swing.JLabel();
         jLabel110 = new javax.swing.JLabel();
         jLabel111 = new javax.swing.JLabel();
-        jLabel112 = new javax.swing.JLabel();
-        jLabel113 = new javax.swing.JLabel();
-        jLabel114 = new javax.swing.JLabel();
-        jLabel115 = new javax.swing.JLabel();
+        temp15 = new javax.swing.JLabel();
+        cycle15 = new javax.swing.JLabel();
+        mintofull15 = new javax.swing.JLabel();
+        percentage15 = new javax.swing.JLabel();
         jLabel116 = new javax.swing.JLabel();
         jLabel117 = new javax.swing.JLabel();
-        jLabel118 = new javax.swing.JLabel();
-        jLabel119 = new javax.swing.JLabel();
-        jLabel120 = new javax.swing.JLabel();
-        jLabel121 = new javax.swing.JLabel();
+        temp16 = new javax.swing.JLabel();
+        cycle16 = new javax.swing.JLabel();
+        mintofull16 = new javax.swing.JLabel();
+        percentage16 = new javax.swing.JLabel();
         jLabel122 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         progressbarB3 = new javax.swing.JProgressBar();
@@ -335,14 +336,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap())
         );
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/start.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/start.png"))); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/stop_1.png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop_1.png"))); // NOI18N
 
         javax.swing.GroupLayout autoTabLayout = new javax.swing.GroupLayout(autoTab);
         autoTab.setLayout(autoTabLayout);
@@ -353,7 +354,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
             .addComponent(textPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         autoTabLayout.setVerticalGroup(
@@ -382,36 +383,36 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jLabel21.setText("jLabel17...............................");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/run.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/up.PNG"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/run.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/run.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/down.PNG"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.PNG"))); // NOI18N
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/up.PNG"))); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/down.PNG"))); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.PNG"))); // NOI18N
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/emergency_stop.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/start.png"))); // NOI18N
 
         javax.swing.GroupLayout SectionLayout = new javax.swing.GroupLayout(Section);
         Section.setLayout(SectionLayout);
@@ -438,7 +439,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SectionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -456,7 +457,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -500,212 +501,229 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jLabel25.setText("Status:");
 
-        jLabel26.setText("jLabel26");
+        temp1.setText("jLabel26");
 
         jLabel27.setText("min to full");
 
         jLabel28.setText("%:");
 
-        jLabel29.setText("jLabel26");
+        cycle1.setText("jLabel26");
 
-        jLabel30.setText("jLabel26");
+        mintofull1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull1.setText("jLabel26");
+        mintofull1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel31.setText("jLabel26");
+        percentage1.setText("jLabel26");
 
         jLabel32.setText("jLabel26");
 
         jLabel33.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel33.setText("Battery No.2:");
 
-        jLabel34.setText("jLabel26");
+        temp2.setText("jLabel26");
 
-        jLabel35.setText("jLabel26");
+        cycle2.setText("jLabel26");
 
-        jLabel36.setText("jLabel26");
+        mintofull2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull2.setText("jLabel26");
 
-        jLabel37.setText("jLabel26");
+        percentage2.setText("jLabel26");
 
         jLabel38.setText("jLabel26");
 
         jLabel39.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel39.setText("Battery No.3:");
 
-        jLabel40.setText("jLabel26");
+        temp3.setText("jLabel26");
 
-        jLabel41.setText("jLabel26");
+        cycle3.setText("jLabel26");
 
-        jLabel42.setText("jLabel26");
+        mintofull3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull3.setText("jLabel26");
 
-        jLabel43.setText("jLabel26");
+        percentage3.setText("jLabel26");
 
         jLabel44.setText("jLabel26");
 
         jLabel45.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel45.setText("Battery No.4:");
 
-        jLabel46.setText("jLabel26");
+        temp4.setText("jLabel26");
 
-        jLabel47.setText("jLabel26");
+        cycle4.setText("jLabel26");
 
-        jLabel48.setText("jLabel26");
+        mintofull4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull4.setText("jLabel26");
 
-        jLabel49.setText("jLabel26");
+        percentage4.setText("jLabel26");
 
         jLabel50.setText("jLabel26");
 
         jLabel51.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel51.setText("Battery No.5:");
 
-        jLabel52.setText("jLabel26");
+        temp5.setText("jLabel26");
 
-        jLabel53.setText("jLabel26");
+        cycle5.setText("jLabel26");
 
-        jLabel54.setText("jLabel26");
+        mintofull5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull5.setText("jLabel26");
 
-        jLabel55.setText("jLabel26");
+        percentage5.setText("jLabel26");
 
         jLabel56.setText("jLabel26");
 
         jLabel57.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel57.setText("Battery No.6:");
 
-        jLabel58.setText("jLabel26");
+        temp6.setText("jLabel26");
 
-        jLabel59.setText("jLabel26");
+        cycle6.setText("jLabel26");
 
-        jLabel60.setText("jLabel26");
+        mintofull6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull6.setText("jLabel26");
 
-        jLabel61.setText("jLabel26");
+        percentage6.setText("jLabel26");
 
         jLabel62.setText("jLabel26");
 
         jLabel63.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel63.setText("Battery No.7:");
 
-        jLabel64.setText("jLabel26");
+        temp7.setText("jLabel26");
 
-        jLabel65.setText("jLabel26");
+        cycle7.setText("jLabel26");
 
-        jLabel66.setText("jLabel26");
+        mintofull7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull7.setText("jLabel26");
 
-        jLabel67.setText("jLabel26");
+        percentage7.setText("jLabel26");
 
         jLabel68.setText("jLabel26");
 
         jLabel69.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel69.setText("Battery No.8:");
 
-        jLabel70.setText("jLabel26");
+        temp8.setText("jLabel26");
 
-        jLabel71.setText("jLabel26");
+        cycle8.setText("jLabel26");
 
-        jLabel72.setText("jLabel26");
+        mintofull8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull8.setText("jLabel26");
 
-        jLabel73.setText("jLabel26");
+        percentage8.setText("jLabel26");
 
         jLabel74.setText("jLabel26");
 
         jLabel75.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel75.setText("Battery No.9:");
 
-        jLabel76.setText("jLabel26");
+        temp9.setText("jLabel26");
 
-        jLabel77.setText("jLabel26");
+        cycle9.setText("jLabel26");
 
-        jLabel78.setText("jLabel26");
+        mintofull9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull9.setText("jLabel26");
 
-        jLabel79.setText("jLabel26");
+        percentage9.setText("jLabel26");
 
         jLabel80.setText("jLabel26");
 
         jLabel81.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel81.setText("Battery No.10:");
 
-        jLabel82.setText("jLabel26");
+        temp10.setText("jLabel26");
 
-        jLabel83.setText("jLabel26");
+        cycle10.setText("jLabel26");
 
-        jLabel84.setText("jLabel26");
+        mintofull10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull10.setText("jLabel26");
 
-        jLabel85.setText("jLabel26");
+        percentage10.setText("jLabel26");
 
         jLabel86.setText("jLabel26");
 
         jLabel87.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel87.setText("Battery No.11:");
 
-        jLabel88.setText("jLabel26");
+        temp11.setText("jLabel26");
 
-        jLabel89.setText("jLabel26");
+        cycle11.setText("jLabel26");
 
-        jLabel90.setText("jLabel26");
+        mintofull11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull11.setText("jLabel26");
 
-        jLabel91.setText("jLabel26");
+        percentage11.setText("jLabel26");
 
         jLabel92.setText("jLabel26");
 
         jLabel93.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel93.setText("Battery No.12:");
 
-        jLabel94.setText("jLabel26");
+        temp12.setText("jLabel26");
 
-        jLabel95.setText("jLabel26");
+        cycle12.setText("jLabel26");
 
-        jLabel96.setText("jLabel26");
+        mintofull12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull12.setText("jLabel26");
 
-        jLabel97.setText("jLabel26");
+        percentage12.setText("jLabel26");
 
         jLabel98.setText("jLabel26");
 
         jLabel99.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel99.setText("Battery No.13:");
 
-        jLabel100.setText("jLabel26");
+        temp13.setText("jLabel26");
 
-        jLabel101.setText("jLabel26");
+        cycle13.setText("jLabel26");
 
-        jLabel102.setText("jLabel26");
+        mintofull13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull13.setText("jLabel26");
 
-        jLabel103.setText("jLabel26");
+        percentage13.setText("jLabel26");
 
         jLabel104.setText("jLabel26");
 
         jLabel105.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel105.setText("Battery No.14:");
 
-        jLabel106.setText("jLabel26");
+        temp14.setText("jLabel26");
 
-        jLabel107.setText("jLabel26");
+        cycle14.setText("jLabel26");
 
-        jLabel108.setText("jLabel26");
+        mintofull14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull14.setText("jLabel26");
 
-        jLabel109.setText("jLabel26");
+        percentage14.setText("jLabel26");
 
         jLabel110.setText("jLabel26");
 
         jLabel111.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel111.setText("Battery No.15:");
 
-        jLabel112.setText("jLabel26");
+        temp15.setText("jLabel26");
 
-        jLabel113.setText("jLabel26");
+        cycle15.setText("jLabel26");
 
-        jLabel114.setText("jLabel26");
+        mintofull15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull15.setText("jLabel26");
 
-        jLabel115.setText("jLabel26");
+        percentage15.setText("jLabel26");
 
         jLabel116.setText("jLabel26");
 
         jLabel117.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel117.setText("Battery No.16:");
 
-        jLabel118.setText("jLabel26");
+        temp16.setText("jLabel26");
 
-        jLabel119.setText("jLabel26");
+        cycle16.setText("jLabel26");
 
-        jLabel120.setText("jLabel26");
+        mintofull16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull16.setText("jLabel26");
 
-        jLabel121.setText("jLabel26");
+        percentage16.setText("jLabel26");
 
         jLabel122.setText("jLabel26");
 
@@ -720,12 +738,12 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
-                                .addComponent(jLabel26)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel29)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                                .addComponent(jLabel30)
-                                .addGap(38, 38, 38))
+                                .addComponent(temp1)
+                                .addGap(60, 60, 60)
+                                .addComponent(cycle1)
+                                .addGap(60, 60, 60)
+                                .addComponent(mintofull1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel23)
                                 .addGap(18, 18, 18)
@@ -734,12 +752,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(jLabel27)
                                 .addGap(39, 39, 39)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(jLabel28))
+                            .addComponent(jLabel28)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel31)))
+                                .addComponent(percentage1)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -747,181 +763,181 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel34)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel35)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel36)
+                        .addComponent(temp2)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle2)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel37)
+                        .addComponent(percentage2)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel38))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel40)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel41)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel42)
+                        .addComponent(temp3)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle3)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel43)
+                        .addComponent(percentage3)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel44))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel46)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel47)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel48)
+                        .addComponent(temp4)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle4)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel49)
+                        .addComponent(percentage4)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel50))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel52)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel53)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel54)
+                        .addComponent(temp5)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle5)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel55)
+                        .addComponent(percentage5)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel56))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel58)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel59)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel60)
+                        .addComponent(temp6)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle6)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel61)
+                        .addComponent(percentage6)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel62))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel64)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel65)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel66)
+                        .addComponent(temp7)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle7)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel67)
+                        .addComponent(percentage7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel68))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel70)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel71)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel72)
+                        .addComponent(temp8)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle8)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel73)
+                        .addComponent(percentage8)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel74))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel76)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel77)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel78)
+                        .addComponent(temp9)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle9)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel79)
+                        .addComponent(percentage9)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel80))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel81, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel82)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel83)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel84)
+                        .addComponent(temp10)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle10)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel85)
+                        .addComponent(percentage10)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel86))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel87, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel88)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel89)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel90)
+                        .addComponent(temp11)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle11)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel91)
+                        .addComponent(percentage11)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel92))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel93, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel94)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel95)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel96)
+                        .addComponent(temp12)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle12)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel97)
+                        .addComponent(percentage12)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel98))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel99, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel100)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel101)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel102)
+                        .addComponent(temp13)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle13)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel103)
+                        .addComponent(percentage13)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel104))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel105, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel106)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel107)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel108)
+                        .addComponent(temp14)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle14)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel109)
+                        .addComponent(percentage14)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel110))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel111, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel112)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel113)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel114)
+                        .addComponent(temp15)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle15)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel115)
+                        .addComponent(percentage15)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel116))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel117, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel118)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel119)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel120)
+                        .addComponent(temp16)
+                        .addGap(60, 60, 60)
+                        .addComponent(cycle16)
+                        .addGap(60, 60, 60)
+                        .addComponent(mintofull16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel121)
+                        .addComponent(percentage16)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel122)))
                 .addContainerGap())
@@ -939,130 +955,130 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel31)
+                    .addComponent(temp1)
+                    .addComponent(cycle1)
+                    .addComponent(mintofull1)
+                    .addComponent(percentage1)
                     .addComponent(jLabel32))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel36)
-                    .addComponent(jLabel37)
+                    .addComponent(temp2)
+                    .addComponent(cycle2)
+                    .addComponent(mintofull2)
+                    .addComponent(percentage2)
                     .addComponent(jLabel38))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
-                    .addComponent(jLabel40)
-                    .addComponent(jLabel41)
-                    .addComponent(jLabel42)
-                    .addComponent(jLabel43)
+                    .addComponent(temp3)
+                    .addComponent(cycle3)
+                    .addComponent(mintofull3)
+                    .addComponent(percentage3)
                     .addComponent(jLabel44))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(jLabel46)
-                    .addComponent(jLabel47)
-                    .addComponent(jLabel48)
-                    .addComponent(jLabel49)
+                    .addComponent(temp4)
+                    .addComponent(cycle4)
+                    .addComponent(mintofull4)
+                    .addComponent(percentage4)
                     .addComponent(jLabel50))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel51)
-                    .addComponent(jLabel52)
-                    .addComponent(jLabel53)
-                    .addComponent(jLabel54)
-                    .addComponent(jLabel55)
+                    .addComponent(temp5)
+                    .addComponent(cycle5)
+                    .addComponent(mintofull5)
+                    .addComponent(percentage5)
                     .addComponent(jLabel56))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel57)
-                    .addComponent(jLabel58)
-                    .addComponent(jLabel59)
-                    .addComponent(jLabel60)
-                    .addComponent(jLabel61)
+                    .addComponent(temp6)
+                    .addComponent(cycle6)
+                    .addComponent(mintofull6)
+                    .addComponent(percentage6)
                     .addComponent(jLabel62))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel63)
-                    .addComponent(jLabel64)
-                    .addComponent(jLabel65)
-                    .addComponent(jLabel66)
-                    .addComponent(jLabel67)
+                    .addComponent(temp7)
+                    .addComponent(cycle7)
+                    .addComponent(mintofull7)
+                    .addComponent(percentage7)
                     .addComponent(jLabel68))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel69)
-                    .addComponent(jLabel70)
-                    .addComponent(jLabel71)
-                    .addComponent(jLabel72)
-                    .addComponent(jLabel73)
+                    .addComponent(temp8)
+                    .addComponent(cycle8)
+                    .addComponent(mintofull8)
+                    .addComponent(percentage8)
                     .addComponent(jLabel74))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel75)
-                    .addComponent(jLabel76)
-                    .addComponent(jLabel77)
-                    .addComponent(jLabel78)
-                    .addComponent(jLabel79)
+                    .addComponent(temp9)
+                    .addComponent(cycle9)
+                    .addComponent(mintofull9)
+                    .addComponent(percentage9)
                     .addComponent(jLabel80))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel81)
-                    .addComponent(jLabel82)
-                    .addComponent(jLabel83)
-                    .addComponent(jLabel84)
-                    .addComponent(jLabel85)
+                    .addComponent(temp10)
+                    .addComponent(cycle10)
+                    .addComponent(mintofull10)
+                    .addComponent(percentage10)
                     .addComponent(jLabel86))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel87)
-                    .addComponent(jLabel88)
-                    .addComponent(jLabel89)
-                    .addComponent(jLabel90)
-                    .addComponent(jLabel91)
+                    .addComponent(temp11)
+                    .addComponent(cycle11)
+                    .addComponent(mintofull11)
+                    .addComponent(percentage11)
                     .addComponent(jLabel92))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel93)
-                    .addComponent(jLabel94)
-                    .addComponent(jLabel95)
-                    .addComponent(jLabel96)
-                    .addComponent(jLabel97)
+                    .addComponent(temp12)
+                    .addComponent(cycle12)
+                    .addComponent(mintofull12)
+                    .addComponent(percentage12)
                     .addComponent(jLabel98))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel99)
-                    .addComponent(jLabel100)
-                    .addComponent(jLabel101)
-                    .addComponent(jLabel102)
-                    .addComponent(jLabel103)
+                    .addComponent(temp13)
+                    .addComponent(cycle13)
+                    .addComponent(mintofull13)
+                    .addComponent(percentage13)
                     .addComponent(jLabel104))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel105)
-                    .addComponent(jLabel106)
-                    .addComponent(jLabel107)
-                    .addComponent(jLabel108)
-                    .addComponent(jLabel109)
+                    .addComponent(temp14)
+                    .addComponent(cycle14)
+                    .addComponent(mintofull14)
+                    .addComponent(percentage14)
                     .addComponent(jLabel110))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel111)
-                    .addComponent(jLabel112)
-                    .addComponent(jLabel113)
-                    .addComponent(jLabel114)
-                    .addComponent(jLabel115)
+                    .addComponent(temp15)
+                    .addComponent(cycle15)
+                    .addComponent(mintofull15)
+                    .addComponent(percentage15)
                     .addComponent(jLabel116))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel117)
-                    .addComponent(jLabel118)
-                    .addComponent(jLabel119)
-                    .addComponent(jLabel120)
-                    .addComponent(jLabel121)
+                    .addComponent(temp16)
+                    .addComponent(cycle16)
+                    .addComponent(mintofull16)
+                    .addComponent(percentage16)
                     .addComponent(jLabel122))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
@@ -1150,37 +1166,37 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         progressbarB16.setStringPainted(true);
 
-        BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
-        BatteryButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png"))); // NOI18N
+        BatteryButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1450,7 +1466,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
     /**
      * gets the last docked battery and sett it to charging
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         int x = receive.getLastDockedBattery();
@@ -1513,6 +1530,22 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JPanel Section;
     private javax.swing.JPanel autoTab;
     private javax.swing.JLabel batteryNo2Label6;
+    private javax.swing.JLabel cycle1;
+    private javax.swing.JLabel cycle10;
+    private javax.swing.JLabel cycle11;
+    private javax.swing.JLabel cycle12;
+    private javax.swing.JLabel cycle13;
+    private javax.swing.JLabel cycle14;
+    private javax.swing.JLabel cycle15;
+    private javax.swing.JLabel cycle16;
+    private javax.swing.JLabel cycle2;
+    private javax.swing.JLabel cycle3;
+    private javax.swing.JLabel cycle4;
+    private javax.swing.JLabel cycle5;
+    private javax.swing.JLabel cycle6;
+    private javax.swing.JLabel cycle7;
+    private javax.swing.JLabel cycle8;
+    private javax.swing.JLabel cycle9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -1525,30 +1558,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel100;
-    private javax.swing.JLabel jLabel101;
-    private javax.swing.JLabel jLabel102;
-    private javax.swing.JLabel jLabel103;
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
-    private javax.swing.JLabel jLabel106;
-    private javax.swing.JLabel jLabel107;
-    private javax.swing.JLabel jLabel108;
-    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel110;
     private javax.swing.JLabel jLabel111;
-    private javax.swing.JLabel jLabel112;
-    private javax.swing.JLabel jLabel113;
-    private javax.swing.JLabel jLabel114;
-    private javax.swing.JLabel jLabel115;
     private javax.swing.JLabel jLabel116;
     private javax.swing.JLabel jLabel117;
-    private javax.swing.JLabel jLabel118;
-    private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel120;
-    private javax.swing.JLabel jLabel121;
     private javax.swing.JLabel jLabel122;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1564,91 +1581,75 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel77;
-    private javax.swing.JLabel jLabel78;
-    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
-    private javax.swing.JLabel jLabel82;
-    private javax.swing.JLabel jLabel83;
-    private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
-    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel90;
-    private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
-    private javax.swing.JLabel jLabel94;
-    private javax.swing.JLabel jLabel95;
-    private javax.swing.JLabel jLabel96;
-    private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar6;
+    private javax.swing.JLabel mintofull1;
+    private javax.swing.JLabel mintofull10;
+    private javax.swing.JLabel mintofull11;
+    private javax.swing.JLabel mintofull12;
+    private javax.swing.JLabel mintofull13;
+    private javax.swing.JLabel mintofull14;
+    private javax.swing.JLabel mintofull15;
+    private javax.swing.JLabel mintofull16;
+    private javax.swing.JLabel mintofull2;
+    private javax.swing.JLabel mintofull3;
+    private javax.swing.JLabel mintofull4;
+    private javax.swing.JLabel mintofull5;
+    private javax.swing.JLabel mintofull6;
+    private javax.swing.JLabel mintofull7;
+    private javax.swing.JLabel mintofull8;
+    private javax.swing.JLabel mintofull9;
+    private javax.swing.JLabel percentage1;
+    private javax.swing.JLabel percentage10;
+    private javax.swing.JLabel percentage11;
+    private javax.swing.JLabel percentage12;
+    private javax.swing.JLabel percentage13;
+    private javax.swing.JLabel percentage14;
+    private javax.swing.JLabel percentage15;
+    private javax.swing.JLabel percentage16;
+    private javax.swing.JLabel percentage2;
+    private javax.swing.JLabel percentage3;
+    private javax.swing.JLabel percentage4;
+    private javax.swing.JLabel percentage5;
+    private javax.swing.JLabel percentage6;
+    private javax.swing.JLabel percentage7;
+    private javax.swing.JLabel percentage8;
+    private javax.swing.JLabel percentage9;
     private javax.swing.JProgressBar progressbarB1;
     private javax.swing.JProgressBar progressbarB10;
     private javax.swing.JProgressBar progressbarB11;
@@ -1666,6 +1667,22 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JProgressBar progressbarB8;
     private javax.swing.JProgressBar progressbarB9;
     private javax.swing.JTabbedPane tabPanels;
+    private javax.swing.JLabel temp1;
+    private javax.swing.JLabel temp10;
+    private javax.swing.JLabel temp11;
+    private javax.swing.JLabel temp12;
+    private javax.swing.JLabel temp13;
+    private javax.swing.JLabel temp14;
+    private javax.swing.JLabel temp15;
+    private javax.swing.JLabel temp16;
+    private javax.swing.JLabel temp2;
+    private javax.swing.JLabel temp3;
+    private javax.swing.JLabel temp4;
+    private javax.swing.JLabel temp5;
+    private javax.swing.JLabel temp6;
+    private javax.swing.JLabel temp7;
+    private javax.swing.JLabel temp8;
+    private javax.swing.JLabel temp9;
     private javax.swing.JLabel textLabel1;
     private javax.swing.JLabel textLabel10;
     private javax.swing.JLabel textLabel2;
@@ -1683,111 +1700,186 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     public void keyPressed(KeyEvent ke) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void keyReleased(KeyEvent ke) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public void isBatteryInStation(GUIObservable receive) {
         boolean isBatteryDockedInStation = false;
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(0);
         if (isBatteryDockedInStation) {
-            BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(1);
         if (isBatteryDockedInStation) {
-            BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        
+
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(2);
         if (isBatteryDockedInStation) {
-            BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(3);
         if (isBatteryDockedInStation) {
-            BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(4);
         if (isBatteryDockedInStation) {
-            BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(5);
         if (isBatteryDockedInStation) {
-            BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(6);
         if (isBatteryDockedInStation) {
-            BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(7);
         if (isBatteryDockedInStation) {
-            BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(8);
         if (isBatteryDockedInStation) {
-            BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(9);
         if (isBatteryDockedInStation) {
-            BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(10);
         if (isBatteryDockedInStation) {
-            BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(11);
         if (isBatteryDockedInStation) {
-            BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(12);
         if (isBatteryDockedInStation) {
-            BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(13);
         if (isBatteryDockedInStation) {
-            BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         isBatteryDockedInStation = receive.getBatteryStationDockingStatus(14);
         if (isBatteryDockedInStation) {
-            BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
+            BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
         if (isBatteryDockedInStation) {
-            BatteryButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/green_button.png")));
+            BatteryButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
-            BatteryButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/droneplatform/red_button.png")));
-            
+            BatteryButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
+
         }
     }
-    
+
+    public void settBatteryInformation(GUIObservable receive) {
+        this.receive = receive;
+
+        this.temp1.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(0)) +" .C");
+        this.temp2.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(1)) +" .C");
+        this.temp3.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(2)) +" .C");
+        this.temp4.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(3)) +" .C");
+        this.temp5.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(4)) +" .C");
+        this.temp6.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(5)) +" .C");
+        this.temp7.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(6)) +" .C");
+        this.temp8.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(7)) +" .C");
+        this.temp9.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(8)) +" .C");
+        this.temp10.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(9)) +" .C");
+        this.temp11.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(10)) +" .C");
+        this.temp12.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(11)) +" .C");
+        this.temp13.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(12)) +" .C");
+        this.temp14.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(13)) +" .C");
+        this.temp15.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(14)) +" .C");
+        this.temp16.setText(convertIntToString(receive.getSpescificBatteryTempertureLevel(15)) +" .C");
+        this.cycle1.setText(convertIntToString(receive.getSpescificBatterySyclecount(0))+": Times");
+        this.cycle2.setText(convertIntToString(receive.getSpescificBatterySyclecount(1))+": Times");
+        this.cycle3.setText(convertIntToString(receive.getSpescificBatterySyclecount(2))+": Times");
+        this.cycle4.setText(convertIntToString(receive.getSpescificBatterySyclecount(3))+": Times");
+        this.cycle5.setText(convertIntToString(receive.getSpescificBatterySyclecount(4))+": Times");
+        this.cycle6.setText(convertIntToString(receive.getSpescificBatterySyclecount(5))+": Times");
+        this.cycle7.setText(convertIntToString(receive.getSpescificBatterySyclecount(6))+": Times");
+        this.cycle8.setText(convertIntToString(receive.getSpescificBatterySyclecount(7))+": Times");
+        this.cycle9.setText(convertIntToString(receive.getSpescificBatterySyclecount(8))+": Times");
+        this.cycle10.setText(convertIntToString(receive.getSpescificBatterySyclecount(9))+": Times");
+        this.cycle11.setText(convertIntToString(receive.getSpescificBatterySyclecount(10))+": Times");
+        this.cycle12.setText(convertIntToString(receive.getSpescificBatterySyclecount(11))+": Times");
+        this.cycle13.setText(convertIntToString(receive.getSpescificBatterySyclecount(12))+": Times");
+        this.cycle14.setText(convertIntToString(receive.getSpescificBatterySyclecount(13))+": Times");
+        this.cycle15.setText(convertIntToString(receive.getSpescificBatterySyclecount(14))+": Times");
+        this.cycle16.setText(convertIntToString(receive.getSpescificBatterySyclecount(15))+": Times");
+        this.mintofull1.setText(convertIntToString(receive.getSpescificBatteryMinToFull(0))+": min");
+        this.mintofull2.setText(convertIntToString(receive.getSpescificBatteryMinToFull(1))+": min");
+        this.mintofull3.setText(convertIntToString(receive.getSpescificBatteryMinToFull(2))+": min");
+        this.mintofull4.setText(convertIntToString(receive.getSpescificBatteryMinToFull(3))+": min");
+        this.mintofull5.setText(convertIntToString(receive.getSpescificBatteryMinToFull(4))+": min");
+        this.mintofull6.setText(convertIntToString(receive.getSpescificBatteryMinToFull(5))+": min");
+        this.mintofull7.setText(convertIntToString(receive.getSpescificBatteryMinToFull(6))+": min");
+        this.mintofull8.setText(convertIntToString(receive.getSpescificBatteryMinToFull(7))+": min");
+        this.mintofull9.setText(convertIntToString(receive.getSpescificBatteryMinToFull(8))+": min");
+        this.mintofull10.setText(convertIntToString(receive.getSpescificBatteryMinToFull(9))+": min");
+        this.mintofull11.setText(convertIntToString(receive.getSpescificBatteryMinToFull(10))+": min");
+        this.mintofull12.setText(convertIntToString(receive.getSpescificBatteryMinToFull(11))+": min");
+        this.mintofull13.setText(convertIntToString(receive.getSpescificBatteryMinToFull(12))+": min");
+        this.mintofull14.setText(convertIntToString(receive.getSpescificBatteryMinToFull(13))+": min");
+        this.mintofull15.setText(convertIntToString(receive.getSpescificBatteryMinToFull(14))+": min");
+        this.mintofull16.setText(convertIntToString(receive.getSpescificBatteryMinToFull(15))+": min");
+        this.percentage1.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(0))+"V");
+        this.percentage2.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(1))+"V");
+        this.percentage3.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(2))+"V");
+        this.percentage4.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(3))+"V");
+        this.percentage5.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(4))+"V");
+        this.percentage6.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(5))+"V");
+        this.percentage7.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(6))+"V");
+        this.percentage8.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(7))+"V");
+        this.percentage9.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(8))+"V");
+        this.percentage10.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(9))+"V");
+        this.percentage11.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(10))+"V");
+        this.percentage12.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(11))+"V");
+        this.percentage13.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(12))+"V");
+        this.percentage14.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(13))+"V");
+        this.percentage15.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(14))+"V");
+        this.percentage16.setText(convertIntToString(receive.getSpesificBatteryChargingLevel(15))+"V");
+
+    }
+
+    public String convertIntToString(int x) {
+        String returnString = Integer.toString(x);
+        return returnString;
+    }
+
 }
