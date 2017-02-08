@@ -64,6 +64,7 @@ public class SerialSend implements Runnable {
                 serialPort.writeBytes(dataToArduino);
 
                 semaphore.release();
+               
             }
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialSend");

@@ -7,6 +7,7 @@ package droneplatform;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.util.concurrent.Semaphore;
 
 /**
  *
@@ -19,7 +20,7 @@ public class DronePlatform {
      */
     public static void main(String[] args) {
         //test.testPrint();
-        
+        DataHandler dataHandler = new DataHandler();
             
         GUI gui = new GUI();
         gui.setVisible(true);
@@ -27,9 +28,9 @@ public class DronePlatform {
         //GraphicsDevice screen = ge.getDefaultScreenDevice();
         //screen.setFullScreenWindow(gui);
         
-        
-        DataHandler dataHandler = new DataHandler();
-        BatteryStationLogic bsg = new BatteryStationLogic(dataHandler);  
+        Semaphore semaphore = new Semaphore(1,true);
+        BatteryStationLogic bsg = new BatteryStationLogic(dataHandler,semaphore);  
+        bsg.start();
         FaultHandler faultHandler = new FaultHandler();
         GUIObservable observable = new GUIObservable(faultHandler,bsg);
         faultHandler.testing();
