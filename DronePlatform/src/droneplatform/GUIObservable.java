@@ -19,6 +19,7 @@ public class GUIObservable extends Observable {
     private BatteryStationLogic batteryStationLogic;
     private ArrayList<BatteryStation> batteries;
     private String[] faultArray;
+    private Thread t;
 
     public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic) {
         this.faultHandler = faultHandler;
@@ -43,49 +44,13 @@ public class GUIObservable extends Observable {
         notifyObservers();
     }
 
+    /**
+     * get the faultmessages
+     * @param x the message number in the list 
+     * @return the message as string
+     */
     public String getFaultText(int x) {
         return faultArray[x];
-    }
-
-    public String getFaultTextArea2() {
-        return faultArray[1];
-    }
-
-    public String getFaultTextArea3() {
-        return faultArray[2];
-    }
-
-    public String getFaultTextArea4() {
-        return faultArray[3];
-    }
-
-    public String getFaultTextArea5() {
-        return faultArray[4];
-    }
-
-    public String getFaultTextArea6() {
-
-        return faultArray[5];
-    }
-
-    public String getFaultTextArea7() {
-
-        return faultArray[6];
-    }
-
-    public String getFaultTextArea8() {
-
-        return faultArray[7];
-    }
-
-    public String getFaultTextArea9() {
-
-        return faultArray[8];
-    }
-
-    public String getFaultTextArea10() {
-
-        return faultArray[9];
     }
 
     ///////////////////////////////////////////////////
@@ -97,32 +62,67 @@ public class GUIObservable extends Observable {
         return isBatteryDockedInStation;
     }
 
+    
+    /**
+     * sets a spesific battery to docking
+     * @param x 
+     */
     public void setSpesificBatteryToDocking(int x) {
         batteryStationLogic.settBatteryToChargeInStation(x);
     }
 
+    
+    /**
+     * release a spesific battery from docking
+     * @param x the number of the battery
+     */
     public void releaseSpesificBatteryFromDocking(int x) {
 
         batteryStationLogic.releaseBatteryFromChargeInStation(x);
     }
 
+    /**
+     * retriesves the last docked battery
+     * @return the int of the last doicked battery
+     */
     public int getLastDockedBattery() {
         return batteryStationLogic.getActiveBatteryPlacement();
     }
 
+    /**
+     * get spesifik battery cvhargingvalue
+     * @param x the number of the battery
+     * @return the int of the charging level
+     */
     public int getSpesificBatteryChargingLevel(int x) {
         return this.batteryStationLogic.getBatteryChargingPercentage(x);
 
     }
 
+    
+      /**
+     * get spesifik battery temperatire
+     * @param x the number of the battery
+     * @return the int of the temperature level
+     */
     public int getSpescificBatteryTempertureLevel(int x) {
         return this.batteryStationLogic.getActiveBatteryTemperature(x);
     }
 
+      /**
+     * get spesifik battery cychlus
+     * @param x the number of the battery
+     * @return the int of the cychlus level
+     */
     public int getSpescificBatterySyclecount(int x) {
         return this.batteryStationLogic.getBatteryChargingCycle(x);
     }
 
+      /**
+     * get spesifik battery minutes to full charged
+     * @param x the number of the battery
+     * @return the int of the miuntes to full level
+     */
     public int getSpescificBatteryMinToFull(int x) {
         return this.batteryStationLogic.getTimeToMaxChargingLevel(x);
     }
@@ -137,4 +137,5 @@ public class GUIObservable extends Observable {
 
         return batteryChargingLevel;
     }
+
 }

@@ -1,8 +1,5 @@
 package droneplatform;
 
-
-
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -21,7 +18,7 @@ import jssc.SerialPortList;
 //import jssc.*;
 /**
  * Serialcommunikation between Java and microcontroller
- * 
+ *
  */
 public class SerialSend implements Runnable {
 
@@ -32,10 +29,11 @@ public class SerialSend implements Runnable {
     int increment;
 
     /**
-     * Setting ut the serialCommunication sending thread. 
+     * Setting ut the serialCommunication sending thread.
+     *
      * @param serialCom the serialcommunicator class
      * @param s The semaphore added to the communication
-     * @param sp  the serial communication port 
+     * @param sp the serial communication port
      */
     public SerialSend(SerialCom serialCom, Semaphore s, SerialPort sp) {
         this.serialCom = serialCom;
@@ -44,10 +42,9 @@ public class SerialSend implements Runnable {
         dataHandler = new DataHandler();
     }
 
-    
     /**
-     * run method for thread. aquires semaphore and runs code, 
-     * and release the code when finished
+     * run method for thread. aquires semaphore and runs code, and release the
+     * code when finished
      */
     public void run() {
         try {
@@ -59,12 +56,12 @@ public class SerialSend implements Runnable {
                 dataToArduino = serialCom.sendDataToArduino();
                 //System.out.println("dataHandler data: " + Arrays.toString(serialCom.sendDataToArduino()));
 //                dataToArduino = this.dataHandler.dataToArduino();
-               System.out.println("SEND Serial " + Arrays.toString(dataToArduino));
+                System.out.println("SEND Serial " + Arrays.toString(dataToArduino));
                 System.out.println("Sent:" + increment);
                 serialPort.writeBytes(dataToArduino);
 
                 semaphore.release();
-               
+
             }
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialSend");
