@@ -27,10 +27,11 @@ public class BatteryStation {
     private TimerTask tTask;
     private int batteryPossition;
     private int chargingTimeToMax;
-    private int temperature;
+    private float temperature;
     private int timeToMaxBattery;
     private int chargedPercentage;
-    private int batteryCycles;
+    private float batteryCycles;
+    private float voltageChargingLevel;
 
     /**
      * constructor of batteryStation class
@@ -102,7 +103,9 @@ public class BatteryStation {
             tTask = new TimerTask() {
                 public void run() {
                     secondsPassed++;
-                    System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
+                   // System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
+                 //   setTemperature(temperature+secondsPassed);
+                   // System.out.println("Temp:" +getTemperature());
                 }
             };
 
@@ -219,7 +222,7 @@ public class BatteryStation {
      *
      * @param temp of battery
      */
-    public void setTemperature(int temp) {
+    public void setTemperature(float temp) {
         temperature = temp;
     }
 
@@ -228,7 +231,11 @@ public class BatteryStation {
      *
      * @return battery temperature int
      */
-    public int getTemperature() {
+    public float getTemperature() {
+    /*    if (temperature == 120.35)
+        {
+            temperature = 0;
+        }*/
         return temperature;
     }
 
@@ -265,6 +272,10 @@ public class BatteryStation {
      * @return percetage of battery
      */
     public int getChargedPercentage() {
+      /*  if (chargedPercentage==-1)
+        {
+            chargedPercentage=0;
+        }*/
         return chargedPercentage;
     }
 
@@ -273,16 +284,20 @@ public class BatteryStation {
      *
      * @param numberOfSycles the amount of times the battery has been charged
      */
-    public void setBatteryCycles(int numberOfSycles) {
+    public void setBatteryCycles(float numberOfSycles) {
         this.batteryCycles = numberOfSycles;
     }
 
     /**
-     * returning the amount of charging cychles of the battery
+     * returning the amount of charging cstatuychles of the battery
      *
      * @return an int describing number of charging cychles
      */
-    public int getNumberOfChargingCycles() {
+    public float getNumberOfChargingCycles() {
+       /* if(batteryCycles==-1)
+        {
+            batteryCycles=0;
+        }*/
         return batteryCycles;
     }
 
@@ -292,6 +307,18 @@ public class BatteryStation {
      */
     public int getNumberOfSecondsCharged() {
         return secondsPassed;
+    }
+    
+    
+    public void setChargingVoltage(float voltageCharg)
+    {
+        voltageChargingLevel = voltageCharg;
+    }
+    
+    public float getVoltageChargingLevel()
+    {
+        return voltageChargingLevel;
+               
     }
 
 }

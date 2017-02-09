@@ -27,14 +27,11 @@ public class DataHandler {
     ///
 
     public DataHandler() {
-        //serialCom = new SerialCom("/dev/ttyUSB0", this);
-        //serialCom = new SerialCom("COM3", this);
-       // serialCom.connect();
-        serialComArduino = new SerialComArduino("COM3", this);
-        serialComArduino.start();
-        byte[] dataFromArduino = new byte[10];
-        byte[] dataToArduino = new byte[64];
-        // settTestDataFromArduino();
+   
+        dataFromArduino = new byte[160];
+        dataToArduino = new byte[64];
+       // settingTestArray();
+                // settTestDataFromArduino();
         //testing();   //starts a timer to change the data to se if GUI reacts
 
     }
@@ -73,7 +70,7 @@ public class DataHandler {
      * starts a timer to change the data to se if GUI reacts
      */
     public void testing() {
-        byte[] testByte = new byte[5];
+        byte[] testByte = new byte[160];
         this.dataFromArduino = testByte;
         // secondsPassed = 0;
 
@@ -86,11 +83,29 @@ public class DataHandler {
                     dataFromArduino[2] = (byte) x;
                     dataFromArduino[3] = (byte) x;
                     dataFromArduino[4] = (byte) x;
+                    dataFromArduino[5] = (byte) x;
+                    dataFromArduino[6] = (byte) x;
+                    dataFromArduino[7] = (byte) x;
+                    dataFromArduino[8] = (byte) x;
+                    dataFromArduino[9] = (byte) x;
 
                 }
             }
         };
         timer = new java.util.Timer();
         timer.scheduleAtFixedRate(tTask, 1000, 1000);
+    }
+
+    
+    
+    /**
+     * sets anb start array to se if the gui gets the data
+     */
+    public void settingTestArray() {
+        //byte[] testByte = new byte[160];
+        // this.dataFromArduino = testByte;
+        for (int x = 0; x < 160; x++) {
+            dataFromArduino[x] = (byte) x;
+        }
     }
 }

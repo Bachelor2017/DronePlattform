@@ -21,7 +21,7 @@ public class BatteryStationLogic implements Runnable {
     private BatteryStation battery;
     private byte[] batteriStationLocation;
     private final Semaphore semaphore;
-    private int batteryStationTemperature;
+    private float batteryStationTemperature;
     private int timeToMaxChargingLevel;
     private int batteryStationNumberPossition;
     private int batteryStationYPossition;
@@ -44,8 +44,8 @@ public class BatteryStationLogic implements Runnable {
         batteryStationNumberPossition = 0;
         this.dh = dh;
         fillList();
-        byte[] dataFromArduino = new byte[10];
-        //testing();
+        //dataFromArduino = new byte[160];
+        // testing();
     }
 
     /**
@@ -62,9 +62,11 @@ public class BatteryStationLogic implements Runnable {
             try {
                 semaphore.acquire();
                 dataFromArduino = dh.getDataFromArduino();
-                //System.out.println("dette er test");
-                setDataFromArduino();
                 semaphore.release();
+              //  System.out.println("inne i run metode batteryStationLogic");
+                updateBatteryInformation(dataFromArduino);
+                
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(BatteryStationLogic.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -171,7 +173,7 @@ public class BatteryStationLogic implements Runnable {
      * @param x the battery in x posistion
      * @return the temperature of battery x
      */
-    public int getActiveBatteryTemperature(int x) {
+    public float getActiveBatteryTemperature(int x) {
         batteryStationTemperature = batteries.get(x).getTemperature();
         return batteryStationTemperature;
     }
@@ -182,7 +184,7 @@ public class BatteryStationLogic implements Runnable {
      * @param x the battery in position x
      * @param temperature the temperature of the battery
      */
-    public void setActiveBatteryTemperature(int x, int temperature) {
+    public void setActiveBatteryTemperature(int x, float temperature) {
         batteries.get(x).setTemperature(temperature);
     }
 
@@ -233,7 +235,7 @@ public class BatteryStationLogic implements Runnable {
      * @param x the battery number
      * @return the cyclus amount in int
      */
-    public int getBatteryChargingCycle(int x) {
+    public float getBatteryChargingCycle(int x) {
         return this.batteries.get(x).getNumberOfChargingCycles();
     }
 
@@ -242,8 +244,19 @@ public class BatteryStationLogic implements Runnable {
      *
      * @param x the number of the battery
      */
-    public void setBatteryChargingCycle(int x) {
-        this.batteries.get(x).setBatteryCycles(x);
+    public void setBatteryChargingCycle(int x, float cycles) {
+        this.batteries.get(x).setBatteryCycles(cycles);
+    }
+    
+    
+    public void setSpesificChargingVoltage(int x, float voltage)
+    {
+        this.batteries.get(x).setChargingVoltage(voltage);
+    }
+    
+    public float getSpesificChargingVoltage(int x)
+    {
+        return this.batteries.get(x).getVoltageChargingLevel();
     }
 
     /**
@@ -251,60 +264,50 @@ public class BatteryStationLogic implements Runnable {
      * spesific battery Adds the temperature, batterycychle,timetomax and
      * percentage information
      */
-    public void setDataFromArduino() {
-        dataFromArduino = dh.getDataFromArduino();
-        int batteryNumber = dataFromArduino[0];
-        batteries.get(batteryNumber).setTemperature(dataFromArduino[1]);
-        batteries.get(batteryNumber).setBatteryCycles(dataFromArduino[2]);
-        batteries.get(batteryNumber).setTimeToMaxBattery(dataFromArduino[3]);
-        batteries.get(batteryNumber).setPercentageCharged(dataFromArduino[4]);
-            batteries.get(batteryNumber).setTemperature(dataFromArduino[5]);
-        batteries.get(batteryNumber).setBatteryCycles(dataFromArduino[6]);
-        batteries.get(batteryNumber).setTimeToMaxBattery(dataFromArduino[7]);
-        batteries.get(batteryNumber).setPercentageCharged(dataFromArduino[8]);
-            batteries.get(batteryNumber).setTemperature(dataFromArduino[9]);
-  
-
-
-    }
-
-    /**
-     * gets the data read from the arduino and adds the information to the
-     * spesific battery Adds the temperature, batterycychle,timetomax and
-     * percentage information
-     */
-    public void setDataFromArduinoTest() {
-        dataFromArduino = dh.getDataFromArduino();
-        int batteryNumber = dataFromArduino[0];
+    public void updateBatteryInformation(byte[] incomingDataFromArduino) {
+       // System.out.println("Updating battery information:");
+        // dataFromArduino = dh.getDataFromArduino();
+        //  int batteryNumber = dataFromArduino[0];
         int i = 1;
+        //  float number = 0.0f;
         for (int x = 0; x < 16; x++) {
-            batteries.get(x).setTemperature(dataFromArduino[i]);
+            //setting percentage of charge
+            batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+            i = i + 1;
+
+            //Setting the charging voltage
+            float voltage = incomingDataFromArduino[i];
+            i = i + 1;
+            float voltageDesc = incomingDataFromArduino[i];
+            i = i + 1;
+            batteries.get(x).setChargingVoltage(voltage + (voltageDesc / 100));
+
+            //Setting minutest to fully charged
+            batteries.get(x).setTimeToMaxBattery(incomingDataFromArduino[i]);
+            //setTimeToMaxChargingLevel(x, dataFromArduino[i]);
+            i++;
+
+            //Setting Temperatur on station
+            float temperature = incomingDataFromArduino[i];
+            i = i + 1;
+            float tempDesc = incomingDataFromArduino[i];
+            batteries.get(x).setTemperature((temperature + (tempDesc / 100)));
             //setActiveBatteryTemperature(x, dataFromArduino[i]);
-            i++;
-            batteries.get(x).setBatteryCycles(dataFromArduino[i]);
-            //setTimeToMaxChargingLevel(x, dataFromArduino[i]);
-            i++;
-            batteries.get(x).setTimeToMaxBattery(dataFromArduino[i]);
-            //setTimeToMaxChargingLevel(x, dataFromArduino[i]);
-            i++;
-            batteries.get(x).setPercentageCharged(dataFromArduino[i]);
-            //setBatteryChargingPercentage(x, dataFromArduino[i]);
-            i++;
+            i = i + 1;
 
+            //setting cycle count on batteries
+            float cyclecount = incomingDataFromArduino[i];
+            i = i + 1;
+            float cycleDesc = incomingDataFromArduino[i];
+            batteries.get(x).setBatteryCycles((cyclecount + (cycleDesc / 100))*100);
+            i = i + 1;
+
+            batteries.get(x).setBatteryStatus(incomingDataFromArduino[i]);
+            i = i + 1;
+            i = i + 1;
         }
-        i = 0;
-    }
+        //System.out.println("ute av update battery");
 
-   
-    ///////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////
-    //det under trenger vi ikke etter vi har satt inn i2C
-    public int getBatteriesLevel(int x) {
-        return batteries.get(x).getBatteryLevel();
-    }
-
-    public void setBatteriesLevel(int x, int value) {
-        batteries.get(x).setBatteryLevel(value);
     }
 
     public int getBatteriesStatus(int x) {
@@ -315,54 +318,6 @@ public class BatteryStationLogic implements Runnable {
         batteries.get(x).setBatteryStatus(value);
     }
 
-    /*
-    test of setting the batterylevel
-     */
-    public void test() {
-        batteries.get(2).setBatteryLevel(20);
-        batteries.get(4).setBatteryLevel(40);
-        batteries.get(6).setBatteryLevel(60);
-        batteries.get(8).setBatteryLevel(80);
-        batteries.get(10).setBatteryLevel(100);
-        for (int i = 0; i < 16; i++) {
-            System.out.println("Bat Nr: " + i + " " + batteries.get(i).getBatteryLevel());
-        }
-    }
-
-    /**
-     * test function to start charging of several batterys usiong timer
-     */
-    public void testing() {
-        secondsPassed = 0;
-        BatteryStation batr1 = new BatteryStation(1);
-        batteries.get(0).setDocked(true);
-        tTask = new TimerTask() {
-            public void run() {
-
-                if (secondsPassed == 5) {
-                    batteries.get(0).setDocked(false);
-                }
-                if (secondsPassed == 8) {
-                    batteries.get(0).setDocked(true);
-                    batteries.get(1).setDocked(true);
-                }
-                if (secondsPassed == 12) {
-                    batteries.get(0).setDocked(false);
-                    batteries.get(1).setDocked(false);
-                    batteries.get(2).setDocked(true);
-                }
-                if (secondsPassed == 15) {
-                    batteries.get(3).setDocked(true);
-                    batteries.get(4).setDocked(true);
-                    batteries.get(5).setDocked(true);
-                    batteries.get(6).setDocked(true);
-                    batteries.get(7).setDocked(true);
-                }
-                secondsPassed++;
-            }
-        };
-        timer = new java.util.Timer();
-        timer.scheduleAtFixedRate(tTask, 1000, 1000);
-    }
+   
 
 }
