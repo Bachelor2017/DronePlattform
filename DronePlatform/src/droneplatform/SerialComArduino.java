@@ -6,6 +6,8 @@ import jssc.SerialPort;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,7 +22,7 @@ import java.util.concurrent.Semaphore;
 public class SerialComArduino implements Runnable {
 
     private SerialPort serialPort;
-    Semaphore semaPhore = new Semaphore(1, true);
+    Semaphore semaphore = new Semaphore(1, true);
     private Thread reader; // reads from arduino
     private Thread sender;  // writes to arduino
     public byte[] dataFromArduino = new byte[23];
@@ -33,10 +35,11 @@ private Thread t;
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialComArduino(String comPort, DataHandler dataHandler) {
+    public SerialComArduino(String comPort, DataHandler dataHandler,Semaphore semaphore) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
+        this.semaphore = semaphore;
     }
     
     /**
@@ -62,6 +65,39 @@ private Thread t;
         } catch (SerialPortException e) {
             System.out.println("No Port Found On: " + System.getProperty("os.name"));
         }
+    }
+    
+        @Override
+    public void run() {
+        try {
+            System.out.println("inne i serialcom før while");
+            while (true) {
+                  System.out.println("inne i serialcom etter while");
+               
+               byte[] data = serialPort.readBytes(1);
+               if (data[0]==-128)
+               {
+                     byte[] dataFromArduionoToDH = serialPort.readBytes(160);
+                increment++;
+                semaphore.acquire();
+                   System.out.println("Setter data til Datahandler");
+               dataHandler.setDataFromArduino(dataFromArduionoToDH);
+                 semaphore.release();
+                    System.out.println("received: " + increment);
+                    System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
+               // }
+
+             // 
+
+            }
+               }
+              
+        } catch (SerialPortException ex) {
+            System.out.println("SerialPortException i SerialRead");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SerialComArduino.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -125,39 +161,8 @@ private Thread t;
         return portNames;
     }
 
-    public Semaphore getSemaphore() {
-        return semaPhore;
-    }
+   
 
-    @Override
-    public void run() {
-        try {
-            while (true) {
-               // semaphore.acquire();
-               byte[] data = serialPort.readBytes(1);
-               if (data[0]==-128)
-               {
-                     byte[] data1 = serialPort.readBytes(144);
-                increment++;
-                //System.out.println("Read Serial " + Arrays.toString(data));
-                //if (data.length > 0) {
-                   // byte[] arrangedData = checkDataArrangementTest(data);
-                   // this.dataArduino = arrangedData;
-                   // serialCom.dataFromArduino = arrangedData;
-                  //  dataHandler.setDataFromArduino(arrangedData);
-                    System.out.println("received: " + increment);
-                    System.out.println("Read Arranged " + Arrays.toString(data1));
-               // }
 
-             //   semaphore.release();
-
-            }
-               }
-              
-        } catch (SerialPortException ex) {
-            System.out.println("SerialPortException i SerialRead");
-        }
-      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

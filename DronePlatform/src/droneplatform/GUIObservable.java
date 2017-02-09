@@ -3,6 +3,8 @@ package droneplatform;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,11 +21,13 @@ public class GUIObservable extends Observable {
     private BatteryStationLogic batteryStationLogic;
     private ArrayList<BatteryStation> batteries;
     private String[] faultArray;
+    ArrayList<String> faultList;
     private Thread t;
 
     public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic) {
         this.faultHandler = faultHandler;
         this.batteryStationLogic = batteryStationLogic;
+        
     }
 
     @Override
@@ -36,21 +40,32 @@ public class GUIObservable extends Observable {
      * setting the data retrieved from system
      */
     public void setData() {
+       
+                faultArray = faultHandler.guiFaultList();
+                faultList = faultHandler.getFaultList();
+                batteries = batteryStationLogic.getArrayListBatteries();
+                // System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
+                //   setTemperature(temperature+secondsPassed);
+                // System.out.println("Temp:" +getTemperature());
+         
 
-        faultArray = faultHandler.guiFaultList();
-        batteries = batteryStationLogic.getArrayListBatteries();
-
+       
         setChanged();
         notifyObservers();
     }
 
     /**
      * get the faultmessages
-     * @param x the message number in the list 
+     *
+     * @param x the message number in the list
      * @return the message as string
      */
     public String getFaultText(int x) {
         return faultArray[x];
+    }
+
+    public ArrayList<String> getFaultList() {
+        return faultList;
     }
 
     ///////////////////////////////////////////////////
@@ -62,18 +77,18 @@ public class GUIObservable extends Observable {
         return isBatteryDockedInStation;
     }
 
-    
     /**
      * sets a spesific battery to docking
-     * @param x 
+     *
+     * @param x
      */
     public void setSpesificBatteryToDocking(int x) {
         batteryStationLogic.settBatteryToChargeInStation(x);
     }
 
-    
     /**
      * release a spesific battery from docking
+     *
      * @param x the number of the battery
      */
     public void releaseSpesificBatteryFromDocking(int x) {
@@ -83,6 +98,7 @@ public class GUIObservable extends Observable {
 
     /**
      * retriesves the last docked battery
+     *
      * @return the int of the last doicked battery
      */
     public int getLastDockedBattery() {
@@ -91,6 +107,7 @@ public class GUIObservable extends Observable {
 
     /**
      * get spesifik battery cvhargingvalue
+     *
      * @param x the number of the battery
      * @return the int of the charging level
      */
@@ -99,32 +116,50 @@ public class GUIObservable extends Observable {
 
     }
 
-    
-      /**
+    /**
      * get spesifik battery temperatire
+     *
      * @param x the number of the battery
      * @return the int of the temperature level
      */
-    public int getSpescificBatteryTempertureLevel(int x) {
+    public float getSpescificBatteryTempertureLevel(int x) {
         return this.batteryStationLogic.getActiveBatteryTemperature(x);
     }
 
-      /**
+    /**
      * get spesifik battery cychlus
+     *
      * @param x the number of the battery
      * @return the int of the cychlus level
      */
-    public int getSpescificBatterySyclecount(int x) {
+    public float getSpescificBatterySyclecount(int x) {
         return this.batteryStationLogic.getBatteryChargingCycle(x);
     }
 
-      /**
+    /**
      * get spesifik battery minutes to full charged
+     *
      * @param x the number of the battery
      * @return the int of the miuntes to full level
      */
     public int getSpescificBatteryMinToFull(int x) {
         return this.batteryStationLogic.getTimeToMaxChargingLevel(x);
+    }
+
+    public float getSpesificChargingVoltage(int x) {
+        return this.batteryStationLogic.getSpesificChargingVoltage(x);
+    }
+
+    public void setSpesificChargingVoltage(int x, float voltage) {
+        this.batteryStationLogic.getSpesificChargingVoltage(x);
+    }
+
+    public int getBatteriesStatus(int x) {
+        return batteryStationLogic.getBatteriesStatus(x);
+    }
+
+    public void setBatteriesStatus(int x, int value) {
+        batteryStationLogic.setBatteriesStatus(x, value);
     }
 
     ////////////////////////////////////

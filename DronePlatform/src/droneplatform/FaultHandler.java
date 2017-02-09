@@ -83,7 +83,7 @@ public class FaultHandler {
 
     }
     
-    private ArrayList getFaultList(){
+    public ArrayList getFaultList(){
         return faultList;
     }
     
