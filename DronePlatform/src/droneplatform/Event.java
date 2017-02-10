@@ -15,6 +15,7 @@ public class Event {
     private int xValue;
     private int yValue;
     private int zValue;
+    private int timeSyclusOfEvent;
     
     
     public Event(int eventNumber,String eventName,int xValue,int zValue,int yValue)
@@ -24,6 +25,13 @@ public class Event {
         this.xValue = xValue;
         this.yValue = yValue;
         this.zValue = zValue;
+    }
+    
+    public Event(int eventNumber, String eventName,int timeSyclusOfEvent)
+    {
+        this.eventNumber = eventNumber;
+        this.eventName = eventName;
+        this.timeSyclusOfEvent = timeSyclusOfEvent;
     }
 
     /**
@@ -106,6 +114,14 @@ public class Event {
         this.zValue = zValue;
     }
     
+    public int getTimeSyclusOfEvent()
+    {
+        return this.timeSyclusOfEvent;
+    }
     
+    public void settimeSyclusOfEvent(int timeSyclusOfEvent)
+    {
+        this.timeSyclusOfEvent = timeSyclusOfEvent;
+    }
     
 }

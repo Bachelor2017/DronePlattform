@@ -32,6 +32,7 @@ public class BatteryStation {
     private int chargedPercentage;
     private float batteryCycles;
     private float voltageChargingLevel;
+    private boolean limitSwitch;
 
     /**
      * constructor of batteryStation class
@@ -321,4 +322,15 @@ public class BatteryStation {
                
     }
 
+    
+    public void setLimiSwitch(boolean value)
+    {
+        this.limitSwitch=value;
+                
+    }
+    
+    public boolean returnLimitSwitch()
+    {
+        return this.limitSwitch;
+    }
 }

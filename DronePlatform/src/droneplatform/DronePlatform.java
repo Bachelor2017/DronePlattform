@@ -35,12 +35,14 @@ public class DronePlatform {
         BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
         bsg.start();
 
+        EventStates events = new EventStates();
         FaultHandler faultHandler = new FaultHandler();
-        GUIObservable observable = new GUIObservable(faultHandler, bsg);
+        GUIObservable observable = new GUIObservable(faultHandler, bsg,events);
 
         observable.addObserver(gui);
 
-        faultHandler.testing();
+        //faultHandler.testing();
+        
         //SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
         //sysLog.start();
         //Serial Communication

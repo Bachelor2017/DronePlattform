@@ -44,8 +44,7 @@ public class BatteryStationLogic implements Runnable {
         batteryStationNumberPossition = 0;
         this.dh = dh;
         fillList();
-        //dataFromArduino = new byte[160];
-        // testing();
+        
     }
 
     /**
@@ -304,7 +303,20 @@ public class BatteryStationLogic implements Runnable {
 
             batteries.get(x).setBatteryStatus(incomingDataFromArduino[i]);
             i = i + 1;
+            
+            boolean limitSwitch = false;
+            if (incomingDataFromArduino[i]==1)
+            {
+                limitSwitch = true;
+            }
+            else
+            {
+                limitSwitch = false;
+            }
+                
+             batteries.get(x).setLimiSwitch(limitSwitch);
             i = i + 1;
+             i = i + 1;
         }
         //System.out.println("ute av update battery");
 
@@ -316,6 +328,17 @@ public class BatteryStationLogic implements Runnable {
 
     public void setBatteriesStatus(int x, int value) {
         batteries.get(x).setBatteryStatus(value);
+    }
+    
+    
+    public boolean getBatteryLimitSwitchValue(int x)
+    {
+        return  batteries.get(x).returnLimitSwitch();
+    }
+    
+    public void setLimitSwitcxhValue(int x,boolean value)
+    {
+         batteries.get(x).setLimiSwitch(value);
     }
 
    

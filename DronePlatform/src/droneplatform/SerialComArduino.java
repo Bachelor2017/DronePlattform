@@ -29,19 +29,20 @@ public class SerialComArduino implements Runnable {
     public byte[] dataToArduino = new byte[6];
     DataHandler dataHandler;
     int increment;
-private Thread t;
+    private Thread t;
+
     /**
      *
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialComArduino(String comPort, DataHandler dataHandler,Semaphore semaphore) {
+    public SerialComArduino(String comPort, DataHandler dataHandler, Semaphore semaphore) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
         this.semaphore = semaphore;
     }
-    
+
     /**
      * start a new thread containing the batterystationLogic
      */
@@ -50,7 +51,6 @@ private Thread t;
         t.start();
     }
 
-
     /**
      * Creats and starts the threads read and send.
      */
@@ -58,46 +58,42 @@ private Thread t;
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(9600, 8, 1, 0);
-               // reader = new Thread(new SerialReadArduino(this, semaPhore, serialPort, dataHandler));         
-               // reader.start();
+                getSerialPort().setParams(19200, 8, 1, 0);
+                // reader = new Thread(new SerialReadArduino(this, semaPhore, serialPort, dataHandler));         
+                // reader.start();
             }
         } catch (SerialPortException e) {
             System.out.println("No Port Found On: " + System.getProperty("os.name"));
         }
     }
-    
-        @Override
+
+    @Override
     public void run() {
         try {
-            System.out.println("inne i serialcom før while");
+
             while (true) {
-                  System.out.println("inne i serialcom etter while");
-               
-               byte[] data = serialPort.readBytes(1);
-               if (data[0]==-128)
-               {
-                     byte[] dataFromArduionoToDH = serialPort.readBytes(160);
-                increment++;
-                semaphore.acquire();
-                   System.out.println("Setter data til Datahandler");
-               dataHandler.setDataFromArduino(dataFromArduionoToDH);
-                 semaphore.release();
-                    System.out.println("received: " + increment);
+
+                byte[] data = serialPort.readBytes(1);
+                if (data[0] == -128) {
+                    byte[] dataFromArduionoToDH = serialPort.readBytes(176);
+                    increment++;
+                    semaphore.acquire();
+
+                    dataHandler.setDataFromArduino(dataFromArduionoToDH);
+                    semaphore.release();
                     System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
-               // }
+                    // }
 
-             // 
-
+                    // 
+                }
             }
-               }
-              
+
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");
         } catch (InterruptedException ex) {
             Logger.getLogger(SerialComArduino.class.getName()).log(Level.SEVERE, null, ex);
         }
-      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -160,9 +156,5 @@ private Thread t;
         }
         return portNames;
     }
-
-   
-
-
 
 }
