@@ -28,7 +28,7 @@ public class DataHandler {
 
     public DataHandler() {
    
-        dataFromArduino = new byte[160];
+        dataFromArduino = new byte[176];
         dataToArduino = new byte[64];
        // settingTestArray();
                 // settTestDataFromArduino();

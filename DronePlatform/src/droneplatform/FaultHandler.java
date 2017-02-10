@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,44 +20,29 @@ import java.util.Date;
 public class FaultHandler {
     
     private ArrayList<String> faultList;
+    int x = 0;
     
     public FaultHandler(){
          faultList = new ArrayList<>();
         fillList();
+        testFault();
     }
     
     public void fillList(){
-        addFaultToList("Error 1");
-        addFaultToList("Error 2");
-        addFaultToList("Error 3");
-        addFaultToList("Error 4");
-        addFaultToList("Error 5");
-        addFaultToList("Error 6");
-        addFaultToList("Error 7");
-        addFaultToList("Error 8");
-        addFaultToList("Error 9");
-        addFaultToList("Error 10");
-        addFaultToList("Error 11");
-        addFaultToList("Error 12");
-        addFaultToList("Error 13");
-        addFaultToList("Error 14");
-        addFaultToList("Error 15");
-        addFaultToList("Error 16");
-        addFaultToList("Error 17");
-        addFaultToList("Error 18");
-        addFaultToList("Error 19");
-        addFaultToList("Error 20");
-        addFaultToList("Error 21");
-        addFaultToList("Error 28");
-        addFaultToList("Error 30");
-        addFaultToList("Error 32");
-        addFaultToList("Error 34");
-        addFaultToList("Error 36");
-        addFaultToList("Error 38");
-        addFaultToList("Error 46");
-        addFaultToList("Error 48");
-        addFaultToList("Error 50");
-        addFaultToList("Error 52");
+        addFaultToList("");
+        addFaultToList("");
+         addFaultToList("");
+        addFaultToList("");
+         addFaultToList("");
+        addFaultToList("");
+         addFaultToList("");
+        addFaultToList("");
+         addFaultToList("");
+        addFaultToList("");
+         addFaultToList("");
+        addFaultToList("");
+         addFaultToList("");
+        addFaultToList("");
     }
     
     public void testPrint(){
@@ -66,8 +53,16 @@ public class FaultHandler {
     
     public void addFaultToList(String command){
         String time = "";
-        
-        String fault = "Command: " + command + getTimeStamp();
+        String fault="";
+        if(command =="")
+        {
+            fault = "";
+        }
+        else
+        {
+             fault = "Command: " + command + getTimeStamp();
+        }
+       
         faultList.add(fault);     
     }
     
@@ -102,5 +97,27 @@ public class FaultHandler {
             System.out.println(test[i]);
         }
     }
+    
+    public void addFault()
+    {
+        addFaultToList("Error " + x);
+        x++;
+    }
+    
+    
+     public void testFault() {
+        
+            TimerTask tTask = new TimerTask() {
+                public void run() {
+                   
+             addFault();
+                }
+            };
+
+            Timer timer = new java.util.Timer();
+            timer.scheduleAtFixedRate(tTask, 1000, 1000);
+        } 
+       
+    
     
 }

@@ -19,14 +19,19 @@ public class GUIObservable extends Observable {
 
     private FaultHandler faultHandler;
     private BatteryStationLogic batteryStationLogic;
+    private EventStates events;
     private ArrayList<BatteryStation> batteries;
     private String[] faultArray;
+    private String[] eventArray;
     ArrayList<String> faultList;
+    ArrayList<String> eventList;
     private Thread t;
+    private boolean limitSwitch;
 
-    public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic) {
+    public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic,EventStates events) {
         this.faultHandler = faultHandler;
         this.batteryStationLogic = batteryStationLogic;
+        this.events = events;
         
     }
 
@@ -44,6 +49,8 @@ public class GUIObservable extends Observable {
                 faultArray = faultHandler.guiFaultList();
                 faultList = faultHandler.getFaultList();
                 batteries = batteryStationLogic.getArrayListBatteries();
+                eventArray = events.guiEventList();
+                eventList = events.getEventList();
                 // System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
                 //   setTemperature(temperature+secondsPassed);
                 // System.out.println("Temp:" +getTemperature());
@@ -67,7 +74,36 @@ public class GUIObservable extends Observable {
     public ArrayList<String> getFaultList() {
         return faultList;
     }
+    
+    
+    
+    ///////////////////////////////////////////////////
+    //////EVENTS
+    /**
+     * get the faultmessages
+     *
+     * @param x the message number in the list
+     * @return the message as string
+     */
+    public String getEventText(int x) {
+        return eventArray[x];
+    }
+    
+     public ArrayList<String> getEventList() {
+        return eventList;
+    }
 
+     public String getLastEventState()
+     {
+         return events.getLastEventState();
+     }
+     
+     public int testGetXvalue()
+     {
+         return events.testGetXValue();
+     }
+     
+     
     ///////////////////////////////////////////////////
     //to battery GUI
     public boolean getBatteryStationDockingStatus(int x) {
@@ -161,6 +197,11 @@ public class GUIObservable extends Observable {
     public void setBatteriesStatus(int x, int value) {
         batteryStationLogic.setBatteriesStatus(x, value);
     }
+    
+    public boolean getSpesificLimitSwitch(int x)
+    {
+        return batteryStationLogic.getBatteryLimitSwitchValue(x);
+    }
 
     ////////////////////////////////////
     //Utgår når vi tar i bruk I2C
@@ -171,6 +212,11 @@ public class GUIObservable extends Observable {
         String batteryLevelString = null;
 
         return batteryChargingLevel;
+    }
+    
+    public void addFaultToList()
+    {
+        faultHandler.addFault();
     }
 
 }

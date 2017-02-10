@@ -23,6 +23,7 @@ import javax.swing.JScrollPane;
 public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
     GUIObservable receive;
+     ArrayList<String> faultList;
 
     /**
      * Creates new form GUI
@@ -30,6 +31,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     public GUI() {
         initComponents();
         addKeyListener(this);
+        faultList = new ArrayList<>();
     }
 
     @Override
@@ -37,11 +39,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         if (o instanceof GUIObservable) {
             receive = (GUIObservable) o;
             this.setFaultMessages(receive);
+            this.setEventMessages(receive);
             this.setProgressBarValue(receive);
             isBatteryInStation(receive);
             settBatteryInformation(receive);
             //add(new JScrollPane(jTextArea1));
-            setFault(receive);
+            setEvents(receive);
+            updateActiveStatus(receive);
+            updateProgreessBar(receive);
+            
 
         }
     }
@@ -228,6 +234,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel40 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        textLabel11 = new javax.swing.JLabel();
+        textLabel12 = new javax.swing.JLabel();
+        textLabel13 = new javax.swing.JLabel();
+        textLabel14 = new javax.swing.JLabel();
+        textLabel15 = new javax.swing.JLabel();
+        textLabel16 = new javax.swing.JLabel();
+        textLabel17 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         progressbarB3 = new javax.swing.JProgressBar();
         progressbarB12 = new javax.swing.JProgressBar();
@@ -286,6 +301,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         batteryNo2Label6.setText("Battery No.2");
 
@@ -1361,20 +1377,26 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jLabel40.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel40.setText("Event information:");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -1396,6 +1418,67 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         );
 
         tabPanels.addTab("Status info", jPanel4);
+
+        textLabel11.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+
+        textLabel12.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+
+        textLabel13.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+
+        textLabel14.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+
+        textLabel15.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+
+        textLabel16.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+
+        textLabel17.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                            .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(28, 28, 28)
+                    .addComponent(textLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(8, 8, 8)))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(textLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                .addGap(306, 306, 306))
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(278, 278, 278)
+                    .addComponent(textLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addGap(259, 259, 259)))
+        );
+
+        tabPanels.addTab("tab5", jPanel10);
 
         jLabel8.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel8.setText("Battery No.12");
@@ -1537,16 +1620,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel32)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(jLabel31)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1565,15 +1639,22 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addContainerGap()
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel31)
-                    .addComponent(jLabel37))
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLabel31)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
                     .addComponent(jLabel34))
@@ -1592,6 +1673,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jLabel38.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel38.setText("Battery No.2");
+
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1714,7 +1807,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addGap(18, 18, 18)
                                 .addComponent(BatteryButton16))
                             .addComponent(progressbarB8, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(98, 98, 98))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(9, 9, 9))
                     .addComponent(tabPanels)))
         );
         layout.setVerticalGroup(
@@ -1766,15 +1861,20 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                                     .addComponent(jLabel13))
                                                 .addComponent(BatteryButton8)
                                                 .addComponent(BatteryButton7))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(progressbarB8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(progressbarB7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(17, 17, 17)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel16)
-                                                .addComponent(BatteryButton16)
-                                                .addComponent(BatteryButton15)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(progressbarB8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(progressbarB7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGap(17, 17, 17)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel16)
+                                                        .addComponent(BatteryButton16)
+                                                        .addComponent(BatteryButton15)))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(25, 25, 25)
+                                                    .addComponent(jButton1))))
                                         .addComponent(jLabel14))
                                     .addGap(8, 8, 8)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1908,6 +2008,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
     }//GEN-LAST:event_startBeltToggleMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+      receive.addFaultToList();
+        System.out.println("lag til feil");
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1979,6 +2088,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel cycle7;
     private javax.swing.JLabel cycle8;
     private javax.swing.JLabel cycle9;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton13;
@@ -2030,6 +2140,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel45;
@@ -2048,6 +2159,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2145,6 +2257,13 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel temp9;
     private javax.swing.JLabel textLabel1;
     private javax.swing.JLabel textLabel10;
+    private javax.swing.JLabel textLabel11;
+    private javax.swing.JLabel textLabel12;
+    private javax.swing.JLabel textLabel13;
+    private javax.swing.JLabel textLabel14;
+    private javax.swing.JLabel textLabel15;
+    private javax.swing.JLabel textLabel16;
+    private javax.swing.JLabel textLabel17;
     private javax.swing.JLabel textLabel2;
     private javax.swing.JLabel textLabel3;
     private javax.swing.JLabel textLabel4;
@@ -2190,92 +2309,92 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
      */
     public void isBatteryInStation(GUIObservable receive) {
         boolean isBatteryDockedInStation = false;
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(0);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(0);
         if (isBatteryDockedInStation) {
             BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(1);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(1);
         if (isBatteryDockedInStation) {
             BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
 
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(2);
+     isBatteryDockedInStation = receive.getSpesificLimitSwitch(2);
         if (isBatteryDockedInStation) {
             BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(3);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(3);
         if (isBatteryDockedInStation) {
             BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(4);
+      isBatteryDockedInStation = receive.getSpesificLimitSwitch(4);
         if (isBatteryDockedInStation) {
             BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(5);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(5);
         if (isBatteryDockedInStation) {
             BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(6);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(6);
         if (isBatteryDockedInStation) {
             BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(7);
+       isBatteryDockedInStation = receive.getSpesificLimitSwitch(7);
         if (isBatteryDockedInStation) {
             BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(8);
+       isBatteryDockedInStation = receive.getSpesificLimitSwitch(8);
         if (isBatteryDockedInStation) {
             BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(9);
+       isBatteryDockedInStation = receive.getSpesificLimitSwitch(9);
         if (isBatteryDockedInStation) {
             BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(10);
+       isBatteryDockedInStation = receive.getSpesificLimitSwitch(10);
         if (isBatteryDockedInStation) {
             BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(11);
+       isBatteryDockedInStation = receive.getSpesificLimitSwitch(11);
         if (isBatteryDockedInStation) {
             BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(12);
+       isBatteryDockedInStation = receive.getSpesificLimitSwitch(12);
         if (isBatteryDockedInStation) {
             BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(13);
+     isBatteryDockedInStation = receive.getSpesificLimitSwitch(13);
         if (isBatteryDockedInStation) {
             BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-        isBatteryDockedInStation = receive.getBatteryStationDockingStatus(14);
+      isBatteryDockedInStation = receive.getSpesificLimitSwitch(14);
         if (isBatteryDockedInStation) {
             BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
@@ -2437,17 +2556,64 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         this.textLabel10.setText(receive.getFaultText(9));
 
     }
+    
+    /**
+     * setting the fault messages to the GUI
+     *
+     * @param receive
+     */
+    public void setEventMessages(GUIObservable receive) {
+        this.textLabel11.setText(receive.getEventText(0));
+        this.textLabel12.setText(receive.getEventText(1));
+        this.textLabel13.setText(receive.getEventText(2));
+        this.textLabel14.setText(receive.getEventText(3));
+        this.textLabel15.setText(receive.getEventText(4));
+        this.textLabel16.setText(receive.getEventText(5));
+        this.textLabel17.setText(receive.getEventText(6));
+     
 
+    }
+
+    
+    /**
+     * convert the integer to a string output
+     * @param x
+     * @return 
+     */
     public String convertIntToString(int x) {
         String returnString = Integer.toString(x);
         return returnString;
     }
 
-    public void setFault(GUIObservable receive) {
-        ArrayList<String> faultList = receive.getFaultList();
-        for (String a : faultList) {
+    /**
+     * setting the fault screen. updates the list if the 
+     * size differ in length from the old list
+     * @param receive 
+     */
+    public void setEvents(GUIObservable receive) {
+        
+        ArrayList<String> tempEventList = new ArrayList<>();
+        tempEventList = receive.getEventList();
+        if(tempEventList.size()>faultList.size())
+        {
+            jTextArea1.setText("");
+        for (String a : tempEventList) {
             jTextArea1.append(a + "\n");
         }
+        }
+        faultList = tempEventList;
+    }
+    
+    
+    
+    public void updateActiveStatus(GUIObservable receive)
+    {
+        jLabel37.setText(receive.getLastEventState());
     }
 
+    
+    public void updateProgreessBar(GUIObservable receive)
+    {
+        jProgressBar1.setValue(receive.testGetXvalue());
+    }
 }
