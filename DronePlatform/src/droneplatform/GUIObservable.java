@@ -51,16 +51,15 @@ public class GUIObservable extends Observable {
                 batteries = batteryStationLogic.getArrayListBatteries();
                 eventArray = events.guiEventList();
                 eventList = events.getEventList();
-                // System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
-                //   setTemperature(temperature+secondsPassed);
-                // System.out.println("Temp:" +getTemperature());
-         
-
-       
+   
         setChanged();
         notifyObservers();
     }
 
+    
+    
+    
+    ////////////////////////FAULT HANDLING/////////////////////////
     /**
      * get the faultmessages
      *
@@ -77,8 +76,7 @@ public class GUIObservable extends Observable {
     
     
     
-    ///////////////////////////////////////////////////
-    //////EVENTS
+    /////////////////////////EVENT HANDLING////////////////////////
     /**
      * get the faultmessages
      *
@@ -104,8 +102,7 @@ public class GUIObservable extends Observable {
      }
      
      
-    ///////////////////////////////////////////////////
-    //to battery GUI
+    /////////////////////////BATTERY INFORMATION//////////////////////
     public boolean getBatteryStationDockingStatus(int x) {
         boolean isBatteryDockedInStation = false;
         isBatteryDockedInStation = batteries.get(x).isDocked();
@@ -203,16 +200,7 @@ public class GUIObservable extends Observable {
         return batteryStationLogic.getBatteryLimitSwitchValue(x);
     }
 
-    ////////////////////////////////////
-    //Utgår når vi tar i bruk I2C
-    ////////////////////////////
-    public int getBatteryLevel(int x) {
-        int batteryChargingLevel = 0;
-        batteryChargingLevel = batteries.get(x).getNumberOfSecondsCharged();
-        String batteryLevelString = null;
-
-        return batteryChargingLevel;
-    }
+  
     
     public void addFaultToList()
     {

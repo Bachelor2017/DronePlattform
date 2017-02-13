@@ -6,13 +6,9 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 /**
- *
+ *   
  *
  */
 public class BatteryStationLogic implements Runnable {
@@ -21,19 +17,17 @@ public class BatteryStationLogic implements Runnable {
     private BatteryStation battery;
     private byte[] batteriStationLocation;
     private final Semaphore semaphore;
-    private float batteryStationTemperature;
-    private int timeToMaxChargingLevel;
     private int batteryStationNumberPossition;
     private int batteryStationYPossition;
-    private int batteryStationChargingLevel;
     private byte[] dataFromArduino;
     private DataHandler dh;
     private Thread t;
-    ///
+  
     private java.util.Timer timer;
     private TimerTask tTask;
     public int secondsPassed;
-    ///
+    boolean limitSwitch;
+   
 
     /**
      * create the batterystationlogic, and fill inn batteries to atrraylist
@@ -44,7 +38,8 @@ public class BatteryStationLogic implements Runnable {
         batteryStationNumberPossition = 0;
         this.dh = dh;
         fillList();
-        
+        limitSwitch = false;
+
     }
 
     /**
@@ -62,9 +57,7 @@ public class BatteryStationLogic implements Runnable {
                 semaphore.acquire();
                 dataFromArduino = dh.getDataFromArduino();
                 semaphore.release();
-              //  System.out.println("inne i run metode batteryStationLogic");
                 updateBatteryInformation(dataFromArduino);
-                
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(BatteryStationLogic.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,7 +66,7 @@ public class BatteryStationLogic implements Runnable {
     }
 
     /**
-     * fill the batterystation with batterys
+     * fill the batterystationArrayList with 16 batterystations
      */
     private void fillList() {
         for (int i = 0; i < 16; i++) {
@@ -89,6 +82,65 @@ public class BatteryStationLogic implements Runnable {
      */
     public ArrayList getArrayListBatteries() {
         return batteries;
+    }
+
+    /**
+     * gets the data read from the arduino and adds the information to the
+     * spesific battery Adds the temperature, batterycychle,timetomax and
+     * percentage information
+     */
+    public void updateBatteryInformation(byte[] incomingDataFromArduino) {
+
+        int i = 1;
+
+        for (int x = 0; x < 16; x++) {
+            //setting percentage of charge
+            batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+            i = i + 1;
+
+            //Setting the charging voltage
+            float voltage = incomingDataFromArduino[i];
+            i = i + 1;
+            float voltageDesc = incomingDataFromArduino[i];
+            i = i + 1;
+            batteries.get(x).setChargingVoltage(voltage + (voltageDesc / 100));
+
+            //Setting minutest to fully charged
+            batteries.get(x).setTimeToMaxBattery(incomingDataFromArduino[i]);
+            //setTimeToMaxChargingLevel(x, dataFromArduino[i]);
+            i++;
+
+            //Setting Temperatur on station
+            float temperature = incomingDataFromArduino[i];
+            i = i + 1;
+            float tempDesc = incomingDataFromArduino[i];
+            batteries.get(x).setTemperature((temperature + (tempDesc / 100)));
+            //setActiveBatteryTemperature(x, dataFromArduino[i]);
+            i = i + 1;
+
+            //setting cycle count on batteries
+            float cyclecount = incomingDataFromArduino[i];
+            i = i + 1;
+            float cycleDesc = incomingDataFromArduino[i];
+            batteries.get(x).setBatteryCycles((cyclecount + (cycleDesc / 100)) * 100);
+            i = i + 1;
+
+            //setting staus on batteries
+            batteries.get(x).setBatteryStatus(incomingDataFromArduino[i]);
+            i = i + 1;
+
+            if (incomingDataFromArduino[i] == 1) {
+                limitSwitch = true;
+            } else {
+                limitSwitch = false;
+            }
+
+            batteries.get(x).setLimiSwitch(limitSwitch);
+            i = i + 1;
+            i = i + 1;
+        }
+        //System.out.println("ute av update battery");
+
     }
 
     /**
@@ -144,8 +196,8 @@ public class BatteryStationLogic implements Runnable {
      * @return the int of the charging level in percentage
      */
     public int getActiveBatteryChargingLevel(int x) {
-        batteryStationChargingLevel = batteries.get(x).getBatteryLevel();
-        return batteryStationChargingLevel;
+        return batteries.get(x).getBatteryLevel();
+
     }
 
     /**
@@ -173,8 +225,8 @@ public class BatteryStationLogic implements Runnable {
      * @return the temperature of battery x
      */
     public float getActiveBatteryTemperature(int x) {
-        batteryStationTemperature = batteries.get(x).getTemperature();
-        return batteryStationTemperature;
+        return batteries.get(x).getTemperature();
+
     }
 
     /**
@@ -194,8 +246,8 @@ public class BatteryStationLogic implements Runnable {
      * @return the timetomax charging level of battery in possition x
      */
     public int getTimeToMaxChargingLevel(int x) {
-        timeToMaxChargingLevel = batteries.get(x).returnTimeToMaxBattery();
-        return timeToMaxChargingLevel;
+        return batteries.get(x).returnTimeToMaxBattery();
+
     }
 
     /**
@@ -246,101 +298,65 @@ public class BatteryStationLogic implements Runnable {
     public void setBatteryChargingCycle(int x, float cycles) {
         this.batteries.get(x).setBatteryCycles(cycles);
     }
-    
-    
-    public void setSpesificChargingVoltage(int x, float voltage)
-    {
+
+    /**
+     * setting the chargingVoltage value of the batteryStation
+     *
+     * @param x the number of the batterystation location
+     * @param voltage the chargingVoltage level of the station
+     */
+    public void setSpesificChargingVoltage(int x, float voltage) {
         this.batteries.get(x).setChargingVoltage(voltage);
     }
-    
-    public float getSpesificChargingVoltage(int x)
-    {
+
+    /**
+     * getting the voltage charing level at the battery
+     *
+     * @param x the number of the batterystation location
+     * @return the charging level at the batteryStation
+     */
+    public float getSpesificChargingVoltage(int x) {
         return this.batteries.get(x).getVoltageChargingLevel();
     }
 
     /**
-     * gets the data read from the arduino and adds the information to the
-     * spesific battery Adds the temperature, batterycychle,timetomax and
-     * percentage information
+     * getting the battery status
+     *
+     * @param x the number of the batterystation location
+     * @return the value of the status integer
      */
-    public void updateBatteryInformation(byte[] incomingDataFromArduino) {
-       // System.out.println("Updating battery information:");
-        // dataFromArduino = dh.getDataFromArduino();
-        //  int batteryNumber = dataFromArduino[0];
-        int i = 1;
-        //  float number = 0.0f;
-        for (int x = 0; x < 16; x++) {
-            //setting percentage of charge
-            batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
-            i = i + 1;
-
-            //Setting the charging voltage
-            float voltage = incomingDataFromArduino[i];
-            i = i + 1;
-            float voltageDesc = incomingDataFromArduino[i];
-            i = i + 1;
-            batteries.get(x).setChargingVoltage(voltage + (voltageDesc / 100));
-
-            //Setting minutest to fully charged
-            batteries.get(x).setTimeToMaxBattery(incomingDataFromArduino[i]);
-            //setTimeToMaxChargingLevel(x, dataFromArduino[i]);
-            i++;
-
-            //Setting Temperatur on station
-            float temperature = incomingDataFromArduino[i];
-            i = i + 1;
-            float tempDesc = incomingDataFromArduino[i];
-            batteries.get(x).setTemperature((temperature + (tempDesc / 100)));
-            //setActiveBatteryTemperature(x, dataFromArduino[i]);
-            i = i + 1;
-
-            //setting cycle count on batteries
-            float cyclecount = incomingDataFromArduino[i];
-            i = i + 1;
-            float cycleDesc = incomingDataFromArduino[i];
-            batteries.get(x).setBatteryCycles((cyclecount + (cycleDesc / 100))*100);
-            i = i + 1;
-
-            batteries.get(x).setBatteryStatus(incomingDataFromArduino[i]);
-            i = i + 1;
-            
-            boolean limitSwitch = false;
-            if (incomingDataFromArduino[i]==1)
-            {
-                limitSwitch = true;
-            }
-            else
-            {
-                limitSwitch = false;
-            }
-                
-             batteries.get(x).setLimiSwitch(limitSwitch);
-            i = i + 1;
-             i = i + 1;
-        }
-        //System.out.println("ute av update battery");
-
-    }
-
     public int getBatteriesStatus(int x) {
         return batteries.get(x).getBatteryStatus();
     }
 
+    /**
+     * setting the status of the battery
+     *
+     * @param x integer of the batterystation location
+     * @param value the integer of the status
+     */
     public void setBatteriesStatus(int x, int value) {
         batteries.get(x).setBatteryStatus(value);
     }
-    
-    
-    public boolean getBatteryLimitSwitchValue(int x)
-    {
-        return  batteries.get(x).returnLimitSwitch();
-    }
-    
-    public void setLimitSwitcxhValue(int x,boolean value)
-    {
-         batteries.get(x).setLimiSwitch(value);
+
+    /**
+     * getting the limitSwitch boolean value
+     *
+     * @param x integer of the batterystation location
+     * @return the boolean value of the limitSwitch
+     */
+    public boolean getBatteryLimitSwitchValue(int x) {
+        return batteries.get(x).returnLimitSwitch();
     }
 
-   
+    /**
+     * set the limitSwitch boolean value
+     *
+     * @param x integer of the batterystation location
+     * @param value the boolean value of the limitswitch
+     */
+    public void setLimitSwitcxhValue(int x, boolean value) {
+        batteries.get(x).setLimiSwitch(value);
+    }
 
 }

@@ -77,7 +77,7 @@ public class SerialCom {
     public byte[] sendDataToArduino() {
         byte[] data = new byte[7];
         try {
-            data = dataHandler.dataToArduino();
+            data = dataHandler.dataToTeensy();
 
         } catch (NullPointerException e) {
 
