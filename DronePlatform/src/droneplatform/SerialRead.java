@@ -46,21 +46,13 @@ public class SerialRead implements Runnable {
     public void run() {
         try {
             while (true) {
-                semaphore.acquire();
-                byte[] data = serialPort.readBytes(10);
-               // increment++;
-                //System.out.println("Read Serial " + Arrays.toString(data));
-                //if (data.length > 0) {
-                   // byte[] arrangedData = checkDataArrangementTest(data);
-                   // this.dataFromArduino = arrangedData;
-                   // serialCom.dataFromArduino = arrangedData;
-                  //  dataHandler.setDataFromArduino(arrangedData);
-                 //   System.out.println("received: " + increment);
-                    System.out.println("Read Arranged " + Arrays.toString(data));
-               // }
-
-                semaphore.release();
-
+                byte[] flagByte = serialPort.readBytes(1);
+                if (flagByte[0] == -128) {
+                    byte[] data = serialPort.readBytes(10);
+                    semaphore.acquire();
+                    dataHandler.setDataFromTeensy(data);
+                    semaphore.release();
+                }
             }
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");
@@ -69,5 +61,4 @@ public class SerialRead implements Runnable {
         }
     }
 
-  
 }

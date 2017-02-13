@@ -110,24 +110,7 @@ public class GUIObservable extends Observable {
         return isBatteryDockedInStation;
     }
 
-    /**
-     * sets a spesific battery to docking
-     *
-     * @param x
-     */
-    public void setSpesificBatteryToDocking(int x) {
-        batteryStationLogic.settBatteryToChargeInStation(x);
-    }
-
-    /**
-     * release a spesific battery from docking
-     *
-     * @param x the number of the battery
-     */
-    public void releaseSpesificBatteryFromDocking(int x) {
-
-        batteryStationLogic.releaseBatteryFromChargeInStation(x);
-    }
+   
 
     /**
      * retriesves the last docked battery
@@ -183,25 +166,45 @@ public class GUIObservable extends Observable {
         return this.batteryStationLogic.getSpesificChargingVoltage(x);
     }
 
-    public void setSpesificChargingVoltage(int x, float voltage) {
-        this.batteryStationLogic.getSpesificChargingVoltage(x);
+    public boolean getSpesificLimitSwitch(int x)
+    {
+        return batteryStationLogic.getBatteryLimitSwitchValue(x);
     }
+    
 
     public int getBatteriesStatus(int x) {
         return batteryStationLogic.getBatteriesStatus(x);
+    }
+    
+    
+    ///////HAR LAGT DE INN,MEN TRENGER MULIGENS IKKE NOE SETTERE HER
+    public void setSpesificChargingVoltage(int x, float voltage) {
+        this.batteryStationLogic.getSpesificChargingVoltage(x);
     }
 
     public void setBatteriesStatus(int x, int value) {
         batteryStationLogic.setBatteriesStatus(x, value);
     }
     
-    public boolean getSpesificLimitSwitch(int x)
-    {
-        return batteryStationLogic.getBatteryLimitSwitchValue(x);
+     /**
+     * sets a spesific battery to docking
+     *
+     * @param x
+     */
+    public void setSpesificBatteryToDocking(int x) {
+        batteryStationLogic.settBatteryToChargeInStation(x);
     }
 
-  
-    
+    /**
+     * release a spesific battery from docking
+     *
+     * @param x the number of the battery
+     */
+    public void releaseSpesificBatteryFromDocking(int x) {
+
+        batteryStationLogic.releaseBatteryFromChargeInStation(x);
+    }
+        
     public void addFaultToList()
     {
         faultHandler.addFault();

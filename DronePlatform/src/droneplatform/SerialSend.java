@@ -35,11 +35,11 @@ public class SerialSend implements Runnable {
      * @param s The semaphore added to the communication
      * @param sp the serial communication port
      */
-    public SerialSend(SerialCom serialCom, Semaphore s, SerialPort sp) {
+    public SerialSend(SerialCom serialCom, Semaphore s, SerialPort sp,DataHandler dataHandler) {
         this.serialCom = serialCom;
         this.semaphore = s;
         this.serialPort = sp;
-        dataHandler = new DataHandler();
+        this.dataHandler = dataHandler;
     }
 
     /**
@@ -49,19 +49,12 @@ public class SerialSend implements Runnable {
     public void run() {
         try {
             while (true) {
+
+                byte[] dataToTeensy = new byte[6];
                 semaphore.acquire();
-                increment++;
-                //this.dataToArduino = serialCom.sendDataToArduino();
-                byte[] dataToArduino = new byte[6];
-                dataToArduino = serialCom.sendDataToArduino();
-                //System.out.println("dataHandler data: " + Arrays.toString(serialCom.sendDataToArduino()));
-//                dataToArduino = this.dataHandler.dataToArduino();
-                System.out.println("SEND Serial " + Arrays.toString(dataToArduino));
-                System.out.println("Sent:" + increment);
-                serialPort.writeBytes(dataToArduino);
-
+                dataToTeensy = dataHandler.getDataToTeensy();
                 semaphore.release();
-
+                serialPort.writeBytes(dataToTeensy);
             }
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialSend");

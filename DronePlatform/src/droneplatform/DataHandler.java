@@ -14,9 +14,10 @@ import java.util.concurrent.Semaphore;
  */
 public class DataHandler {
 
-    private byte[] dataFromArduino;
-    private byte[] dataToArduino;
-    private BatteryStationLogic batteryStationLogic;
+    private byte[] dataFromArduino;     //The byteArray retrieved from Arduino 
+    private byte[] dataToTeensy;        //The byteArray to be sendt to Teensy 
+    private byte[] dataFromTeensy;      //The byteArray retrieved from Teensy 
+ 
 
     /// for testing
     private java.util.Timer timer;
@@ -27,7 +28,8 @@ public class DataHandler {
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToArduino = new byte[64];
+        dataToTeensy = new byte[64];
+        dataFromTeensy = new byte[64];
     }
 
     /**
@@ -37,6 +39,8 @@ public class DataHandler {
     public byte[] getDataFromArduino() {
         return dataFromArduino;
     }
+    
+    
 
     /**
      * setting the data from the arduinoController
@@ -47,20 +51,39 @@ public class DataHandler {
     }
 
     /**
-     * Denne må fylles inn med data
-     * @return
+     * get the data retrieved from the teensy controller
+     * @return retuns a byte[] retrieved from the mikrocontroller
      */
-    public byte[] dataToTeensy() {
-        byte[] data = new byte[7];
-        data[0] = 100;
-        data[1] = 2;
-        data[2] = 3;
-        data[3] = 4;
-        data[4] = 5;
-        data[5] = 6;
-        data[6] = 123;
-        return data;
+    public byte[] getDataFromTeensy() {
+        return dataFromTeensy;
     }
+    
+    /**
+     * setting the data from the teensyController
+     * @param newData the data updating the dataFromTeensy byte[]
+     */
+    public void setDataFromTeensy(byte[] newData) {
+        this.dataFromTeensy = newData;
+    }
+    
+     /**
+     * get the data to be sendt to the teensy controller
+     * @return retuns a byte[] to be sendt to the teensy controller
+     */
+    public byte[] getDataToTeensy() {
+        return dataToTeensy;
+    }
+    
+       /**
+     * setting the data to the TeensyController
+     * @param newData the data updating the dataToTeensy byte[]
+     */
+    public void setDataToTeensy(byte[] newData) {
+        this.dataToTeensy = newData;
+    }
+    
+    
+ 
 
     ////////////////////////////////////////////////////////////
     ////////////////ALT UNDER BARE TIL TEST. KAN TAS BORT SENERE

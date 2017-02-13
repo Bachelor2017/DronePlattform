@@ -78,7 +78,6 @@ public class SerialComArduino implements Runnable {
                     byte[] dataFromArduionoToDH = serialPort.readBytes(176);
                     increment++;
                     semaphore.acquire();
-
                     dataHandler.setDataFromArduino(dataFromArduionoToDH);
                     semaphore.release();
                     System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
