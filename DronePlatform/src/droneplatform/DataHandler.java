@@ -14,32 +14,25 @@ import java.util.concurrent.Semaphore;
  */
 public class DataHandler {
 
-    private SerialCom serialCom;
     private byte[] dataFromArduino;
     private byte[] dataToArduino;
     private BatteryStationLogic batteryStationLogic;
-    private SerialComArduino serialComArduino;
 
-    ///
+    /// for testing
     private java.util.Timer timer;
     private TimerTask tTask;
     public int secondsPassed;
-    ///
+    /// testing slutt
 
     public DataHandler() {
-   
+
         dataFromArduino = new byte[176];
         dataToArduino = new byte[64];
-       // settingTestArray();
-                // settTestDataFromArduino();
-        //testing();   //starts a timer to change the data to se if GUI reacts
-
     }
 
     /**
      * get the data retrieved from the arduino controller
-     *
-     * @return retuns a byte[] retrieved fr om the mikrocontroller
+     * @return retuns a byte[] retrieved from the mikrocontroller
      */
     public byte[] getDataFromArduino() {
         return dataFromArduino;
@@ -47,14 +40,17 @@ public class DataHandler {
 
     /**
      * setting the data from the arduinoController
-     *
-     * @param newData
+     * @param newData the data updating the dataFromArduino byte[]
      */
     public void setDataFromArduino(byte[] newData) {
         this.dataFromArduino = newData;
     }
 
-    public byte[] dataToArduino() {
+    /**
+     * Denne må fylles inn med data
+     * @return
+     */
+    public byte[] dataToTeensy() {
         byte[] data = new byte[7];
         data[0] = 100;
         data[1] = 2;
@@ -66,6 +62,9 @@ public class DataHandler {
         return data;
     }
 
+    ////////////////////////////////////////////////////////////
+    ////////////////ALT UNDER BARE TIL TEST. KAN TAS BORT SENERE
+    ////////////////////////////////////////////////////////////
     /**
      * starts a timer to change the data to se if GUI reacts
      */
@@ -96,8 +95,6 @@ public class DataHandler {
         timer.scheduleAtFixedRate(tTask, 1000, 1000);
     }
 
-    
-    
     /**
      * sets anb start array to se if the gui gets the data
      */

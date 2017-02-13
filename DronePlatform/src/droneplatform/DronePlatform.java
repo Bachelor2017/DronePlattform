@@ -21,30 +21,26 @@ public class DronePlatform {
      */
     public static void main(String[] args) {
 
+        Semaphore semaphore = new Semaphore(1, true);
         DataHandler dataHandler = new DataHandler();
-
         GUI gui = new GUI();
         gui.setVisible(true);
-        //
         //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         //GraphicsDevice screen = ge.getDefaultScreenDevice();
         //screen.setFullScreenWindow(gui);
-//
 
-        Semaphore semaphore = new Semaphore(1, true);
+        //creating logic classes/threads
         BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
         bsg.start();
-
-        EventStates events = new EventStates();
-        FaultHandler faultHandler = new FaultHandler();
-        GUIObservable observable = new GUIObservable(faultHandler, bsg,events);
-
-        observable.addObserver(gui);
-
-        //faultHandler.testing();
-        
         //SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
         //sysLog.start();
+        EventStates events = new EventStates();
+        FaultHandler faultHandler = new FaultHandler();
+
+        //Adding the observer
+        GUIObservable observable = new GUIObservable(faultHandler, bsg, events);
+        observable.addObserver(gui);
+
         //Serial Communication
         //serialCom = new SerialCom("/dev/ttyUSB0", dataHandler);
         //serialCom = new SerialCom("COM3", this);
@@ -54,7 +50,6 @@ public class DronePlatform {
 
         while (true) {
             observable.setData();
-//            faultHandler.testing();
         }
 
     }

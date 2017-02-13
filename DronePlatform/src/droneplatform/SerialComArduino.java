@@ -96,43 +96,7 @@ public class SerialComArduino implements Runnable {
         //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * get the data retrieved from the arduino controller
-     *
-     * @return bytearray dataFromArduino
-     */
-    public byte[] getDataFromArduino() {
-        return this.dataFromArduino;
-    }
-
-    public void sendDataFromArduinoToDataHandler() {
-        dataHandler.setDataFromArduino(dataFromArduino);
-    }
-
-    /**
-     * The data to be sendt to the microcontroller
-     *
-     * @return the bytearray to be sendt to the mikrokontroller
-     */
-    public byte[] sendDataToArduino() {
-        byte[] data = new byte[7];
-        try {
-            data = dataHandler.dataToArduino();
-
-        } catch (NullPointerException e) {
-
-        }
-        return data;
-    }
-
-    /**
-     *
-     * @param data
-     */
-    public void setDataFromArduino(byte[] data) {
-        this.dataFromArduino = data;
-    }
-
+  
     public SerialPort getSerialPort() {
         return this.serialPort;
     }
