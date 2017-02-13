@@ -24,7 +24,7 @@ public class SystemLogic implements Runnable {
     private int caseScenario;
     private Semaphore semaphore;
 
-    public SystemLogic(DataHandler dh,Semaphore semaphore) {
+    public SystemLogic(DataHandler dh, Semaphore semaphore) {
         this.dataHandler = dh;
         this.semaphore = semaphore;
     }
@@ -37,49 +37,46 @@ public class SystemLogic implements Runnable {
         t.start();
     }
 
-     @Override
+    @Override
     public void run() {
-        while(true)
-        {
+        while (true) {
             try {
                 semaphore.acquire();
-                 int caseNumber = getState();
-                    switchCases();
-                    semaphore.release();
+                int caseNumber = getState();
+                switchCases();
+                semaphore.release();
             } catch (InterruptedException ex) {
                 Logger.getLogger(SystemLogic.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
-         
+
         }
-       
+
     }
-    
-    
+
     protected void switchCases() {
-        switch (this.getState()){
-            case(0):
-                System.out.println("Caste 0");
+        switch (this.getState()) {
+            case (0):
+                System.out.println("Case 0");
                 break;
-                 case(5):
-                System.out.println("Caste 1");
+            case (5):
+                System.out.println("Case 1");
                 break;
-                 case(8):
-                System.out.println("Caste 2");
+            case (8):
+                System.out.println("Case 2");
                 break;
-                 case(11):
-                System.out.println("Caste 3");
+            case (11):
+                System.out.println("Case 3");
                 break;
-                
-                
+
         }
     }
 
+    
+    
     public int getState() {
         dataFromArduino = dataHandler.getDataFromArduino();
         caseScenario = dataFromArduino[1];
         return caseScenario;
     }
 
-   
 }

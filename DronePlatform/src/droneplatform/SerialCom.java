@@ -47,7 +47,7 @@ public class SerialCom {
                 serialPort.openPort();
                 getSerialPort().setParams(9600, 8, 1, 0);
                 reader = new Thread(new SerialRead(this, semaPhore, serialPort, dataHandler));
-                sender = new Thread(new SerialSend(this, semaPhore, serialPort));
+                sender = new Thread(new SerialSend(this, semaPhore, serialPort, dataHandler));
                 sender.start();
                 reader.start();
             }
@@ -56,48 +56,12 @@ public class SerialCom {
         }
     }
 
-    /**
-     * get the data retrieved from the arduino controller
-     *
-     * @return bytearray dataFromArduino
-     */
-    public byte[] getDataFromArduino() {
-        return this.dataFromArduino;
-    }
-
-    public void sendDataFromArduinoToDataHandler() {
-        dataHandler.setDataFromArduino(dataFromArduino);
-    }
-
-    /**
-     * The data to be sendt to the microcontroller
-     *
-     * @return the bytearray to be sendt to the mikrokontroller
-     */
-    public byte[] sendDataToArduino() {
-        byte[] data = new byte[7];
-        try {
-            data = dataHandler.dataToTeensy();
-
-        } catch (NullPointerException e) {
-
-        }
-        return data;
-    }
-
-    /**
-     *
-     * @param data
-     */
-    public void setDataFromArduino(byte[] data) {
-        this.dataFromArduino = data;
-    }
-
+    
     public SerialPort getSerialPort() {
         return this.serialPort;
     }
 
-    public String[] getPortList() {
+  /*  public String[] getPortList() {
         String[] portNames = SerialPortList.getPortNames();
 
         if (portNames.length == 0) {
@@ -115,10 +79,5 @@ public class SerialCom {
             System.out.println(portNames[i]);
         }
         return portNames;
-    }
-
-    public Semaphore getSemaphore() {
-        return semaPhore;
-    }
-
+    }*/
 }

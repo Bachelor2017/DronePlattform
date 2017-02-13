@@ -32,8 +32,8 @@ public class DronePlatform {
         //creating logic classes/threads
         BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
         bsg.start();
-        //SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
-        //sysLog.start();
+        SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
+        sysLog.start();
         EventStates events = new EventStates();
         FaultHandler faultHandler = new FaultHandler();
 
