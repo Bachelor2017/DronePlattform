@@ -111,10 +111,11 @@ public class BatteryStationLogic implements Runnable {
             i++;
 
             //Setting Temperatur on station
-            float temperature = incomingDataFromArduino[i];
-            i = i + 1;
-            float tempDesc = incomingDataFromArduino[i];
-            batteries.get(x).setTemperature((temperature + (tempDesc / 100)));
+            float temperature = incomingDataFromArduino[i]; // whole number temperature
+            i = i + 1;                                      // increment the byte placement
+            float tempDesc = incomingDataFromArduino[i];    // temperatur descimal 
+            // find the spesific battery, sett the temperature with combined whole number and the descimal
+            batteries.get(x).setTemperature((temperature + (tempDesc / 100))); 
             //setActiveBatteryTemperature(x, dataFromArduino[i]);
             i = i + 1;
 
