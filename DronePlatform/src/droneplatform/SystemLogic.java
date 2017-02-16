@@ -23,10 +23,13 @@ public class SystemLogic implements Runnable {
     private byte[] dataFromArduino;
     private int caseScenario;
     private Semaphore semaphore;
+    private EventStates eventStates;
+    boolean value = false;
 
-    public SystemLogic(DataHandler dh, Semaphore semaphore) {
+    public SystemLogic(DataHandler dh, Semaphore semaphore, EventStates eventStates) {
         this.dataHandler = dh;
         this.semaphore = semaphore;
+        this.eventStates = eventStates;
     }
 
     /**
@@ -42,7 +45,6 @@ public class SystemLogic implements Runnable {
         while (true) {
             try {
                 semaphore.acquire();
-                int caseNumber = getState();
                 switchCases();
                 semaphore.release();
             } catch (InterruptedException ex) {
@@ -56,27 +58,58 @@ public class SystemLogic implements Runnable {
     protected void switchCases() {
         switch (this.getState()) {
             case (0):
+                case1();
                 System.out.println("Case 0");
                 break;
-            case (5):
+            case (1):
+                case2();
                 System.out.println("Case 1");
                 break;
-            case (8):
+            case (2):
+                case3();
                 System.out.println("Case 2");
                 break;
-            case (11):
+            case (3):
+                case4();
                 System.out.println("Case 3");
                 break;
 
         }
     }
 
-    
-    
+    /**
+     * searc the datafromArduino for case number. can be trigged by limitswitch?
+     *
+     * @return
+     */
     public int getState() {
         dataFromArduino = dataHandler.getDataFromArduino();
         caseScenario = dataFromArduino[1];
         return caseScenario;
+    }
+
+    public void case1() {
+
+    }
+
+    public void case2() {
+
+    }
+
+    public void case3() {
+
+    }
+
+    public void case4() {
+
+    }
+
+    public void case5() {
+
+    }
+
+    public void case6() {
+
     }
 
 }

@@ -27,12 +27,14 @@ public class GUIObservable extends Observable {
     ArrayList<String> eventList;
     private Thread t;
     private boolean limitSwitch;
+    private int timeLeft;
+    private int timeLeftCyclus;
 
-    public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic,EventStates events) {
+    public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic, EventStates events) {
         this.faultHandler = faultHandler;
         this.batteryStationLogic = batteryStationLogic;
         this.events = events;
-        
+
     }
 
     @Override
@@ -45,20 +47,27 @@ public class GUIObservable extends Observable {
      * setting the data retrieved from system
      */
     public void setData() {
-       
-                faultArray = faultHandler.guiFaultList();
-                faultList = faultHandler.getFaultList();
-                batteries = batteryStationLogic.getArrayListBatteries();
-                eventArray = events.guiEventList();
-                eventList = events.getEventList();
-   
+
+        faultArray = faultHandler.guiFaultList();
+        faultList = faultHandler.getFaultList();
+        batteries = batteryStationLogic.getArrayListBatteries();
+        eventArray = events.guiEventList();
+        eventList = events.getEventList();
+        timeLeft = events.timeLeftOfBatteryChange();
+        timeLeftCyclus = events.getLastEventTimeSyclus();
+
         setChanged();
         notifyObservers();
     }
 
+    public int getTimeLeft() {
+        return timeLeft;
+    }
     
-    
-    
+      public int getTimeLeftCyclus() {
+        return timeLeftCyclus;
+    }
+
     ////////////////////////FAULT HANDLING/////////////////////////
     /**
      * get the faultmessages
@@ -73,9 +82,7 @@ public class GUIObservable extends Observable {
     public ArrayList<String> getFaultList() {
         return faultList;
     }
-    
-    
-    
+
     /////////////////////////EVENT HANDLING////////////////////////
     /**
      * get the faultmessages
@@ -86,22 +93,19 @@ public class GUIObservable extends Observable {
     public String getEventText(int x) {
         return eventArray[x];
     }
-    
-     public ArrayList<String> getEventList() {
+
+    public ArrayList<String> getEventList() {
         return eventList;
     }
 
-     public String getLastEventState()
-     {
-         return events.getLastEventState();
-     }
-     
-     public int testGetXvalue()
-     {
-         return events.testGetXValue();
-     }
-     
-     
+    public String getLastEventState() {
+        return events.getLastEventState();
+    }
+
+    public int testGetXvalue() {
+        return events.testGetXValue();
+    }
+
     /////////////////////////BATTERY INFORMATION//////////////////////
     public boolean getBatteryStationDockingStatus(int x) {
         boolean isBatteryDockedInStation = false;
@@ -109,8 +113,6 @@ public class GUIObservable extends Observable {
 
         return isBatteryDockedInStation;
     }
-
-   
 
     /**
      * retriesves the last docked battery
@@ -166,17 +168,14 @@ public class GUIObservable extends Observable {
         return this.batteryStationLogic.getSpesificChargingVoltage(x);
     }
 
-    public boolean getSpesificLimitSwitch(int x)
-    {
+    public boolean getSpesificLimitSwitch(int x) {
         return batteryStationLogic.getBatteryLimitSwitchValue(x);
     }
-    
 
     public int getBatteriesStatus(int x) {
         return batteryStationLogic.getBatteriesStatus(x);
     }
-    
-    
+
     ///////HAR LAGT DE INN,MEN TRENGER MULIGENS IKKE NOE SETTERE HER
     public void setSpesificChargingVoltage(int x, float voltage) {
         this.batteryStationLogic.getSpesificChargingVoltage(x);
@@ -185,8 +184,8 @@ public class GUIObservable extends Observable {
     public void setBatteriesStatus(int x, int value) {
         batteryStationLogic.setBatteriesStatus(x, value);
     }
-    
-     /**
+
+    /**
      * sets a spesific battery to docking
      *
      * @param x
@@ -204,9 +203,8 @@ public class GUIObservable extends Observable {
 
         batteryStationLogic.releaseBatteryFromChargeInStation(x);
     }
-        
-    public void addFaultToList()
-    {
+
+    public void addFaultToList() {
         faultHandler.addFault();
     }
 

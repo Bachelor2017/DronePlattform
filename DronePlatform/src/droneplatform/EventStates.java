@@ -23,6 +23,10 @@ public class EventStates {
     int x = 0;
     int y = 0;
     int eventValue = 0;
+    int timeLeft = 100;
+    int timeLeftCyclus = 0;
+    TimerTask tTask;
+    java.util.Timer timer;
 
     public EventStates() {
         eventList = new ArrayList<>();
@@ -38,13 +42,6 @@ public class EventStates {
 
     }
 
-   
-    /*public void testPrint() {
-        for (int i = 0; i < eventList.size(); i++) {
-            System.out.println(eventList.get(i));
-        }
-    }*/
-
     public void addEventToList(String command) {
         String time = "";
         String fault = "";
@@ -57,18 +54,18 @@ public class EventStates {
         eventList.add(fault);
     }
 
-    
     /**
      * adding the event to list
-     * @param event 
+     *
+     * @param event
      */
     public void addEventToList(Event event) {
         events.add(event);
     }
 
-    
-    /** 
-     * getting the timestamp of the 
+    /**
+     * getting the timestamp of the
+     *
      * @return the timestamp in format HH:mm:ss
      */
     private String getTimeStamp() {
@@ -84,8 +81,8 @@ public class EventStates {
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String[] guiEventList() {
         String[] eventListGUI = new String[10];
@@ -101,11 +98,9 @@ public class EventStates {
         x++;
     }
 
-    
     /**
-     * 
+     *
      */
-    
     public void testEvent() {
 
         TimerTask tTask = new TimerTask() {
@@ -147,26 +142,26 @@ public class EventStates {
         return x;
     }
 
-    
     /**
-     * incrementing the X value with the timer incrementation. used as test for the progressbar in GUI
+     * incrementing the X value with the timer incrementation. used as test for
+     * the progressbar in GUI
      */
     public void runTimer() {
 
-        TimerTask tTask = new TimerTask() {
+        tTask = new TimerTask() {
             public void run() {
+                calculateTimeLeft();
 
+                calculateTimeLeftSyclus();
                 x++;
             }
 
         };
-        java.util.Timer timer = new java.util.Timer();
+        timer = new java.util.Timer();
         timer.scheduleAtFixedRate(tTask, 1000, 500);
     }
-    
-    
-    
-     public void fillList() {
+
+    public void fillList() {
         addEventToList("");
         addEventToList("");
         addEventToList("");
@@ -181,8 +176,7 @@ public class EventStates {
         addEventToList("");
 
     }
-     
-     
+
     public void addingEventStates() {
         Event event1 = new Event(1, "Signal om drone plassert motatt", 2);
         Event event2 = new Event(2, "Rullebånd startet", 1);
@@ -208,6 +202,47 @@ public class EventStates {
         differentEventStates.add(event11);
     }
 
+    /**
+     * Setting the docking status of the station If battery is docked, the timer
+     * starts running. of the battery is out of docking, the timer pstops and
+     * resets
+     *
+     * @param value boolean value , true if battery is in docking, and false if
+     * station is empty
+     */
+    public int timeLeftOfBatteryChange() {
+        return timeLeft;
+    }
 
+    public void calculateTimeLeft() {
+        if (timeLeft > 0) {
+            timeLeft = timeLeft - 1;
+        } else {
+            timer.cancel();
+            timer.purge();
+            timeLeft = 0;
+
+        }
+        ;
+    }
+
+    public int calculateTimeLeftSyclus() {
+
+        if (timeLeftCyclus > 0) {
+            timeLeftCyclus = timeLeftCyclus - 1;
+        } else {
+            timeLeftCyclus = getLastEventTimeSyclus();
+        }
+        return timeLeftCyclus;
+    }
+
+    public void settEventState(int x) {
+        events.add(differentEventStates.get(x));
+    }
+
+    public int getLastEventTimeSyclus() {
+        int eventListSize = events.size();
+        return events.get(eventListSize - 1).getTimeSyclusOfEvent();
+    }
 
 }
