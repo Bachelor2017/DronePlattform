@@ -20,9 +20,7 @@ public class DronePlatform {
     public static void main(String[] args) {
         //test.testPrint();
         
-        BatteryStationLogic bsg = new BatteryStationLogic();
-        /*
-        
+        BatteryStationLogic bsg = new BatteryStationLogic();      
         GUI gui = new GUI();
         gui.setVisible(true);
         //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -41,7 +39,7 @@ public class DronePlatform {
             observable.setData();
 //            faultHandler.testing();
         }
-       */
+       
        
     }
     

@@ -15,7 +15,7 @@ import java.util.Timer;
  */
 public class BatteryStation {
 
-    private boolean isDocked;
+    private boolean dockingStatus;
     private int batteryLevel;
     private int batteryStatus;
     private int xValue;
@@ -26,14 +26,17 @@ public class BatteryStation {
     private Timer timer;
     private TimerTask tTask;
     private int batteryPossition;
+    private int chargingTimeToMax;
 
     public BatteryStation(int batteryPossition) {
 
         this.batteryPossition = batteryPossition;
         batteryStatus = 0;
         batteryLevel = 0;
-        isDocked = false;
+        dockingStatus = true;
+        setDocked(dockingStatus);
         this.stationLocation = new byte[3];
+        chargingTimeToMax = 100;   //3600 oringalt
 
     }
 
@@ -55,10 +58,13 @@ public class BatteryStation {
     }
 
     /**
+     * The value is calculated from the soconds in docking to seconds to full
+     * carge ratio
      *
-     * @return the value of the battery
+     * @return the value of the battery in persentage
      */
     public int getBatteryLevel() {
+        batteryLevel = (secondsPassed / chargingTimeToMax) * 100;
         return batteryLevel;
     }
 
@@ -70,7 +76,7 @@ public class BatteryStation {
      *
      */
     public boolean isDocked() {
-        return isDocked;
+        return dockingStatus;
     }
 
     /**
@@ -89,15 +95,15 @@ public class BatteryStation {
                     System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
                 }
             };
+
             timer = new Timer();
             timer.scheduleAtFixedRate(tTask, 1000, 1000);
-
         } else {
             timer.cancel();
             timer.purge();
             secondsPassed = 0;
         }
-        isDocked = value;
+        dockingStatus = value;
     }
 
     /**
