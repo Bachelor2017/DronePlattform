@@ -7,42 +7,52 @@ package droneplatform;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.util.concurrent.Semaphore;
 
 /**
  *
  * @author Olav Rune
  */
 public class DronePlatform {
+    //private SerialComArduino serialComArduino;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //test.testPrint();
-        
-        BatteryStationLogic bsg = new BatteryStationLogic();      
+
+        Semaphore semaphore = new Semaphore(1, true);
+        DataHandler dataHandler = new DataHandler();
         GUI gui = new GUI();
         gui.setVisible(true);
         //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         //GraphicsDevice screen = ge.getDefaultScreenDevice();
         //screen.setFullScreenWindow(gui);
-        
-        
-        DataHandler dataHandler = new DataHandler();
+
+        //creating logic classes/threads
+        BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
+        bsg.start();
+          EventStates events = new EventStates();
+        SystemLogic sysLog = new SystemLogic(dataHandler,semaphore,events);
+        sysLog.start();
+      
         FaultHandler faultHandler = new FaultHandler();
-        GUIObservable observable = new GUIObservable(faultHandler);
-        faultHandler.testing();
+
+        //Adding the observer
+        GUIObservable observable = new GUIObservable(faultHandler, bsg, events);
         observable.addObserver(gui);
-        
-         
-        while(true){
+
+        //Serial Communication
+        //serialCom = new SerialCom("/dev/ttyUSB0", dataHandler);
+        //serialCom = new SerialCom("COM3", this);
+        //serialCom.connect();
+        SerialComArduino serialComArduino = new SerialComArduino("COM3", dataHandler, semaphore);
+        serialComArduino.start();
+
+        while (true) {
             observable.setData();
-//            faultHandler.testing();
         }
-       
-       
+
     }
-    
- 
-    
+
 }

@@ -6,6 +6,8 @@ import jssc.SerialPort;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,25 +19,36 @@ import java.util.concurrent.Semaphore;
  * between serial read and send to make sure on is running at the time
  *
  */
-public class SerialCom {
+public class SerialComArduino implements Runnable {
 
     private SerialPort serialPort;
-    Semaphore semaPhore = new Semaphore(1, true);
+    Semaphore semaphore = new Semaphore(1, true);
     private Thread reader; // reads from arduino
     private Thread sender;  // writes to arduino
     public byte[] dataFromArduino = new byte[23];
     public byte[] dataToArduino = new byte[6];
     DataHandler dataHandler;
+    int increment;
+    private Thread t;
 
     /**
      *
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialCom(String comPort, DataHandler dataHandler) {
+    public SerialComArduino(String comPort, DataHandler dataHandler, Semaphore semaphore) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
+        this.semaphore = semaphore;
+    }
+
+    /**
+     * start a new thread containing the batterystationLogic
+     */
+    public void start() {
+        t = new Thread(this, "BatteryStationLogic thread");
+        t.start();
     }
 
     /**
@@ -45,23 +58,45 @@ public class SerialCom {
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(9600, 8, 1, 0);
-                reader = new Thread(new SerialRead(this, semaPhore, serialPort, dataHandler));
-                sender = new Thread(new SerialSend(this, semaPhore, serialPort, dataHandler));
-                sender.start();
-                reader.start();
+                getSerialPort().setParams(19200, 8, 1, 0);
+                // reader = new Thread(new SerialReadArduino(this, semaPhore, serialPort, dataHandler));         
+                // reader.start();
             }
         } catch (SerialPortException e) {
             System.out.println("No Port Found On: " + System.getProperty("os.name"));
         }
     }
 
-    
+    @Override
+    public void run() {
+        try {
+
+            while (true) {
+                byte[] data = serialPort.readBytes(1);
+                if (data[0] == -128) {
+                    byte[] dataFromArduionoToDH = serialPort.readBytes(176);
+                    increment++;
+                    semaphore.acquire();
+                    dataHandler.setDataFromArduino(dataFromArduionoToDH);
+                    semaphore.release();
+                    System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
+                 }
+            }
+
+        } catch (SerialPortException ex) {
+            System.out.println("SerialPortException i SerialRead");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SerialComArduino.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
     public SerialPort getSerialPort() {
         return this.serialPort;
     }
 
-  /*  public String[] getPortList() {
+    public String[] getPortList() {
         String[] portNames = SerialPortList.getPortNames();
 
         if (portNames.length == 0) {
@@ -79,5 +114,6 @@ public class SerialCom {
             System.out.println(portNames[i]);
         }
         return portNames;
-    }*/
+    }
+
 }

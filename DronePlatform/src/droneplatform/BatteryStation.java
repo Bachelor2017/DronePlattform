@@ -27,83 +27,115 @@ public class BatteryStation {
     private TimerTask tTask;
     private int batteryPossition;
     private int chargingTimeToMax;
+    private float temperature;
+    private int timeToMaxBattery;
+    private int chargedPercentage;
+    private float batteryCycles;
+    private float voltageChargingLevel;
+    private boolean limitSwitch;
 
+    /**
+     * constructor of batteryStation class
+     *
+     * @param batteryPossition a integer describing number in line of battery.
+     * not in use later. CAN DELETE
+     */
     public BatteryStation(int batteryPossition) {
 
         this.batteryPossition = batteryPossition;
         batteryStatus = 0;
         batteryLevel = 0;
         dockingStatus = true;
-        setDocked(dockingStatus);
+       // setDocked(dockingStatus);
         this.stationLocation = new byte[3];
         chargingTimeToMax = 100;   //3600 oringalt
 
     }
 
-    /**
-     * Sets the batterycharged value. makes sure the value uios not below 0 or
-     * above 100
-     *
-     * @param value the value of batterycharging status
-     */
-    public void setBatteryLevel(int value) {
-        if (value < 0) {
-            batteryLevel = 0;
-        } else if (value > 100) {
-            batteryLevel = 100;
-        } else {
-            batteryLevel = value;
+    
 
-        }
+    /**
+     * sett the temperature of the battery
+     *
+     * @param temp of battery
+     */
+    public void setTemperature(float temp) {
+        temperature = temp;
     }
 
     /**
-     * The value is calculated from the soconds in docking to seconds to full
-     * carge ratio
+     * returning the battery temperature
      *
-     * @return the value of the battery in persentage
+     * @return battery temperature int
      */
-    public int getBatteryLevel() {
-        batteryLevel = (secondsPassed / chargingTimeToMax) * 100;
-        return batteryLevel;
+    public float getTemperature() {
+        /*    if (temperature == 120.35)
+        {
+            temperature = 0;
+        }*/
+        return temperature;
     }
 
     /**
-     * Check if there is battery docked to station
+     * Setting the time to battery is fully charged
      *
-     * @return boolean signal that staes if there is battery in station (true)
-     * or not (false)
-     *
+     * @param time to battery is fully charged int
      */
-    public boolean isDocked() {
-        return dockingStatus;
+    public void setTimeToMaxBattery(int time) {
+        timeToMaxBattery = time;
     }
 
     /**
-     * Setting the docking status of the station If battery is docked, the timer
-     * starts running. of the battery is out of docking, the timer pstops and
-     * resets
+     * returns the time for the battery is fully charged
      *
-     * @param value boolean value , true if battery is in docking, and false if
-     * station is empty
+     * @return timeToMaxBattery
      */
-    public void setDocked(boolean value) {
-        if (value == true) {
-            tTask = new TimerTask() {
-                public void run() {
-                    secondsPassed++;
-                    System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
-                }
-            };
+    public int returnTimeToMaxBattery() {
+        return timeToMaxBattery;
+    }
 
-            timer = new Timer();
-            timer.scheduleAtFixedRate(tTask, 1000, 1000);
-        } else {
-            timer.cancel();
-            timer.purge();
-            secondsPassed = 0;
-        }
-        dockingStatus = value;
+    /**
+     * returns the battery charging percentage
+     *
+     * @param percentage of charged battery
+     */
+    public void setPercentageCharged(int percentage) {
+        this.chargedPercentage = percentage;
+    }
+
+    /**
+     * returns the percentage of the charged battery
+     *
+     * @return percetage of battery
+     */
+    public int getChargedPercentage() {
+        /*  if (chargedPercentage==-1)
+        {
+            chargedPercentage=0;
+        }*/
+        return chargedPercentage;
+    }
+
+    /**
+     * setting number of cychles the battery has been charged
+     *
+     * @param numberOfSycles the amount of times the battery has been charged
+     */
+    public void setBatteryCycles(float numberOfSycles) {
+        this.batteryCycles = numberOfSycles;
+    }
+
+    /**
+     * returning the amount of charging cstatuychles of the battery
+     *
+     * @return an int describing number of charging cychles
+     */
+    public float getNumberOfChargingCycles() {
+        /* if(batteryCycles==-1)
+        {
+            batteryCycles=0;
+        }*/
+        return batteryCycles;
     }
 
     /**
@@ -124,6 +156,47 @@ public class BatteryStation {
         batteryStatus = value;
     }
 
+    /**
+     * setting the voltage charging the battery
+     *
+     * @param voltageCharg the float value of the charger
+     */
+    public void setChargingVoltage(float voltageCharg) {
+        voltageChargingLevel = voltageCharg;
+    }
+
+    /**
+     * get the voltage charginbg the battery
+     *
+     * @return the charging voltage
+     */
+    public float getVoltageChargingLevel() {
+        return voltageChargingLevel;
+
+    }
+
+    /**
+     * setting the tru/false value of the limitSwitch
+     *
+     * @param value boolean value showing if the battery is in docking or not
+     */
+    public void setLimiSwitch(boolean value) {
+        this.limitSwitch = value;
+
+    }
+
+    /**
+     * returning the value of the limitSwitch
+     *
+     * @return boolean value of limitSSwitch
+     */
+    public boolean returnLimitSwitch() {
+        return this.limitSwitch;
+    }
+
+    /////////////////////////////////////////////////////////////
+    //////////////////Setting the location paramters of the batterystation. 
+    //////////////////not sure if should be used////////////////////////////
     /**
      * Returning the X-Value of the charger
      *
@@ -203,12 +276,95 @@ public class BatteryStation {
         zValue = (byte) newZValue;
     }
 
+    //////////////////////////////////////////////////////////////////////
+    ////////////////////////USED FOR TESTING//////////////////////////////
+    //////////////////////////////////////////////////////////////////////
     /**
      * Returns the number of seconds the batterystation has batteri on charging
      * returns 0 if batterDocking is false
      */
     public int getNumberOfSecondsCharged() {
         return secondsPassed;
+    }
+
+    /**
+     * Sets the batterycharged value. makes sure the value uios not below 0 or
+     * above 100
+     *
+     * @param value the value of batterycharging status
+     */
+    public void setBatteryLevel(int value) {
+        if (value < 0) {
+            batteryLevel = 0;
+        } else if (value > 100) {
+            batteryLevel = 100;
+        } else {
+            batteryLevel = value;
+
+        }
+    }
+
+    /**
+     * The value is calculated from the soconds in docking to seconds to full
+     * carge ratio
+     *
+     * @return the value of the battery in persentage
+     */
+    public int getBatteryLevel() {
+        batteryLevel = (secondsPassed / chargingTimeToMax) * 100;
+        return batteryLevel;
+    }
+
+    /**
+     * Setting the docking status of the station If battery is docked, the timer
+     * starts running. of the battery is out of docking, the timer pstops and
+     * resets
+     *
+     * @param value boolean value , true if battery is in docking, and false if
+     * station is empty
+     */
+    public void setDockedtest(boolean value) {
+        if (value == true) {
+            tTask = new TimerTask() {
+                public void run() {
+                    secondsPassed++;
+                    // System.out.println("Battery :" + batteryPossition + " ,Seconds Passed: " + secondsPassed);
+                    //   setTemperature(temperature+secondsPassed);
+                    // System.out.println("Temp:" +getTemperature());
+                }
+            };
+
+            timer = new Timer();
+            timer.scheduleAtFixedRate(tTask, 1000, 1000);
+        } else {
+            timer.cancel();
+            timer.purge();
+            secondsPassed = 0;
+            chargedPercentage = 0;
+        }
+        dockingStatus = value;
+    }
+    
+    /**
+     * Check if there is battery docked to station
+     *
+     * @return boolean signal that staes if there is battery in station (true)
+     * or not (false)
+     *
+     */
+    public boolean isDocked() {
+        return dockingStatus;
+    }
+
+    /**
+     * Setting the docking status of the station
+     *
+     * @param value boolean value , true if battery is in docking, and false if
+     * station is empty
+     */
+    public void setDocked(boolean value) {
+
+        dockingStatus = value;
     }
 
 }
