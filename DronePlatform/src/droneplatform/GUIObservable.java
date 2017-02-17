@@ -6,11 +6,6 @@ import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  * an observer updating the fields in the GUI
  *
@@ -47,15 +42,10 @@ public class GUIObservable extends Observable {
      * setting the data retrieved from system
      */
     public void setData() {
-
-        faultArray = faultHandler.guiFaultList();
         faultList = faultHandler.getFaultList();
         batteries = batteryStationLogic.getArrayListBatteries();
-        eventArray = events.guiEventList();
-        eventList = events.getEventList();
         timeLeft = events.timeLeftOfBatteryChange();
         timeLeftCyclus = events.getLastEventTimeSyclus();
-
         setChanged();
         notifyObservers();
     }
@@ -75,12 +65,8 @@ public class GUIObservable extends Observable {
      * @param x the message number in the list
      * @return the message as string
      */
-    public String getFaultText(int x) {
-        return faultArray[x];
-    }
-
-    public ArrayList<String> getFaultList() {
-        return faultList;
+    public String getLastErrorMessage(){
+        return faultHandler.lastFaultMessage();
     }
 
     /////////////////////////EVENT HANDLING////////////////////////
@@ -90,13 +76,7 @@ public class GUIObservable extends Observable {
      * @param x the message number in the list
      * @return the message as string
      */
-    public String getEventText(int x) {
-        return eventArray[x];
-    }
-
-    public ArrayList<String> getEventList() {
-        return eventList;
-    }
+ 
 
     public String getLastEventState() {
         return events.getLastEventState();
@@ -135,7 +115,7 @@ public class GUIObservable extends Observable {
     }
 
     /**
-     * get spesifik battery temperatire
+     * Returns battery temperatire
      *
      * @param x the number of the battery
      * @return the int of the temperature level
@@ -145,17 +125,17 @@ public class GUIObservable extends Observable {
     }
 
     /**
-     * get spesifik battery cychlus
+     * Return battery cycle count.
      *
      * @param x the number of the battery
      * @return the int of the cychlus level
      */
-    public float getSpescificBatterySyclecount(int x) {
+    public float getSpescificBatteryCyclecount(int x) {
         return this.batteryStationLogic.getBatteryChargingCycle(x);
     }
 
     /**
-     * get spesifik battery minutes to full charged
+     * Returns the predicted time to full charge in minutes.
      *
      * @param x the number of the battery
      * @return the int of the miuntes to full level
@@ -186,7 +166,7 @@ public class GUIObservable extends Observable {
     }
 
     /**
-     * sets a spesific battery to docking
+     * Sets a spesific battery to docking
      *
      * @param x
      */
@@ -206,6 +186,10 @@ public class GUIObservable extends Observable {
 
     public void addFaultToList() {
         faultHandler.addFault();
+    }
+    
+    public String getTimeStamp(){
+        return events.getTimeStamp();
     }
 
 }

@@ -7,11 +7,6 @@ import jssc.SerialPortException;
 import jssc.SerialPortList;
 import java.util.concurrent.Semaphore;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  * Creates the new SerialCom class. creates a new Semaphore wich is shared
  * between serial read and send to make sure on is running at the time

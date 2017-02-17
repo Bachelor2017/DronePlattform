@@ -24,6 +24,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
     GUIObservable receive;
      ArrayList<String> faultList;
+     private String lastEventState = "";
+     private String lastErrorState = "";
+     
 
     /**
      * Creates new form GUI
@@ -38,18 +41,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     public void update(Observable o, Object arg) {
         if (o instanceof GUIObservable) {
             receive = (GUIObservable) o;
-            this.setFaultMessages(receive);
-            this.setEventMessages(receive);
             this.setProgressBarValue(receive);
             isBatteryInStation(receive);
             settBatteryInformation(receive);
-            //add(new JScrollPane(jTextArea1));
             setEvents(receive);
             updateActiveStatus(receive);
             updateProgreessBar(receive);
             jLabel34.setText(Integer.toString(receive.testGetXvalue()));
             jLabel36.setText(Integer.toString(receive.getTimeLeft()));
-
+            this.setFaultMessages(receive);
         }
     }
 
@@ -83,6 +83,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel44 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
         tabPanels = new javax.swing.JTabbedPane();
+        autoTab = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        eventInfoPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textAreaInformationEvent = new javax.swing.JTextArea();
+        ErrorMessagePanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textAreaErrorMessages = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         Section = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -235,7 +244,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel40 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         textLabel11 = new javax.swing.JLabel();
         textLabel12 = new javax.swing.JLabel();
@@ -244,20 +252,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         textLabel15 = new javax.swing.JLabel();
         textLabel16 = new javax.swing.JLabel();
         textLabel17 = new javax.swing.JLabel();
-        autoTab = new javax.swing.JPanel();
-        textPanel = new javax.swing.JPanel();
-        textLabel1 = new javax.swing.JLabel();
-        textLabel3 = new javax.swing.JLabel();
-        textLabel2 = new javax.swing.JLabel();
-        textLabel4 = new javax.swing.JLabel();
-        textLabel5 = new javax.swing.JLabel();
-        textLabel6 = new javax.swing.JLabel();
-        textLabel7 = new javax.swing.JLabel();
-        textLabel8 = new javax.swing.JLabel();
-        textLabel9 = new javax.swing.JLabel();
-        textLabel10 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -324,7 +318,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jProgressBar1.setStringPainted(true);
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel30.setText("BatteryChange Progress:");
+        jLabel30.setText("Battery Change Progress:");
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel31.setText("Status:");
@@ -409,7 +403,88 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap())
         );
 
-        Section.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Run section by section:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/start.png"))); // NOI18N
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop_1.png"))); // NOI18N
+
+        eventInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Event Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Bright", 3, 18))); // NOI18N
+
+        textAreaInformationEvent.setEditable(false);
+        textAreaInformationEvent.setBackground(new java.awt.Color(240, 240, 240));
+        textAreaInformationEvent.setColumns(20);
+        textAreaInformationEvent.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+        textAreaInformationEvent.setRows(5);
+        textAreaInformationEvent.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(240, 240, 240))); // NOI18N
+        textAreaInformationEvent.setCaretColor(new java.awt.Color(240, 240, 240));
+        textAreaInformationEvent.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jScrollPane3.setViewportView(textAreaInformationEvent);
+
+        javax.swing.GroupLayout eventInfoPanelLayout = new javax.swing.GroupLayout(eventInfoPanel);
+        eventInfoPanel.setLayout(eventInfoPanelLayout);
+        eventInfoPanelLayout.setHorizontalGroup(
+            eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        eventInfoPanelLayout.setVerticalGroup(
+            eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+        );
+
+        ErrorMessagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Error Message(s)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Bright", 3, 18))); // NOI18N
+
+        textAreaErrorMessages.setEditable(false);
+        textAreaErrorMessages.setBackground(new java.awt.Color(240, 240, 240));
+        textAreaErrorMessages.setColumns(20);
+        textAreaErrorMessages.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+        textAreaErrorMessages.setRows(5);
+        textAreaErrorMessages.setBorder(null);
+        jScrollPane2.setViewportView(textAreaErrorMessages);
+
+        javax.swing.GroupLayout ErrorMessagePanelLayout = new javax.swing.GroupLayout(ErrorMessagePanel);
+        ErrorMessagePanel.setLayout(ErrorMessagePanelLayout);
+        ErrorMessagePanelLayout.setHorizontalGroup(
+            ErrorMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+        );
+        ErrorMessagePanelLayout.setVerticalGroup(
+            ErrorMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout autoTabLayout = new javax.swing.GroupLayout(autoTab);
+        autoTab.setLayout(autoTabLayout);
+        autoTabLayout.setHorizontalGroup(
+            autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(autoTabLayout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(124, 124, 124))
+            .addComponent(eventInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        autoTabLayout.setVerticalGroup(
+            autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(autoTabLayout.createSequentialGroup()
+                .addComponent(eventInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        tabPanels.addTab("Auto", autoTab);
+
+        Section.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Manual Operation(s)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
         Section.setName(""); // NOI18N
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Robot", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Bright", 1, 12))); // NOI18N
@@ -710,7 +785,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel23.setText("Temp:");
 
         jLabel24.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        jLabel24.setText("Sycle count");
+        jLabel24.setText("Cycle count:");
 
         jLabel25.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jLabel25.setText("Status:");
@@ -718,7 +793,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         temp1.setText("jLabel26");
 
         jLabel27.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        jLabel27.setText("min to full");
+        jLabel27.setText("Min to full:");
 
         jLabel28.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jLabel28.setText("%:");
@@ -944,7 +1019,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         status16.setText("jLabel26");
 
         jLabel29.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
-        jLabel29.setText("Charging Voltage:");
+        jLabel29.setText(" Terminal Voltage:");
 
         voltcharg1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         voltcharg1.setText("jLabel26");
@@ -1013,7 +1088,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                     .addComponent(jLabel87, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel93, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel99, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1022,7 +1097,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jLabel117, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(temp1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(temp1, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                     .addComponent(jLabel23)
                     .addComponent(temp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(temp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1045,7 +1120,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addComponent(jLabel24)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(cycle1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                        .addComponent(cycle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(40, 40, 40))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1069,7 +1144,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jLabel27)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mintofull16, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(mintofull16, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                             .addComponent(mintofull15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1090,7 +1165,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jLabel29)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(voltcharg15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(voltcharg14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(voltcharg13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1109,7 +1184,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addGap(61, 61, 61)))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(percentage16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(percentage16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                     .addComponent(percentage15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(percentage14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(percentage13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1128,7 +1203,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(percentage1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(status16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(status16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                     .addComponent(status15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(status14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(status13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1190,7 +1265,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(voltcharg15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE))
+                        .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel23)
@@ -1379,50 +1454,40 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         tabPanels.addTab("Battery specified", jPanel3);
 
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Event Information:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Bright", 1, 18))); // NOI18N
+
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
-
-        jLabel40.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
-        jLabel40.setText("Event information:");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 343, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 303, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 68, Short.MAX_VALUE))
         );
 
         tabPanels.addTab("Status info", jPanel4);
@@ -1449,11 +1514,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                    .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                            .addComponent(textLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                             .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -1467,17 +1532,17 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addComponent(textLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addComponent(textLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(textLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addComponent(textLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addGap(306, 306, 306))
             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel10Layout.createSequentialGroup()
@@ -1487,110 +1552,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         );
 
         tabPanels.addTab("tab5", jPanel10);
-
-        autoTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        textPanel.setBackground(new java.awt.Color(255, 255, 255));
-        textPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Error Message(s):", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
-
-        textLabel1.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel3.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel2.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel4.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel5.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel6.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel7.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel8.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel9.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        textLabel10.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
-
-        javax.swing.GroupLayout textPanelLayout = new javax.swing.GroupLayout(textPanel);
-        textPanel.setLayout(textPanelLayout);
-        textPanelLayout.setHorizontalGroup(
-            textPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(textPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(textPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        textPanelLayout.setVerticalGroup(
-            textPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(textPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(textLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addGap(5, 5, 5)
-                .addComponent(textLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/start.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop_1.png"))); // NOI18N
-
-        javax.swing.GroupLayout autoTabLayout = new javax.swing.GroupLayout(autoTab);
-        autoTab.setLayout(autoTabLayout);
-        autoTabLayout.setHorizontalGroup(
-            autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(autoTabLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(textPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        autoTabLayout.setVerticalGroup(
-            autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(autoTabLayout.createSequentialGroup()
-                .addComponent(textPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        tabPanels.addTab("Auto", autoTab);
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1962,10 +1923,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * gets the last docked battery and sett it to charging
      *
@@ -1977,46 +1934,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         receive.setSpesificBatteryToDocking(x);
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void startLiftToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startLiftToggleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startLiftToggleActionPerformed
-
     private void startBeltToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBeltToggleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_startBeltToggleActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void startLiftToggleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startLiftToggleMouseClicked
-        if (this.startLiftToggle.isSelected()) {
-            startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/of.png")));
-            System.out.println("turn on");
-
-        } else {
-            startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png")));
-            System.out.println("turn iof");
-
-        }
-
-    }//GEN-LAST:event_startLiftToggleMouseClicked
 
     private void startBeltToggleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startBeltToggleMouseClicked
         if (this.startBeltToggle.isSelected()) {
@@ -2029,6 +1949,46 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         }
     }//GEN-LAST:event_startBeltToggleMouseClicked
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void startLiftToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startLiftToggleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startLiftToggleActionPerformed
+
+    private void startLiftToggleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startLiftToggleMouseClicked
+        if (this.startLiftToggle.isSelected()) {
+            startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/of.png")));
+            System.out.println("turn on");
+
+        } else {
+            startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png")));
+            System.out.println("turn iof");
+
+        }
+    }//GEN-LAST:event_startLiftToggleMouseClicked
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2082,6 +2042,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel BatteryButton7;
     private javax.swing.JLabel BatteryButton8;
     private javax.swing.JLabel BatteryButton9;
+    private javax.swing.JPanel ErrorMessagePanel;
     private javax.swing.JPanel Section;
     private javax.swing.JPanel autoTab;
     private javax.swing.JLabel batteryNo2Label6;
@@ -2101,6 +2062,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel cycle7;
     private javax.swing.JLabel cycle8;
     private javax.swing.JLabel cycle9;
+    private javax.swing.JPanel eventInfoPanel;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton13;
@@ -2152,7 +2114,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
@@ -2188,6 +2149,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JProgressBar jProgressBar6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel mintofull1;
     private javax.swing.JLabel mintofull10;
@@ -2272,8 +2235,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel temp7;
     private javax.swing.JLabel temp8;
     private javax.swing.JLabel temp9;
-    private javax.swing.JLabel textLabel1;
-    private javax.swing.JLabel textLabel10;
+    private javax.swing.JTextArea textAreaErrorMessages;
+    private javax.swing.JTextArea textAreaInformationEvent;
     private javax.swing.JLabel textLabel11;
     private javax.swing.JLabel textLabel12;
     private javax.swing.JLabel textLabel13;
@@ -2281,15 +2244,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel textLabel15;
     private javax.swing.JLabel textLabel16;
     private javax.swing.JLabel textLabel17;
-    private javax.swing.JLabel textLabel2;
-    private javax.swing.JLabel textLabel3;
-    private javax.swing.JLabel textLabel4;
-    private javax.swing.JLabel textLabel5;
-    private javax.swing.JLabel textLabel6;
-    private javax.swing.JLabel textLabel7;
-    private javax.swing.JLabel textLabel8;
-    private javax.swing.JLabel textLabel9;
-    private javax.swing.JPanel textPanel;
     private javax.swing.JLabel voltcharg1;
     private javax.swing.JLabel voltcharg10;
     private javax.swing.JLabel voltcharg11;
@@ -2448,22 +2402,22 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         this.temp14.setText(Float.toString(receive.getSpescificBatteryTempertureLevel(13)) + " .C");
         this.temp15.setText(Float.toString(receive.getSpescificBatteryTempertureLevel(14)) + " .C");
         this.temp16.setText(Float.toString(receive.getSpescificBatteryTempertureLevel(15)) + " .C");
-        this.cycle1.setText(Float.toString(receive.getSpescificBatterySyclecount(0)) + ": Times");
-        this.cycle2.setText(Float.toString(receive.getSpescificBatterySyclecount(1)) + ": Times");
-        this.cycle3.setText(Float.toString(receive.getSpescificBatterySyclecount(2)) + ": Times");
-        this.cycle4.setText(Float.toString(receive.getSpescificBatterySyclecount(3)) + ": Times");
-        this.cycle5.setText(Float.toString(receive.getSpescificBatterySyclecount(4)) + ": Times");
-        this.cycle6.setText(Float.toString(receive.getSpescificBatterySyclecount(5)) + ": Times");
-        this.cycle7.setText(Float.toString(receive.getSpescificBatterySyclecount(6)) + ": Times");
-        this.cycle8.setText(Float.toString(receive.getSpescificBatterySyclecount(7)) + ": Times");
-        this.cycle9.setText(Float.toString(receive.getSpescificBatterySyclecount(8)) + ": Times");
-        this.cycle10.setText(Float.toString(receive.getSpescificBatterySyclecount(9)) + ": Times");
-        this.cycle11.setText(Float.toString(receive.getSpescificBatterySyclecount(10)) + ": Times");
-        this.cycle12.setText(Float.toString(receive.getSpescificBatterySyclecount(11)) + ": Times");
-        this.cycle13.setText(Float.toString(receive.getSpescificBatterySyclecount(12)) + ": Times");
-        this.cycle14.setText(Float.toString(receive.getSpescificBatterySyclecount(13)) + ": Times");
-        this.cycle15.setText(Float.toString(receive.getSpescificBatterySyclecount(14)) + ": Times");
-        this.cycle16.setText(Float.toString(receive.getSpescificBatterySyclecount(15)) + ": Times");
+        this.cycle1.setText(Float.toString(receive.getSpescificBatteryCyclecount(0)) + ": Times");
+        this.cycle2.setText(Float.toString(receive.getSpescificBatteryCyclecount(1)) + ": Times");
+        this.cycle3.setText(Float.toString(receive.getSpescificBatteryCyclecount(2)) + ": Times");
+        this.cycle4.setText(Float.toString(receive.getSpescificBatteryCyclecount(3)) + ": Times");
+        this.cycle5.setText(Float.toString(receive.getSpescificBatteryCyclecount(4)) + ": Times");
+        this.cycle6.setText(Float.toString(receive.getSpescificBatteryCyclecount(5)) + ": Times");
+        this.cycle7.setText(Float.toString(receive.getSpescificBatteryCyclecount(6)) + ": Times");
+        this.cycle8.setText(Float.toString(receive.getSpescificBatteryCyclecount(7)) + ": Times");
+        this.cycle9.setText(Float.toString(receive.getSpescificBatteryCyclecount(8)) + ": Times");
+        this.cycle10.setText(Float.toString(receive.getSpescificBatteryCyclecount(9)) + ": Times");
+        this.cycle11.setText(Float.toString(receive.getSpescificBatteryCyclecount(10)) + ": Times");
+        this.cycle12.setText(Float.toString(receive.getSpescificBatteryCyclecount(11)) + ": Times");
+        this.cycle13.setText(Float.toString(receive.getSpescificBatteryCyclecount(12)) + ": Times");
+        this.cycle14.setText(Float.toString(receive.getSpescificBatteryCyclecount(13)) + ": Times");
+        this.cycle15.setText(Float.toString(receive.getSpescificBatteryCyclecount(14)) + ": Times");
+        this.cycle16.setText(Float.toString(receive.getSpescificBatteryCyclecount(15)) + ": Times");
         this.mintofull1.setText(Float.toString(receive.getSpescificBatteryMinToFull(0)) + ": min");
         this.mintofull2.setText(Float.toString(receive.getSpescificBatteryMinToFull(1)) + ": min");
         this.mintofull3.setText(Float.toString(receive.getSpescificBatteryMinToFull(2)) + ": min");
@@ -2556,41 +2510,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }
 
     /**
-     * setting the fault messages to the GUI
+     * Setup for listing error messages to the GUI
      *
      * @param receive
      */
     public void setFaultMessages(GUIObservable receive) {
-        this.textLabel1.setText(receive.getFaultText(0));
-        this.textLabel2.setText(receive.getFaultText(1));
-        this.textLabel3.setText(receive.getFaultText(2));
-        this.textLabel4.setText(receive.getFaultText(3));
-        this.textLabel5.setText(receive.getFaultText(4));
-        this.textLabel6.setText(receive.getFaultText(5));
-        this.textLabel7.setText(receive.getFaultText(6));
-        this.textLabel8.setText(receive.getFaultText(7));
-        this.textLabel9.setText(receive.getFaultText(8));
-        this.textLabel10.setText(receive.getFaultText(9));
-
+        String lastState = receive.getLastErrorMessage();                 // Reads the last event state.
+        if(!lastState.equalsIgnoreCase(this.lastErrorState)){           // Compares current state with last event state.
+        textAreaErrorMessages.setText(lastState +  " "                             // Writes state on top of textArea.
+                + receive.getTimeStamp()+ "\n"  + textAreaErrorMessages.getText());// (Må undersøke hvilke størrelse gir error!
+        this.lastErrorState = lastState;                                // Sets last state equal to current. 
+        }
     }
-    
-    /**
-     * setting the fault messages to the GUI
-     *
-     * @param receive
-     */
-    public void setEventMessages(GUIObservable receive) {
-        this.textLabel11.setText(receive.getEventText(0));
-        this.textLabel12.setText(receive.getEventText(1));
-        this.textLabel13.setText(receive.getEventText(2));
-        this.textLabel14.setText(receive.getEventText(3));
-        this.textLabel15.setText(receive.getEventText(4));
-        this.textLabel16.setText(receive.getEventText(5));
-        this.textLabel17.setText(receive.getEventText(6));
-     
-
-    }
-
     
     /**
      * convert the integer to a string output
@@ -2603,22 +2534,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }
 
     /**
-     * setting the fault screen. updates the list if the 
-     * size differ in length from the old list
-     * @param receive 
+     * Setup for listing events to GUI
      */
     public void setEvents(GUIObservable receive) {
-        
-        ArrayList<String> tempEventList = new ArrayList<>();
-        tempEventList = receive.getEventList();
-        if(tempEventList.size()>faultList.size())
-        {
-            jTextArea1.setText("");
-        for (String a : tempEventList) {
-            jTextArea1.append(a + "\n");
+        String lastState = receive.getLastEventState();                 // Reads the last event state.
+        if(!lastState.equalsIgnoreCase(this.lastEventState)){           // Compares current state with last event state.
+        textAreaInformationEvent.setText(lastState +  " "                             // Writes state on top of textArea.
+                + receive.getTimeStamp()+ "\n"  + textAreaInformationEvent.getText());// (Må undersøke hvilke størrelse gir error!
+        this.lastEventState = lastState;                                // Sets last state equal to current. 
         }
-        }
-        faultList = tempEventList;
     }
     
     
