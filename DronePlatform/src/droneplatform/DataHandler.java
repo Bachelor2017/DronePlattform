@@ -1,5 +1,6 @@
 package droneplatform;
 
+import java.util.Arrays;
 import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 
@@ -28,8 +29,8 @@ public class DataHandler {
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToTeensy = new byte[64];
-        dataFromTeensy = new byte[64];
+        dataToTeensy = new byte[3];
+        dataFromTeensy = new byte[1];
     }
 
     /**
@@ -64,6 +65,7 @@ public class DataHandler {
      */
     public void setDataFromTeensy(byte[] newData) {
         this.dataFromTeensy = newData;
+        System.out.println("Data from teensy:" + Arrays.toString(newData));
     }
     
      /**
@@ -71,6 +73,9 @@ public class DataHandler {
      * @return retuns a byte[] to be sendt to the teensy controller
      */
     public byte[] getDataToTeensy() {
+        dataToTeensy[0] = (-128); //Flag byte
+        dataToTeensy[1] = 1;
+        dataToTeensy[2] = 2;
         return dataToTeensy;
     }
     

@@ -7,12 +7,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * 
@@ -60,7 +54,7 @@ public class FaultHandler {
         }
         else
         {
-             fault = "Command: " + command + getTimeStamp();
+             fault = command;
         }
        
         faultList.add(fault);     
@@ -75,28 +69,18 @@ public class FaultHandler {
         } catch (NullPointerException e) {
         }
         return time;
-
     }
     
     public ArrayList getFaultList(){
         return faultList;
     }
-    
-    public String[] guiFaultList(){
-        String[] faultListGUI = new String[10];
-        
-        for(int i = 0; i < 10; i++){
-            faultListGUI[i] = faultList.get(faultList.size() - 1 - i);
-        } 
-        return faultListGUI;
+   
+    public String lastFaultMessage(){
+        int length = faultList.size();
+        String faultString = faultList.get(length - 1);
+        return faultString;
     }
-    
-    public void testing(){
-        for(int i = 0; i < 10; i++){
-            String[] test = guiFaultList();
-            System.out.println(test[i]);
-        }
-    }
+   
     
     public void addFault()
     {

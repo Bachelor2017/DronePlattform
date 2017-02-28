@@ -7,11 +7,6 @@ import jssc.SerialPortException;
 import jssc.SerialPortList;
 import java.util.concurrent.Semaphore;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  * Creates the new SerialCom class. creates a new Semaphore wich is shared
  * between serial read and send to make sure on is running at the time
@@ -45,9 +40,10 @@ public class SerialCom {
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(9600, 8, 1, 0);
-                reader = new Thread(new SerialRead(this, semaPhore, serialPort, dataHandler));
-                sender = new Thread(new SerialSend(this, semaPhore, serialPort, dataHandler));
+                System.out.println("SerialPort Opened To Teensy!");
+                getSerialPort().setParams(19200, 8, 1, 0);
+                reader = new Thread(new SerialRead(this, semaPhore, serialPort));
+                sender = new Thread(new SerialSend(this, semaPhore, serialPort));
                 sender.start();
                 reader.start();
             }
@@ -55,8 +51,15 @@ public class SerialCom {
             System.out.println("No Port Found On: " + System.getProperty("os.name"));
         }
     }
-
     
+    public void setDataFromTeensy(byte[] data){
+        dataHandler.setDataFromArduino(data);
+    }
+    
+    public byte[] getDataToTeensy(){
+        return dataHandler.getDataToTeensy();
+    }
+
     public SerialPort getSerialPort() {
         return this.serialPort;
     }

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * between serial read and send to make sure on is running at the time
  *
  */
-public class SerialComArduino implements Runnable {
+public class SerialComTeensy implements Runnable {
 
     private SerialPort serialPort;
     Semaphore semaphore = new Semaphore(1, true);
@@ -22,20 +22,23 @@ public class SerialComArduino implements Runnable {
     private Thread sender;  // writes to arduino
     public byte[] dataFromArduino = new byte[23];
     public byte[] dataToArduino = new byte[6];
-    DataHandler dataHandler;
-    int increment;
+    private DataHandler dataHandler;
+    private int increment1;
+    private int increment2;
     private Thread t;
+    private boolean hasReceived;
 
     /**
      *
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialComArduino(String comPort, DataHandler dataHandler, Semaphore semaphore) {
+    public SerialComTeensy(String comPort, DataHandler dataHandler, Semaphore semaphore) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
         this.semaphore = semaphore;
+        hasReceived = false;
     }
 
     /**
@@ -67,22 +70,40 @@ public class SerialComArduino implements Runnable {
         try {
 
             while (true) {
+                
+                if(hasReceived){
+                byte[] dataToTeensy = new byte[3];
+                semaphore.acquire();
+                dataToTeensy = dataHandler.getDataToTeensy();
+                increment1++;
+                System.out.println("Serialsend:" + Arrays.toString(dataToTeensy) + " NR: " + increment1);
+                semaphore.release();
+                serialPort.writeBytes(dataToTeensy);
+                hasReceived = false;
+                }
+                
+                
+                
                 byte[] data = serialPort.readBytes(1);
                 if (data[0] == -128) {
-                    byte[] dataFromArduionoToDH = serialPort.readBytes(176);
-                    increment++;
+                    byte[] dataFromTeensynoToDH = serialPort.readBytes(24);
+                    increment2++;
                     semaphore.acquire();
-                    dataHandler.setDataFromArduino(dataFromArduionoToDH);
+                    dataHandler.setDataFromArduino(dataFromTeensynoToDH);
                     semaphore.release();
-                    System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
+                    System.out.println("Read Arranged " + Arrays.toString(dataFromTeensynoToDH) + " NR: " + increment2);
+                    hasReceived = true;
                  }
+                
+                
             }
 
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");
         } catch (InterruptedException ex) {
-            Logger.getLogger(SerialComArduino.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SerialComTeensy.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

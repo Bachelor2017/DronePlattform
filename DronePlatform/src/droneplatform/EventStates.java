@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package droneplatform;
 
 import java.text.DateFormat;
@@ -48,7 +43,7 @@ public class EventStates {
         if (command == "") {
             fault = "";
         } else {
-            fault = "Command: " + command + getTimeStamp();
+            fault = "Command: " + command;
         }
 
         eventList.add(fault);
@@ -68,7 +63,7 @@ public class EventStates {
      *
      * @return the timestamp in format HH:mm:ss
      */
-    private String getTimeStamp() {
+    public String getTimeStamp() {
         String time = "";
         try {
             DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -80,18 +75,7 @@ public class EventStates {
 
     }
 
-    /**
-     *
-     * @return
-     */
-    public String[] guiEventList() {
-        String[] eventListGUI = new String[10];
-
-        for (int i = 0; i < 10; i++) {
-            eventListGUI[i] = eventList.get(eventList.size() - 1 - i);
-        }
-        return eventListGUI;
-    }
+    
 
     public void addEvent() {
         addEventToList("Event " + x);
@@ -178,17 +162,17 @@ public class EventStates {
     }
 
     public void addingEventStates() {
-        Event event1 = new Event(1, "Signal om drone plassert motatt", 2);
-        Event event2 = new Event(2, "Rullebånd startet", 1);
-        Event event3 = new Event(3, "Lift på vei opp", 5);
-        Event event4 = new Event(4, "RulleBånd stoppet,drone på ende", 6);
-        Event event5 = new Event(5, "Robot søker drone", 2);
-        Event event6 = new Event(6, "droneplassering mottat, rettet opp drone", 1);
-        Event event7 = new Event(7, "Skifter batter", 4);
-        Event event8 = new Event(8, "Batteri av", 1);
-        Event event9 = new Event(8, "Nytt batteri plassert", 8);
-        Event event10 = new Event(8, "Drone batteriskifter utført", 1);
-        Event event11 = new Event(8, "Plasserer batteri til dokking", 5);
+        Event event1 = new Event(1, "Signal from drone received", 2);
+        Event event2 = new Event(2, "Conveyorbelt started", 1);
+        Event event3 = new Event(3, "Lift going up", 5);
+        Event event4 = new Event(4, "Conveyorbelt stopped", 6);
+        Event event5 = new Event(5, "Drone location search", 2);
+        Event event6 = new Event(6, "Location found, relocating drone", 1);
+        Event event7 = new Event(7, "Changing battery", 4);
+        Event event8 = new Event(8, "Battery change successful", 1);
+        Event event9 = new Event(8, "New battery positioned and locked", 8);
+        Event event10 = new Event(8, "Drone battery change successful", 1);
+        Event event11 = new Event(8, "Placing old battery to dockingstation", 5);
         differentEventStates.add(event1);
         differentEventStates.add(event2);
         differentEventStates.add(event3);
