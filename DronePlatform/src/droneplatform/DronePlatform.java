@@ -7,6 +7,7 @@ package droneplatform;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -24,34 +25,40 @@ public class DronePlatform {
         Semaphore semaphore = new Semaphore(1, true);
         DataHandler dataHandler = new DataHandler();
         GUI gui = new GUI();
-        gui.setVisible(true);
+        //gui.setVisible(true);
         //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         //GraphicsDevice screen = ge.getDefaultScreenDevice();
         //screen.setFullScreenWindow(gui);
 
         //creating logic classes/threads
-        BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
-        bsg.start();
-          EventStates events = new EventStates();
-        SystemLogic sysLog = new SystemLogic(dataHandler,semaphore,events);
-        sysLog.start();
+        //BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
+        //bsg.start();
+          //EventStates events = new EventStates();
+        //SystemLogic sysLog = new SystemLogic(dataHandler,semaphore,events);
+        //sysLog.start();
       
         FaultHandler faultHandler = new FaultHandler();
 
         //Adding the observer
-        GUIObservable observable = new GUIObservable(faultHandler, bsg, events);
-        observable.addObserver(gui);
+        //GUIObservable observable = new GUIObservable(faultHandler, bsg, events);
+        //observable.addObserver(gui);
 
         //Serial Communication
         //serialCom = new SerialCom("/dev/ttyUSB0", dataHandler);
         //serialCom = new SerialCom("COM3", this);
         //serialCom.connect();
-        SerialComArduino serialComArduino = new SerialComArduino("COM3", dataHandler, semaphore);
-        serialComArduino.start();
-
+        
+        //SerialComArduino serialComArduino = new SerialComArduino("COM4", dataHandler, semaphore);
+        //serialComArduino.start();
+        
+        SerialComTeensy serialComTeensy = new SerialComTeensy("COM4", dataHandler, semaphore);
+        serialComTeensy.start();
+        //SerialCom serialComTeensy = new SerialCom("COM4",dataHandler);
+        
+/*
         while (true) {
             observable.setData();
-        }
+        }*/
 
     }
 

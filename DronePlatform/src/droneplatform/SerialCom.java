@@ -40,9 +40,10 @@ public class SerialCom {
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(9600, 8, 1, 0);
-                reader = new Thread(new SerialRead(this, semaPhore, serialPort, dataHandler));
-                sender = new Thread(new SerialSend(this, semaPhore, serialPort, dataHandler));
+                System.out.println("SerialPort Opened To Teensy!");
+                getSerialPort().setParams(19200, 8, 1, 0);
+                reader = new Thread(new SerialRead(this, semaPhore, serialPort));
+                sender = new Thread(new SerialSend(this, semaPhore, serialPort));
                 sender.start();
                 reader.start();
             }
@@ -50,8 +51,15 @@ public class SerialCom {
             System.out.println("No Port Found On: " + System.getProperty("os.name"));
         }
     }
-
     
+    public void setDataFromTeensy(byte[] data){
+        dataHandler.setDataFromArduino(data);
+    }
+    
+    public byte[] getDataToTeensy(){
+        return dataHandler.getDataToTeensy();
+    }
+
     public SerialPort getSerialPort() {
         return this.serialPort;
     }

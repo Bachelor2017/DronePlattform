@@ -29,25 +29,28 @@ public class SerialSend implements Runnable {
      * @param serialCom the serialcommunicator class
      * @param s The semaphore added to the communication
      * @param sp the serial communication port
+     * @param dh the datahandler class
      */
-    public SerialSend(SerialCom serialCom, Semaphore s, SerialPort sp,DataHandler dataHandler) {
+    public SerialSend(SerialCom serialCom, Semaphore s, SerialPort sp) {
         this.serialCom = serialCom;
         this.semaphore = s;
         this.serialPort = sp;
-        this.dataHandler = dataHandler;
+        //this.dataHandler = dh;
     }
 
     /**
      * run method for thread. aquires semaphore and runs code, and release the
      * code when finished
      */
+    @Override
     public void run() {
         try {
             while (true) {
 
-                byte[] dataToTeensy = new byte[6];
+                byte[] dataToTeensy = new byte[3];
                 semaphore.acquire();
-                dataToTeensy = dataHandler.getDataToTeensy();
+                dataToTeensy = serialCom.getDataToTeensy();
+                System.out.println("Serialsend:" + Arrays.toString(dataToTeensy));
                 semaphore.release();
                 serialPort.writeBytes(dataToTeensy);
             }
