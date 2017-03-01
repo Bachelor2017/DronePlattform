@@ -18,10 +18,10 @@ public class SerialComTeensy implements Runnable {
 
     private SerialPort serialPort;
     Semaphore semaphore = new Semaphore(1, true);
-    private Thread reader; // reads from arduino
-    private Thread sender;  // writes to arduino
-    public byte[] dataFromArduino = new byte[23];
-    public byte[] dataToArduino = new byte[6];
+   // private Thread reader; // reads from arduino
+   // private Thread sender;  // writes to arduino
+   // public byte[] dataFromArduino = new byte[10];
+   // public byte[] dataToArduino = new byte[2];
     private DataHandler dataHandler;
     private int increment1;
     private int increment2;
@@ -38,7 +38,7 @@ public class SerialComTeensy implements Runnable {
         connect();
         this.dataHandler = dataHandler;
         this.semaphore = semaphore;
-        hasReceived = false;
+        hasReceived = true;
     }
 
     /**
@@ -56,7 +56,7 @@ public class SerialComTeensy implements Runnable {
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(19200, 8, 1, 0);
+                getSerialPort().setParams(9600, 8, 1, 0);
                 // reader = new Thread(new SerialReadArduino(this, semaPhore, serialPort, dataHandler));         
                 // reader.start();
             }
@@ -72,21 +72,24 @@ public class SerialComTeensy implements Runnable {
             while (true) {
                 
                 if(hasReceived){
-                byte[] dataToTeensy = new byte[3];
+                    System.out.println("send");
+                byte[] dataToTeensy = new byte[5];
                 semaphore.acquire();
                 dataToTeensy = dataHandler.getDataToTeensy();
+                semaphore.release();
                 increment1++;
                 System.out.println("Serialsend:" + Arrays.toString(dataToTeensy) + " NR: " + increment1);
-                semaphore.release();
+                
                 serialPort.writeBytes(dataToTeensy);
                 hasReceived = false;
                 }
                 
                 
-                
+                    System.out.println("read");
                 byte[] data = serialPort.readBytes(1);
                 if (data[0] == -128) {
-                    byte[] dataFromTeensynoToDH = serialPort.readBytes(24);
+                
+                    byte[] dataFromTeensynoToDH = serialPort.readBytes(10);
                     increment2++;
                     semaphore.acquire();
                     dataHandler.setDataFromArduino(dataFromTeensynoToDH);

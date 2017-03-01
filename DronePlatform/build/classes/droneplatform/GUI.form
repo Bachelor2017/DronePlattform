@@ -761,9 +761,9 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel41" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton13" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Component id="liftButtonUp" min="-2" pref="47" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton14" min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Component id="liftButtonDown" min="-2" pref="48" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="startLiftToggle" pref="45" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -777,9 +777,9 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="startLiftToggle" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jButton13" alignment="1" pref="39" max="32767" attributes="0"/>
+                                          <Component id="liftButtonUp" alignment="1" pref="39" max="32767" attributes="0"/>
                                           <Component id="jLabel41" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Component id="jButton14" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="liftButtonDown" alignment="1" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -793,22 +793,29 @@
                             <Property name="text" type="java.lang.String" value="Run lift:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton13">
+                        <Component class="javax.swing.JButton" name="liftButtonUp">
                           <Properties>
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/images/up.PNG"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton13ActionPerformed"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonUpMousePressed"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonUpMouseReleased"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="liftButtonUpActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton14">
+                        <Component class="javax.swing.JButton" name="liftButtonDown">
                           <Properties>
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/images/down.PNG"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonDownMouseClicked"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonDownMousePressed"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonDownMouseReleased"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JToggleButton" name="startLiftToggle">
                           <Properties>
@@ -841,9 +848,9 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel42" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton16" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Component id="conveyorButtonUp" min="-2" pref="47" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton17" min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Component id="conveyorButtonDown" min="-2" pref="48" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="startBeltToggle" pref="45" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -857,9 +864,9 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="startBeltToggle" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jButton16" alignment="1" pref="39" max="32767" attributes="0"/>
+                                          <Component id="conveyorButtonUp" alignment="1" pref="39" max="32767" attributes="0"/>
                                           <Component id="jLabel42" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Component id="jButton17" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="conveyorButtonDown" alignment="1" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -873,22 +880,28 @@
                             <Property name="text" type="java.lang.String" value="Run lift:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton16">
+                        <Component class="javax.swing.JButton" name="conveyorButtonUp">
                           <Properties>
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/images/up.PNG"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton16ActionPerformed"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="conveyorButtonUpMousePressed"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="conveyorButtonUpMouseReleased"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="conveyorButtonUpActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton17">
+                        <Component class="javax.swing.JButton" name="conveyorButtonDown">
                           <Properties>
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/images/down.PNG"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="conveyorButtonDownMousePressed"/>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="conveyorButtonDownMouseReleased"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JToggleButton" name="startBeltToggle">
                           <Properties>

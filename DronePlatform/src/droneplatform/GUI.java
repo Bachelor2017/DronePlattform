@@ -22,16 +22,18 @@ import javax.swing.JScrollPane;
  */
 public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
+    private GUIController controller;
     GUIObservable receive;
-     ArrayList<String> faultList;
-     private String lastEventState = "";
-     private String lastErrorState = "";
-     
+    ArrayList<String> faultList;
+    private String lastEventState = "";
+    private String lastErrorState = "";
+    private java.util.Timer fTimer;
 
     /**
      * Creates new form GUI
      */
     public GUI() {
+        this.fTimer = new java.util.Timer();
         initComponents();
         addKeyListener(this);
         faultList = new ArrayList<>();
@@ -51,6 +53,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jLabel36.setText(Integer.toString(receive.getTimeLeft()));
             this.setFaultMessages(receive);
         }
+    }
+
+    public void setHandler(DataHandler datahandler) {
+        this.controller = new GUIController();
+        this.controller.setDatahandler(datahandler);
+        this.fTimer.scheduleAtFixedRate(controller, 0, 1000);
+        System.out.println("starter datahandler");
+
     }
 
     @Override
@@ -112,13 +122,13 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel3 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        liftButtonUp = new javax.swing.JButton();
+        liftButtonDown = new javax.swing.JButton();
         startLiftToggle = new javax.swing.JToggleButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
+        conveyorButtonUp = new javax.swing.JButton();
+        conveyorButtonDown = new javax.swing.JButton();
         startBeltToggle = new javax.swing.JToggleButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
@@ -419,7 +429,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         textAreaInformationEvent.setColumns(20);
         textAreaInformationEvent.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         textAreaInformationEvent.setRows(5);
-        textAreaInformationEvent.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(240, 240, 240))); // NOI18N
+        textAreaInformationEvent.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(240, 240, 240))); // NOI18N
         textAreaInformationEvent.setCaretColor(new java.awt.Color(240, 240, 240));
         textAreaInformationEvent.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane3.setViewportView(textAreaInformationEvent);
@@ -633,14 +643,33 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jLabel41.setText("Run lift:");
 
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        liftButtonUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
+        liftButtonUp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                liftButtonUpMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                liftButtonUpMouseReleased(evt);
+            }
+        });
+        liftButtonUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                liftButtonUpActionPerformed(evt);
             }
         });
 
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.PNG"))); // NOI18N
+        liftButtonDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.PNG"))); // NOI18N
+        liftButtonDown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                liftButtonDownMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                liftButtonDownMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                liftButtonDownMouseReleased(evt);
+            }
+        });
 
         startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
         startLiftToggle.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -662,9 +691,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap()
                 .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(liftButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(liftButtonDown, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(startLiftToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
                 .addContainerGap())
@@ -676,9 +705,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(startLiftToggle)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                        .addComponent(liftButtonUp, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                         .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(liftButtonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -686,14 +715,30 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jLabel42.setText("Run lift:");
 
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        conveyorButtonUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
+        conveyorButtonUp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                conveyorButtonUpMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                conveyorButtonUpMouseReleased(evt);
+            }
+        });
+        conveyorButtonUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                conveyorButtonUpActionPerformed(evt);
             }
         });
 
-        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.PNG"))); // NOI18N
+        conveyorButtonDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.PNG"))); // NOI18N
+        conveyorButtonDown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                conveyorButtonDownMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                conveyorButtonDownMouseReleased(evt);
+            }
+        });
 
         startBeltToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
         startBeltToggle.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -715,9 +760,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap()
                 .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(conveyorButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(conveyorButtonDown, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(startBeltToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
                 .addContainerGap())
@@ -729,9 +774,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(startBeltToggle)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                        .addComponent(conveyorButtonUp, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                         .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(conveyorButtonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1950,9 +1995,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
     }//GEN-LAST:event_startBeltToggleMouseClicked
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+    private void conveyorButtonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conveyorButtonUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton16ActionPerformed
+    }//GEN-LAST:event_conveyorButtonUpActionPerformed
 
     private void startLiftToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startLiftToggleActionPerformed
         // TODO add your handling code here:
@@ -1970,9 +2015,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
     }//GEN-LAST:event_startLiftToggleMouseClicked
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
+    private void liftButtonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_liftButtonUpActionPerformed
+
+    }//GEN-LAST:event_liftButtonUpActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -1989,6 +2034,46 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void liftButtonDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_liftButtonDownMouseClicked
+
+    private void liftButtonDownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMousePressed
+        this.controller.setLiftStatus(true,1);
+    }//GEN-LAST:event_liftButtonDownMousePressed
+
+    private void liftButtonDownMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMouseReleased
+        this.controller.setLiftStatus(false,0);
+    }//GEN-LAST:event_liftButtonDownMouseReleased
+
+    private void liftButtonUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonUpMousePressed
+        this.controller.setLiftStatus(true,2);
+        //  System.out.println("pressed up");
+    }//GEN-LAST:event_liftButtonUpMousePressed
+
+    private void liftButtonUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonUpMouseReleased
+        this.controller.setLiftStatus(false,0);
+        //  System.out.println("pressed down");
+    }//GEN-LAST:event_liftButtonUpMouseReleased
+
+    private void conveyorButtonUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonUpMousePressed
+        this.controller.setConveyorStatus(true,2);
+        // System.out.println("pressed up");
+    }//GEN-LAST:event_conveyorButtonUpMousePressed
+
+    private void conveyorButtonUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonUpMouseReleased
+        this.controller.setConveyorStatus(false,0);
+        //   System.out.println("pressed down");
+    }//GEN-LAST:event_conveyorButtonUpMouseReleased
+
+    private void conveyorButtonDownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonDownMousePressed
+        this.controller.setConveyorStatus(true,1);
+    }//GEN-LAST:event_conveyorButtonDownMousePressed
+
+    private void conveyorButtonDownMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonDownMouseReleased
+        this.controller.setConveyorStatus(false,0);
+    }//GEN-LAST:event_conveyorButtonDownMouseReleased
 
     /**
      * @param args the command line arguments
@@ -2046,6 +2131,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JPanel Section;
     private javax.swing.JPanel autoTab;
     private javax.swing.JLabel batteryNo2Label6;
+    private javax.swing.JButton conveyorButtonDown;
+    private javax.swing.JButton conveyorButtonUp;
     private javax.swing.JLabel cycle1;
     private javax.swing.JLabel cycle10;
     private javax.swing.JLabel cycle11;
@@ -2065,10 +2152,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JPanel eventInfoPanel;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2152,6 +2235,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton liftButtonDown;
+    private javax.swing.JButton liftButtonUp;
     private javax.swing.JLabel mintofull1;
     private javax.swing.JLabel mintofull10;
     private javax.swing.JLabel mintofull11;
@@ -2293,7 +2378,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             BatteryButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
 
-     isBatteryDockedInStation = receive.getSpesificLimitSwitch(2);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(2);
         if (isBatteryDockedInStation) {
             BatteryButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
@@ -2305,7 +2390,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         } else {
             BatteryButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-      isBatteryDockedInStation = receive.getSpesificLimitSwitch(4);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(4);
         if (isBatteryDockedInStation) {
             BatteryButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
@@ -2323,49 +2408,49 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         } else {
             BatteryButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-       isBatteryDockedInStation = receive.getSpesificLimitSwitch(7);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(7);
         if (isBatteryDockedInStation) {
             BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-       isBatteryDockedInStation = receive.getSpesificLimitSwitch(8);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(8);
         if (isBatteryDockedInStation) {
             BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-       isBatteryDockedInStation = receive.getSpesificLimitSwitch(9);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(9);
         if (isBatteryDockedInStation) {
             BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-       isBatteryDockedInStation = receive.getSpesificLimitSwitch(10);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(10);
         if (isBatteryDockedInStation) {
             BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-       isBatteryDockedInStation = receive.getSpesificLimitSwitch(11);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(11);
         if (isBatteryDockedInStation) {
             BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-       isBatteryDockedInStation = receive.getSpesificLimitSwitch(12);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(12);
         if (isBatteryDockedInStation) {
             BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-     isBatteryDockedInStation = receive.getSpesificLimitSwitch(13);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(13);
         if (isBatteryDockedInStation) {
             BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
             BatteryButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red_button.png")));
         }
-      isBatteryDockedInStation = receive.getSpesificLimitSwitch(14);
+        isBatteryDockedInStation = receive.getSpesificLimitSwitch(14);
         if (isBatteryDockedInStation) {
             BatteryButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png")));
         } else {
@@ -2516,17 +2601,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
      */
     public void setFaultMessages(GUIObservable receive) {
         String lastState = receive.getLastErrorMessage();                 // Reads the last event state.
-        if(!lastState.equalsIgnoreCase(this.lastErrorState)){           // Compares current state with last event state.
-        textAreaErrorMessages.setText(lastState +  " "                             // Writes state on top of textArea.
-                + receive.getTimeStamp()+ "\n"  + textAreaErrorMessages.getText());// (Må undersøke hvilke størrelse gir error!
-        this.lastErrorState = lastState;                                // Sets last state equal to current. 
+        if (!lastState.equalsIgnoreCase(this.lastErrorState)) {           // Compares current state with last event state.
+            textAreaErrorMessages.setText(lastState + " " // Writes state on top of textArea.
+                    + receive.getTimeStamp() + "\n" + textAreaErrorMessages.getText());// (Må undersøke hvilke størrelse gir error!
+            this.lastErrorState = lastState;                                // Sets last state equal to current. 
         }
     }
-    
+
     /**
      * convert the integer to a string output
+     *
      * @param x
-     * @return 
+     * @return
      */
     public String convertIntToString(int x) {
         String returnString = Integer.toString(x);
@@ -2538,26 +2624,19 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
      */
     public void setEvents(GUIObservable receive) {
         String lastState = receive.getLastEventState();                 // Reads the last event state.
-        if(!lastState.equalsIgnoreCase(this.lastEventState)){           // Compares current state with last event state.
-        textAreaInformationEvent.setText(lastState +  " "                             // Writes state on top of textArea.
-                + receive.getTimeStamp()+ "\n"  + textAreaInformationEvent.getText());// (Må undersøke hvilke størrelse gir error!
-        this.lastEventState = lastState;                                // Sets last state equal to current. 
+        if (!lastState.equalsIgnoreCase(this.lastEventState)) {           // Compares current state with last event state.
+            textAreaInformationEvent.setText(lastState + " " // Writes state on top of textArea.
+                    + receive.getTimeStamp() + "\n" + textAreaInformationEvent.getText());// (Må undersøke hvilke størrelse gir error!
+            this.lastEventState = lastState;                                // Sets last state equal to current. 
         }
     }
-    
-    
-    
-    public void updateActiveStatus(GUIObservable receive)
-    {
+
+    public void updateActiveStatus(GUIObservable receive) {
         jLabel37.setText(receive.getLastEventState());
     }
 
-    
-    public void updateProgreessBar(GUIObservable receive)
-    {
+    public void updateProgreessBar(GUIObservable receive) {
         jProgressBar1.setValue(receive.testGetXvalue());
         jProgressBar2.setValue(receive.getTimeLeftCyclus());
     }
 }
-    
-    
