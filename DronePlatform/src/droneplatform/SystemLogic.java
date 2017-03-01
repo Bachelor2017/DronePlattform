@@ -77,7 +77,7 @@ public class SystemLogic implements Runnable {
      *
      * @return
      */
-    public int getState() {
+   public int getState() {
         dataFromArduino = dataHandler.getDataFromArduino();
         caseScenario = dataFromArduino[1];
         return caseScenario;

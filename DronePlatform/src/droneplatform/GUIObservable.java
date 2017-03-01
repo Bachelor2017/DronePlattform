@@ -191,5 +191,10 @@ public class GUIObservable extends Observable {
     public String getTimeStamp(){
         return events.getTimeStamp();
     }
+    
+    
+    
+    
+   
 
 }
