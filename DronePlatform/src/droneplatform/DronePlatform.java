@@ -27,6 +27,7 @@ public class DronePlatform {
         GUI gui = new GUI();
         gui.setVisible(true);
         gui.setHandler(dataHandler);
+
         //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         //GraphicsDevice screen = ge.getDefaultScreenDevice();
         //screen.setFullScreenWindow(gui);
@@ -34,28 +35,27 @@ public class DronePlatform {
         //creating logic classes/threads
         BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
         bsg.start();
-          EventStates events = new EventStates();
+        //EventStates events = new EventStates();
         //SystemLogic sysLog = new SystemLogic(dataHandler,semaphore,events);
         //sysLog.start();
-      
+         SystemLogic sysLog = new SystemLogic(dataHandler,semaphore);
+        sysLog.start();
+
         FaultHandler faultHandler = new FaultHandler();
 
         //Adding the observer
-        GUIObservable observable = new GUIObservable(faultHandler, bsg, events);
+        GUIObservable observable = new GUIObservable(faultHandler, bsg, sysLog);
         observable.addObserver(gui);
 
         //Serial Communication
         //serialCom = new SerialCom("/dev/ttyUSB0", dataHandler);
         //serialCom = new SerialCom("COM3", this);
         //serialCom.connect();
-        
         //SerialComArduino serialComArduino = new SerialComArduino("COM4", dataHandler, semaphore);
         //serialComArduino.start();
-        
-        SerialComTeensy serialComTeensy = new SerialComTeensy("COM5", dataHandler, semaphore);
-        serialComTeensy.start();
+    ////////////    SerialComTeensy serialComTeensy = new SerialComTeensy("COM5", dataHandler, semaphore);
+    ////////////    serialComTeensy.start();
         //SerialCom serialComTeensy = new SerialCom("COM4",dataHandler);
-        
 
         while (true) {
             observable.setData();
