@@ -10,7 +10,6 @@ import java.util.concurrent.Semaphore;
  * and open the template in the editor.
  */
 ////////////PROTOCOLLS///////////////
-
 //Data from GUI to TEENSY Controller   - dataToTeensy//
 //
 //byte[0] - 101    (flagbyte)
@@ -18,8 +17,6 @@ import java.util.concurrent.Semaphore;
 //byte[2] - 1-10   (motor number)
 //byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
 //byte[4] - 0-100  (speed)
-
-
 //Data from Teensy controller to GUI   - dataFromTeensy//
 //
 //byte[0] - 101    (flagbyte)
@@ -27,8 +24,6 @@ import java.util.concurrent.Semaphore;
 //byte[2] - 1-10   (motor number)
 //byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
 //byte[4] - 0-100  (speed)
-
-
 /////Data from arduino controller to GUI   - dataFromArduino//
 //
 //byte[0] - 0-15   (BatteryNumber)
@@ -43,10 +38,6 @@ import java.util.concurrent.Semaphore;
 //byte[7] - cycle count
 //byte[8] - cycle count Descimal
 //byte[9] - Battery Status
-
-
-
-
 public class DataHandler {
 
     private byte[] dataFromArduino;     //The byteArray retrieved from Arduino 
@@ -90,6 +81,7 @@ public class DataHandler {
      * @return retuns a byte[] retrieved from the mikrocontroller
      */
     public byte[] getDataFromTeensy() {
+        dataFromTeensy[1] = 1;
         return dataFromTeensy;
     }
 
@@ -100,32 +92,10 @@ public class DataHandler {
      */
     public void setDataFromTeensy(byte[] newData) {
         this.dataFromTeensy = newData;
-        //System.out.println("Data from teensy:" + Arrays.toString(newData));
+
     }
 
-    /**
-     * get the data to be sendt to the teensy controller
-     *
-     * @return retuns a byte[] to be sendt to the teensy controller
-     */
-    public byte[] getDataToTeensy() {
-        dataToTeensy[0] = (101);   //Flag byte
-        dataToTeensy[4] = 100;    //Manuel speed
-
-        return dataToTeensy;
-    }
-
-    /**
-     * setting the data to the TeensyController
-     *
-     * @param newData the data updating the dataToTeensy byte[]
-     */
-    public void setDataToTeensy(byte[] newData) {
-        this.dataToTeensy = newData;
-    }
-
-  
-        ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////FROM GUI////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     /**
@@ -150,9 +120,9 @@ public class DataHandler {
                 System.out.println("lift deactivated");
             }
         } else {
-            System.out.println("test");
+
         }
-        
+
         System.out.println(Arrays.toString(dataToTeensy));
     }
 
@@ -164,20 +134,43 @@ public class DataHandler {
     public void setPlatformMode(boolean value) {
         if (value) {
             dataToTeensy[1] = 0;      //auto mode
-            System.out.println("Auto: " + 0);
         } else if (!value) {
 
             dataToTeensy[1] = 1;      //Manuel mode
-            System.out.println("Manual: " + 1);
-            System.out.println(dataToTeensy[1]);
         }
     }
-    
-    
-    
-    
-    
-      ////////////////////////////////////////////////////////////
+
+    /**
+     * Setting the speed value of the engine
+     *
+     * @param speed 0-100, (percentage)
+     */
+    public void setSpeedValue(int speed) {
+        dataToTeensy[4] = (byte) speed;
+        System.out.println(Arrays.toString(dataToTeensy));
+    }
+
+    /**
+     * get the data to be sendt to the teensy controller
+     *
+     * @return retuns a byte[] to be sendt to the teensy controller
+     */
+    public byte[] getDataToTeensy() {
+        dataToTeensy[0] = (101);   //Flag byte
+
+        return dataToTeensy;
+    }
+
+    /**
+     * setting the data to the TeensyController
+     *
+     * @param newData the data updating the dataToTeensy byte[]
+     */
+    public void setDataToTeensy(byte[] newData) {
+        this.dataToTeensy = newData;
+    }
+
+    ////////////////////////////////////////////////////////////
     ////////////////ALT UNDER BARE TIL TEST. KAN TAS BORT SENERE
     ////////////////////////////////////////////////////////////
     /**

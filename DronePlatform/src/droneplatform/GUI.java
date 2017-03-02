@@ -28,6 +28,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private String lastEventState = "";
     private String lastErrorState = "";
     private java.util.Timer fTimer;
+    private int speed;
+    private boolean platformMode;
 
     /**
      * Creates new form GUI
@@ -38,6 +40,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         addKeyListener(this);
         faultList = new ArrayList<>();
         GUISetup();
+        speed = 50;
+        platformMode = true;
     }
 
     @Override
@@ -59,18 +63,22 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     public void setHandler(DataHandler datahandler) {
         this.controller = new GUIController();
         this.controller.setDatahandler(datahandler);
-        this.controller.setPlatformMode(true);
+        this.controller.setPlatformMode(platformMode);
+        this.controller.setSpeedValue(speed);
         this.fTimer.scheduleAtFixedRate(controller, 0, 1000);
         System.out.println("starter datahandler");
 
     }
-    
-        public void GUISetup()
-    {
-        autoStatus.setEnabled(true); 
-        manualStatus.setEnabled(false); 
-    }
 
+    public void GUISetup() {
+        autoStatus.setEnabled(true);
+        manualStatus.setEnabled(false);
+        liftStatus.setEnabled(false);
+        xStatus.setEnabled(false);
+        robotStatus.setEnabled(false);
+        beltStatus.setEnabled(false);
+
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -89,18 +97,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         batteryNo2Label6 = new javax.swing.JLabel();
         jProgressBar6 = new javax.swing.JProgressBar();
         jPanel12 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jProgressBar2 = new javax.swing.JProgressBar();
         tabPanels = new javax.swing.JTabbedPane();
         autoTab = new javax.swing.JPanel();
         eventInfoPanel = new javax.swing.JPanel();
@@ -112,37 +108,34 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel40 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
-        modeToggleButton = new javax.swing.JToggleButton();
         autoStatus = new javax.swing.JLabel();
         manualStatus = new javax.swing.JLabel();
+        testButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         Section = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         liftButtonUp = new javax.swing.JButton();
         liftButtonDown = new javax.swing.JButton();
-        startLiftToggle = new javax.swing.JToggleButton();
+        liftStatus = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         conveyorButtonUp = new javax.swing.JButton();
         conveyorButtonDown = new javax.swing.JButton();
-        startBeltToggle = new javax.swing.JToggleButton();
+        beltStatus = new javax.swing.JLabel();
+        speedSlider = new javax.swing.JSlider();
+        speedPercentLabel = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel48 = new javax.swing.JLabel();
+        xAxisLeft = new javax.swing.JButton();
+        xAxisRight = new javax.swing.JButton();
+        xStatus = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
+        armLeft = new javax.swing.JButton();
+        armRight = new javax.swing.JButton();
+        robotStatus = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -275,6 +268,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         textLabel15 = new javax.swing.JLabel();
         textLabel16 = new javax.swing.JLabel();
         textLabel17 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jProgressBar2 = new javax.swing.JProgressBar();
         jPanel11 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -334,98 +339,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/drone_image.png"))); // NOI18N
-
-        jProgressBar1.setStringPainted(true);
-
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel30.setText("Battery Change Progress:");
-
-        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel31.setText("Status:");
-
-        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel32.setText("Time used:");
-
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel34.setText("00:00");
-
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel35.setText("Time remaining:");
-
-        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel36.setText("00:00");
-
-        jLabel37.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel37.setText("idle");
-
-        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FFI.png"))); // NOI18N
-        jLabel44.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jProgressBar2.setStringPainted(true);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel31)
-                                .addGap(258, 258, 258))
-                            .addComponent(jLabel44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel30))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel35)
-                .addGap(52, 52, 52)
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
-            .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel31)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel37)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel36))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         eventInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Event Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Bright", 3, 18))); // NOI18N
 
         textAreaInformationEvent.setEditable(false);
@@ -470,30 +383,28 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
         );
 
+        jLabel40.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
         jLabel40.setText("Change mode:");
 
+        jLabel46.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
         jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel46.setText("Auto:");
 
+        jLabel47.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
         jLabel47.setText("Manual:");
-
-        modeToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-        modeToggleButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                modeToggleButtonMouseClicked(evt);
-            }
-        });
-        modeToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modeToggleButtonActionPerformed(evt);
-            }
-        });
 
         autoStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autoStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
 
         manualStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         manualStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
+
+        testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
+        testButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                testButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout autoTabLayout = new javax.swing.GroupLayout(autoTab);
         autoTab.setLayout(autoTabLayout);
@@ -504,9 +415,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             .addGroup(autoTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel40)
-                .addGap(29, 29, 29)
-                .addComponent(modeToggleButton)
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
+                .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(autoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -520,11 +431,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(autoTabLayout.createSequentialGroup()
                 .addComponent(eventInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(autoTabLayout.createSequentialGroup()
+                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, autoTabLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
                         .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel46)
                             .addComponent(jLabel47))
@@ -532,9 +443,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(autoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                             .addComponent(manualStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(modeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(autoTabLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel40, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(testButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(42, 42, 42))
         );
 
@@ -543,150 +456,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         Section.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Manual Operation(s)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 18))); // NOI18N
         Section.setName(""); // NOI18N
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Robot", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Bright", 1, 12))); // NOI18N
-
-        jLabel17.setText("Run top slider:");
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.PNG"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.PNG"))); // NOI18N
-
-        jLabel19.setText("Turn robot");
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.PNG"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.PNG"))); // NOI18N
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel20.setText("Pick up battery:");
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-
-        jLabel21.setText("Release battery:");
-
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Side 1:");
-
-        jLabel3.setText("Side 2:");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton4)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton11))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lift", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Bright", 1, 12))); // NOI18N
 
+        jLabel41.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel41.setText("Run lift:");
 
         liftButtonUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
@@ -717,49 +489,40 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             }
         });
 
-        startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
-        startLiftToggle.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                startLiftToggleMouseClicked(evt);
-            }
-        });
-        startLiftToggle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startLiftToggleActionPerformed(evt);
-            }
-        });
+        liftStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        liftStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
                 .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(liftButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(liftButtonDown, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(startLiftToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(liftStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(startLiftToggle)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(liftButtonUp, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(liftButtonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(liftButtonUp, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(liftButtonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(liftStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Conveyor Belt", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Bright", 1, 12))); // NOI18N
 
-        jLabel42.setText("Run lift:");
+        jLabel42.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+        jLabel42.setText("Run belt:");
 
         conveyorButtonUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/up.PNG"))); // NOI18N
         conveyorButtonUp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -786,70 +549,209 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             }
         });
 
-        startBeltToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
-        startBeltToggle.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                startBeltToggleMouseClicked(evt);
-            }
-        });
-        startBeltToggle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startBeltToggleActionPerformed(evt);
-            }
-        });
+        beltStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        beltStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
                 .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(conveyorButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(conveyorButtonDown, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(startBeltToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(beltStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(startBeltToggle)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(conveyorButtonUp, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(conveyorButtonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(conveyorButtonUp, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(conveyorButtonDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(beltStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        speedSlider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                speedSliderMouseReleased(evt);
+            }
+        });
+
+        speedPercentLabel.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
+        speedPercentLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        speedPercentLabel.setText("50 %");
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Axis", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Bright", 1, 12))); // NOI18N
+
+        jLabel48.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+        jLabel48.setText("Run engine:");
+
+        xAxisLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.PNG"))); // NOI18N
+        xAxisLeft.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                xAxisLeftMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                xAxisLeftMouseReleased(evt);
+            }
+        });
+        xAxisLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xAxisLeftActionPerformed(evt);
+            }
+        });
+
+        xAxisRight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.PNG"))); // NOI18N
+        xAxisRight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                xAxisRightMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                xAxisRightMouseReleased(evt);
+            }
+        });
+
+        xStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        xStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(xAxisLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(xAxisRight, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(xStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(xAxisLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xAxisRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(xStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rotation Robot", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Bright", 1, 12))); // NOI18N
+
+        jLabel49.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
+        jLabel49.setText("Run arm:");
+
+        armLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left.PNG"))); // NOI18N
+        armLeft.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                armLeftMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                armLeftMouseReleased(evt);
+            }
+        });
+        armLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                armLeftActionPerformed(evt);
+            }
+        });
+
+        armRight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.PNG"))); // NOI18N
+        armRight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                armRightMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                armRightMouseReleased(evt);
+            }
+        });
+
+        robotStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        robotStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green_button.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(armLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(armRight, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(robotStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(armLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(armRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(robotStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jLabel50.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel50.setText("SPEED:");
 
         javax.swing.GroupLayout SectionLayout = new javax.swing.GroupLayout(Section);
         Section.setLayout(SectionLayout);
         SectionLayout.setHorizontalGroup(
             SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SectionLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(SectionLayout.createSequentialGroup()
+                .addGap(0, 40, Short.MAX_VALUE)
+                .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(SectionLayout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                        .addComponent(speedPercentLabel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SectionLayout.createSequentialGroup()
+                        .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         SectionLayout.setVerticalGroup(
             SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SectionLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
+                .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(speedPercentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(speedSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(317, 317, 317))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -860,9 +762,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(Section, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Section, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         tabPanels.addTab("Manual", jPanel1);
@@ -1188,7 +1088,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jLabel117, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(temp1, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(temp1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                     .addComponent(jLabel23)
                     .addComponent(temp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(temp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1356,7 +1256,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(voltcharg15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                        .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel23)
@@ -1557,7 +1457,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 303, Short.MAX_VALUE))
+                .addGap(0, 305, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1578,7 +1478,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
+                .addGap(0, 88, Short.MAX_VALUE))
         );
 
         tabPanels.addTab("Status info", jPanel4);
@@ -1605,7 +1505,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                    .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1623,17 +1523,17 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(textLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(textLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(textLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addComponent(textLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addGap(306, 306, 306))
             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel10Layout.createSequentialGroup()
@@ -1643,6 +1543,98 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         );
 
         tabPanels.addTab("tab5", jPanel10);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/drone_image.png"))); // NOI18N
+
+        jProgressBar1.setStringPainted(true);
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel30.setText("Battery Change Progress:");
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel31.setText("Status:");
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel32.setText("Time used:");
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel34.setText("00:00");
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel35.setText("Time remaining:");
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel36.setText("00:00");
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("idle");
+
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FFI.png"))); // NOI18N
+        jLabel44.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jProgressBar2.setStringPainted(true);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 25, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel31)
+                                .addGap(258, 258, 258))
+                            .addComponent(jLabel44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel35)
+                .addGap(52, 52, 52)
+                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
+            .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel31)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel34)
+                    .addComponent(jLabel35)
+                    .addComponent(jLabel36))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1991,9 +1983,12 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tabPanels))
-                .addGap(26, 26, 26)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(tabPanels, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -2014,123 +2009,172 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void startBeltToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBeltToggleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startBeltToggleActionPerformed
-
-    private void startBeltToggleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startBeltToggleMouseClicked
-        if (this.startBeltToggle.isSelected()) {
-            startBeltToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/of.png")));
-            System.out.println("turn on");
-
-        } else {
-            startBeltToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png")));
-            System.out.println("turn iof");
-
-        }
-    }//GEN-LAST:event_startBeltToggleMouseClicked
-
     private void conveyorButtonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conveyorButtonUpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_conveyorButtonUpActionPerformed
 
-    private void startLiftToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startLiftToggleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startLiftToggleActionPerformed
-
-    private void startLiftToggleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startLiftToggleMouseClicked
-        if (this.startLiftToggle.isSelected()) {
-            startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/of.png")));
-            System.out.println("turn on");
-
-        } else {
-            startLiftToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png")));
-            System.out.println("turn iof");
-
-        }
-    }//GEN-LAST:event_startLiftToggleMouseClicked
-
     private void liftButtonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_liftButtonUpActionPerformed
 
     }//GEN-LAST:event_liftButtonUpActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void liftButtonDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_liftButtonDownMouseClicked
 
     private void liftButtonDownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMousePressed
-        this.controller.setLiftStatus(true,1);
+         if(!platformMode){
+        this.controller.setLiftStatus(true, 1);
+        liftStatus.setEnabled(true);
+         }
     }//GEN-LAST:event_liftButtonDownMousePressed
 
     private void liftButtonDownMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMouseReleased
-        this.controller.setLiftStatus(false,0);
+          if(!platformMode){
+        this.controller.setLiftStatus(false, 0);
+        liftStatus.setEnabled(false);
+          }
     }//GEN-LAST:event_liftButtonDownMouseReleased
 
     private void liftButtonUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonUpMousePressed
-        this.controller.setLiftStatus(true,2);
+         if(!platformMode){
+        this.controller.setLiftStatus(true, 2);
+        liftStatus.setEnabled(true);
+         }
         //  System.out.println("pressed up");
     }//GEN-LAST:event_liftButtonUpMousePressed
 
     private void liftButtonUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonUpMouseReleased
-        this.controller.setLiftStatus(false,0);
+          if(!platformMode){
+        this.controller.setLiftStatus(false, 0);
+        liftStatus.setEnabled(false);
         //  System.out.println("pressed down");
+          }
     }//GEN-LAST:event_liftButtonUpMouseReleased
 
     private void conveyorButtonUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonUpMousePressed
-        this.controller.setConveyorStatus(true,2);
+       if(!platformMode){
+        this.controller.setConveyorStatus(true, 2);
+        beltStatus.setEnabled(true);
+       }
         // System.out.println("pressed up");
     }//GEN-LAST:event_conveyorButtonUpMousePressed
 
     private void conveyorButtonUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonUpMouseReleased
-        this.controller.setConveyorStatus(false,0);
+          if(!platformMode){
+        this.controller.setConveyorStatus(false, 0);
+        beltStatus.setEnabled(false);
+          
+    }
         //   System.out.println("pressed down");
     }//GEN-LAST:event_conveyorButtonUpMouseReleased
 
     private void conveyorButtonDownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonDownMousePressed
-        this.controller.setConveyorStatus(true,1);
+       if(!platformMode){
+        this.controller.setConveyorStatus(true, 1);
+        beltStatus.setEnabled(true);
+       }
     }//GEN-LAST:event_conveyorButtonDownMousePressed
 
     private void conveyorButtonDownMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonDownMouseReleased
-        this.controller.setConveyorStatus(false,0);
+        if(!platformMode)
+        {this.controller.setConveyorStatus(false, 0);
+        beltStatus.setEnabled(false);
+        }
     }//GEN-LAST:event_conveyorButtonDownMouseReleased
 
-    private void modeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_modeToggleButtonActionPerformed
+    private void speedSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_speedSliderMouseReleased
 
-    private void modeToggleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeToggleButtonMouseClicked
-                if (this.modeToggleButton.isSelected()) {
-            this.controller.setPlatformMode(false);
-          //  this.modeToggleButton.setText("Turn to Manual mode");
+        this.speed = this.speedSlider.getValue();
+        this.controller.setSpeedValue(this.speed);
+        this.speedPercentLabel.setText("" + this.speed + "%");
+    }//GEN-LAST:event_speedSliderMouseReleased
+
+    private void xAxisLeftMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisLeftMousePressed
+         if(!platformMode){
+        this.controller.setXAxisStatus(true, 1);
+        xStatus.setEnabled(true);
+       }
+    }//GEN-LAST:event_xAxisLeftMousePressed
+
+    private void xAxisLeftMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisLeftMouseReleased
+        if(!platformMode){
+        this.controller.setXAxisStatus(true, 0);
+        xStatus.setEnabled(false);
+       }
+    }//GEN-LAST:event_xAxisLeftMouseReleased
+
+    private void xAxisLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xAxisLeftActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xAxisLeftActionPerformed
+
+    private void xAxisRightMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisRightMousePressed
+         if(!platformMode){
+        this.controller.setXAxisStatus(true, 2);
+        xStatus.setEnabled(true);
+       }
+    }//GEN-LAST:event_xAxisRightMousePressed
+
+    private void xAxisRightMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisRightMouseReleased
+         if(!platformMode){
+        this.controller.setXAxisStatus(true, 0);
+        xStatus.setEnabled(false);
+       }
+    }//GEN-LAST:event_xAxisRightMouseReleased
+
+    private void armLeftMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armLeftMousePressed
+        if(!platformMode){
+        this.controller.setArmStatus(true, 1);
+        robotStatus.setEnabled(true);
+       }
+    }//GEN-LAST:event_armLeftMousePressed
+
+    private void armLeftMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armLeftMouseReleased
+        if(!platformMode){
+        this.controller.setArmStatus(true, 0);
+        robotStatus.setEnabled(false);
+       }
+    }//GEN-LAST:event_armLeftMouseReleased
+
+    private void armLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_armLeftActionPerformed
+  
+    }//GEN-LAST:event_armLeftActionPerformed
+
+    private void armRightMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armRightMousePressed
+       if(!platformMode){
+        this.controller.setArmStatus(true, 2);
+        robotStatus.setEnabled(true);
+       }
+    }//GEN-LAST:event_armRightMousePressed
+
+    private void armRightMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armRightMouseReleased
+      if(!platformMode){
+        this.controller.setArmStatus(true, 0);
+        robotStatus.setEnabled(false);
+       }
+    }//GEN-LAST:event_armRightMouseReleased
+
+    private void testButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testButtonMouseClicked
+       platformMode = !platformMode;
+       
+         if (!platformMode) {
+            //platformMode = false;
+            this.controller.setPlatformMode(platformMode);
+            //  this.modeToggleButton.setText("Turn to Manual mode");
             this.manualStatus.setEnabled(true);
             this.autoStatus.setEnabled(false);
-  
+
         } else {
-            this.controller.setPlatformMode(true);
-           // this.modeToggleButton.setText("Turn to Auto mode");
-          
+           // platformMode = true;
+            this.controller.setPlatformMode(platformMode);
+            // this.modeToggleButton.setText("Turn to Auto mode");
+
             this.manualStatus.setEnabled(false);
             this.autoStatus.setEnabled(true);
-           
-        }
 
-    }//GEN-LAST:event_modeToggleButtonMouseClicked
+        }
+       
+       
+    }//GEN-LAST:event_testButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2186,9 +2230,12 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel BatteryButton9;
     private javax.swing.JPanel ErrorMessagePanel;
     private javax.swing.JPanel Section;
+    private javax.swing.JButton armLeft;
+    private javax.swing.JButton armRight;
     private javax.swing.JLabel autoStatus;
     private javax.swing.JPanel autoTab;
     private javax.swing.JLabel batteryNo2Label6;
+    private javax.swing.JLabel beltStatus;
     private javax.swing.JButton conveyorButtonDown;
     private javax.swing.JButton conveyorButtonUp;
     private javax.swing.JLabel cycle1;
@@ -2208,14 +2255,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel cycle8;
     private javax.swing.JLabel cycle9;
     private javax.swing.JPanel eventInfoPanel;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel105;
@@ -2227,12 +2266,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -2241,7 +2275,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -2261,7 +2294,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel6;
@@ -2279,11 +2315,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -2296,6 +2332,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton liftButtonDown;
     private javax.swing.JButton liftButtonUp;
+    private javax.swing.JLabel liftStatus;
     private javax.swing.JLabel manualStatus;
     private javax.swing.JLabel mintofull1;
     private javax.swing.JLabel mintofull10;
@@ -2313,7 +2350,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel mintofull7;
     private javax.swing.JLabel mintofull8;
     private javax.swing.JLabel mintofull9;
-    private javax.swing.JToggleButton modeToggleButton;
     private javax.swing.JLabel percentage1;
     private javax.swing.JLabel percentage10;
     private javax.swing.JLabel percentage11;
@@ -2346,8 +2382,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JProgressBar progressbarB7;
     private javax.swing.JProgressBar progressbarB8;
     private javax.swing.JProgressBar progressbarB9;
-    private javax.swing.JToggleButton startBeltToggle;
-    private javax.swing.JToggleButton startLiftToggle;
+    private javax.swing.JLabel robotStatus;
+    private javax.swing.JLabel speedPercentLabel;
+    private javax.swing.JSlider speedSlider;
     private javax.swing.JLabel status1;
     private javax.swing.JLabel status10;
     private javax.swing.JLabel status11;
@@ -2381,6 +2418,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel temp7;
     private javax.swing.JLabel temp8;
     private javax.swing.JLabel temp9;
+    private javax.swing.JButton testButton;
     private javax.swing.JTextArea textAreaErrorMessages;
     private javax.swing.JTextArea textAreaInformationEvent;
     private javax.swing.JLabel textLabel11;
@@ -2406,6 +2444,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel voltcharg7;
     private javax.swing.JLabel voltcharg8;
     private javax.swing.JLabel voltcharg9;
+    private javax.swing.JButton xAxisLeft;
+    private javax.swing.JButton xAxisRight;
+    private javax.swing.JLabel xStatus;
     // End of variables declaration//GEN-END:variables
 
     @Override

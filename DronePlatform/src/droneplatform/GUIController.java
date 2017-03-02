@@ -18,11 +18,10 @@ public class GUIController extends TimerTask {
     private DataHandler datahandler;
 
     public GUIController() {
-
     }
 
     /**
-     * prints the statement :Reques data:"
+     *
      */
     @Override
     public void run() {
@@ -42,40 +41,67 @@ public class GUIController extends TimerTask {
     /**
      * checs value if true, and ends the boolean value to datahandler
      *
-     * @param value
+     * @param status The status of the motor (true/false)
+     * @param direction The direction/funcion of the engine (int:0=idle, 1 =
+     * rev, 2=forward)
      */
-    
-    
-     public void setLiftStatus(boolean value,int direction) {
-
-        System.out.println("status lift " + value);
-        this.datahandler.motorStatus(1,value,direction);
+    public void setLiftStatus(boolean value, int direction) {
+       this.datahandler.motorStatus(1, value, direction);
 
     }
-      
-    
-     /**
+
+    /**
      * checs value if true, and ends the boolean value to datahandler
      *
-     * @param value
+     * @param status The status of the motor (true/false)
+     * @param direction The direction/funcion of the engine (int:0=idle, 1 =
+     * rev, 2=forward)
      */
-    public void setConveyorStatus(boolean value,int direction) {
-        System.out.println("status conveyor " + value);
-        this.datahandler.motorStatus(2,value,direction);
+    public void setConveyorStatus(boolean value, int direction) {
+       this.datahandler.motorStatus(2, value, direction);
 
     }
-    
-    
+
     /**
      * Setting the running mode of platform. true = auto , false = manual
      *
      * @param value boolean value , true =auto , false = manual
      */
     public void setPlatformMode(boolean value) {
-       
-            this.datahandler.setPlatformMode(value);      //auto mode
-           
+
+        this.datahandler.setPlatformMode(value);      //auto mode
+
     }
-    
+
+    /**
+     * setting the speed value in persentage as an integer 0-100
+     *
+     * @param value the speed value 0-100 (percentage)
+     */
+    public void setSpeedValue(int value) {
+        this.datahandler.setSpeedValue(value);
+    }
+
+    /**
+     * Setting the status of the robotArm
+     *
+     * @param status The status of the motor (true/false)
+     * @param direction The direction/funcion of the engine (int:0=idle, 1 =
+     * rev, 2=forward)
+     */
+    public void setArmStatus(boolean value, int direction) {
+       this.datahandler.motorStatus(3, value, direction);
+    }
+
+    /**
+     * Setting the status of the X-Axis engine
+     *
+     * @param status The status of the motor (true/false)
+     * @param direction The direction/funcion of the engine (int:0=idle, 1 =
+     * rev, 2=forward)
+     */
+    public void setXAxisStatus(boolean value, int direction) {
+        this.datahandler.motorStatus(4, value, direction);
+    }
 
 }
