@@ -65,5 +65,17 @@ public class GUIController extends TimerTask {
 
     }
     
+    
+    /**
+     * Setting the running mode of platform. true = auto , false = manual
+     *
+     * @param value boolean value , true =auto , false = manual
+     */
+    public void setPlatformMode(boolean value) {
+       
+            this.datahandler.setPlatformMode(value);      //auto mode
+           
+    }
+    
 
 }
