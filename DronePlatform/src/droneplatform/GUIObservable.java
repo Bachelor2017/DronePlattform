@@ -14,7 +14,8 @@ public class GUIObservable extends Observable {
 
     private FaultHandler faultHandler;
     private BatteryStationLogic batteryStationLogic;
-    private EventStates events;
+    private SystemLogic events;
+    // private EventStates events;
     private ArrayList<BatteryStation> batteries;
     private String[] faultArray;
     private String[] eventArray;
@@ -25,7 +26,8 @@ public class GUIObservable extends Observable {
     private int timeLeft;
     private int timeLeftCyclus;
 
-    public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic, EventStates events) {
+   // public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic, EventStates events) {
+    public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic, SystemLogic events) {
         this.faultHandler = faultHandler;
         this.batteryStationLogic = batteryStationLogic;
         this.events = events;
@@ -83,7 +85,7 @@ public class GUIObservable extends Observable {
     }
 
     public int testGetXvalue() {
-        return events.testGetXValue();
+        return events.getTotalTimeUsed();
     }
 
     /////////////////////////BATTERY INFORMATION//////////////////////
