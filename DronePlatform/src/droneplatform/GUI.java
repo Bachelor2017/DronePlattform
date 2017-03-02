@@ -37,6 +37,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         initComponents();
         addKeyListener(this);
         faultList = new ArrayList<>();
+        GUISetup();
     }
 
     @Override
@@ -58,10 +59,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     public void setHandler(DataHandler datahandler) {
         this.controller = new GUIController();
         this.controller.setDatahandler(datahandler);
+        this.controller.setPlatformMode(true);
         this.fTimer.scheduleAtFixedRate(controller, 0, 1000);
         System.out.println("starter datahandler");
 
     }
+    
+        public void GUISetup()
+    {
+        autoStatus.setEnabled(true); 
+        manualStatus.setEnabled(false); 
+    }
+
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -94,14 +103,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jProgressBar2 = new javax.swing.JProgressBar();
         tabPanels = new javax.swing.JTabbedPane();
         autoTab = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         eventInfoPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         textAreaInformationEvent = new javax.swing.JTextArea();
         ErrorMessagePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaErrorMessages = new javax.swing.JTextArea();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        modeToggleButton = new javax.swing.JToggleButton();
+        autoStatus = new javax.swing.JLabel();
+        manualStatus = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         Section = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -413,15 +426,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap())
         );
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/start.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop_1.png"))); // NOI18N
-
         eventInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Event Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Bright", 3, 18))); // NOI18N
 
         textAreaInformationEvent.setEditable(false);
@@ -438,7 +442,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         eventInfoPanel.setLayout(eventInfoPanelLayout);
         eventInfoPanelLayout.setHorizontalGroup(
             eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
         eventInfoPanelLayout.setVerticalGroup(
             eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,30 +470,72 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
         );
 
+        jLabel40.setText("Change mode:");
+
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel46.setText("Auto:");
+
+        jLabel47.setText("Manual:");
+
+        modeToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
+        modeToggleButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modeToggleButtonMouseClicked(evt);
+            }
+        });
+        modeToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeToggleButtonActionPerformed(evt);
+            }
+        });
+
+        autoStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        autoStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
+
+        manualStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        manualStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
+
         javax.swing.GroupLayout autoTabLayout = new javax.swing.GroupLayout(autoTab);
         autoTab.setLayout(autoTabLayout);
         autoTabLayout.setHorizontalGroup(
             autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(autoTabLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124))
             .addComponent(eventInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(autoTabLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel40)
+                .addGap(29, 29, 29)
+                .addComponent(modeToggleButton)
+                .addGap(49, 49, 49)
+                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(autoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manualStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(168, 168, 168))
         );
         autoTabLayout.setVerticalGroup(
             autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(autoTabLayout.createSequentialGroup()
                 .addComponent(eventInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(autoTabLayout.createSequentialGroup()
+                        .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel47))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(autoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(manualStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(modeToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(42, 42, 42))
         );
 
         tabPanels.addTab("Auto", autoTab);
@@ -1968,17 +2014,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * gets the last docked battery and sett it to charging
-     *
-     * @param evt
-     */
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        int x = receive.getLastDockedBattery();
-        receive.releaseSpesificBatteryFromDocking(x);
-        receive.setSpesificBatteryToDocking(x);
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void startBeltToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBeltToggleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_startBeltToggleActionPerformed
@@ -2075,6 +2110,28 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         this.controller.setConveyorStatus(false,0);
     }//GEN-LAST:event_conveyorButtonDownMouseReleased
 
+    private void modeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeToggleButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modeToggleButtonActionPerformed
+
+    private void modeToggleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeToggleButtonMouseClicked
+                if (this.modeToggleButton.isSelected()) {
+            this.controller.setPlatformMode(false);
+          //  this.modeToggleButton.setText("Turn to Manual mode");
+            this.manualStatus.setEnabled(true);
+            this.autoStatus.setEnabled(false);
+  
+        } else {
+            this.controller.setPlatformMode(true);
+           // this.modeToggleButton.setText("Turn to Auto mode");
+          
+            this.manualStatus.setEnabled(false);
+            this.autoStatus.setEnabled(true);
+           
+        }
+
+    }//GEN-LAST:event_modeToggleButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2129,6 +2186,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel BatteryButton9;
     private javax.swing.JPanel ErrorMessagePanel;
     private javax.swing.JPanel Section;
+    private javax.swing.JLabel autoStatus;
     private javax.swing.JPanel autoTab;
     private javax.swing.JLabel batteryNo2Label6;
     private javax.swing.JButton conveyorButtonDown;
@@ -2150,14 +2208,12 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel cycle8;
     private javax.swing.JLabel cycle9;
     private javax.swing.JPanel eventInfoPanel;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -2197,11 +2253,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel57;
@@ -2237,6 +2296,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton liftButtonDown;
     private javax.swing.JButton liftButtonUp;
+    private javax.swing.JLabel manualStatus;
     private javax.swing.JLabel mintofull1;
     private javax.swing.JLabel mintofull10;
     private javax.swing.JLabel mintofull11;
@@ -2253,6 +2313,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel mintofull7;
     private javax.swing.JLabel mintofull8;
     private javax.swing.JLabel mintofull9;
+    private javax.swing.JToggleButton modeToggleButton;
     private javax.swing.JLabel percentage1;
     private javax.swing.JLabel percentage10;
     private javax.swing.JLabel percentage11;

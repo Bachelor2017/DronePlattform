@@ -9,10 +9,44 @@ import java.util.concurrent.Semaphore;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/**
- *
- *
- */
+////////////PROTOCOLLS///////////////
+
+//Data from GUI to TEENSY Controller   - dataToTeensy//
+//
+//byte[0] - 101    (flagbyte)
+//byte[1] - 0-1    (auto/manual mode)
+//byte[2] - 1-10   (motor number)
+//byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
+//byte[4] - 0-100  (speed)
+
+
+//Data from Teensy controller to GUI   - dataFromTeensy//
+//
+//byte[0] - 101    (flagbyte)
+//byte[1] - 0-1    (auto/manual mode)
+//byte[2] - 1-10   (motor number)
+//byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
+//byte[4] - 0-100  (speed)
+
+
+/////Data from arduino controller to GUI   - dataFromArduino//
+//
+//byte[0] - 0-15   (BatteryNumber)
+//
+//Repeat x16 batteries  total of byte[176]
+//byte[1] - 0-100% (Relative charge)
+//byte[2] - Voltage
+//byte[3] - Voltage descimal
+//byte[4] - Minutes remaining to full
+//byte[5] - Temperature
+//byte[6] - Temperature descimal
+//byte[7] - cycle count
+//byte[8] - cycle count Descimal
+//byte[9] - Battery Status
+
+
+
+
 public class DataHandler {
 
     private byte[] dataFromArduino;     //The byteArray retrieved from Arduino 
@@ -76,9 +110,6 @@ public class DataHandler {
      */
     public byte[] getDataToTeensy() {
         dataToTeensy[0] = (101);   //Flag byte
-        dataToTeensy[1] = 1;      //Manuel or auto mode
-        //dataToTeensy[2] = 100;   // Manuel motor number
-        // dataToTeensy[3] = 1;    // Manuel motor direction  0-reverse , 1, idle, 2 forward
         dataToTeensy[4] = 100;    //Manuel speed
 
         return dataToTeensy;
@@ -93,7 +124,60 @@ public class DataHandler {
         this.dataToTeensy = newData;
     }
 
-    ////////////////////////////////////////////////////////////
+  
+        ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////FROM GUI////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Setting the value of the spesific stepper engine
+     *
+     * @param motorNumber the number of the motor (1-5)
+     * @param status The status of the motor (true/false)
+     * @param direction The direction/funcion of the engine (int:0=idle, 1 =
+     * rev, 2=forward)
+     */
+    public void motorStatus(int motorNumber, boolean status, int direction) {
+        int modeNumber = dataToTeensy[1];
+        if (modeNumber == 1) {
+
+            //the number of the motor to be activated
+            dataToTeensy[2] = (byte) motorNumber;    //Setting engine number to the bytearray
+            if (status) {
+                System.out.println("lift activated");
+                dataToTeensy[3] = (byte) direction;    //setting the direction to byte 3 in  the bytearray
+            } else if (!status) {
+                dataToTeensy[3] = (byte) direction;
+                System.out.println("lift deactivated");
+            }
+        } else {
+            System.out.println("test");
+        }
+        
+        System.out.println(Arrays.toString(dataToTeensy));
+    }
+
+    /**
+     * Setting the running mode of platform. true = auto , false = manual
+     *
+     * @param value boolean value , true =auto , false = manual
+     */
+    public void setPlatformMode(boolean value) {
+        if (value) {
+            dataToTeensy[1] = 0;      //auto mode
+            System.out.println("Auto: " + 0);
+        } else if (!value) {
+
+            dataToTeensy[1] = 1;      //Manuel mode
+            System.out.println("Manual: " + 1);
+            System.out.println(dataToTeensy[1]);
+        }
+    }
+    
+    
+    
+    
+    
+      ////////////////////////////////////////////////////////////
     ////////////////ALT UNDER BARE TIL TEST. KAN TAS BORT SENERE
     ////////////////////////////////////////////////////////////
     /**
@@ -137,25 +221,4 @@ public class DataHandler {
         }
     }
 
-    ////////////////////////////FROM GUI////////////////////
-   
-    /**
-     * setting the value of the lift status
-     * @param status the status of the lift
-     */
-    public void motorStatus(int motorNumber,boolean status,int direction) {
-        
-        //the number of the motor to be activated
-        dataToTeensy[2] = (byte) motorNumber;    //Setting engine number
-        if (status) {
-            System.out.println("lift activated");
-            dataToTeensy[3] = (byte) direction;    //Activated up 
-        } else if (!status) {
-            dataToTeensy[3] = (byte) direction;    // deactivated up
-            System.out.println("lift deactivated");
-        }
-
-    }
-
-    
 }
