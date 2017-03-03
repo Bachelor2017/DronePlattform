@@ -54,8 +54,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             setEvents(receive);
             updateActiveStatus(receive);
             updateProgreessBar(receive);
-            jLabel34.setText(Integer.toString(receive.testGetXvalue()));
+            jLabel34.setText(Integer.toString(receive.getTotalTimeUsed()));
             jLabel36.setText(Integer.toString(receive.getTimeLeft()));
+            jLabel53.setText(Integer.toString(receive.getCycleTimeUsed()));
+            jLabel55.setText(Integer.toString(receive.getCycleTimeLeft()));
             this.setFaultMessages(receive);
         }
     }
@@ -105,12 +107,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         ErrorMessagePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaErrorMessages = new javax.swing.JTextArea();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        autoStatus = new javax.swing.JLabel();
-        manualStatus = new javax.swing.JLabel();
-        testButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         Section = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -136,6 +132,13 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         armRight = new javax.swing.JButton();
         robotStatus = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
+        eventButton = new javax.swing.JButton();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        autoStatus = new javax.swing.JLabel();
+        manualStatus = new javax.swing.JLabel();
+        testButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -280,6 +283,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel37 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -355,11 +362,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         eventInfoPanel.setLayout(eventInfoPanelLayout);
         eventInfoPanelLayout.setHorizontalGroup(
             eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
         );
         eventInfoPanelLayout.setVerticalGroup(
             eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
         );
 
         ErrorMessagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Error Message(s)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Bright", 3, 18))); // NOI18N
@@ -380,31 +387,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         );
         ErrorMessagePanelLayout.setVerticalGroup(
             ErrorMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        jLabel40.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
-        jLabel40.setText("Change mode:");
-
-        jLabel46.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
-        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel46.setText("Auto:");
-
-        jLabel47.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
-        jLabel47.setText("Manual:");
-
-        autoStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        autoStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
-
-        manualStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manualStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
-
-        testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-        testButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                testButtonMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout autoTabLayout = new javax.swing.GroupLayout(autoTab);
         autoTab.setLayout(autoTabLayout);
@@ -412,43 +396,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(eventInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(autoTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel40)
-                .addGap(18, 18, 18)
-                .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(autoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manualStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(168, 168, 168))
         );
         autoTabLayout.setVerticalGroup(
             autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(autoTabLayout.createSequentialGroup()
                 .addComponent(eventInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, autoTabLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel46)
-                            .addComponent(jLabel47))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(autoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                            .addComponent(manualStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(autoTabLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(autoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel40, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(testButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(42, 42, 42))
+                .addContainerGap())
         );
 
         tabPanels.addTab("Auto", autoTab);
@@ -712,12 +667,42 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel50.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
         jLabel50.setText("SPEED:");
 
+        eventButton.setText("jButton1");
+        eventButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eventButtonMouseClicked(evt);
+            }
+        });
+
+        jLabel40.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel40.setText("Change mode:");
+
+        jLabel46.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel46.setText("Auto:");
+
+        jLabel47.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
+        jLabel47.setText("Manual:");
+
+        autoStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        autoStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
+
+        manualStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        manualStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/on.png"))); // NOI18N
+
+        testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
+        testButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                testButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout SectionLayout = new javax.swing.GroupLayout(Section);
         Section.setLayout(SectionLayout);
         SectionLayout.setHorizontalGroup(
             SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SectionLayout.createSequentialGroup()
-                .addGap(0, 40, Short.MAX_VALUE)
+                .addGap(0, 46, Short.MAX_VALUE)
                 .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(SectionLayout.createSequentialGroup()
                         .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -733,7 +718,25 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(SectionLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jLabel40)
+                .addGap(18, 18, 18)
+                .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(autoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manualStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SectionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(eventButton)
+                .addGap(255, 255, 255))
         );
         SectionLayout.setVerticalGroup(
             SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,7 +754,21 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(speedPercentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(speedSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                     .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(317, 317, 317))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(testButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SectionLayout.createSequentialGroup()
+                        .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel47))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(autoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manualStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addComponent(eventButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -781,6 +798,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel25.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jLabel25.setText("Status:");
 
+        temp1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp1.setText("jLabel26");
 
         jLabel27.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
@@ -789,224 +807,287 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel28.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jLabel28.setText("%:");
 
+        cycle1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle1.setText("jLabel26");
 
-        mintofull1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull1.setText("jLabel26");
         mintofull1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
+        percentage1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage1.setText("jLabel26");
 
+        status1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status1.setText("jLabel26");
 
         jLabel33.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel33.setText("Battery No.2:");
 
+        temp2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp2.setText("jLabel26");
 
+        cycle2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle2.setText("jLabel26");
 
-        mintofull2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull2.setText("jLabel26");
 
+        percentage2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage2.setText("jLabel26");
 
+        status2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status2.setText("jLabel26");
 
         jLabel39.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel39.setText("Battery No.3:");
 
+        temp3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp3.setText("jLabel26");
 
+        cycle3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle3.setText("jLabel26");
 
-        mintofull3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull3.setText("jLabel26");
 
+        percentage3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage3.setText("jLabel26");
 
+        status3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status3.setText("jLabel26");
 
         jLabel45.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel45.setText("Battery No.4:");
 
+        temp4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp4.setText("jLabel26");
 
+        cycle4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle4.setText("jLabel26");
 
-        mintofull4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull4.setText("jLabel26");
 
+        percentage4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage4.setText("jLabel26");
 
+        status4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status4.setText("jLabel26");
 
         jLabel51.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel51.setText("Battery No.5:");
 
+        temp5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp5.setText("jLabel26");
 
+        cycle5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle5.setText("jLabel26");
 
-        mintofull5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull5.setText("jLabel26");
 
+        percentage5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage5.setText("jLabel26");
 
+        status5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status5.setText("jLabel26");
 
         jLabel57.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel57.setText("Battery No.6:");
 
+        temp6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp6.setText("jLabel26");
 
+        cycle6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle6.setText("jLabel26");
 
-        mintofull6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull6.setText("jLabel26");
 
+        percentage6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage6.setText("jLabel26");
 
+        status6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status6.setText("jLabel26");
 
         jLabel63.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel63.setText("Battery No.7:");
 
+        temp7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp7.setText("jLabel26");
 
+        cycle7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle7.setText("jLabel26");
 
-        mintofull7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull7.setText("jLabel26");
 
+        percentage7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage7.setText("jLabel26");
 
+        status7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status7.setText("jLabel26");
 
         jLabel69.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel69.setText("Battery No.8:");
 
+        temp8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp8.setText("jLabel26");
 
+        cycle8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle8.setText("jLabel26");
 
-        mintofull8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull8.setText("jLabel26");
 
+        percentage8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage8.setText("jLabel26");
 
+        status8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status8.setText("jLabel26");
 
         jLabel75.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel75.setText("Battery No.9:");
 
+        temp9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp9.setText("jLabel26");
 
+        cycle9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle9.setText("jLabel26");
 
-        mintofull9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull9.setText("jLabel26");
 
+        percentage9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage9.setText("jLabel26");
 
+        status9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status9.setText("jLabel26");
 
         jLabel81.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel81.setText("Battery No.10:");
 
+        temp10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp10.setText("jLabel26");
 
+        cycle10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle10.setText("jLabel26");
 
-        mintofull10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull10.setText("jLabel26");
 
+        percentage10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage10.setText("jLabel26");
 
+        status10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status10.setText("jLabel26");
 
         jLabel87.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel87.setText("Battery No.11:");
 
+        temp11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp11.setText("jLabel26");
 
+        cycle11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle11.setText("jLabel26");
 
-        mintofull11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull11.setText("jLabel26");
 
+        percentage11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage11.setText("jLabel26");
 
+        status11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status11.setText("jLabel26");
 
         jLabel93.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel93.setText("Battery No.12:");
 
+        temp12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp12.setText("jLabel26");
 
+        cycle12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle12.setText("jLabel26");
 
-        mintofull12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull12.setText("jLabel26");
 
+        percentage12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage12.setText("jLabel26");
 
+        status12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status12.setText("jLabel26");
 
         jLabel99.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel99.setText("Battery No.13:");
 
+        temp13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp13.setText("jLabel26");
 
+        cycle13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle13.setText("jLabel26");
 
-        mintofull13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull13.setText("jLabel26");
 
+        percentage13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage13.setText("jLabel26");
 
+        status13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status13.setText("jLabel26");
 
         jLabel105.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel105.setText("Battery No.14:");
 
+        temp14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp14.setText("jLabel26");
 
+        cycle14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle14.setText("jLabel26");
 
-        mintofull14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull14.setText("jLabel26");
 
+        percentage14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage14.setText("jLabel26");
 
+        status14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status14.setText("jLabel26");
 
         jLabel111.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel111.setText("Battery No.15:");
 
+        temp15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp15.setText("jLabel26");
 
+        cycle15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle15.setText("jLabel26");
 
-        mintofull15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull15.setText("jLabel26");
 
+        percentage15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage15.setText("jLabel26");
 
+        status15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status15.setText("jLabel26");
 
         jLabel117.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel117.setText("Battery No.16:");
 
+        temp16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         temp16.setText("jLabel26");
 
+        cycle16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cycle16.setText("jLabel26");
 
-        mintofull16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mintofull16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mintofull16.setText("jLabel26");
 
+        percentage16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         percentage16.setText("jLabel26");
 
+        status16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status16.setText("jLabel26");
 
         jLabel29.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
@@ -1111,71 +1192,83 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addComponent(jLabel24)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(cycle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(40, 40, 40))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cycle1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cycle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cycle16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(40, 40, 40)))
+                            .addComponent(cycle6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel27)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mintofull16, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                            .addComponent(mintofull16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mintofull10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mintofull7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mintofull1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(17, 17, 17)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(voltcharg13, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voltcharg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(61, 61, 61)))
-                .addGap(12, 12, 12)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel27)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
+                                .addComponent(mintofull10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mintofull7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(voltcharg14, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(voltcharg12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(voltcharg11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(voltcharg9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(voltcharg8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(voltcharg1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(voltcharg16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(voltcharg15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(voltcharg2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(voltcharg7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(voltcharg10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(voltcharg5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                .addComponent(voltcharg6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(voltcharg3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                .addComponent(voltcharg4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addGap(30, 30, 30)))
+                        .addGap(12, 12, 12)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(percentage16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(percentage16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                     .addComponent(percentage15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(percentage14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(percentage13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1194,7 +1287,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(percentage1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(status16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(status16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                     .addComponent(status15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(status14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(status13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1222,41 +1315,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap()
                 .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel29)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel23)
@@ -1285,7 +1344,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1296,7 +1356,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1307,7 +1368,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1318,7 +1380,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1329,7 +1392,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1340,7 +1404,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1351,7 +1416,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1362,7 +1428,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1373,74 +1440,91 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(cycle10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addComponent(jLabel87, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(temp11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cycle11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mintofull11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(percentage11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(temp11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mintofull11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(voltcharg11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(percentage11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(status11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addComponent(jLabel93, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(temp12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cycle12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(status12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(temp12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(5, 5, 5)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(jLabel99, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel99, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(temp13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(temp13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cycle13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(jLabel105, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel105, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(temp14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(temp14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cycle14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mintofull14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(percentage14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(status14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(voltcharg14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(7, 7, 7))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(temp15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cycle15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mintofull15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(percentage15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel117, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(temp16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cycle16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mintofull16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(percentage16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(status16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(82, 82, 82))
+                        .addComponent(voltcharg1, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                        .addGap(378, 378, 378)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel111, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                            .addComponent(temp15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cycle15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mintofull15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(voltcharg15, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(percentage15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(status15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(percentage16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(status16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(82, 82, 82))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(mintofull16, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                                .addComponent(voltcharg16))
+                            .addComponent(cycle16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(temp16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel117, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         tabPanels.addTab("Battery specified", jPanel3);
@@ -1457,7 +1541,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 305, Short.MAX_VALUE))
+                .addGap(0, 318, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1505,11 +1589,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                    .addComponent(textLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                            .addComponent(textLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                             .addComponent(textLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -1550,22 +1634,22 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jProgressBar1.setStringPainted(true);
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Lucida Bright", 0, 24)); // NOI18N
         jLabel30.setText("Battery Change Progress:");
 
-        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Lucida Bright", 1, 24)); // NOI18N
         jLabel31.setText("Status:");
 
-        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel32.setText("Time used:");
+        jLabel32.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel32.setText("Total Time used:");
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel34.setText("00:00");
 
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel35.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
         jLabel35.setText("Time remaining:");
 
-        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
         jLabel36.setText("00:00");
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
@@ -1578,6 +1662,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         jProgressBar2.setStringPainted(true);
 
+        jLabel52.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel52.setText("Cycle Time used:");
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel53.setText("00:00");
+
+        jLabel54.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel54.setText("Time remaining:");
+
+        jLabel55.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel55.setText("00:00");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1588,7 +1684,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1597,19 +1693,29 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                                 .addComponent(jLabel31)
                                 .addGap(258, 258, 258))
                             .addComponent(jLabel44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+            .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel52)
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel30))
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel54, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(52, 52, 52)
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72))
-            .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel30)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1627,9 +1733,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jLabel34)
                     .addComponent(jLabel35)
                     .addComponent(jLabel36))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel52)
+                    .addComponent(jLabel53)
+                    .addComponent(jLabel54)
+                    .addComponent(jLabel55))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1988,7 +2100,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addGap(26, 26, 26))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(tabPanels, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)))
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -2022,63 +2134,71 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }//GEN-LAST:event_liftButtonDownMouseClicked
 
     private void liftButtonDownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMousePressed
-         if(!platformMode){
-        this.controller.setLiftStatus(true, 1);
-        liftStatus.setEnabled(true);
-         }
+        if (!platformMode) {
+            this.controller.setLiftStatus(true, 1);
+            liftStatus.setEnabled(true);
+             jLabel37.setText("Lifting down");
+        }
     }//GEN-LAST:event_liftButtonDownMousePressed
 
     private void liftButtonDownMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonDownMouseReleased
-          if(!platformMode){
-        this.controller.setLiftStatus(false, 0);
-        liftStatus.setEnabled(false);
-          }
+        if (!platformMode) {
+            this.controller.setLiftStatus(false, 0);
+            liftStatus.setEnabled(false);
+              jLabel37.setText("idle");
+        }
     }//GEN-LAST:event_liftButtonDownMouseReleased
 
     private void liftButtonUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonUpMousePressed
-         if(!platformMode){
-        this.controller.setLiftStatus(true, 2);
-        liftStatus.setEnabled(true);
-         }
+        if (!platformMode) {
+            this.controller.setLiftStatus(true, 2);
+            liftStatus.setEnabled(true);
+            jLabel37.setText("Lifting up");
+        }
         //  System.out.println("pressed up");
     }//GEN-LAST:event_liftButtonUpMousePressed
 
     private void liftButtonUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonUpMouseReleased
-          if(!platformMode){
-        this.controller.setLiftStatus(false, 0);
-        liftStatus.setEnabled(false);
-        //  System.out.println("pressed down");
-          }
+        if (!platformMode) {
+            this.controller.setLiftStatus(false, 0);
+            liftStatus.setEnabled(false);
+             jLabel37.setText("idle");
+            //  System.out.println("pressed down");
+        }
     }//GEN-LAST:event_liftButtonUpMouseReleased
 
     private void conveyorButtonUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonUpMousePressed
-       if(!platformMode){
-        this.controller.setConveyorStatus(true, 2);
-        beltStatus.setEnabled(true);
-       }
+        if (!platformMode) {
+            this.controller.setConveyorStatus(true, 2);
+            beltStatus.setEnabled(true);
+              jLabel37.setText("Conveyor left");
+        }
         // System.out.println("pressed up");
     }//GEN-LAST:event_conveyorButtonUpMousePressed
 
     private void conveyorButtonUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonUpMouseReleased
-          if(!platformMode){
-        this.controller.setConveyorStatus(false, 0);
-        beltStatus.setEnabled(false);
-          
-    }
+        if (!platformMode) {
+            this.controller.setConveyorStatus(false, 0);
+            beltStatus.setEnabled(false);
+            jLabel37.setText("idle");
+
+        }
         //   System.out.println("pressed down");
     }//GEN-LAST:event_conveyorButtonUpMouseReleased
 
     private void conveyorButtonDownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonDownMousePressed
-       if(!platformMode){
-        this.controller.setConveyorStatus(true, 1);
-        beltStatus.setEnabled(true);
-       }
+        if (!platformMode) {
+            this.controller.setConveyorStatus(true, 1);
+            beltStatus.setEnabled(true);
+            jLabel37.setText("Conveyor right");
+        }
     }//GEN-LAST:event_conveyorButtonDownMousePressed
 
     private void conveyorButtonDownMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_conveyorButtonDownMouseReleased
-        if(!platformMode)
-        {this.controller.setConveyorStatus(false, 0);
-        beltStatus.setEnabled(false);
+        if (!platformMode) {
+            this.controller.setConveyorStatus(false, 0);
+            beltStatus.setEnabled(false);
+            jLabel37.setText("idle");
         }
     }//GEN-LAST:event_conveyorButtonDownMouseReleased
 
@@ -2090,17 +2210,19 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }//GEN-LAST:event_speedSliderMouseReleased
 
     private void xAxisLeftMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisLeftMousePressed
-         if(!platformMode){
-        this.controller.setXAxisStatus(true, 1);
-        xStatus.setEnabled(true);
-       }
+        if (!platformMode) {
+            this.controller.setXAxisStatus(true, 1);
+            xStatus.setEnabled(true);
+           jLabel37.setText("X-axis left");
+        }
     }//GEN-LAST:event_xAxisLeftMousePressed
 
     private void xAxisLeftMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisLeftMouseReleased
-        if(!platformMode){
-        this.controller.setXAxisStatus(true, 0);
-        xStatus.setEnabled(false);
-       }
+        if (!platformMode) {
+            this.controller.setXAxisStatus(true, 0);
+            xStatus.setEnabled(false);
+             jLabel37.setText("idle");
+        }
     }//GEN-LAST:event_xAxisLeftMouseReleased
 
     private void xAxisLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xAxisLeftActionPerformed
@@ -2108,55 +2230,61 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }//GEN-LAST:event_xAxisLeftActionPerformed
 
     private void xAxisRightMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisRightMousePressed
-         if(!platformMode){
-        this.controller.setXAxisStatus(true, 2);
-        xStatus.setEnabled(true);
-       }
+        if (!platformMode) {
+            this.controller.setXAxisStatus(true, 2);
+            xStatus.setEnabled(true);
+             jLabel37.setText("X-axis right");
+        }
     }//GEN-LAST:event_xAxisRightMousePressed
 
     private void xAxisRightMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xAxisRightMouseReleased
-         if(!platformMode){
-        this.controller.setXAxisStatus(true, 0);
-        xStatus.setEnabled(false);
-       }
+        if (!platformMode) {
+            this.controller.setXAxisStatus(true, 0);
+            xStatus.setEnabled(false);
+            jLabel37.setText("idle");
+        }
     }//GEN-LAST:event_xAxisRightMouseReleased
 
     private void armLeftMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armLeftMousePressed
-        if(!platformMode){
-        this.controller.setArmStatus(true, 1);
-        robotStatus.setEnabled(true);
-       }
+        if (!platformMode) {
+            this.controller.setArmStatus(true, 1);
+            robotStatus.setEnabled(true);
+            jLabel37.setText("Turn arm left");
+        }
     }//GEN-LAST:event_armLeftMousePressed
 
     private void armLeftMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armLeftMouseReleased
-        if(!platformMode){
-        this.controller.setArmStatus(true, 0);
-        robotStatus.setEnabled(false);
-       }
+        if (!platformMode) {
+            this.controller.setArmStatus(true, 0);
+            robotStatus.setEnabled(false);
+              jLabel37.setText("idle");
+        }
     }//GEN-LAST:event_armLeftMouseReleased
 
     private void armLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_armLeftActionPerformed
-  
+
     }//GEN-LAST:event_armLeftActionPerformed
 
     private void armRightMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armRightMousePressed
-       if(!platformMode){
-        this.controller.setArmStatus(true, 2);
-        robotStatus.setEnabled(true);
-       }
+        if (!platformMode) {
+            this.controller.setArmStatus(true, 2);
+            robotStatus.setEnabled(true);
+              jLabel37.setText("Turn arm right");
+        }
     }//GEN-LAST:event_armRightMousePressed
 
     private void armRightMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_armRightMouseReleased
-      if(!platformMode){
-        this.controller.setArmStatus(true, 0);
-        robotStatus.setEnabled(false);
-       }
+        if (!platformMode) {
+            this.controller.setArmStatus(true, 0);
+            robotStatus.setEnabled(false);
+              jLabel37.setText("idle");
+        }
     }//GEN-LAST:event_armRightMouseReleased
 
     private void testButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testButtonMouseClicked
-       platformMode = !platformMode;
-       
-         if (!platformMode) {
+        platformMode = !platformMode;
+
+        if (!platformMode) {
             //platformMode = false;
             this.controller.setPlatformMode(platformMode);
             //  this.modeToggleButton.setText("Turn to Manual mode");
@@ -2164,7 +2292,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             this.autoStatus.setEnabled(false);
 
         } else {
-           // platformMode = true;
+            // platformMode = true;
             this.controller.setPlatformMode(platformMode);
             // this.modeToggleButton.setText("Turn to Auto mode");
 
@@ -2172,9 +2300,13 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             this.autoStatus.setEnabled(true);
 
         }
-       
-       
+
+
     }//GEN-LAST:event_testButtonMouseClicked
+
+    private void eventButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventButtonMouseClicked
+        controller.incrementEventStatus();
+    }//GEN-LAST:event_eventButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2254,6 +2386,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel cycle7;
     private javax.swing.JLabel cycle8;
     private javax.swing.JLabel cycle9;
+    private javax.swing.JButton eventButton;
     private javax.swing.JPanel eventInfoPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2299,6 +2432,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel63;
@@ -2734,11 +2871,13 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }
 
     public void updateActiveStatus(GUIObservable receive) {
+        if(platformMode){
         jLabel37.setText(receive.getLastEventState());
+        }
     }
 
     public void updateProgreessBar(GUIObservable receive) {
-        jProgressBar1.setValue(receive.testGetXvalue());
-        jProgressBar2.setValue(receive.getTimeLeftCyclus());
+        jProgressBar1.setValue(receive.getTotalPercentageCompleted());
+        jProgressBar2.setValue(receive.getCyclusPercentageCompleted());
     }
 }

@@ -48,6 +48,8 @@ public class DataHandler {
     private java.util.Timer timer;
     private TimerTask tTask;
     public int secondsPassed;
+    public int eventStatus = 0;
+    public boolean platformMode = false;
     /// testing slutt
 
     public DataHandler() {
@@ -55,6 +57,7 @@ public class DataHandler {
         dataFromArduino = new byte[176];
         dataToTeensy = new byte[5];
         dataFromTeensy = new byte[10];
+
     }
 
     /**
@@ -81,7 +84,8 @@ public class DataHandler {
      * @return retuns a byte[] retrieved from the mikrocontroller
      */
     public byte[] getDataFromTeensy() {
-        dataFromTeensy[1] = 1;
+        dataFromTeensy[1] = (byte) eventStatus;
+        dataFromTeensy[2] = (byte) eventStatus;
         return dataFromTeensy;
     }
 
@@ -132,12 +136,21 @@ public class DataHandler {
      * @param value boolean value , true =auto , false = manual
      */
     public void setPlatformMode(boolean value) {
+        platformMode = value;
+        getPlatformMode();
         if (value) {
             dataToTeensy[1] = 0;      //auto mode
+
         } else if (!value) {
 
             dataToTeensy[1] = 1;      //Manuel mode
         }
+    }
+
+    public boolean getPlatformMode() {
+
+        return platformMode;
+
     }
 
     /**
@@ -176,25 +189,35 @@ public class DataHandler {
     /**
      * starts a timer to change the data to se if GUI reacts
      */
-    public void testing() {
-        byte[] testByte = new byte[160];
+    /* public void testing() {
+        byte[] testByte = new byte[176];
         this.dataFromArduino = testByte;
         // secondsPassed = 0;
 
         tTask = new TimerTask() {
+            int i = 0;
             public void run() {
                 for (int x = 0; x < 15; x++) {
 
-                    dataFromArduino[0] = (byte) x;
-                    dataFromArduino[1] = (byte) x;
-                    dataFromArduino[2] = (byte) x;
-                    dataFromArduino[3] = (byte) x;
-                    dataFromArduino[4] = (byte) x;
-                    dataFromArduino[5] = (byte) x;
-                    dataFromArduino[6] = (byte) x;
-                    dataFromArduino[7] = (byte) x;
-                    dataFromArduino[8] = (byte) x;
-                    dataFromArduino[9] = (byte) x;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
+                    i++;
+                    dataFromArduino[i] = (byte) x;
 
                 }
             }
@@ -202,7 +225,7 @@ public class DataHandler {
         timer = new java.util.Timer();
         timer.scheduleAtFixedRate(tTask, 1000, 1000);
     }
-
+     */
     /**
      * sets anb start array to se if the gui gets the data
      */
@@ -212,6 +235,11 @@ public class DataHandler {
         for (int x = 0; x < 160; x++) {
             dataFromArduino[x] = (byte) x;
         }
+    }
+
+    public void incrementEventStatus() {
+        eventStatus++;
+        System.out.println(eventStatus);
     }
 
 }

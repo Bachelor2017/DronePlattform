@@ -103,5 +103,20 @@ public class GUIController extends TimerTask {
     public void setXAxisStatus(boolean value, int direction) {
         this.datahandler.motorStatus(4, value, direction);
     }
+    
+    
+    
+    
+    
+    
+    //////////////////////////////////////////////
+    ////////TESTING AV EVENTS
+    
+    
+    
+    public void incrementEventStatus()
+    {
+        datahandler.incrementEventStatus();
+    }
 
 }

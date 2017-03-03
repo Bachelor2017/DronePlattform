@@ -55,7 +55,7 @@ public class BatteryStationLogic implements Runnable {
                 semaphore.acquire();
                 dataFromArduino = dh.getDataFromArduino();
                 semaphore.release();
-             //   updateBatteryInformation(dataFromArduino);
+                updateBatteryInformation(dataFromArduino);
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(BatteryStationLogic.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,7 +94,7 @@ public class BatteryStationLogic implements Runnable {
      * spesific battery Adds the temperature, batterycychle,timetomax and
      * percentage information
      */
-    /*
+    
     public void updateBatteryInformation(byte[] incomingDataFromArduino) {
 
         int i = 1;
@@ -148,7 +148,7 @@ public class BatteryStationLogic implements Runnable {
         }
         //System.out.println("ute av update battery");
 
-    }*/
+    }
 
     /**
      * setting spesific battery to docking
