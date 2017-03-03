@@ -22,11 +22,11 @@ public class Event {
         this.zValue = zValue;
     }
     
-    public Event(int eventNumber, String eventName,int timeSyclusOfEvent)
+    public Event(int eventNumber, String eventName)
     {
         this.eventNumber = eventNumber;
         this.eventName = eventName;
-        this.timeSyclusOfEvent = timeSyclusOfEvent;
+      
     }
 
     /**
