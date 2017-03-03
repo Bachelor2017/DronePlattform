@@ -25,17 +25,7 @@ public class FaultLogic implements Runnable {
     private ArrayList<Event> faults;
     private ArrayList<String> faultList;
 
-    //time
-    /*
-    int totalTime = 100;
-    int totalTimeUsed = 0;
-    int totalTimeLeft = 100;
-    int cycleTimeUsed = 0;
-    int cyclustimeLeft = 0;
-    int cycleTime = 0;
-    int totalPercentageCompleted = 0;
-    int cyclusPercentageCompleted = 0;
-     */
+   
     TimerTask tTask;
     java.util.Timer timer;
     boolean runState = true;

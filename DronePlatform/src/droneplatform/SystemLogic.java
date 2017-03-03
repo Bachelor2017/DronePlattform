@@ -40,13 +40,13 @@ public class SystemLogic implements Runnable {
     private int caseScenario;
     private Semaphore semaphore;
     private boolean platformMode = false;
-   
+
     boolean value = false;
 
     public SystemLogic(DataHandler dh, Semaphore semaphore) {
         this.dataHandler = dh;
         this.semaphore = semaphore;
-     
+
         caseScenario = 500;
 
         //FRA EVENTSTATES
@@ -76,21 +76,18 @@ public class SystemLogic implements Runnable {
                 platformMode = dataHandler.getPlatformMode();
                 dataFromTeensy = dataHandler.getDataFromTeensy();
                 semaphore.release();
-if(platformMode)
-{
-                if (caseScenario != dataFromTeensy[1]) {
-                    caseScenario = dataFromTeensy[1];
-                    switchCases(caseScenario);
-                } else {
-                    runState = false;
+                if (platformMode) {
+                    if (caseScenario != dataFromTeensy[1]) {
+                        caseScenario = dataFromTeensy[1];
+                        switchCases(caseScenario);
+                    } else {
+                        runState = false;
 
+                    }
+                } else {
+                    switchCases(0);
                 }
-            } 
-else
-{
-    switchCases(0);
-}
-            }catch (InterruptedException ex) {
+            } catch (InterruptedException ex) {
                 Logger.getLogger(SystemLogic.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -281,7 +278,7 @@ else
             public void run() {
 
                 try {
-                    if (caseScenario != 0) {
+                    if ((caseScenario != 0) && (platformMode == true)) {
                         calculateCyclusTimeLeft();
                         calculateTotalTimeLeft();
                         calculateTotalPercentageCompleted();
@@ -290,6 +287,11 @@ else
                         totalTimeUsed++;
                         cycleTimeUsed++;
 
+                    } else {
+                        totalTimeLeft = totalTime;
+                        cyclustimeLeft = 0;
+                        totalTimeUsed = 0;
+                        cycleTimeUsed = 0;
                     }
                 } catch (InterruptedException ex) {
                     Logger.getLogger(SystemLogic.class.getName()).log(Level.SEVERE, null, ex);
@@ -451,13 +453,9 @@ else
 
     }
 
-    
-    
-   /**
-    * setting up the different events. 
-    * Adding an event with name
-    */
-
+    /**
+     * setting up the different events. Adding an event with name
+     */
     public void addingEventStates() {
 
         Event event1 = new Event(1, "Signal from drone received");
@@ -489,10 +487,9 @@ else
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////ting som er kommentert bort for å se om de ikke er i bruk
-
- /**
-     * fills a blank list of event string
-     */
+/**
+ * fills a blank list of event string
+ */
 
 /*public void fillList() {
         addEventToList("");
@@ -509,12 +506,7 @@ else
         addEventToList("");
 
     }*/
-
-
-
-
-
-/* public void settEventState(int x) {
+ /* public void settEventState(int x) {
         events.add(differentEventStates.get(x));
     }*/
 /**
