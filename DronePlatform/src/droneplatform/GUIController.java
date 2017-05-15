@@ -49,7 +49,34 @@ public class GUIController extends TimerTask {
        this.datahandler.motorStatus(1, value, direction);
 
     }
+    
+    
+    public void setMotorNumberToIdle()
+    {
+        this.datahandler.setIdleMotorNumber();
+                
+    }
+    
+    /*
+    public void setArmCalibrated(boolean value)
+    {
+        this.datahandler.setArmCalibrated(value);
+    }
+    */
+    
+    public void setCalibrationStatus(boolean value)
+    {
+        this.datahandler.setCalibrationStatus(value);
+    }
 
+    
+    public void setDataToDataHandler(int byteNumber, int value)
+    {
+        this.datahandler.setSpesificDataFromGUI(byteNumber,value);
+    }
+    
+    
+    
     /**
      * checs value if true, and ends the boolean value to datahandler
      *
@@ -58,7 +85,7 @@ public class GUIController extends TimerTask {
      * rev, 2=forward)
      */
     public void setConveyorStatus(boolean value, int direction) {
-       this.datahandler.motorStatus(2, value, direction);
+       this.datahandler.motorStatus(4, value, direction);
 
     }
 
@@ -72,6 +99,8 @@ public class GUIController extends TimerTask {
         this.datahandler.setPlatformMode(value);      //auto mode
 
     }
+    
+
 
     /**
      * setting the speed value in persentage as an integer 0-100
@@ -101,7 +130,7 @@ public class GUIController extends TimerTask {
      * rev, 2=forward)
      */
     public void setXAxisStatus(boolean value, int direction) {
-        this.datahandler.motorStatus(4, value, direction);
+        this.datahandler.motorStatus(2, value, direction);
     }
     
     

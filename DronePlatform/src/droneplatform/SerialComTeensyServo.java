@@ -14,14 +14,14 @@ import java.util.logging.Logger;
  * between serial read and send to make sure on is running at the time
  *
  */
-public class SerialComTeensy implements Runnable {
+public class SerialComTeensyServo implements Runnable {
 
     private SerialPort serialPort;
     Semaphore semaphore = new Semaphore(1, true);
-   // private Thread reader; // reads from arduino
-   // private Thread sender;  // writes to arduino
-   // public byte[] dataFromArduino = new byte[10];
-   // public byte[] dataToArduino = new byte[2];
+    // private Thread reader; // reads from arduino
+    // private Thread sender;  // writes to arduino
+    // public byte[] dataFromArduino = new byte[10];
+    // public byte[] dataToArduino = new byte[2];
     private DataHandler dataHandler;
     private int increment1;
     private int increment2;
@@ -33,7 +33,7 @@ public class SerialComTeensy implements Runnable {
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialComTeensy(String comPort, DataHandler dataHandler, Semaphore semaphore) {
+    public SerialComTeensyServo(String comPort, DataHandler dataHandler, Semaphore semaphore) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
@@ -70,47 +70,45 @@ public class SerialComTeensy implements Runnable {
         try {
 
             while (true) {
-                
-                if(hasReceived){
+
+                if (hasReceived) {
                     System.out.println("send");
-                byte[] dataToTeensy = new byte[5];
-                semaphore.acquire();
-                dataToTeensy = dataHandler.getDataToTeensy();
-                semaphore.release();
-                increment1++;
-                System.out.println("Serialsend:" + Arrays.toString(dataToTeensy) + " NR: " + increment1);
-                
-                serialPort.writeBytes(dataToTeensy);
-                hasReceived = false;
+                    byte[] dataToTeensy = new byte[5];
+                    semaphore.acquire();
+                    dataToTeensy = dataHandler.getDataToTeensy();
+                    semaphore.release();
+                    increment1++;
+                    System.out.println("Serialsend:" + Arrays.toString(dataToTeensy));
+
+                    serialPort.writeBytes(dataToTeensy);
+                    hasReceived = false;
                 }
-                
-                
-                    System.out.println("read");
+if(!hasReceived)
+{
+                System.out.println("read");
                 byte[] data = serialPort.readBytes(1);
                 if (data[0] == -128) {
-                
+
                     byte[] dataFromTeensynoToDH = serialPort.readBytes(10);
                     increment2++;
                     semaphore.acquire();
                     dataHandler.setDataFromArduino(dataFromTeensynoToDH);
                     semaphore.release();
-                    System.out.println("Read Arranged " + Arrays.toString(dataFromTeensynoToDH) + " NR: " + increment2);
+                    System.out.println("Read Arranged " + Arrays.toString(dataFromTeensynoToDH));
                     hasReceived = true;
-                 }
-                
-                
+                }
+}
+
             }
 
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");
         } catch (InterruptedException ex) {
-            Logger.getLogger(SerialComTeensy.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SerialComTeensyServo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
     }
 
-  
     public SerialPort getSerialPort() {
         return this.serialPort;
     }

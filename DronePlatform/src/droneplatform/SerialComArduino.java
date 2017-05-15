@@ -65,16 +65,17 @@ public class SerialComArduino implements Runnable {
     @Override
     public void run() {
         try {
-
+           
             while (true) {
                 byte[] data = serialPort.readBytes(1);
+            
                 if (data[0] == -128) {
                     byte[] dataFromArduionoToDH = serialPort.readBytes(176);
-                    increment++;
+                    //  increment++;
                     semaphore.acquire();
                     dataHandler.setDataFromArduino(dataFromArduionoToDH);
                     semaphore.release();
-                    System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
+               //     System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
                  }
             }
 

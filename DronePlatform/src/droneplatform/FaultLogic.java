@@ -32,7 +32,7 @@ public class FaultLogic implements Runnable {
 
     private Thread t;
     private DataHandler dataHandler;
-    private byte[] dataFromTeensy;
+    private byte[] dataFromArduino;
     private int caseScenario;
     private Semaphore semaphore;
     private boolean platformMode = false;
@@ -69,11 +69,11 @@ public class FaultLogic implements Runnable {
         while (true) {
             try {
                 semaphore.acquire();
-                dataFromTeensy = dataHandler.getDataFromTeensy();
+                dataFromArduino = dataHandler.getDataFromArduino();
                 semaphore.release();
 
-                if (caseScenario != dataFromTeensy[2]) {
-                    caseScenario = dataFromTeensy[2];
+                if (caseScenario != dataFromArduino[7]) {
+                    caseScenario = dataFromArduino[7];
                     switchCases(caseScenario);
                 }
             } catch (InterruptedException ex) {
@@ -118,7 +118,7 @@ public class FaultLogic implements Runnable {
                 case5();            //setting the event time to 13, and time used to 0
 
                 break;
-            case (6):
+            case (16):
                 case6();           //setting the event time to 13, and time used to 0
 
                 break;
@@ -299,7 +299,7 @@ public class FaultLogic implements Runnable {
      */
     public void addingFaultStates() {
 
-        Event event1 = new Event(1, "Fault 1: Conveyor stuck");
+        Event event1 = new Event(1, "Fault 1: run lift only up");
         Event event2 = new Event(2, "Fault 2: Cant detach battery from drone");
         Event event3 = new Event(3, "Fault 3: Cant detach battery from station");
         Event event4 = new Event(4, "Fault 4: Cant attach battery to dockingstation");
@@ -310,7 +310,6 @@ public class FaultLogic implements Runnable {
         Event event9 = new Event(9, "Fault 3");
         Event event10 = new Event(10, "Fault 4");
         Event event11 = new Event(11, "Fault 5");
-
         Event event12 = new Event(12, "idle");
         differentFaultStates.add(event1);
         differentFaultStates.add(event2);

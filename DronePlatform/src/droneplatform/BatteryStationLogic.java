@@ -5,8 +5,9 @@ import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
- *   
+ *
  *
  */
 public class BatteryStationLogic implements Runnable {
@@ -20,12 +21,11 @@ public class BatteryStationLogic implements Runnable {
     private byte[] dataFromArduino;
     private DataHandler dh;
     private Thread t;
-  
+
     private java.util.Timer timer;
     private TimerTask tTask;
     public int secondsPassed;
     boolean limitSwitch;
-   
 
     /**
      * create the batterystationlogic, and fill inn batteries to atrraylist
@@ -54,6 +54,7 @@ public class BatteryStationLogic implements Runnable {
             try {
                 semaphore.acquire();
                 dataFromArduino = dh.getDataFromArduino();
+                dh.setNextBatteryNumberToChange(getNextBatteryToChange());
                 semaphore.release();
                 updateBatteryInformation(dataFromArduino);
 
@@ -70,7 +71,18 @@ public class BatteryStationLogic implements Runnable {
         for (int i = 0; i < 16; i++) {
             battery = new BatteryStation(i);
             batteries.add(battery);
+
         }
+        batteries.get(1).setPercentageCharged(99);
+        batteries.get(3).setPercentageCharged(30);
+        batteries.get(4).setPercentageCharged(75);
+        batteries.get(5).setPercentageCharged(55);
+        batteries.get(6).setPercentageCharged(72);
+        batteries.get(7).setPercentageCharged(70);
+        batteries.get(8).setPercentageCharged(40);
+      //  batteries.get(6).setBatteryCycles(22);
+      //  batteries.get(6).setLimiSwitch(true);
+        
     }
 
     /**
@@ -82,26 +94,18 @@ public class BatteryStationLogic implements Runnable {
         return batteries;
     }
 
-    
-    
-     
-    
-    
-    
-    
     /**
      * gets the data read from the arduino and adds the information to the
      * spesific battery Adds the temperature, batterycychle,timetomax and
      * percentage information
      */
-    
     public void updateBatteryInformation(byte[] incomingDataFromArduino) {
 
         int i = 1;
 
         for (int x = 0; x < 16; x++) {
             //setting percentage of charge
-            batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+  /////////////////        batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
             i = i + 1;
 
             //Setting the charging voltage
@@ -121,7 +125,7 @@ public class BatteryStationLogic implements Runnable {
             i = i + 1;                                      // increment the byte placement
             float tempDesc = incomingDataFromArduino[i];    // temperatur descimal 
             // find the spesific battery, sett the temperature with combined whole number and the descimal
-            batteries.get(x).setTemperature((temperature + (tempDesc / 100))); 
+            batteries.get(x).setTemperature((temperature + (tempDesc / 100)));
             //setActiveBatteryTemperature(x, dataFromArduino[i]);
             i = i + 1;
 
@@ -150,7 +154,56 @@ public class BatteryStationLogic implements Runnable {
 
     }
 
+
+
     /**
+     * find the next battery in line to be used
+     *
+     * @return returns the number of the location to the next battery
+     */
+    public int getActiveBatteryPlacement() {
+        batteryStationNumberPossition++;
+        if (batteryStationNumberPossition > 15) {
+            batteryStationNumberPossition = 0;
+        }
+        return batteryStationNumberPossition;
+    }
+
+    /**
+     * Search for the next battery to change. The loop is checking all battery
+     * charing levels, and choose the one with the most persentage
+     *
+     * @return the battery number
+     */
+    public int getNextBatteryToChange() {
+        int nextBatteryNumber = 0;
+        int lastBatteryPercentage = 0;
+
+        
+        for (int x = 0; x < 16; x++) {
+            if (getBatteryChargingPercentage(x) > lastBatteryPercentage) {
+                lastBatteryPercentage = getBatteryChargingPercentage(x);
+                nextBatteryNumber = x;
+            }
+
+        }
+        nextBatteryNumber = nextBatteryNumber + 1;
+        
+        if((dataFromArduino[10]==0)&&(lastBatteryPercentage<=80)) 
+        {
+            nextBatteryNumber  = 0;
+        }
+       // System.out.println("nextBatteryNumber: " + nextBatteryNumber);
+       //  System.out.println("nextBatteryPercentage: " + lastBatteryPercentage);
+        
+        return nextBatteryNumber;
+    }
+
+    
+    
+    
+    
+        /**
      * setting spesific battery to docking
      *
      * @param x
@@ -169,20 +222,10 @@ public class BatteryStationLogic implements Runnable {
     public boolean isBatteriesDocked(int x) {
         return batteries.get(x).isDocked();
     }
-
-    /**
-     * find the next battery in line to be used
-     *
-     * @return returns the number of the location to the next battery
-     */
-    public int getActiveBatteryPlacement() {
-        batteryStationNumberPossition++;
-        if (batteryStationNumberPossition > 15) {
-            batteryStationNumberPossition = 0;
-        }
-        return batteryStationNumberPossition;
-    }
-
+    
+    
+    
+    
     /**
      * gives the XYZ location of the batterystation
      *

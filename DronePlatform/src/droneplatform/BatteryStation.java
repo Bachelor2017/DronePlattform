@@ -179,7 +179,7 @@ public class BatteryStation {
      * @param value boolean value showing if the battery is in docking or not
      */
     public void setLimiSwitch(boolean value) {
-        this.limitSwitch = value;
+       // this.limitSwitch = value;
 
     }
 
@@ -189,12 +189,22 @@ public class BatteryStation {
      * @return boolean value of limitSSwitch
      */
     public boolean returnLimitSwitch() {
+        if(chargedPercentage!=0)
+        {
+            limitSwitch = true;
+        }
+        else
+        {
+            limitSwitch = false;
+        }
         return this.limitSwitch;
     }
 
     /////////////////////////////////////////////////////////////
     //////////////////Setting the location paramters of the batterystation. 
     //////////////////not sure if should be used////////////////////////////
+    ////////ALT UNDER KAN TAS BORT. SKAL IKKE BRUKES/////////////////////////
+    
     /**
      * Returning the X-Value of the charger
      *

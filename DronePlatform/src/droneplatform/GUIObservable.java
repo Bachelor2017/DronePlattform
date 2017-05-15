@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Semaphore;
 
 /**
  * an observer updating the fields in the GUI
@@ -13,8 +14,11 @@ import java.util.TimerTask;
 public class GUIObservable extends Observable {
 
    // private FaultHandler faultHandler;
+    private DataHandler dataHandler;
+     Semaphore semaphore = new Semaphore(1, true);
      private FaultLogic faultHandler;
     private BatteryStationLogic batteryStationLogic;
+     private byte[] dataFromTeensy;      //The byteArray retrieved from Teensy 
     private SystemLogic events;
     // private EventStates events;
     private ArrayList<BatteryStation> batteries;
@@ -29,10 +33,12 @@ public class GUIObservable extends Observable {
 
   
    // public GUIObservable(FaultHandler faultHandler, BatteryStationLogic batteryStationLogic, SystemLogic events) {
-        public GUIObservable(FaultLogic faultHandler, BatteryStationLogic batteryStationLogic, SystemLogic events) {
+        public GUIObservable(FaultLogic faultHandler, BatteryStationLogic batteryStationLogic, SystemLogic events, DataHandler dataHandler, Semaphore semaphore) {
         this.faultHandler = faultHandler;
         this.batteryStationLogic = batteryStationLogic;
         this.events = events;
+        this.dataHandler = dataHandler;
+        this.semaphore = semaphore;
 
     }
 
@@ -49,9 +55,12 @@ public class GUIObservable extends Observable {
     /**
      * setting the data retrieved from system
      */
-    public void setData() {
+    public void setData() throws InterruptedException {
       //  faultList = faultHandler.getFaultList();
         batteries = batteryStationLogic.getArrayListBatteries();
+        semaphore.acquire();
+        dataFromTeensy = dataHandler.getDataFromTeensy();
+        semaphore.release();
         setChanged();
         notifyObservers();
     }
@@ -69,6 +78,10 @@ public class GUIObservable extends Observable {
         return faultHandler.getLastEventState();
     }
 
+    
+    
+    
+   
     
     ///////////////////////////////////////////////////////////////
     /////////////////////////EVENT HANDLING////////////////////////
@@ -106,6 +119,7 @@ public class GUIObservable extends Observable {
         return events.getCycleTimeUsed();
     }
      
+  
      
            /**
      * get the total time left in the current cycle
@@ -139,6 +153,16 @@ public class GUIObservable extends Observable {
      }
      
   
+     
+      //////////////////////////////////////////////////////////////////
+    /////////////////////////STEPPER ENIGNE CONTROLLER INFORMATION//////////////////////
+     
+     public int getSpesificValueFromByte(int value)
+    {
+        return dataFromTeensy[value];
+    }
+     
+     
     
     //////////////////////////////////////////////////////////////////
     /////////////////////////BATTERY INFORMATION//////////////////////
@@ -222,6 +246,9 @@ public class GUIObservable extends Observable {
     public int getBatteriesStatus(int x) {
         return batteryStationLogic.getBatteriesStatus(x);
     }
+    
+    
+    
 
     
     
@@ -232,6 +259,14 @@ public class GUIObservable extends Observable {
     public String getTimeStamp(){
         return events.getTimeStamp();
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
