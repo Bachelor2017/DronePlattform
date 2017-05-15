@@ -62,6 +62,11 @@ public class Event {
     }
 
     
+    
+    
+    /////////////
+    ////KAN TA BORT OM DET IKKE SKAL BRUKES. MULIG DETE BLIR SATT I ARDUINO
+    
     /**
      * get the x-value of the event
      * @return the x-value of the event as int 

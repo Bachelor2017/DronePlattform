@@ -6,6 +6,10 @@ package droneplatform;
  * Batteristatus, Commands,Robotdiretions and errormessages
  * @author Jørgen
  */
+
+
+
+//TROR IKKE DENNE KLASSEN VIL BRUKES: SLETT OM DEN IKKE BLIR TAT I BRUK
 public enum Protocol {
     
     BATTERYSTATUS(0),

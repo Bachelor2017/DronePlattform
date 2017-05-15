@@ -13,6 +13,10 @@ import java.util.logging.Logger;
  * this class does all the logic and calculations
  *
  */
+
+
+
+//DENNE KLASSEN MÅ RYDDEST I. SAMME SOM MED FAULTLOGIC. SLÅ SAMMEN CASE
 public class SystemLogic implements Runnable {
 
     ///FRA eventStates
@@ -20,10 +24,15 @@ public class SystemLogic implements Runnable {
     private ArrayList<Event> events;
     private ArrayList<String> eventList;
 
+    int test = 1;
+
+    boolean calibrated = false;
+    int oldState = 100;
+    int newState = 0;
     //time
-    int totalTime = 100;
+    int totalTime = 10;
     int totalTimeUsed = 0;
-    int totalTimeLeft = 100;
+    int totalTimeLeft = 10;
     int cycleTimeUsed = 0;
     int cyclustimeLeft = 0;
     int cycleTime = 0;
@@ -37,6 +46,7 @@ public class SystemLogic implements Runnable {
     private Thread t;
     private DataHandler dataHandler;
     private byte[] dataFromTeensy;
+    private byte[] datatoTeensy;
     private int caseScenario;
     private Semaphore semaphore;
     private boolean platformMode = false;
@@ -54,7 +64,7 @@ public class SystemLogic implements Runnable {
         events = new ArrayList<>();
         differentEventStates = new ArrayList<>();
         addingEventStates();
-        Event event12 = new Event(8, "Awaits drone");
+        Event event12 = new Event(8, "System powered on");
         events.add(event12);
         runTimer();
         ///////
@@ -75,18 +85,22 @@ public class SystemLogic implements Runnable {
                 semaphore.acquire();
                 platformMode = dataHandler.getPlatformMode();
                 dataFromTeensy = dataHandler.getDataFromTeensy();
+                datatoTeensy = dataHandler.getDataToTeensy();
                 semaphore.release();
-                if (platformMode) {
-                    if (caseScenario != dataFromTeensy[1]) {
-                        caseScenario = dataFromTeensy[1];
-                        switchCases(caseScenario);
-                    } else {
-                        runState = false;
+             
+                if (!platformMode) {
 
-                    }
-                } else {
-                    switchCases(0);
+                    int readData = dataFromTeensy[8];
+                    newState = readData;
+                    switchCalibrationCases(newState);
+                } else if (platformMode) {
+                    int readData = dataFromTeensy[6];
+                    newState = readData;
+                    switchCases(newState);
                 }
+
+                caseScenario = newState;
+              
             } catch (InterruptedException ex) {
                 Logger.getLogger(SystemLogic.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -105,41 +119,148 @@ public class SystemLogic implements Runnable {
         int number = caseNumber;
         switch (number) {
             case (0):
-                // if (runState) {
-                totalTimeLeft = totalTime;
-                cyclustimeLeft = 0;
-                totalTimeUsed = 0;
-                cycleTimeUsed = 0;
-                // }
+
+                if (oldState != newState) {
+                    totalTime = 120;
+                    totalTimeLeft = 120;
+                    caseLogic(25, totalTimeLeft, 4);
+
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
 
                 break;
-            case (1):
-                //(runState) {
-                case1(13, 0);            //setting the event time to 13, and time used to 0
-                // }
-                break;
-            case (2):
-                // if (runState) {
-                case2(22, 90);           //setting the event time to 13, and time used to 0
-                // }
-                break;
-            case (3):
-                case3(5, 80);            //setting the event time to 13, and time used to 0
+            case (6):      //Calibrating slider
+                if (oldState != newState) {
+                    totalTime = 120;
+                    totalTimeLeft = 120;
+                    caseLogic(25, totalTimeLeft, 5);
 
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
                 break;
-            case (4):
-                case4(10, 70);           //setting the event time to 13, and time used to 0
+            case (10):       //Calibrating Lift
+                if (oldState != newState) {
+                    //totalTimeLeft = totalTimeLeft - cycleTime;
+                    caseLogic(20, 85, 6);
 
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
                 break;
-            case (5):
-                case5(6, 60);            //setting the event time to 13, and time used to 0
-
+            case (11):        //Calibrating arm
+                if (oldState != newState) {
+                    totalTimeLeft = totalTimeLeft - cycleTime;
+                    caseLogic(4, 50, 7);
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
                 break;
-            case (6):
-                case6(15, 30);           //setting the event time to 13, and time used to 0
-
+            case (13):
+                if (oldState != newState) {
+                    totalTimeLeft = totalTimeLeft - cycleTime;
+                    caseLogic(5, 10, 8);
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
+                break;
+            case (14):
+                if (oldState != newState) {
+                    totalTimeLeft = totalTimeLeft - cycleTime;
+                    case4(4, totalTimeLeft);
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
+                break;
+            case (15):
+                if (oldState != newState) {
+                    totalTimeLeft = totalTimeLeft - cycleTime;
+                    case5(5, totalTimeLeft);
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
+                break;
+            case (17):
+                if (oldState != newState) {
+                    totalTimeLeft = totalTimeLeft - cycleTime;
+                    case6(10, totalTimeLeft);
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
                 break;
         }
+    }
+
+    /**
+     * The switch cases. each case representing a event.
+     *
+     * @param caseNumber
+     * @throws InterruptedException
+     */
+    protected void switchCalibrationCases(int caseNumber) throws InterruptedException {
+        int number = caseNumber;
+        switch (number) {
+            case (0):
+
+                if (oldState != newState) {
+                    // if (runState) {
+                    totalTime = 40;
+                    totalTimeLeft = 40;
+                    cyclustimeLeft = 0;
+                    totalTimeUsed = 0;
+                    cycleTimeUsed = 0;
+
+                    //caseLogic(1, totalTimeLeft, 1);
+
+                    oldState = newState;//setting the event time to 13, and time left to total time
+                }
+
+                break;
+            case (2):      //Calibrating slider
+                //(runState) {
+                if (oldState != newState) {
+                  
+                    totalTimeLeft = totalTimeLeft;
+                    caseLogic(15, totalTimeLeft, 1);
+
+                    oldState = newState;//setting the event time to 13, and time left to total time
+                }
+                break;
+            case (4):       //Calibrating Lift
+                if (oldState != newState) {
+                   // totalTime = 40;
+                    totalTimeLeft = totalTimeLeft- cycleTime;
+                    caseLogic(25, totalTimeLeft, 2);
+
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
+                break;
+            case (6):        //Calibrating arm
+                if (oldState != newState) {
+                   
+                   caseLogic(0,0, 3);
+
+                    oldState = newState;//setting the event time to 13, and time used to 0
+                }
+                break;
+          
+
+               
+        }
+    }
+
+    /**
+     * case: setting the total time left to the total time value. Setting the
+     * cycletime used to 0 to state that a new cycle is starting
+     *
+     * @param cTime setting the cycle time of the cycle
+     * @param totTimeLeft setting the total time left in case the earlier
+     * prosess is finished before planed. This also updates the progreessbar in
+     * GUI
+     * @throws InterruptedException
+     */
+    public void caseLogic(int cTime, int totTimeLeft, int x) throws InterruptedException {
+        cycleTimeUsed = 1;
+        totalTimeLeft = totTimeLeft;
+        cycleTime = cTime;
+        cyclustimeLeft = cycleTime;
+        System.out.println("test case: " + x);
+        //  System.out.println(differentEventStates.get(0).getEventName());
+        events.add(differentEventStates.get(x));
+
     }
 
     /**
@@ -153,12 +274,11 @@ public class SystemLogic implements Runnable {
      * @throws InterruptedException
      */
     public void case1(int cTime, int totTimeLeft) throws InterruptedException {
-        totalTimeLeft = totalTime;
         cycleTimeUsed = 1;
-        totalTimeUsed = totTimeLeft;
+        totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
         cyclustimeLeft = cycleTime;
-        //  System.out.println("test case 1");
+        System.out.println("test case 1");
         //  System.out.println(differentEventStates.get(0).getEventName());
         events.add(differentEventStates.get(0));
 
@@ -179,7 +299,7 @@ public class SystemLogic implements Runnable {
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
         cyclustimeLeft = cycleTime;
-        //   System.out.println("test case 2");
+        System.out.println("test case 2");
         //   System.out.println(differentEventStates.get(1).getEventName());
         events.add(differentEventStates.get(1));
 
@@ -200,7 +320,7 @@ public class SystemLogic implements Runnable {
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
         cyclustimeLeft = cycleTime;
-        //   System.out.println("test case 3");
+        System.out.println("test case 3");
         //   System.out.println(differentEventStates.get(2).getEventName());
         events.add(differentEventStates.get(2));
 
@@ -221,7 +341,7 @@ public class SystemLogic implements Runnable {
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
         cyclustimeLeft = cycleTime;
-        //  System.out.println("test case 4");
+        System.out.println("test case 4");
         //  System.out.println(differentEventStates.get(3).getEventName());
         events.add(differentEventStates.get(3));
 
@@ -278,7 +398,8 @@ public class SystemLogic implements Runnable {
             public void run() {
 
                 try {
-                    if ((caseScenario != 0) && (platformMode == true)) {
+                    //  if ((caseScenario != 0) && (platformMode == true)) {
+                    if ((caseScenario != 0)) {
                         calculateCyclusTimeLeft();
                         calculateTotalTimeLeft();
                         calculateTotalPercentageCompleted();
@@ -311,7 +432,14 @@ public class SystemLogic implements Runnable {
      */
     public String getLastEventState() {
         int eventListSize = events.size();
-        return events.get(eventListSize - 1).getEventName();
+        String eventName = "";
+        if (eventListSize == 0) {
+            eventName = events.get(eventListSize).getEventName();
+        } else {
+            eventName = events.get(eventListSize - 1).getEventName();
+        }
+
+        return eventName;
 
     }
 
@@ -402,6 +530,7 @@ public class SystemLogic implements Runnable {
     public void calculateCyclusPercentageCompleted() {
         float calculatedPercentage = (float) cycleTimeUsed / (float) cycleTime * 100;
         cyclusPercentageCompleted = (int) calculatedPercentage;
+
     }
 
     /**
@@ -457,19 +586,19 @@ public class SystemLogic implements Runnable {
      * setting up the different events. Adding an event with name
      */
     public void addingEventStates() {
+        Event event1 = new Event(1, "Calibrating arm");
+        Event event2 = new Event(2, "Calibrating lift");
+        Event event3 = new Event(3, "Calibrating slider");
+        Event event4 = new Event(4, "Calibration Complete");
+        Event event5 = new Event(5, "idloe pos, Awaits signal from drone");
+        Event event6 = new Event(6, "Retreiving battery from chargingstation");
+        Event event7 = new Event(7, "Battery retreived, going to idle pos");
+        Event event8 = new Event(8, "await signal from drone");
+        Event event9 = new Event(9, "Signal received, running lift up for batterychange");
+        Event event10 = new Event(10, "Starting drone detection");
+        Event event11 = new Event(11, "");
+        Event event12 = new Event(12, "Locate new battery for change");
 
-        Event event1 = new Event(1, "Signal from drone received");
-        Event event2 = new Event(2, "Conveyorbelt started");
-        Event event3 = new Event(3, "Lift going up");
-        Event event4 = new Event(4, "Drone location search");
-        Event event5 = new Event(5, "Location found, relocating drone");
-        Event event6 = new Event(6, "Detaching battery");
-        Event event7 = new Event(7, "retreiving battery to docking");
-        Event event8 = new Event(8, "Changing battery");
-        Event event9 = new Event(9, "Battery change successful");
-        Event event10 = new Event(10, "Drone battery change successful");
-        Event event11 = new Event(11, "Placing old battery to dockingstation");
-        Event event12 = new Event(12, "idle");
         differentEventStates.add(event1);
         differentEventStates.add(event2);
         differentEventStates.add(event3);
@@ -481,87 +610,8 @@ public class SystemLogic implements Runnable {
         differentEventStates.add(event9);
         differentEventStates.add(event10);
         differentEventStates.add(event11);
+        differentEventStates.add(event12);
+
     }
 
 }
-
-//////////////////////////////////////////////////////////////////////////////
-///////////ting som er kommentert bort for å se om de ikke er i bruk
-/**
- * fills a blank list of event string
- */
-
-/*public void fillList() {
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-
-    }*/
- /* public void settEventState(int x) {
-        events.add(differentEventStates.get(x));
-    }*/
-/**
- *
- */
-/*
-    public void testEvent() {
-
-        TimerTask tTask = new TimerTask() {
-            public void run() {
-                if (y < differentEventStates.size()) {
-                    addEvent();
-                    events.add(differentEventStates.get(y));
-                    y++;
-                } else {
-                    y = 0;
-                }
-            }
-        };
-
-        java.util.Timer timer = new java.util.Timer();
-        timer.scheduleAtFixedRate(tTask, 1000, 4000);
-    }
- */
-/**
- * gets the last event added to the list
- *
- * @return the integer of the possition of the last event
- */
-/* public int getLastEventTimeSyclus() {
-        int eventListSize = events.size();
-        return events.get(eventListSize - 1).getTimeSyclusOfEvent();
-    }*/
-/**
- * adding the event to list
- *
- * @param event
- */
-/*   public void addEventToList(Event event) {
-        events.add(event);
-    }*/
- /*  public void addEvent() {
-        addEventToList("Event " + totalTimeUsed);
-        totalTimeUsed++;
-    }
- */
- /*  public ArrayList<Event> returnEventList() {
-        return events;
-    }
- */
- /*  public ArrayList getEventList() {
-
-        ArrayList<String> tmpEventList = new ArrayList<>();
-        for (int x = 0; x < events.size(); x++) {
-            tmpEventList.add(events.get(x).getEventName() + "   : " + getTimeStamp());
-        }
-        return tmpEventList;
-    }*/

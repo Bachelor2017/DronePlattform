@@ -20,7 +20,7 @@ public class DronePlatform {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Semaphore semaphore = new Semaphore(1, true);
         DataHandler dataHandler = new DataHandler();
@@ -28,9 +28,7 @@ public class DronePlatform {
         gui.setVisible(true);
         gui.setHandler(dataHandler);
 
-        //GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        //GraphicsDevice screen = ge.getDefaultScreenDevice();
-        //screen.setFullScreenWindow(gui);
+     
         //creating logic classes/threads
         BatteryStationLogic bsg = new BatteryStationLogic(dataHandler, semaphore);
         bsg.start();
@@ -40,18 +38,17 @@ public class DronePlatform {
         faultLog.start();
 
         //Adding the observer
-        GUIObservable observable = new GUIObservable(faultLog, bsg, sysLog);
+        GUIObservable observable = new GUIObservable(faultLog, bsg, sysLog,dataHandler,semaphore);
         observable.addObserver(gui);
 
-        //Serial Communication
-        //serialCom = new SerialCom("/dev/ttyUSB0", dataHandler);
-        //serialCom = new SerialCom("COM3", this);
-        //serialCom.connect();
-        //SerialComArduino serialComArduino = new SerialComArduino("COM4", dataHandler, semaphore);
-        //serialComArduino.start();
-        ////////////    SerialComTeensy serialComTeensy = new SerialComTeensy("COM5", dataHandler, semaphore);
-        ////////////    serialComTeensy.start();
-        //SerialCom serialComTeensy = new SerialCom("COM4",dataHandler);
+        
+     //Serial Communication batteries
+        SerialComArduino serialComArduino = new SerialComArduino("COM7", dataHandler, semaphore);
+        serialComArduino.start();
+        //Serial Communication stepper controller
+        SerialComMega serialComTeensy = new SerialComMega("COM4", dataHandler, semaphore);
+        serialComTeensy.start();
+       
         while (true) {
             observable.setData();
         }

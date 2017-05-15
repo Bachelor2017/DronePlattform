@@ -10,21 +10,14 @@ import java.util.concurrent.Semaphore;
  * and open the template in the editor.
  */
 ////////////PROTOCOLLS///////////////
-//Data from GUI to TEENSY Controller   - dataToTeensy//
-//
+////Data from GU to be sendt to Teensy (stepper engine controller) -dataToTeensy
 //byte[0] - 101    (flagbyte)
 //byte[1] - 0-1    (auto/manual mode)
 //byte[2] - 1-10   (motor number)
 //byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
-//byte[4] - 0-100  (speed)
-//Data from Teensy controller to GUI   - dataFromTeensy//
-//
-//byte[0] - 101    (flagbyte)
-//byte[1] - 0-1    (auto/manual mode)
-//byte[2] - 1-10   (motor number)
-//byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
-//byte[4] - 0-100  (speed)
-/////Data from arduino controller to GUI   - dataFromArduino//
+//byte[4] - 0-1    (start calibration ,1 = true     
+//byte[5] - neste batteri klart til bytte
+/////Data from arduino controller to GUI   - dataFromArduino//  Battery information
 //
 //byte[0] - 0-15   (BatteryNumber)
 //
@@ -38,6 +31,22 @@ import java.util.concurrent.Semaphore;
 //byte[7] - cycle count
 //byte[8] - cycle count Descimal
 //byte[9] - Battery Status
+
+
+//Data from Teensy controller to GUI   - dataFromTeensy//   Stepper controller information
+//
+//byte[0] motor 1 (lift)   position
+//byte[1] motor 1 (lift)   position
+//byte[2] motor 2 (slider) position
+//byte[3] motor 2 (slider) position
+//byte[4] motor 3 (arm)    position
+//byte[5] motor 3 (arm)    position
+//byte[6] Case number    
+//byte[7] Fault number/Motor guard
+//byte[8] calibrationStatus   0= idle, 1 = calibrating slider, 2 = calibrating lift, 3 = calibrating arm, 4 = calibration done
+//byte[9] drone located     0 = no drone on platform, 1 = drone located on platform
+
+
 public class DataHandler {
 
     private byte[] dataFromArduino;     //The byteArray retrieved from Arduino 
@@ -48,15 +57,20 @@ public class DataHandler {
     private java.util.Timer timer;
     private TimerTask tTask;
     public int secondsPassed;
-    public int eventStatus = 0;
+    public int eventStatus = 0;    //bare til test
     public boolean platformMode = false;
     /// testing slutt
 
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToTeensy = new byte[5];
-        dataFromTeensy = new byte[10];
+        dataToTeensy = new byte[6];
+        dataFromTeensy = new byte[11];
+        dataToTeensy[0] = 101;
+        dataToTeensy[1] = 1; //setting to manual from start
+        dataFromTeensy[5] = 1;  //????????????????????????????????????????????????????
+       
+       
 
     }
 
@@ -83,9 +97,8 @@ public class DataHandler {
      *
      * @return retuns a byte[] retrieved from the mikrocontroller
      */
-    public byte[] getDataFromTeensy() {
-        dataFromTeensy[1] = (byte) eventStatus;
-        dataFromTeensy[2] = (byte) eventStatus;
+    public byte[] getDataFromTeensy() {     //byte[1] er case
+   
         return dataFromTeensy;
     }
 
@@ -94,8 +107,8 @@ public class DataHandler {
      *
      * @param newData the data updating the dataFromTeensy byte[]
      */
-    public void setDataFromTeensy(byte[] newData) {
-        this.dataFromTeensy = newData;
+    public void setDataFromTeensy(byte[] serialData) {
+        this.dataFromTeensy = serialData;
 
     }
 
@@ -112,22 +125,33 @@ public class DataHandler {
      */
     public void motorStatus(int motorNumber, boolean status, int direction) {
         int modeNumber = dataToTeensy[1];
-        if (modeNumber == 1) {
+      //  if (modeNumber == 1) {
 
             //the number of the motor to be activated
             dataToTeensy[2] = (byte) motorNumber;    //Setting engine number to the bytearray
-            if (status) {
-                System.out.println("lift activated");
-                dataToTeensy[3] = (byte) direction;    //setting the direction to byte 3 in  the bytearray
-            } else if (!status) {
-                dataToTeensy[3] = (byte) direction;
-                System.out.println("lift deactivated");
-            }
+            dataToTeensy[3] = (byte) direction;    //setting the direction to byte 3 in  the bytearray
+      //  }
+    }
+
+    public void setIdleMotorNumber() {
+        dataToTeensy[2] = 0;
+    }
+
+ 
+    public void setCalibrationStatus(boolean value) {
+        if (value == true) {
+            dataToTeensy[4] = 1;
         } else {
-
+            dataToTeensy[4] = 0;
         }
-
         System.out.println(Arrays.toString(dataToTeensy));
+    }
+
+    public void setSpesificDataFromGUI(int byteNumber, int value) {
+        dataToTeensy[byteNumber] = (byte) value;
+     //   System.out.println("data to Teensy controller: " + Arrays.toString(dataToTeensy));
+     //   System.out.println("data From Teensy controller: " + Arrays.toString(dataFromTeensy));
+     
     }
 
     /**
@@ -145,6 +169,7 @@ public class DataHandler {
 
             dataToTeensy[1] = 1;      //Manuel mode
         }
+        System.out.println(Arrays.toString(dataToTeensy));
     }
 
     public boolean getPlatformMode() {
@@ -159,8 +184,8 @@ public class DataHandler {
      * @param speed 0-100, (percentage)
      */
     public void setSpeedValue(int speed) {
-        dataToTeensy[4] = (byte) speed;
-        System.out.println(Arrays.toString(dataToTeensy));
+        //  dataToTeensy[4] = (byte) speed;
+        //    System.out.println(Arrays.toString(dataToTeensy));
     }
 
     /**
@@ -169,7 +194,6 @@ public class DataHandler {
      * @return retuns a byte[] to be sendt to the teensy controller
      */
     public byte[] getDataToTeensy() {
-        dataToTeensy[0] = (101);   //Flag byte
 
         return dataToTeensy;
     }
@@ -183,63 +207,9 @@ public class DataHandler {
         this.dataToTeensy = newData;
     }
 
-    ////////////////////////////////////////////////////////////
-    ////////////////ALT UNDER BARE TIL TEST. KAN TAS BORT SENERE
-    ////////////////////////////////////////////////////////////
-    /**
-     * starts a timer to change the data to se if GUI reacts
-     */
-    /* public void testing() {
-        byte[] testByte = new byte[176];
-        this.dataFromArduino = testByte;
-        // secondsPassed = 0;
+    public void setNextBatteryNumberToChange(int batteryNumber) {
+        this.dataToTeensy[5] = (byte) batteryNumber;
 
-        tTask = new TimerTask() {
-            int i = 0;
-            public void run() {
-                for (int x = 0; x < 15; x++) {
-
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-
-                }
-            }
-        };
-        timer = new java.util.Timer();
-        timer.scheduleAtFixedRate(tTask, 1000, 1000);
-    }
-     */
-    /**
-     * sets anb start array to se if the gui gets the data
-     */
-    public void settingTestArray() {
-        //byte[] testByte = new byte[160];
-        // this.dataFromArduino = testByte;
-        for (int x = 0; x < 160; x++) {
-            dataFromArduino[x] = (byte) x;
-        }
-    }
-
-    public void incrementEventStatus() {
-        eventStatus++;
-        System.out.println(eventStatus);
     }
 
 }

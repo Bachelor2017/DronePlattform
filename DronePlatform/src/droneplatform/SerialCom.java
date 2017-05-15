@@ -12,6 +12,9 @@ import java.util.concurrent.Semaphore;
  * between serial read and send to make sure on is running at the time
  *
  */
+
+
+//////MULIG KLASSEN IKKE BLIR TATT I BRUK: TA BORT OM DEN IKKE BRUKES
 public class SerialCom {
 
     private SerialPort serialPort;
