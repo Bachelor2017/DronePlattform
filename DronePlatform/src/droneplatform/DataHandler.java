@@ -137,20 +137,7 @@ public class DataHandler {
         dataToTeensy[2] = 0;
     }
 
-    /*
-    public void setArmCalibrated(boolean value)
-    {if(value == true)
-    {
-        
-          dataToTeensy[4] = 1; 
-    }
-    else if(value ==false)
-    {
-           dataToTeensy[4] = 0;
-    }
-      System.out.println(Arrays.toString(dataToTeensy));
-    }
-     */
+ 
     public void setCalibrationStatus(boolean value) {
         if (value == true) {
             dataToTeensy[4] = 1;
@@ -223,66 +210,6 @@ public class DataHandler {
     public void setNextBatteryNumberToChange(int batteryNumber) {
         this.dataToTeensy[5] = (byte) batteryNumber;
 
-    }
-
-    ////////////////////////////////////////////////////////////
-    ////////////////ALT UNDER BARE TIL TEST. KAN TAS BORT SENERE
-    ////////////////////////////////////////////////////////////
-    /**
-     * starts a timer to change the data to se if GUI reacts
-     */
-    /* public void testing() {
-        byte[] testByte = new byte[176];
-        this.dataFromArduino = testByte;
-        // secondsPassed = 0;
-
-        tTask = new TimerTask() {
-            int i = 0;
-            public void run() {
-                for (int x = 0; x < 15; x++) {
-
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-                    i++;
-                    dataFromArduino[i] = (byte) x;
-
-                }
-            }
-        };
-        timer = new java.util.Timer();
-        timer.scheduleAtFixedRate(tTask, 1000, 1000);
-    }
-     */
-    /**
-     * sets anb start array to se if the gui gets the data
-     */
-    public void settingTestArray() {
-        //byte[] testByte = new byte[160];
-        // this.dataFromArduino = testByte;
-        for (int x = 0; x < 160; x++) {
-            dataFromArduino[x] = (byte) x;
-        }
-    }
-
-    // TIL TESTING
-    public void incrementEventStatus() {
-        eventStatus++;
-        System.out.println(eventStatus);
     }
 
 }

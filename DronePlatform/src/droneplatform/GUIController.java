@@ -137,15 +137,6 @@ public class GUIController extends TimerTask {
     
     
     
-    
-    //////////////////////////////////////////////
-    ////////TESTING AV EVENTS
-    
-    
-    
-    public void incrementEventStatus()
-    {
-        datahandler.incrementEventStatus();
-    }
+   
 
 }

@@ -13,6 +13,10 @@ import java.util.logging.Logger;
  * this class does all the logic and calculations
  *
  */
+
+
+
+//DENNE KLASSEN MÅ RYDDEST I. SAMME SOM MED FAULTLOGIC. SLÅ SAMMEN CASE
 public class SystemLogic implements Runnable {
 
     ///FRA eventStates
@@ -83,9 +87,7 @@ public class SystemLogic implements Runnable {
                 dataFromTeensy = dataHandler.getDataFromTeensy();
                 datatoTeensy = dataHandler.getDataToTeensy();
                 semaphore.release();
-                //   newState = 2;
-                //   switchCalibrationCases(newState);
-
+             
                 if (!platformMode) {
 
                     int readData = dataFromTeensy[8];
@@ -98,31 +100,7 @@ public class SystemLogic implements Runnable {
                 }
 
                 caseScenario = newState;
-                ///////////////////////////////
-                /*
-                   if (dataFromTeensy[6] == 1) {
-                    newState = dataFromTeensy[8];
-                    newState = dataFromTeensy[8];
-                } else {
-                    newState = dataFromTeensy[6];
-                }
-                caseScenario = newState+3;
-
-                switchCases(newState);
-                 */
-                ////////////////////////////777
-
-                /* if (!platformMode) {
-                    if (caseScenario != dataFromTeensy[3]) {
-                        caseScenario = dataFromTeensy[3];
-                        switchCases(caseScenario);
-                    } else {
-                        runState = false;
-
-                    }*/
- /*   } else {
-                    switchCases(0);
-                }*/
+              
             } catch (InterruptedException ex) {
                 Logger.getLogger(SystemLogic.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -637,84 +615,3 @@ public class SystemLogic implements Runnable {
     }
 
 }
-
-//////////////////////////////////////////////////////////////////////////////
-///////////ting som er kommentert bort for å se om de ikke er i bruk
-/**
- * fills a blank list of event string
- */
-
-/*public void fillList() {
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-        addEventToList("");
-
-    }*/
- /* public void settEventState(int x) {
-        events.add(differentEventStates.get(x));
-    }*/
-/**
- *
- */
-/*
-    public void testEvent() {
-
-        TimerTask tTask = new TimerTask() {
-            public void run() {
-                if (y < differentEventStates.size()) {
-                    addEvent();
-                    events.add(differentEventStates.get(y));
-                    y++;
-                } else {
-                    y = 0;
-                }
-            }
-        };
-
-        java.util.Timer timer = new java.util.Timer();
-        timer.scheduleAtFixedRate(tTask, 1000, 4000);
-    }
- */
-/**
- * gets the last event added to the list
- *
- * @return the integer of the possition of the last event
- */
-/* public int getLastEventTimeSyclus() {
-        int eventListSize = events.size();
-        return events.get(eventListSize - 1).getTimeSyclusOfEvent();
-    }*/
-/**
- * adding the event to list
- *
- * @param event
- */
-/*   public void addEventToList(Event event) {
-        events.add(event);
-    }*/
- /*  public void addEvent() {
-        addEventToList("Event " + totalTimeUsed);
-        totalTimeUsed++;
-    }
- */
- /*  public ArrayList<Event> returnEventList() {
-        return events;
-    }
- */
- /*  public ArrayList getEventList() {
-
-        ArrayList<String> tmpEventList = new ArrayList<>();
-        for (int x = 0; x < events.size(); x++) {
-            tmpEventList.add(events.get(x).getEventName() + "   : " + getTimeStamp());
-        }
-        return tmpEventList;
-    }*/

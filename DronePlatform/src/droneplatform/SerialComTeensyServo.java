@@ -14,6 +14,8 @@ import java.util.logging.Logger;
  * between serial read and send to make sure on is running at the time
  *
  */
+
+//MULIG DENNE IKKE BRUKES: SLETT OM DEN IKKE BLIR TATT I BRUK
 public class SerialComTeensyServo implements Runnable {
 
     private SerialPort serialPort;

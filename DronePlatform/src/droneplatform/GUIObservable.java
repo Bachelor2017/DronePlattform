@@ -260,75 +260,10 @@ public class GUIObservable extends Observable {
         return events.getTimeStamp();
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /////////////////////////////////////////////////
-    //////////////kommentert bort for å se om de kan slettes
-        /*
-    public void addFaultToList() {
-        faultHandler.addFault();
-    }*/
-    /*
-    
-    ///////HAR LAGT DE INN,MEN TRENGER MULIGENS IKKE NOE SETTERE HER
-    public void setSpesificChargingVoltage(int x, float voltage) {
-        this.batteryStationLogic.getSpesificChargingVoltage(x);
-    }
-
-    public void setBatteriesStatus(int x, int value) {
-        batteryStationLogic.setBatteriesStatus(x, value);
-    }
-
-    /**
-     * Sets a spesific battery to docking
-     *
-     * @param x
-     */
-    /*
-    public void setSpesificBatteryToDocking(int x) {
-        batteryStationLogic.settBatteryToChargeInStation(x);
-    }
-
-    /**
-     * release a spesific battery from docking
-     *
-     * @param x the number of the battery
-     *//*
-    public void releaseSpesificBatteryFromDocking(int x) {
-
-        batteryStationLogic.releaseBatteryFromChargeInStation(x);
-    }*/
-   
-
-    
-      /*
-    public boolean getBatteryStationDockingStatus(int x) {
-        boolean isBatteryDockedInStation = false;
-        isBatteryDockedInStation = batteries.get(x).isDocked();
-
-        return isBatteryDockedInStation;
-    }*/
-
-    
-    /*  public int getTimeLeftCyclus() {
-        return timeLeftCyclus;
-    }*/
-     
-    
-      /**
-     * get the faultmessages
-     *
-     * @param x the message number in the list
-     * @return the message as string
-     */
- 
-    
 }
+
+    
+    
+    
+    
+  

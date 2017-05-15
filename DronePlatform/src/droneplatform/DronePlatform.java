@@ -41,15 +41,14 @@ public class DronePlatform {
         GUIObservable observable = new GUIObservable(faultLog, bsg, sysLog,dataHandler,semaphore);
         observable.addObserver(gui);
 
-        //Serial Communication
-        //serialCom = new SerialCom("/dev/ttyUSB0", dataHandler);
-        //serialCom = new SerialCom("COM3", this);
-        //serialCom.connect();
+        
+     //Serial Communication batteries
         SerialComArduino serialComArduino = new SerialComArduino("COM7", dataHandler, semaphore);
         serialComArduino.start();
+        //Serial Communication stepper controller
         SerialComMega serialComTeensy = new SerialComMega("COM4", dataHandler, semaphore);
         serialComTeensy.start();
-        //SerialCom serialComTeensy = new SerialCom("COM4",dataHandler);
+       
         while (true) {
             observable.setData();
         }
