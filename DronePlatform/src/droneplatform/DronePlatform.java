@@ -7,6 +7,7 @@ package droneplatform;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.net.SocketException;
 import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 
@@ -20,7 +21,7 @@ public class DronePlatform {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, SocketException {
 
         Semaphore semaphore = new Semaphore(1, true);
         DataHandler dataHandler = new DataHandler();
@@ -48,7 +49,11 @@ public class DronePlatform {
         //Serial Communication stepper controller
         SerialComMega serialComTeensy = new SerialComMega("COM4", dataHandler, semaphore);
         serialComTeensy.start();
-       
+        
+        UDPrecive udpR = new UDPrecive(1111, dataHandler, semaphore);
+        udpR.start();
+        
+        
         while (true) {
             observable.setData();
         }

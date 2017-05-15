@@ -59,6 +59,7 @@ public class DataHandler {
     public int secondsPassed;
     public int eventStatus = 0;    //bare til test
     public boolean platformMode = false;
+    public boolean droneOnPlatform = false;
     /// testing slutt
 
     public DataHandler() {
@@ -110,6 +111,12 @@ public class DataHandler {
     public void setDataFromTeensy(byte[] serialData) {
         this.dataFromTeensy = serialData;
 
+    }
+    
+    
+    public void droneOnPlatform(int value)
+    {
+        dataToTeensy[6] = (byte)value;
     }
 
     ////////////////////////////////////////////////////////////////////////////////
