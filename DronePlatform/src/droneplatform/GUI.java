@@ -415,8 +415,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea8 = new javax.swing.JTextArea();
         jPanel10 = new javax.swing.JPanel();
-        armint = new javax.swing.JLabel();
-        armdec = new javax.swing.JLabel();
+        droneOnPlatform = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
@@ -1615,7 +1614,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         eventInfoPanel.setLayout(eventInfoPanelLayout);
         eventInfoPanelLayout.setHorizontalGroup(
             eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
             .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         eventInfoPanelLayout.setVerticalGroup(
@@ -2041,7 +2040,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Section, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addGap(0, 123, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2951,29 +2950,31 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         tabPanels.addTab("Stat", jPanel4);
 
-        armint.setText("jLabel45");
-
-        armdec.setText("jLabel48");
+        droneOnPlatform.setText("DRONE SIGNAL RECEIVED ");
+        droneOnPlatform.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                droneOnPlatformMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                droneOnPlatformMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(armint)
-                .addGap(18, 18, 18)
-                .addComponent(armdec)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(droneOnPlatform, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(armint)
-                    .addComponent(armdec))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addComponent(droneOnPlatform, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         tabPanels.addTab("x", jPanel10);
@@ -4098,6 +4099,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7MouseReleased
 
+    private void droneOnPlatformMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_droneOnPlatformMousePressed
+        controller.setDataToDataHandler(6, 1);
+    }//GEN-LAST:event_droneOnPlatformMousePressed
+
+    private void droneOnPlatformMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_droneOnPlatformMouseReleased
+         controller.setDataToDataHandler(6, 0);
+    }//GEN-LAST:event_droneOnPlatformMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -4161,8 +4170,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JButton armLeft1;
     private javax.swing.JButton armRight;
     private javax.swing.JButton armRight1;
-    private javax.swing.JLabel armdec;
-    private javax.swing.JLabel armint;
     private javax.swing.JButton attach1Station;
     private javax.swing.JButton attach1Station1;
     private javax.swing.JButton attach1buton;
@@ -4210,6 +4217,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JButton detach1Button1;
     private javax.swing.JButton detach1Station;
     private javax.swing.JButton detach1Station1;
+    private javax.swing.JButton droneOnPlatform;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JPanel eventInfoPanel;
     private javax.swing.JButton jButton1;
@@ -4838,10 +4846,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         this.sliderPostiotionLabel1.setText(Float.toString(sliderPostition) + " :cm");
         this.rotationPostiotionLabel1.setText(Float.toString(armPostition) + " :cm");
 
-        int armintValue = ((receive.getSpesificValueFromByte(4)));
-        int armdecValue = ((receive.getSpesificValueFromByte(5)));
-        this.armint.setText(Float.toString(armintValue));
-        this.armdec.setText(Float.toString(armdecValue));
+      
 
     }
 

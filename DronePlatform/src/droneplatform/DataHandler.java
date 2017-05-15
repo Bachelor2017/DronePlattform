@@ -17,6 +17,7 @@ import java.util.concurrent.Semaphore;
 //byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
 //byte[4] - 0-1    (start calibration ,1 = true     
 //byte[5] - neste batteri klart til bytte
+//byte[6] - drone on platform 1 = drone sent signal 
 /////Data from arduino controller to GUI   - dataFromArduino//  Battery information
 //
 //byte[0] - 0-15   (BatteryNumber)
@@ -64,7 +65,7 @@ public class DataHandler {
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToTeensy = new byte[6];
+        dataToTeensy = new byte[7];
         dataFromTeensy = new byte[11];
         dataToTeensy[0] = 101;
         dataToTeensy[1] = 1; //setting to manual from start
