@@ -2349,7 +2349,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="testButton" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="modeButton" min="-2" pref="45" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel46" alignment="1" min="-2" pref="48" max="-2" attributes="0"/>
@@ -2370,7 +2370,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel40" min="-2" pref="47" max="-2" attributes="0"/>
-                                          <Component id="testButton" min="-2" pref="47" max="-2" attributes="0"/>
+                                          <Component id="modeButton" min="-2" pref="47" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -2421,14 +2421,14 @@
                                 <Property name="text" type="java.lang.String" value="Auto:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JButton" name="testButton">
+                            <Component class="javax.swing.JButton" name="modeButton">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/images/run.png"/>
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="testButtonMouseClicked"/>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modeButtonMouseClicked"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel40">

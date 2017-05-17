@@ -112,6 +112,16 @@ public class DataHandler {
         this.dataFromTeensy = serialData;
 
     }
+    
+    
+    /**
+     * if the drone signal is received, the byte is sett to 1. 
+     * @param value the value of the signal from drone. 1= drone located, 0 = no drone on platform
+     */
+    public void droneOnPlatform(int value)
+    {
+        this.dataToTeensy[6] = (byte)value;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////FROM GUI////////////////////////////////////////////
@@ -141,7 +151,7 @@ public class DataHandler {
  
     public void setCalibrationStatus(boolean value) {
         if (value == true) {
-            dataToTeensy[4] = 1;
+            dataToTeensy[4] = 106;
         } else {
             dataToTeensy[4] = 0;
         }
@@ -170,7 +180,9 @@ public class DataHandler {
 
             dataToTeensy[1] = 1;      //Manuel mode
         }
-        System.out.println(Arrays.toString(dataToTeensy));
+      //  System.out.println(Arrays.toString(dataToTeensy));
+  //  System.out.println(platformMode);
+   
     }
 
     public boolean getPlatformMode() {
