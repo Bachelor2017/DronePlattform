@@ -53,6 +53,10 @@ public class DronePlatform {
         
         UDPReceive udp = new UDPReceive(1111,dataHandler,semaphore);
         udp.start();
+        
+        // Charging current to teensy
+        SerialComTeensyTransistor transistorTeensy = new SerialComTeensyTransistor("COM NOE", dataHandler, semaphore);
+        transistorTeensy.start();
        
         while (true) {
             observable.setData();

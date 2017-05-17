@@ -53,7 +53,7 @@ public class DataHandler {
     private byte[] dataFromArduino;     //The byteArray retrieved from Arduino 
     private byte[] dataToTeensy;        //The byteArray to be sendt to Teensy 
     private byte[] dataFromTeensy;      //The byteArray retrieved from Teensy 
-
+    private byte[] chargeCurrent;       //The charge current for each battery
     /// for testing
     private java.util.Timer timer;
     private TimerTask tTask;
@@ -61,6 +61,7 @@ public class DataHandler {
     public int eventStatus = 0;    //bare til test
     public boolean platformMode = false;
     /// testing slutt
+   
 
     public DataHandler() {
 
@@ -70,7 +71,12 @@ public class DataHandler {
         dataToTeensy[0] = 101;
         dataToTeensy[1] = 1; //setting to manual from start
         dataFromTeensy[5] = 1;  //????????????????????????????????????????????????????
-       
+        chargeCurrent = new byte[8];
+        
+        for(int i = 0; i < 8; i++){
+            // init
+            chargeCurrent[i] = (byte) 150;
+        }
        
 
     }
@@ -224,5 +230,11 @@ public class DataHandler {
         this.dataToTeensy[5] = (byte) batteryNumber;
 
     }
+    
+     public byte[] getChargeCurrent() {
+
+        return chargeCurrent;
+    }
+
 
 }
