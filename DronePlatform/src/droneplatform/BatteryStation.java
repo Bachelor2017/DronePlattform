@@ -31,6 +31,7 @@ public class BatteryStation {
     private float batteryCycles;
     private float voltageChargingLevel;
     private boolean limitSwitch;
+    private int chargingLevelOnBatteri;
 
     /**
      * constructor of batteryStation class
@@ -39,7 +40,7 @@ public class BatteryStation {
      * not in use later. CAN DELETE
      */
     public BatteryStation(int batteryPossition) {
-
+chargingLevelOnBatteri = 0;
         this.batteryPossition = batteryPossition;
         batteryStatus = 0;
         batteryLevel = 0;
@@ -198,6 +199,19 @@ public class BatteryStation {
             limitSwitch = false;
         }
         return this.limitSwitch;
+    }
+    
+    
+    
+    public void setChargingLevelOnBatteries(int chargingLevel)
+    {
+        this.chargingLevelOnBatteri = chargingLevel;
+    }
+    
+    
+    public int getChargingLevelOnBatteries()
+    {
+        return  this.chargingLevelOnBatteri;
     }
 
     /////////////////////////////////////////////////////////////

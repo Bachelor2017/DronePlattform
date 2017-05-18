@@ -51,20 +51,20 @@ public class DronePlatform {
        //  SerialComMega serialComTeensy = new SerialComMega("/dev/ttyACM0", dataHandler, semaphore);
         serialComTeensy.start();
         
-<<<<<<< HEAD
+
         UDPrecive udpR = new UDPrecive(1111, dataHandler, semaphore);
         udpR.start();
         
         
-=======
+/*
         UDPReceive udp = new UDPReceive(1111,dataHandler,semaphore);
         udp.start();
-        
+  */      
         // Charging current to teensy
-        SerialComTeensyTransistor transistorTeensy = new SerialComTeensyTransistor("COM NOE", dataHandler, semaphore);
+        SerialComTeensyTransistor transistorTeensy = new SerialComTeensyTransistor("COM NOE", dataHandler, semaphore, bsg);
         transistorTeensy.start();
        
->>>>>>> origin/Olav
+
         while (true) {
             observable.setData();
         }

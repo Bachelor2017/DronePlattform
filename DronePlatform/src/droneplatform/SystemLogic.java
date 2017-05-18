@@ -305,6 +305,7 @@ public class SystemLogic implements Runnable {
                 break;
             case (1):      //Calibrating slider
                 //(runState) {
+                
                 if (oldState != newState) {
 
                     totalTimeLeft = totalTimeLeft;
@@ -364,129 +365,7 @@ public class SystemLogic implements Runnable {
 
     }
 
-    /**
-     * case 1: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-    public void case1(int cTime, int totTimeLeft) throws InterruptedException {
-        cycleTimeUsed = 1;
-        totalTimeLeft = totTimeLeft;
-        cycleTime = cTime;
-        cyclustimeLeft = cycleTime;
-     //   System.out.println("test case 1");
-        //  System.out.println(differentEventStates.get(0).getEventName());
-        events.add(differentEventStates.get(0));
-
-    }
-
-    /**
-     * case 2: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-    public void case2(int cTime, int totTimeLeft) throws InterruptedException {
-        cycleTimeUsed = 1;
-        totalTimeLeft = totTimeLeft;
-        cycleTime = cTime;
-        cyclustimeLeft = cycleTime;
-    //    System.out.println("test case 2");
-        //   System.out.println(differentEventStates.get(1).getEventName());
-        events.add(differentEventStates.get(1));
-
-    }
-
-    /**
-     * case 3: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-    public void case3(int cTime, int totTimeLeft) throws InterruptedException {
-        cycleTimeUsed = 1;
-        totalTimeLeft = totTimeLeft;
-        cycleTime = cTime;
-        cyclustimeLeft = cycleTime;
-   //     System.out.println("test case 3");
-        //   System.out.println(differentEventStates.get(2).getEventName());
-        events.add(differentEventStates.get(2));
-
-    }
-
-    /**
-     * case 4: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-    public void case4(int cTime, int totTimeLeft) throws InterruptedException {
-        cycleTimeUsed = 1;
-        totalTimeLeft = totTimeLeft;
-        cycleTime = cTime;
-        cyclustimeLeft = cycleTime;
-        System.out.println("test case 4");
-        //  System.out.println(differentEventStates.get(3).getEventName());
-        events.add(differentEventStates.get(3));
-
-    }
-
-    /**
-     * case 5: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-    public void case5(int cTime, int totTimeLeft) throws InterruptedException {
-        cycleTimeUsed = 1;
-        totalTimeLeft = totTimeLeft;
-        cycleTime = cTime;
-        cyclustimeLeft = cycleTime;
-        //    System.out.println("test case 5");
-        //    System.out.println(differentEventStates.get(4).getEventName());
-        events.add(differentEventStates.get(4));
-    }
-
-    /**
-     * case 6: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-    public void case6(int cTime, int totTimeLeft) throws InterruptedException {
-        cycleTimeUsed = 1;
-        totalTimeLeft = totTimeLeft;
-        cycleTime = cTime;
-        cyclustimeLeft = cycleTime;
-        //    System.out.println("test case 6");
-        //    System.out.println(differentEventStates.get(4).getEventName());
-        events.add(differentEventStates.get(4));
-    }
+   
 
     /**
      * increments the totalTimeused and cycletimeused by one each 1000ms. does
@@ -744,3 +623,135 @@ public class SystemLogic implements Runnable {
     }
 
 }
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+ /**
+     * case 1: setting the total time left to the total time value. Setting the
+     * cycletime used to 0 to state that a new cycle is starting
+     *
+     * @param cTime setting the cycle time of the cycle
+     * @param totTimeLeft setting the total time left in case the earlier
+     * prosess is finished before planed. This also updates the progreessbar in
+     * GUI
+     * @throws InterruptedException
+     */
+  /*  public void case1(int cTime, int totTimeLeft) throws InterruptedException {
+        cycleTimeUsed = 1;
+        totalTimeLeft = totTimeLeft;
+        cycleTime = cTime;
+        cyclustimeLeft = cycleTime;
+     //   System.out.println("test case 1");
+        //  System.out.println(differentEventStates.get(0).getEventName());
+        events.add(differentEventStates.get(0));
+
+    }
+
+    /**
+     * case 2: setting the total time left to the total time value. Setting the
+     * cycletime used to 0 to state that a new cycle is starting
+     *
+     * @param cTime setting the cycle time of the cycle
+     * @param totTimeLeft setting the total time left in case the earlier
+     * prosess is finished before planed. This also updates the progreessbar in
+     * GUI
+     * @throws InterruptedException
+     */
+    /*public void case2(int cTime, int totTimeLeft) throws InterruptedException {
+        cycleTimeUsed = 1;
+        totalTimeLeft = totTimeLeft;
+        cycleTime = cTime;
+        cyclustimeLeft = cycleTime;
+    //    System.out.println("test case 2");
+        //   System.out.println(differentEventStates.get(1).getEventName());
+        events.add(differentEventStates.get(1));
+
+    }
+
+    /**
+     * case 3: setting the total time left to the total time value. Setting the
+     * cycletime used to 0 to state that a new cycle is starting
+     *
+     * @param cTime setting the cycle time of the cycle
+     * @param totTimeLeft setting the total time left in case the earlier
+     * prosess is finished before planed. This also updates the progreessbar in
+     * GUI
+     * @throws InterruptedException
+     */
+   /* public void case3(int cTime, int totTimeLeft) throws InterruptedException {
+        cycleTimeUsed = 1;
+        totalTimeLeft = totTimeLeft;
+        cycleTime = cTime;
+        cyclustimeLeft = cycleTime;
+   //     System.out.println("test case 3");
+        //   System.out.println(differentEventStates.get(2).getEventName());
+        events.add(differentEventStates.get(2));
+
+    }
+
+    /**
+     * case 4: setting the total time left to the total time value. Setting the
+     * cycletime used to 0 to state that a new cycle is starting
+     *
+     * @param cTime setting the cycle time of the cycle
+     * @param totTimeLeft setting the total time left in case the earlier
+     * prosess is finished before planed. This also updates the progreessbar in
+     * GUI
+     * @throws InterruptedException
+     */
+   /* public void case4(int cTime, int totTimeLeft) throws InterruptedException {
+        cycleTimeUsed = 1;
+        totalTimeLeft = totTimeLeft;
+        cycleTime = cTime;
+        cyclustimeLeft = cycleTime;
+        System.out.println("test case 4");
+        //  System.out.println(differentEventStates.get(3).getEventName());
+        events.add(differentEventStates.get(3));
+
+    }
+
+    /**
+     * case 5: setting the total time left to the total time value. Setting the
+     * cycletime used to 0 to state that a new cycle is starting
+     *
+     * @param cTime setting the cycle time of the cycle
+     * @param totTimeLeft setting the total time left in case the earlier
+     * prosess is finished before planed. This also updates the progreessbar in
+     * GUI
+     * @throws InterruptedException
+     */
+   /* public void case5(int cTime, int totTimeLeft) throws InterruptedException {
+        cycleTimeUsed = 1;
+        totalTimeLeft = totTimeLeft;
+        cycleTime = cTime;
+        cyclustimeLeft = cycleTime;
+        //    System.out.println("test case 5");
+        //    System.out.println(differentEventStates.get(4).getEventName());
+        events.add(differentEventStates.get(4));
+    }*/
+
+    /**
+     * case 6: setting the total time left to the total time value. Setting the
+     * cycletime used to 0 to state that a new cycle is starting
+     *
+     * @param cTime setting the cycle time of the cycle
+     * @param totTimeLeft setting the total time left in case the earlier
+     * prosess is finished before planed. This also updates the progreessbar in
+     * GUI
+     * @throws InterruptedException
+     */
+   /* public void case6(int cTime, int totTimeLeft) throws InterruptedException {
+        cycleTimeUsed = 1;
+        totalTimeLeft = totTimeLeft;
+        cycleTime = cTime;
+        cyclustimeLeft = cycleTime;
+        //    System.out.println("test case 6");
+        //    System.out.println(differentEventStates.get(4).getEventName());
+        events.add(differentEventStates.get(4));
+    }*/
+

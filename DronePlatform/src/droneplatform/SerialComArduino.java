@@ -75,7 +75,7 @@ public class SerialComArduino implements Runnable {
                     semaphore.acquire();
                     dataHandler.setDataFromArduino(dataFromArduionoToDH);
                     semaphore.release();
-             //      System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
+            //       System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
                  }
             }
 

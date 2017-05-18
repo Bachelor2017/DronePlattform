@@ -121,11 +121,8 @@ public class DataHandler {
     }
     
     
-<<<<<<< HEAD
-    public void droneOnPlatform(int value)
-    {
-        dataToTeensy[6] = (byte)value;
-=======
+
+   
     /**
      * if the drone signal is received, the byte is sett to 1. 
      * @param value the value of the signal from drone. 1= drone located, 0 = no drone on platform
@@ -133,7 +130,7 @@ public class DataHandler {
     public void droneOnPlatform(int value)
     {
         this.dataToTeensy[6] = (byte)value;
->>>>>>> origin/Olav
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -238,10 +235,6 @@ public class DataHandler {
 
     }
     
-     public byte[] getChargeCurrent() {
-
-        return chargeCurrent;
-    }
-
+  
 
 }

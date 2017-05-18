@@ -1,6 +1,7 @@
 package droneplatform;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ public class BatteryStationLogic implements Runnable {
     private byte[] dataFromArduino;
     private DataHandler dh;
     private Thread t;
-
+    private byte[] chargeCurrent;
     private java.util.Timer timer;
     private TimerTask tTask;
     public int secondsPassed;
@@ -32,6 +33,7 @@ public class BatteryStationLogic implements Runnable {
      */
     public BatteryStationLogic(DataHandler dh, Semaphore semaphore) {
         this.semaphore = semaphore;
+        chargeCurrent = new byte[16];
         batteries = new ArrayList<>();
         batteryStationNumberPossition = 0;
         this.dh = dh;
@@ -57,6 +59,10 @@ public class BatteryStationLogic implements Runnable {
                 dh.setNextBatteryNumberToChange(getNextBatteryToChange());
                 semaphore.release();
                 updateBatteryInformation(dataFromArduino);
+//setAllbatterychargeCurrent();
+            //    System.out.println( Arrays.toString(chargeCurrent));
+             
+            
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(BatteryStationLogic.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,9 +86,9 @@ public class BatteryStationLogic implements Runnable {
         batteries.get(6).setPercentageCharged(72);
         batteries.get(7).setPercentageCharged(70);
         batteries.get(8).setPercentageCharged(40);
-      //  batteries.get(6).setBatteryCycles(22);
-      //  batteries.get(6).setLimiSwitch(true);
-        
+        //  batteries.get(6).setBatteryCycles(22);
+        //  batteries.get(6).setLimiSwitch(true);
+
     }
 
     /**
@@ -105,7 +111,7 @@ public class BatteryStationLogic implements Runnable {
 
         for (int x = 0; x < 16; x++) {
             //setting percentage of charge
-batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+            batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
             i = i + 1;
 
             //Setting the charging voltage
@@ -140,20 +146,47 @@ batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
             batteries.get(x).setBatteryStatus(incomingDataFromArduino[i]);
             i = i + 1;
 
-            if (incomingDataFromArduino[i] == 1) {
+            /*   if (incomingDataFromArduino[i] == 1) {
                 limitSwitch = true;
             } else {
                 limitSwitch = false;
             }
+             batteries.get(x).setLimiSwitch(limitSwitch);
+             */
+            batteries.get(x).setChargingLevelOnBatteries(incomingDataFromArduino[i]);
 
-            batteries.get(x).setLimiSwitch(limitSwitch);
             i = i + 1;
             i = i + 1;
         }
         //System.out.println("ute av update battery");
 
     }
+    
+    
+    public void setAllbatterychargeCurrent()
+    {
+      //  chargeCurrent = null;
+       if (batteries.size()!=0)
+       {
+            for (int x = 0; x < 16; x++) {
+            chargeCurrent[x] = (byte) batteries.get(x).getChargingLevelOnBatteries();
+        }
+       }
+    }
+    
+     
+        
+        
+    
+    
 
+    public byte[] getAllbatterychargeCurrent() {
+            
+        return chargeCurrent;
+           
+      
+            
+    }
 
 
     /**
@@ -179,7 +212,6 @@ batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
         int nextBatteryNumber = 0;
         int lastBatteryPercentage = 0;
 
-        
         for (int x = 0; x < 16; x++) {
             if (getBatteryChargingPercentage(x) > lastBatteryPercentage) {
                 lastBatteryPercentage = getBatteryChargingPercentage(x);
@@ -188,22 +220,17 @@ batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
 
         }
         nextBatteryNumber = nextBatteryNumber + 1;
-        
-        if((dataFromArduino[10]==0)&&(lastBatteryPercentage<=80)) 
-        {
-            nextBatteryNumber  = 0;
+
+        if ((dataFromArduino[10] == 0) && (lastBatteryPercentage <= 80)) {
+            nextBatteryNumber = 0;
         }
-       // System.out.println("nextBatteryNumber: " + nextBatteryNumber);
-       //  System.out.println("nextBatteryPercentage: " + lastBatteryPercentage);
-        
+        // System.out.println("nextBatteryNumber: " + nextBatteryNumber);
+        //  System.out.println("nextBatteryPercentage: " + lastBatteryPercentage);
+
         return nextBatteryNumber;
     }
 
-    
-    
-    
-    
-        /**
+    /**
      * setting spesific battery to docking
      *
      * @param x
@@ -222,10 +249,7 @@ batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
     public boolean isBatteriesDocked(int x) {
         return batteries.get(x).isDocked();
     }
-    
-    
-    
-    
+
     /**
      * gives the XYZ location of the batterystation
      *

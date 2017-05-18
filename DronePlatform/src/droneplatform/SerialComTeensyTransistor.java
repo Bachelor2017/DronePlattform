@@ -25,18 +25,20 @@ public class SerialComTeensyTransistor implements Runnable {
     private boolean hasReceived;
     private byte[] oldData = new byte[4];
     byte[] dataFromTeensynoToDH = new byte[11];
+    private BatteryStationLogic bsl;
 
     /**
      *
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialComTeensyTransistor(String comPort, DataHandler dataHandler, Semaphore semaphore) {
+    public SerialComTeensyTransistor(String comPort, DataHandler dataHandler, Semaphore semaphore, BatteryStationLogic bsl) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
         this.semaphore = semaphore;
         hasReceived = true;
+        this.bsl = bsl;
 
     }
 
@@ -73,7 +75,9 @@ public class SerialComTeensyTransistor implements Runnable {
                     byte[] dataToTeensy = new byte[8];
                     semaphore.acquire();
                     // REPLACE WITH CORRECT FUNCTION
-                    dataToTeensy = dataHandler.getDataToTeensy();
+                   
+               //      dataToTeensy = bsl.getAllbatterychargeCurrent(); 
+                //    dataToTeensy = dataHandler.getChargeCurrent();
                     semaphore.release();
                    // System.out.println("Read Arranged " + Arrays.toString(dataToTeensy));
                     
