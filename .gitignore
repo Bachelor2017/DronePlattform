@@ -61,3 +61,9 @@ DronePlatform/dist/DronePlatform.jar
 *.properties
 *.class
 *.properties
+DronePlatform/nbproject/project.properties
+*.properties
+*.properties
+*.properties
+*.class
+*.class

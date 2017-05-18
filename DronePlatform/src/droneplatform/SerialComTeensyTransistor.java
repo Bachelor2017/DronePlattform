@@ -14,28 +14,30 @@ import java.util.logging.Logger;
  * between serial read and send to make sure on is running at the time
  *
  */
-public class SerialComArduino implements Runnable {
+public class SerialComTeensyTransistor implements Runnable {
 
     private SerialPort serialPort;
     Semaphore semaphore = new Semaphore(1, true);
-    private Thread reader; // reads from arduino
-    private Thread sender;  // writes to arduino
-    public byte[] dataFromArduino = new byte[23];
-    public byte[] dataToArduino = new byte[6];
-    DataHandler dataHandler;
-    int increment;
+    private DataHandler dataHandler;
+    private int increment1;
+    private int increment2;
     private Thread t;
+    private boolean hasReceived;
+    private byte[] oldData = new byte[4];
+    byte[] dataFromTeensynoToDH = new byte[11];
 
     /**
      *
      * @param comPort the serialcommunication port
      * @param dataHandler the datahandler
      */
-    public SerialComArduino(String comPort, DataHandler dataHandler, Semaphore semaphore) {
+    public SerialComTeensyTransistor(String comPort, DataHandler dataHandler, Semaphore semaphore) {
         serialPort = new SerialPort(comPort); //"/dev/ttyUSB0"
         connect();
         this.dataHandler = dataHandler;
         this.semaphore = semaphore;
+        hasReceived = true;
+
     }
 
     /**
@@ -53,7 +55,7 @@ public class SerialComArduino implements Runnable {
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(19200, 8, 1, 0);
+                getSerialPort().setParams(9600, 8, 1, 0);
                 // reader = new Thread(new SerialReadArduino(this, semaPhore, serialPort, dataHandler));         
                 // reader.start();
             }
@@ -65,29 +67,56 @@ public class SerialComArduino implements Runnable {
     @Override
     public void run() {
         try {
-           
+
             while (true) {
-                byte[] data = serialPort.readBytes(1);
-            
-                if (data[0] == -128) {
-                    byte[] dataFromArduionoToDH = serialPort.readBytes(176);
-                    //  increment++;
+                
+                    byte[] dataToTeensy = new byte[8];
                     semaphore.acquire();
-                    dataHandler.setDataFromArduino(dataFromArduionoToDH);
+                    // REPLACE WITH CORRECT FUNCTION
+                    dataToTeensy = dataHandler.getDataToTeensy();
                     semaphore.release();
-             //      System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
-                 }
+                   // System.out.println("Read Arranged " + Arrays.toString(dataToTeensy));
+                    
+                    serialPort.writeBytes(dataToTeensy);
+                    wait(2000);
+                    //hasReceived = false;
+                
+/*
+                if (!hasReceived) {
+                    byte[] data = serialPort.readBytes(1);
+                    if (data[0] == 101) {
+                        byte[] dataFromTeensynoToDH = serialPort.readBytes(11);
+                         byte[] testTeensy = new byte[10];
+                        
+                        semaphore.acquire();
+                        dataHandler.setDataFromTeensy(dataFromTeensynoToDH);
+                        semaphore.release();
+                     
+                       
+                        if (testTeensy != dataFromTeensynoToDH) {
+                     //    System.out.println("Read Arranged " + Arrays.toString(dataFromTeensynoToDH));
+                        }
+                        testTeensy = dataFromTeensynoToDH;
+
+                        hasReceived = true;
+
+                    }
+
+                }
+                */
             }
 
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");
         } catch (InterruptedException ex) {
-            Logger.getLogger(SerialComArduino.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SerialComTeensyTransistor.class.getName()).log(Level.SEVERE, null, ex);
         }
+      
+        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
         //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-  
     public SerialPort getSerialPort() {
         return this.serialPort;
     }

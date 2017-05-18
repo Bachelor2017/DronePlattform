@@ -95,6 +95,17 @@ public class GUIObservable extends Observable {
         return events.getLastEventState();
     }
     
+    
+    
+            
+            /**
+     * get the last events state of the process
+     * @return the eventName as String of the last event
+     */
+    public String getSpesificEventState(int event) {
+        return events.getSpesificEventState(event);
+    }
+    
     /**
      * get the total time used in the total process
      * @return the int value of the time used

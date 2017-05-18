@@ -105,7 +105,7 @@ public class BatteryStationLogic implements Runnable {
 
         for (int x = 0; x < 16; x++) {
             //setting percentage of charge
-  /////////////////        batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
             i = i + 1;
 
             //Setting the charging voltage

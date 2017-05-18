@@ -278,7 +278,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel47 = new javax.swing.JLabel();
         autoStatus = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
-        testButton = new javax.swing.JButton();
+        modeButton = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
         errorLabel = new javax.swing.JLabel();
         advancedButton = new javax.swing.JButton();
@@ -415,8 +415,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea8 = new javax.swing.JTextArea();
         jPanel10 = new javax.swing.JPanel();
-        armint = new javax.swing.JLabel();
-        armdec = new javax.swing.JLabel();
+        droneOnPlatform = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
@@ -1615,7 +1614,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         eventInfoPanel.setLayout(eventInfoPanelLayout);
         eventInfoPanelLayout.setHorizontalGroup(
             eventInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
             .addComponent(ErrorMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         eventInfoPanelLayout.setVerticalGroup(
@@ -1931,10 +1930,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel46.setText("Auto:");
 
-        testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
-        testButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        modeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/run.png"))); // NOI18N
+        modeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                testButtonMouseClicked(evt);
+                modeButtonMouseClicked(evt);
             }
         });
 
@@ -1948,7 +1947,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addComponent(jLabel40)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1965,7 +1964,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(modeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
@@ -2041,7 +2040,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Section, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addGap(0, 123, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2951,29 +2950,31 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         tabPanels.addTab("Stat", jPanel4);
 
-        armint.setText("jLabel45");
-
-        armdec.setText("jLabel48");
+        droneOnPlatform.setText("DRONE SIGNAL RECEIVED ");
+        droneOnPlatform.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                droneOnPlatformMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                droneOnPlatformMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(armint)
-                .addGap(18, 18, 18)
-                .addComponent(armdec)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(droneOnPlatform, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(armint)
-                    .addComponent(armdec))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addComponent(droneOnPlatform, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         tabPanels.addTab("x", jPanel10);
@@ -3517,7 +3518,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }//GEN-LAST:event_liftButtonDownMouseReleased
 
     private void liftButtonUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liftButtonUpMousePressed
-       
+
         if (!platformMode) {
             //  if (receive.getSpesificValueFromByte(4) == 0) {
             //      errorLabel.setText("The limit switch is activated");
@@ -3651,7 +3652,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
     }//GEN-LAST:event_armRightMouseReleased
 
-    private void testButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testButtonMouseClicked
+    private void modeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeButtonMouseClicked
         platformMode = !platformMode;
         if (startupModeCalibrated == true) {
             if (!platformMode) {
@@ -3674,7 +3675,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
 
 
-    }//GEN-LAST:event_testButtonMouseClicked
+    }//GEN-LAST:event_modeButtonMouseClicked
 
     private void cancelCalibrationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelCalibrationButtonMouseClicked
         startCalibration.setVisible(false);
@@ -4098,6 +4099,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7MouseReleased
 
+    private void droneOnPlatformMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_droneOnPlatformMousePressed
+        controller.setDataToDataHandler(6, 1);
+    }//GEN-LAST:event_droneOnPlatformMousePressed
+
+    private void droneOnPlatformMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_droneOnPlatformMouseReleased
+        controller.setDataToDataHandler(6, 0);
+    }//GEN-LAST:event_droneOnPlatformMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -4161,8 +4170,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JButton armLeft1;
     private javax.swing.JButton armRight;
     private javax.swing.JButton armRight1;
-    private javax.swing.JLabel armdec;
-    private javax.swing.JLabel armint;
     private javax.swing.JButton attach1Station;
     private javax.swing.JButton attach1Station1;
     private javax.swing.JButton attach1buton;
@@ -4210,6 +4217,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JButton detach1Button1;
     private javax.swing.JButton detach1Station;
     private javax.swing.JButton detach1Station1;
+    private javax.swing.JButton droneOnPlatform;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JPanel eventInfoPanel;
     private javax.swing.JButton jButton1;
@@ -4368,6 +4376,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel mintofull7;
     private javax.swing.JLabel mintofull8;
     private javax.swing.JLabel mintofull9;
+    private javax.swing.JButton modeButton;
     private javax.swing.JLabel percentage1;
     private javax.swing.JLabel percentage10;
     private javax.swing.JLabel percentage11;
@@ -4447,7 +4456,6 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel temp7;
     private javax.swing.JLabel temp8;
     private javax.swing.JLabel temp9;
-    private javax.swing.JButton testButton;
     private javax.swing.JTextArea textAreaErrorMessages;
     private javax.swing.JTextArea textAreaInformationEvent;
     private javax.swing.JLabel voltcharg1;
@@ -4781,32 +4789,52 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
         if (calibrationNumber == 1) {
             armCalCheck.setText("Calibrating Arm");
-            //  sliderCalCheck.setText("Waiting to be calibrated");
-            //  liftCalCheck.setText("Waiting to be calibrated");
+        //             liftCalCheck.setText("Waiting to be calibrated");
+            sliderCalCheck.setText("Waiting to be calibrated");
+   
         }
         if (calibrationNumber == 2) {
             armCalCheck.setText("Arm Calibrated");
             armCalCheck.setSelected(true);
             liftCalCheck.setText("Lift activated, starting Calibration");
-            //   armCalCheck.setText("Waiting to be calibrated");
+                  
+            sliderCalCheck.setText("Waiting to be calibrated");
         }
         if (calibrationNumber == 3) {
+                armCalCheck.setText("Arm Calibrated");
+            armCalCheck.setSelected(true);
+            liftCalCheck.setText("Lift activated, starting Calibration");
             // liftCalCheck.setText("Done");
             //  liftCalCheck.setSelected(true);
             liftCalCheck.setText("Calibrating lift");
-            //    armCalCheck.setText("Waiting to be calibrated");
+                  
+            sliderCalCheck.setText("Waiting to be calibrated");
         }
         if (calibrationNumber == 4) {
+               armCalCheck.setText("Arm Calibrated");
+            armCalCheck.setSelected(true);
+        
             liftCalCheck.setText("Lift Calibrated");
             liftCalCheck.setSelected(true);
             sliderCalCheck.setText("Slider activated");
 
         }
         if (calibrationNumber == 5) {
+              armCalCheck.setText("Arm Calibrated");
+            armCalCheck.setSelected(true);
+        
+           // liftCalCheck.setText("Lift Calibrated");
+            liftCalCheck.setSelected(true);
+            sliderCalCheck.setText("Slider activated");
             sliderCalCheck.setText("Calibrating Slider");
 
         }
         if (calibrationNumber == 6) {
+              armCalCheck.setText("Arm Calibrated");
+            armCalCheck.setSelected(true);
+        
+        //    liftCalCheck.setText("Lift Calibrated");
+            liftCalCheck.setSelected(true);
             sliderCalCheck.setText("slider Calibrated");
             sliderCalCheck.setSelected(true);
         }
@@ -4825,7 +4853,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
     public void setStepperEnginePostiotions() {
         int batteriChanged = (receive.getSpesificValueFromByte(10));
-          this.batteriesChanged.setText(Integer.toString(batteriChanged));
+        this.batteriesChanged.setText(Integer.toString(batteriChanged));
         liftPostition = (receive.getSpesificValueFromByte(0) + (receive.getSpesificValueFromByte(1) / 10.00F));
         sliderPostition = (receive.getSpesificValueFromByte(2) + (receive.getSpesificValueFromByte(3) / 10.00F));
         armPostition = ((receive.getSpesificValueFromByte(4) * 2) + (receive.getSpesificValueFromByte(5) / 10.00F));
@@ -4838,11 +4866,46 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         this.sliderPostiotionLabel1.setText(Float.toString(sliderPostition) + " :cm");
         this.rotationPostiotionLabel1.setText(Float.toString(armPostition) + " :cm");
 
-        int armintValue = ((receive.getSpesificValueFromByte(4)));
-        int armdecValue = ((receive.getSpesificValueFromByte(5)));
-        this.armint.setText(Float.toString(armintValue));
-        this.armdec.setText(Float.toString(armdecValue));
+    }
 
+    public void saveSumaryTextFile() {
+        //     String content = textAreaInformationEvent.getText();    //step1: get the content of the textfield
+        String state = receive.getSpesificEventState(0);                 // Reads the last event state.
+        String startupEvent = state + " " + receive.getTimeStamp();// (Må undersøke hvilke størrelse gir error!    
+
+        try {
+
+            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+            // Get the date today using Calendar object.
+            Date today = Calendar.getInstance().getTime();
+            // Using DateFormat format method we can create a string 
+            // representation of a date with the defined format.
+            String reportDate = df.format(today);
+
+            String filename = "Sumary-" + reportDate + ".txt";
+            File file = new File("C:\\Users\\dd\\Documents\\NetBeansProjects\\" + filename);
+
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write(startupEvent);
+            bw.newLine();
+            bw.write("Number of total batteryChanges:   ");
+            String batteriesChanged = null;
+           batteriesChanged = Integer.toString(receive.getSpesificValueFromByte(10));
+            bw.write(batteriesChanged);
+             bw.newLine();
+            bw.write("Total time used:  "   +   Integer.toString(receive.getTotalTimeUsed()));
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveLogTextFile() {
@@ -4850,7 +4913,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         try {
 
-            DateFormat df = new SimpleDateFormat("MM-dd-yyyy-HH-mm");
+            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
             // Get the date today using Calendar object.
             Date today = Calendar.getInstance().getTime();
             // Using DateFormat format method we can create a string 
@@ -4880,7 +4943,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         try {
 
-            DateFormat df = new SimpleDateFormat("MM-dd-yyyy-HH-mm");
+            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
             // Get the date today using Calendar object.
             Date today = Calendar.getInstance().getTime();
             // Using DateFormat format method we can create a string 
@@ -4925,14 +4988,15 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
      */
     private void hasEventChanged() {
         String lastState = receive.getLastEventState();
-          String errorState = receive.getLastErrorMessage();
+        String errorState = receive.getLastErrorMessage();
         if (!lastState.equalsIgnoreCase(newState)) {
-            
+
             saveLogTextFile();
+            saveSumaryTextFile();
         }
-         if (!errorState.equalsIgnoreCase(newError)) {
+        if (!errorState.equalsIgnoreCase(newError)) {
             saveErrorTextFile();
-          
+
         }
         newState = lastState;
         newError = errorState;

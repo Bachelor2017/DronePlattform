@@ -44,16 +44,27 @@ public class DronePlatform {
 
         
      //Serial Communication batteries
-        SerialComArduino serialComArduino = new SerialComArduino("COM7", dataHandler, semaphore);
+        SerialComArduino serialComArduino = new SerialComArduino("COM6", dataHandler, semaphore);
         serialComArduino.start();
         //Serial Communication stepper controller
         SerialComMega serialComTeensy = new SerialComMega("COM4", dataHandler, semaphore);
+       //  SerialComMega serialComTeensy = new SerialComMega("/dev/ttyACM0", dataHandler, semaphore);
         serialComTeensy.start();
         
+<<<<<<< HEAD
         UDPrecive udpR = new UDPrecive(1111, dataHandler, semaphore);
         udpR.start();
         
         
+=======
+        UDPReceive udp = new UDPReceive(1111,dataHandler,semaphore);
+        udp.start();
+        
+        // Charging current to teensy
+        SerialComTeensyTransistor transistorTeensy = new SerialComTeensyTransistor("COM NOE", dataHandler, semaphore);
+        transistorTeensy.start();
+       
+>>>>>>> origin/Olav
         while (true) {
             observable.setData();
         }

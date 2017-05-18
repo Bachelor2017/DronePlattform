@@ -17,6 +17,7 @@ import java.util.concurrent.Semaphore;
 //byte[3] - 0-2    (Motor direction)    0 = idle, 1 = rev , 2 = forward
 //byte[4] - 0-1    (start calibration ,1 = true     
 //byte[5] - neste batteri klart til bytte
+//byte[6] - drone on platform 1 = drone sent signal 
 /////Data from arduino controller to GUI   - dataFromArduino//  Battery information
 //
 //byte[0] - 0-15   (BatteryNumber)
@@ -52,7 +53,7 @@ public class DataHandler {
     private byte[] dataFromArduino;     //The byteArray retrieved from Arduino 
     private byte[] dataToTeensy;        //The byteArray to be sendt to Teensy 
     private byte[] dataFromTeensy;      //The byteArray retrieved from Teensy 
-
+    private byte[] chargeCurrent;       //The charge current for each battery
     /// for testing
     private java.util.Timer timer;
     private TimerTask tTask;
@@ -61,16 +62,22 @@ public class DataHandler {
     public boolean platformMode = false;
     public boolean droneOnPlatform = false;
     /// testing slutt
+   
 
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToTeensy = new byte[6];
+        dataToTeensy = new byte[7];
         dataFromTeensy = new byte[11];
         dataToTeensy[0] = 101;
         dataToTeensy[1] = 1; //setting to manual from start
         dataFromTeensy[5] = 1;  //????????????????????????????????????????????????????
-       
+        chargeCurrent = new byte[8];
+        
+        for(int i = 0; i < 8; i++){
+            // init
+            chargeCurrent[i] = (byte) 150;
+        }
        
 
     }
@@ -114,9 +121,19 @@ public class DataHandler {
     }
     
     
+<<<<<<< HEAD
     public void droneOnPlatform(int value)
     {
         dataToTeensy[6] = (byte)value;
+=======
+    /**
+     * if the drone signal is received, the byte is sett to 1. 
+     * @param value the value of the signal from drone. 1= drone located, 0 = no drone on platform
+     */
+    public void droneOnPlatform(int value)
+    {
+        this.dataToTeensy[6] = (byte)value;
+>>>>>>> origin/Olav
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +164,7 @@ public class DataHandler {
  
     public void setCalibrationStatus(boolean value) {
         if (value == true) {
-            dataToTeensy[4] = 1;
+            dataToTeensy[4] = 106;
         } else {
             dataToTeensy[4] = 0;
         }
@@ -176,7 +193,9 @@ public class DataHandler {
 
             dataToTeensy[1] = 1;      //Manuel mode
         }
-        System.out.println(Arrays.toString(dataToTeensy));
+      //  System.out.println(Arrays.toString(dataToTeensy));
+  //  System.out.println(platformMode);
+   
     }
 
     public boolean getPlatformMode() {
@@ -218,5 +237,11 @@ public class DataHandler {
         this.dataToTeensy[5] = (byte) batteryNumber;
 
     }
+    
+     public byte[] getChargeCurrent() {
+
+        return chargeCurrent;
+    }
+
 
 }
