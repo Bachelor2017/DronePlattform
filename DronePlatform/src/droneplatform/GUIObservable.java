@@ -59,7 +59,7 @@ public class GUIObservable extends Observable {
       //  faultList = faultHandler.getFaultList();
         batteries = batteryStationLogic.getArrayListBatteries();
         semaphore.acquire();
-        dataFromTeensy = dataHandler.getDataFromTeensy();
+        dataFromTeensy = dataHandler.getDataFromMega();
         semaphore.release();
         setChanged();
         notifyObservers();
@@ -215,8 +215,8 @@ public class GUIObservable extends Observable {
      * @param x the number of the battery
      * @return the int of the cychlus level
      */
-    public float getSpescificBatteryCyclecount(int x) {
-        return this.batteryStationLogic.getBatteryChargingCycle(x);
+    public int getSpescificBatteryCyclecount(int x) {
+        return (int) this.batteryStationLogic.getBatteryChargingCycle(x);
     }
 
     /**
@@ -235,8 +235,10 @@ public class GUIObservable extends Observable {
  * @param x the number of the spesifikk battery in the list
  * @return the voltage of the spesifikk battery
  */
-    public float getSpesificChargingVoltage(int x) {
-        return this.batteryStationLogic.getSpesificChargingVoltage(x);
+    public int getSpesificChargingVoltage(int x) {
+       // return (int)this.batteryStationLogic.getSpesificChargingVoltage(x);
+        
+        return this.batteryStationLogic.getSpecificbatterychargeCurrent(x);
     }
 
 /**get the limitSwitch of a spesifikk battery from the array list. 
@@ -258,6 +260,8 @@ public class GUIObservable extends Observable {
         return batteryStationLogic.getBatteriesStatus(x);
     }
     
+    
+      
     
     
 

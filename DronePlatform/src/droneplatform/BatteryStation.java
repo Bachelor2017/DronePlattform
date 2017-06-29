@@ -297,6 +297,7 @@ chargingLevelOnBatteri = 0;
         yValue = (byte) newYValue;
         zValue = (byte) newZValue;
     }
+}
 
     //////////////////////////////////////////////////////////////////////
     ////////////////////////USED FOR TESTING//////////////////////////////
@@ -305,9 +306,9 @@ chargingLevelOnBatteri = 0;
      * Returns the number of seconds the batterystation has batteri on charging
      * returns 0 if batterDocking is false
      */
-    public int getNumberOfSecondsCharged() {
+   /* public int getNumberOfSecondsCharged() {
         return secondsPassed;
-    }
+    }*/
 
     /**
      * Sets the batterycharged value. makes sure the value uios not below 0 or
@@ -315,7 +316,7 @@ chargingLevelOnBatteri = 0;
      *
      * @param value the value of batterycharging status
      */
-    public void setBatteryLevel(int value) {
+   /* public void setBatteryLevel(int value) {
         if (value < 0) {
             batteryLevel = 0;
         } else if (value > 100) {
@@ -324,7 +325,7 @@ chargingLevelOnBatteri = 0;
             batteryLevel = value;
 
         }
-    }
+    }*/
 
     /**
      * The value is calculated from the soconds in docking to seconds to full
@@ -332,10 +333,10 @@ chargingLevelOnBatteri = 0;
      *
      * @return the value of the battery in persentage
      */
-    public int getBatteryLevel() {
+  /*  public int getBatteryLevel() {
         batteryLevel = (secondsPassed / chargingTimeToMax) * 100;
         return batteryLevel;
-    }
+    }*/
 
     /**
      * Setting the docking status of the station If battery is docked, the timer
@@ -345,7 +346,7 @@ chargingLevelOnBatteri = 0;
      * @param value boolean value , true if battery is in docking, and false if
      * station is empty
      */
-    public void setDockedtest(boolean value) {
+ /*   public void setDockedtest(boolean value) {
         if (value == true) {
             tTask = new TimerTask() {
                 public void run() {
@@ -365,7 +366,7 @@ chargingLevelOnBatteri = 0;
             chargedPercentage = 0;
         }
         dockingStatus = value;
-    }
+    }*/
     
     /**
      * Check if there is battery docked to station
@@ -374,19 +375,20 @@ chargingLevelOnBatteri = 0;
      * or not (false)
      *
      */
-    public boolean isDocked() {
+ /*   public boolean isDocked() {
         return dockingStatus;
     }
-
+*/
     /**
      * Setting the docking status of the station
      *
      * @param value boolean value , true if battery is in docking, and false if
      * station is empty
      */
-    public void setDocked(boolean value) {
+  /*  public void setDocked(boolean value) {
 
         dockingStatus = value;
     }
 
 }
+*/

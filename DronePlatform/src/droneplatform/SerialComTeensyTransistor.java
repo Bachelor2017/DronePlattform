@@ -72,16 +72,16 @@ public class SerialComTeensyTransistor implements Runnable {
 
             while (true) {
                 
-                    byte[] dataToTeensy = new byte[8];
+                    byte[] dataToTransistorTeensy = new byte[9];
                     semaphore.acquire();
                     // REPLACE WITH CORRECT FUNCTION
                    
-               //      dataToTeensy = bsl.getAllbatterychargeCurrent(); 
+                     dataToTransistorTeensy = bsl.getAllbatterychargeCurrent(); 
                 //    dataToTeensy = dataHandler.getChargeCurrent();
                     semaphore.release();
-                   // System.out.println("Read Arranged " + Arrays.toString(dataToTeensy));
+                //    System.out.println("Read Arranged " + Arrays.toString(dataToTransistorTeensy));
                     
-                    serialPort.writeBytes(dataToTeensy);
+                    serialPort.writeBytes(dataToTransistorTeensy);
                     wait(2000);
                     //hasReceived = false;
                 

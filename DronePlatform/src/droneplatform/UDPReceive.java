@@ -50,13 +50,12 @@ public class UDPReceive extends Thread {
             byte[] b = new byte[10];    // size of byte to be received
             try {
                 b = receiveParam();
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(UDPReceive.class.getName()).log(Level.SEVERE, null, ex);
             }
-             System.out.println(Arrays.toString(b));
-            
-             System.out.println("prosess");
+          //  System.out.println(Arrays.toString(b));
+          //  System.out.println("prosess");
             processData(b);
 
         }
@@ -70,16 +69,19 @@ public class UDPReceive extends Thread {
     }
 
     private void processData(byte[] b) {
-System.out.println(b);
+        System.out.println(b);
+        int value = 0;
         if (b[0] == 1) {
-            try {
-                semaphore.acquire();
-                dh.droneOnPlatform(1);
-                semaphore.release();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(UDPReceive.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            value = 1;
+        } else if (b[0] != 1) {
+            value = 0;
+        }
+        try {
+            semaphore.acquire();
+            dh.droneOnPlatform(value);
+            semaphore.release();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(UDPReceive.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

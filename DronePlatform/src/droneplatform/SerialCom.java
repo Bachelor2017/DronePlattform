@@ -60,7 +60,7 @@ public class SerialCom {
     }
     
     public byte[] getDataToTeensy(){
-        return dataHandler.getDataToTeensy();
+        return dataHandler.getDataToMega();
     }
 
     public SerialPort getSerialPort() {

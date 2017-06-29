@@ -40,6 +40,7 @@ public class SystemLogic implements Runnable {
     TimerTask tTask;
     java.util.Timer timer;
     boolean runState = true;
+    int oldReadData = 100;
 
     private Thread t;
     private DataHandler dataHandler;
@@ -82,62 +83,76 @@ public class SystemLogic implements Runnable {
             try {
                 semaphore.acquire();
                 platformMode = dataHandler.getPlatformMode();
-                dataFromTeensy = dataHandler.getDataFromTeensy();
-                datatoTeensy = dataHandler.getDataToTeensy();
+                dataFromTeensy = dataHandler.getDataFromMega();
+                datatoTeensy = dataHandler.getDataToMega();
                 semaphore.release();
 
                 if (!platformMode) {
 
                     int readData = dataFromTeensy[8];
-                     if((readData==0))
-                            {
-                                newState = 0;
-                                canRun=false;
-                            }
-                    if((readData==1)||(readData==2))
-                            {
-                                newState = 1;
-                                canRun=true;
-                            }
-                    else if((readData==3)||(readData==4))
-                            {
-                                newState = 2;
-                                canRun=true;
-                            }
-                    else if((readData==5))
-                            {
-                                newState = 3;
-                                canRun=true;
-                            }
-                     else if((readData==6))
-                            {
-                                newState = 4;
-                                canRun=false;
-                            }
-                    
+                    if (readData != oldReadData) {
+                       // System.out.println("ReadData Manual Mode: " + readData);
+                    }
+                    oldReadData = readData;
+                    if ((readData == 0)) {
+                        newState = 0;
+                        canRun = false;
+                    }
+                    //  if((readData==1)||(readData==2))
+                    if ((readData == 1)) {
+                        newState = 1;
+                        canRun = true;
+                    } else if ((readData == 2)) {
+                        newState = 2;
+                        canRun = true;
+                    } //else if ((readData == 3) || (readData == 4))
+                    else if ((readData == 4) || (readData == 5)){
+                        newState = 3;
+                        canRun = true;
+                    } else if ((readData == 6)) {
+                        newState = 4;
+                        canRun = false;
+                    }
+
                     switchCalibrationCases(newState);
                 } else if (platformMode) {
                     int readData = dataFromTeensy[6];
-                   
-                      if((readData==0))
+                    if (readData != oldReadData) {
+                     //   System.out.println("ReadData Auto mode: " + readData);
+                    }
+                    oldReadData = readData;
+                    /*    if((readData==0))
                     {
                         newState = 0; 
                         canRun=true;
-                    }
-                    else if((readData!=0)&&(readData<6))
-                    {
-                        newState = 1; 
-                        canRun=true;
-                    }
-                    else if((readData>=6)&&(readData<10))
-                    {
-                        newState = 2; 
-                        canRun=true;
-                    }
-                    else if((readData>=10)&&(readData<15))
-                    {
-                        newState = 3; 
-                        canRun=true;
+                    }*/
+                    if ((readData >= 0) && (readData < 7)) {
+                        newState = 1;
+                        canRun = true;
+                    } else if ((readData >= 7) && (readData < 11)) {
+                        newState = 2;
+                        canRun = true;
+                    } else if ((readData == 11)) {
+                        newState = 3;
+                        canRun = false;
+                    } else if ((readData >= 12) && (readData < 17)) {
+                        newState = 4;
+                        canRun = true;
+                    } else if ((readData >= 17) && (readData <= 18)) {
+                        newState = 5;
+                        canRun = true;
+                    } else if ((readData >= 19) && (readData < 23)) {
+                        newState = 6;
+                        canRun = true;
+                    } else if ((readData >= 23) && (readData < 30)) {
+                        newState = 7;
+                        canRun = true;
+                    } else if ((readData >= 30) && (readData < 37)) {
+                        newState = 8;
+                        canRun = true;
+                    } else if ((readData >= 37)) {
+                        newState = 9;
+                        canRun = true;
                     }
                     switchCases(newState);
                 }
@@ -161,7 +176,7 @@ public class SystemLogic implements Runnable {
     protected void switchCases(int caseNumber) throws InterruptedException {
         int number = caseNumber;
         switch (number) {
-             case (0):
+            case (0):
 
                 if (oldState != newState) {
                     // if (runState) {
@@ -171,8 +186,7 @@ public class SystemLogic implements Runnable {
                     totalTimeUsed = 0;
                     cycleTimeUsed = 0;
                     totalTimeLeft = 150;
-                    caseLogic(15, totalTimeLeft, 10);
-
+                    caseLogic(0, totalTimeLeft, 4);
 
                     //caseLogic(1, totalTimeLeft, 1);
                     oldState = newState;//setting the event time to 13, and time left to total time
@@ -182,14 +196,14 @@ public class SystemLogic implements Runnable {
             case (1):      //Calibrating slider
                 //(runState) {
                 if (oldState != newState) {
-  // if (runState) {
-                    totalTime = 140;
-                    totalTimeLeft = 140;
+                    // if (runState) {
+                    totalTime = 150;
+                    totalTimeLeft = 150;
                     cyclustimeLeft = 0;
                     totalTimeUsed = 0;
                     cycleTimeUsed = 0;
-                    totalTimeLeft = 140;
-                    caseLogic(10, totalTimeLeft, 6);
+
+                    caseLogic(20, totalTimeLeft, 4);
 
                     oldState = newState;//setting the event time to 13, and time left to total time
                 }
@@ -198,80 +212,80 @@ public class SystemLogic implements Runnable {
                 if (oldState != newState) {
                     // totalTime = 40;
                     totalTimeLeft = 130;
-                    caseLogic(10, totalTimeLeft, 7);
+                    caseLogic(10, totalTimeLeft, 5);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
                 break;
-                case (3):       //Calibrating Lift
+            case (3):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
                     totalTimeLeft = 120;
-                    caseLogic(120, totalTimeLeft, 8);
+                    caseLogic(0, totalTimeLeft, 6);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
                 break;
-                case (4):       //Calibrating Lift
+            case (4):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
-                    totalTimeLeft = 100;
-                    caseLogic(5, totalTimeLeft, 9);
+                    totalTimeLeft = 120;
+                    caseLogic(31, totalTimeLeft, 7);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
                 break;
-                case (5):       //Calibrating Lift
+            case (5):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
-                    totalTimeLeft = 90;
-                    caseLogic(5, totalTimeLeft, 10);
+                    totalTimeLeft = 88;
+                    caseLogic(12, totalTimeLeft, 8);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
                 break;
-                case (6):       //Calibrating Lift
+            case (6):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
-                    totalTimeLeft = 80;
-                    caseLogic(5, totalTimeLeft, 11);
+                    totalTimeLeft = 76;
+                    caseLogic(10, totalTimeLeft, 9);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
                 break;
-                case (7):       //Calibrating Lift
+            case (7):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
-                    totalTimeLeft = 70;
-                    caseLogic(5, totalTimeLeft, 12);
+                    totalTimeLeft = 63;
+                    caseLogic(27, totalTimeLeft, 10);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
                 break;
-                case (8):       //Calibrating Lift
+            case (8):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
-                    totalTimeLeft = 60;
-                    caseLogic(5, totalTimeLeft, 13);
+                    totalTimeLeft = 34;
+                    caseLogic(26, totalTimeLeft, 11);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
                 break;
-           
-                case (9):       //Calibrating Lift
+
+            case (9):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
-                    totalTimeLeft = 30;
-                    caseLogic(5, totalTimeLeft, 14);
+                    totalTimeLeft = 13;
+                    caseLogic(13, totalTimeLeft, 12);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
-          
+
                 break;
-                 case (10):        //Calibrating arm
+            case (10):        //Calibrating arm
                 if (oldState != newState) {
 
-                    caseLogic(0, 0, 15);
+                    caseLogic(0, 0, 13);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
@@ -292,8 +306,8 @@ public class SystemLogic implements Runnable {
 
                 if (oldState != newState) {
                     // if (runState) {
-                    totalTime = 40;
-                    totalTimeLeft = 40;
+                    totalTime = 37;
+                    totalTimeLeft = 37;
                     cyclustimeLeft = 0;
                     totalTimeUsed = 0;
                     cycleTimeUsed = 0;
@@ -305,20 +319,20 @@ public class SystemLogic implements Runnable {
                 break;
             case (1):      //Calibrating slider
                 //(runState) {
-                
+
                 if (oldState != newState) {
 
-                    totalTimeLeft = totalTimeLeft;
-                    caseLogic(15, totalTimeLeft, 1);
+                    totalTimeLeft = 37;
+                    caseLogic(2, totalTimeLeft, 0);
 
                     oldState = newState;//setting the event time to 13, and time left to total time
                 }
-                  case (2):      //Calibrating slider
+            case (2):      //Calibrating slider
                 //(runState) {
                 if (oldState != newState) {
-
-                    totalTimeLeft = totalTimeLeft;
-                    caseLogic(15, totalTimeLeft, 2);
+                    totalTimeUsed = 2;
+                    totalTimeLeft = 37;
+                    caseLogic(25, totalTimeLeft, 1);
 
                     oldState = newState;//setting the event time to 13, and time left to total time
                 }
@@ -326,8 +340,9 @@ public class SystemLogic implements Runnable {
             case (3):       //Calibrating Lift
                 if (oldState != newState) {
                     // totalTime = 40;
-                    totalTimeLeft = totalTimeLeft - cycleTime;
-                    caseLogic(25, totalTimeLeft, 3);
+                    totalTimeUsed = 25;
+                    totalTimeLeft = 12;
+                    caseLogic(12, totalTimeLeft, 2);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
@@ -335,7 +350,7 @@ public class SystemLogic implements Runnable {
             case (4):        //Calibrating arm
                 if (oldState != newState) {
 
-                    caseLogic(0, 0, 4);
+                    caseLogic(0, 0, 3);
 
                     oldState = newState;//setting the event time to 13, and time used to 0
                 }
@@ -359,13 +374,11 @@ public class SystemLogic implements Runnable {
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
         cyclustimeLeft = cycleTime;
-        System.out.println("Case Number: " + x);
+        //     System.out.println("Case Number: " + x);
         //  System.out.println(differentEventStates.get(0).getEventName());
         events.add(differentEventStates.get(x));
 
     }
-
-   
 
     /**
      * increments the totalTimeused and cycletimeused by one each 1000ms. does
@@ -378,18 +391,17 @@ public class SystemLogic implements Runnable {
             public void run() {
 
                 try {
-                    
-                     /*    calculateCyclusTimeLeft();
+
+                    /*    calculateCyclusTimeLeft();
                         calculateTotalTimeLeft();
                         calculateTotalPercentageCompleted();
                         calculateCyclusPercentageCompleted();
 
                         totalTimeUsed++;
                         cycleTimeUsed++;
-                    */
-                    
-                      if ((canRun==true)) {
-                
+                     */
+                    if ((canRun == true)) {
+
                         calculateCyclusTimeLeft();
                         calculateTotalTimeLeft();
                         calculateTotalPercentageCompleted();
@@ -398,10 +410,10 @@ public class SystemLogic implements Runnable {
                         totalTimeUsed++;
                         cycleTimeUsed++;
 
-                    } else if(canRun==false){
-                        totalTimeLeft = totalTime;
+                    } else if (canRun == false) {
+                       // totalTimeLeft = totalTime;
                         cyclustimeLeft = 0;
-                        totalTimeUsed = 0;
+                      //  totalTimeUsed = 0;
                         cycleTimeUsed = 0;
                     }
                 } catch (InterruptedException ex) {
@@ -598,15 +610,15 @@ public class SystemLogic implements Runnable {
         Event event2 = new Event(2, "Calibrating lift");
         Event event3 = new Event(3, "Calibrating slider");
         Event event4 = new Event(4, "Calibration Complete");
-        Event event5 = new Event(5, "idloe pos, Awaits signal from drone");
-        Event event6 = new Event(6, "Retreiving battery from chargingstation");
-        Event event7 = new Event(7, "Battery retreived, going to idle pos");
-        Event event8 = new Event(8, "await signal from drone");
-        Event event9 = new Event(9, "Signal received, running lift up for batterychange");
-        Event event10 = new Event(10, "Starting drone detection");
-        Event event11 = new Event(11, "");
-        Event event12 = new Event(12, "Locate new battery for change");
-
+        Event event5 = new Event(5, "going for new battery");
+        Event event6 = new Event(6, "Battery retreived, going to idle pos");
+        Event event7 = new Event(7, "idle pos await signal from drone");
+        Event event8 = new Event(8, "signal received, running lift up for batterychange");
+        Event event9 = new Event(9, "Starting drone detection");
+        Event event10 = new Event(10, "Detaching battery from drone");
+        Event event11 = new Event(11, "Attaching battery to drone");
+        Event event12 = new Event(12, "Retreive battery to charging station");
+        Event event13 = new Event(13, "Battery attached to station, going to idle pos");
         differentEventStates.add(event1);
         differentEventStates.add(event2);
         differentEventStates.add(event3);
@@ -619,29 +631,24 @@ public class SystemLogic implements Runnable {
         differentEventStates.add(event10);
         differentEventStates.add(event11);
         differentEventStates.add(event12);
+        differentEventStates.add(event13);
 
     }
 
 }
 
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
- /**
-     * case 1: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-  /*  public void case1(int cTime, int totTimeLeft) throws InterruptedException {
+/**
+ * case 1: setting the total time left to the total time value. Setting the
+ * cycletime used to 0 to state that a new cycle is starting
+ *
+ * @param cTime setting the cycle time of the cycle
+ * @param totTimeLeft setting the total time left in case the earlier prosess is
+ * finished before planed. This also updates the progreessbar in GUI
+ * @throws InterruptedException
+ */
+/*  public void case1(int cTime, int totTimeLeft) throws InterruptedException {
         cycleTimeUsed = 1;
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
@@ -661,8 +668,8 @@ public class SystemLogic implements Runnable {
      * prosess is finished before planed. This also updates the progreessbar in
      * GUI
      * @throws InterruptedException
-     */
-    /*public void case2(int cTime, int totTimeLeft) throws InterruptedException {
+ */
+ /*public void case2(int cTime, int totTimeLeft) throws InterruptedException {
         cycleTimeUsed = 1;
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
@@ -682,8 +689,8 @@ public class SystemLogic implements Runnable {
      * prosess is finished before planed. This also updates the progreessbar in
      * GUI
      * @throws InterruptedException
-     */
-   /* public void case3(int cTime, int totTimeLeft) throws InterruptedException {
+ */
+ /* public void case3(int cTime, int totTimeLeft) throws InterruptedException {
         cycleTimeUsed = 1;
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
@@ -703,8 +710,8 @@ public class SystemLogic implements Runnable {
      * prosess is finished before planed. This also updates the progreessbar in
      * GUI
      * @throws InterruptedException
-     */
-   /* public void case4(int cTime, int totTimeLeft) throws InterruptedException {
+ */
+ /* public void case4(int cTime, int totTimeLeft) throws InterruptedException {
         cycleTimeUsed = 1;
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
@@ -724,8 +731,8 @@ public class SystemLogic implements Runnable {
      * prosess is finished before planed. This also updates the progreessbar in
      * GUI
      * @throws InterruptedException
-     */
-   /* public void case5(int cTime, int totTimeLeft) throws InterruptedException {
+ */
+ /* public void case5(int cTime, int totTimeLeft) throws InterruptedException {
         cycleTimeUsed = 1;
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
@@ -734,18 +741,16 @@ public class SystemLogic implements Runnable {
         //    System.out.println(differentEventStates.get(4).getEventName());
         events.add(differentEventStates.get(4));
     }*/
-
-    /**
-     * case 6: setting the total time left to the total time value. Setting the
-     * cycletime used to 0 to state that a new cycle is starting
-     *
-     * @param cTime setting the cycle time of the cycle
-     * @param totTimeLeft setting the total time left in case the earlier
-     * prosess is finished before planed. This also updates the progreessbar in
-     * GUI
-     * @throws InterruptedException
-     */
-   /* public void case6(int cTime, int totTimeLeft) throws InterruptedException {
+/**
+ * case 6: setting the total time left to the total time value. Setting the
+ * cycletime used to 0 to state that a new cycle is starting
+ *
+ * @param cTime setting the cycle time of the cycle
+ * @param totTimeLeft setting the total time left in case the earlier prosess is
+ * finished before planed. This also updates the progreessbar in GUI
+ * @throws InterruptedException
+ */
+/* public void case6(int cTime, int totTimeLeft) throws InterruptedException {
         cycleTimeUsed = 1;
         totalTimeLeft = totTimeLeft;
         cycleTime = cTime;
@@ -754,4 +759,3 @@ public class SystemLogic implements Runnable {
         //    System.out.println(differentEventStates.get(4).getEventName());
         events.add(differentEventStates.get(4));
     }*/
-

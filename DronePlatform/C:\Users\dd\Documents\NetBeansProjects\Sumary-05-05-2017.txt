@@ -1,0 +1,3 @@
+Battery retreived, going to idle pos  Time: 08:16:13
+Number of total batteryChanges:   8
+Total time used:  26

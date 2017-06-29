@@ -441,7 +441,7 @@
                           <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="7" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="arm180" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="armCenter" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
@@ -1393,6 +1393,100 @@
         <Property name="text" type="java.lang.String" value="Battery Changed:"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JDialog" name="warning">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel51" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="warningBatteryNumber" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabel59" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="warningCycleCount" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jLabel61" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="33" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel50" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="jLabel50" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="warningBatteryNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel59" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="warningCycleCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel61" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="84" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel50">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="36" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="ATTENTION!"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel51">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Battery Number:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="warningBatteryNumber">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel59">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="has reached"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="warningCycleCount">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="100"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel61">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="cycles"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="close"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -1742,7 +1836,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane3" alignment="1" pref="479" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="1" pref="922" max="32767" attributes="0"/>
                               <Component id="ErrorMessagePanel" alignment="0" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
@@ -1862,7 +1956,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="Section" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="123" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="545" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2489,7 +2583,7 @@
                                   <Component id="jLabel56" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel88" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -2542,6 +2636,42 @@
                                           <Component id="mintofull4" alignment="1" max="32767" attributes="0"/>
                                           <Component id="mintofull8" alignment="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="voltcharg8" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="percentage8" min="-2" pref="44" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="voltcharg1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="voltcharg2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="voltcharg3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="voltcharg4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="voltcharg5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="voltcharg6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="voltcharg7" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="percentage7" alignment="1" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="percentage6" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="percentage5" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="percentage4" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="percentage3" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="percentage2" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="percentage1" min="-2" pref="55" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -2555,36 +2685,12 @@
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel95" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="voltcharg8" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg7" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg6" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg5" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg4" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg3" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg2" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg1" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jLabel95" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel83" min="-2" pref="62" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="503" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel83" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="percentage8" alignment="0" pref="41" max="32767" attributes="0"/>
-                                      <Component id="percentage7" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage6" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage5" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage4" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage3" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage1" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="status8" alignment="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="status7" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -2596,7 +2702,7 @@
                                   <Component id="status1" alignment="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="jLabel93" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -2611,160 +2717,151 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel86" min="-2" pref="40" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel91" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel92" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel93" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel82" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel83" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel95" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel91" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel92" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel93" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel82" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel83" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel56" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp1" alignment="3" pref="16" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel56" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp1" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle1" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull1" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage1" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status1" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel89" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp2" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle2" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull2" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage2" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status2" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg2" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel90" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp3" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle3" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull3" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage3" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status3" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg3" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel94" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp4" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle4" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull4" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage4" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status4" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg4" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel85" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp5" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle5" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull5" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage5" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status5" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg5" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel87" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp6" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle6" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull6" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage6" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status6" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg6" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel84" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp7" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle7" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull7" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage7" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status7" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg7" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel88" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp8" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle8" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull8" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage8" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status8" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg8" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel95" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="voltcharg1" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="378" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle1" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull1" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage1" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status1" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg1" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel89" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp2" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle2" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull2" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage2" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status2" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg2" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel90" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp3" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle3" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull3" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage3" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status3" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg3" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel94" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp4" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="percentage4" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cycle4" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull4" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status4" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg4" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel85" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp5" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="percentage5" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cycle5" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull5" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status5" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg5" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel87" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp6" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle6" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull6" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage6" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status6" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg6" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel84" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp7" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle7" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull7" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage7" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status7" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg7" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel88" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp8" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cycle8" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull8" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status8" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg8" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage8" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="50" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3209,7 +3306,7 @@
                                   <Component id="jLabel57" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel100" alignment="1" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -3253,18 +3350,6 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="mintofull14" alignment="0" pref="67" max="32767" attributes="0"/>
-                                          <Component id="mintofull13" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="mintofull11" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="mintofull10" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="mintofull9" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="mintofull12" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="mintofull16" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel103" min="-2" max="-2" attributes="0"/>
@@ -3280,31 +3365,46 @@
                                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                               <Component id="voltcharg16" alignment="0" max="32767" attributes="0"/>
                                               <Component id="voltcharg15" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg14" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg13" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg12" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg11" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg10" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="voltcharg9" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel104" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="percentage16" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="percentage15" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="percentage14" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="percentage13" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="percentage12" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="percentage11" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="percentage10" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="percentage9" alignment="0" pref="41" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="514" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="mintofull14" alignment="0" pref="67" max="32767" attributes="0"/>
+                                          <Component id="mintofull13" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="mintofull11" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="mintofull10" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="mintofull9" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="mintofull12" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="mintofull16" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="voltcharg10" min="-2" max="-2" attributes="0"/>
+                                          <Component id="voltcharg9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="voltcharg11" min="-2" max="-2" attributes="0"/>
+                                          <Component id="voltcharg12" min="-2" max="-2" attributes="0"/>
+                                          <Component id="voltcharg13" min="-2" max="-2" attributes="0"/>
+                                          <Component id="voltcharg14" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="508" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel104" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="percentage16" alignment="0" pref="41" max="32767" attributes="0"/>
-                                      <Component id="percentage15" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage14" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage13" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage12" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage11" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage10" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="percentage9" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="status16" alignment="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="status15" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -3331,160 +3431,151 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel98" min="-2" pref="40" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel106" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel107" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel108" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel103" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel97" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel104" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel106" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel107" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel108" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel103" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel104" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel57" alignment="3" pref="0" max="32767" attributes="0"/>
+                                          <Component id="temp9" alignment="3" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel57" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp9" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle9" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull9" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage9" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status9" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel101" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp10" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle10" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull10" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage10" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status10" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg10" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel102" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp11" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle11" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull11" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage11" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status11" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg11" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel109" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp12" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle12" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull12" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage12" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status12" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg12" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel96" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp13" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle13" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull13" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage13" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status13" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg13" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel99" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp14" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle14" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull14" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage14" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status14" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg14" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel105" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp15" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle15" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull15" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage15" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status15" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg15" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel100" alignment="3" max="32767" attributes="0"/>
-                                                  <Component id="temp16" alignment="3" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="cycle16" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="mintofull16" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="percentage16" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="status16" alignment="3" max="32767" attributes="0"/>
-                                              <Component id="voltcharg16" alignment="3" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel97" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="voltcharg9" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="378" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle9" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull9" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage9" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status9" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg9" alignment="3" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel101" alignment="3" pref="0" max="32767" attributes="0"/>
+                                          <Component id="temp10" alignment="3" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle10" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull10" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage10" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status10" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg10" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel102" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp11" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle11" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull11" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage11" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status11" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg11" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel109" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp12" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cycle12" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull12" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="percentage12" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status12" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg12" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel96" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp13" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="percentage13" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cycle13" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull13" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status13" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg13" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel99" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp14" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="percentage14" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cycle14" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull14" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status14" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg14" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel105" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp15" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="percentage15" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cycle15" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull15" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status15" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg15" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel100" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="temp16" alignment="3" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="percentage16" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cycle16" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="mintofull16" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="status16" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="voltcharg16" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="364" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3957,7 +4048,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="292" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="609" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -4004,7 +4095,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                               <Component id="droneOnPlatform" min="-2" pref="290" max="-2" attributes="0"/>
-                              <EmptySpace pref="137" max="32767" attributes="0"/>
+                              <EmptySpace pref="578" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -4013,7 +4104,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                               <Component id="droneOnPlatform" min="-2" pref="174" max="-2" attributes="0"/>
-                              <EmptySpace pref="79" max="32767" attributes="0"/>
+                              <EmptySpace pref="395" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -4084,7 +4175,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane11" pref="253" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane11" pref="573" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>

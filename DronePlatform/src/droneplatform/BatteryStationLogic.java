@@ -20,6 +20,7 @@ public class BatteryStationLogic implements Runnable {
     private int batteryStationNumberPossition;
     private int batteryStationYPossition;
     private byte[] dataFromArduino;
+    private byte[] dataFromMega;
     private DataHandler dh;
     private Thread t;
     private byte[] chargeCurrent;
@@ -27,6 +28,9 @@ public class BatteryStationLogic implements Runnable {
     private TimerTask tTask;
     public int secondsPassed;
     boolean limitSwitch;
+    int resetBateryStatus = 0;
+    private int zeroPercentageMessureAmount = 0;
+       int nextBatteryNumber = 0;
 
     /**
      * create the batterystationlogic, and fill inn batteries to atrraylist
@@ -56,14 +60,20 @@ public class BatteryStationLogic implements Runnable {
             try {
                 semaphore.acquire();
                 dataFromArduino = dh.getDataFromArduino();
+                dataFromMega = dh.getDataFromMega();
                 dh.setNextBatteryNumberToChange(getNextBatteryToChange());
-                semaphore.release();
                 updateBatteryInformation(dataFromArduino);
-//setAllbatterychargeCurrent();
-            //    System.out.println( Arrays.toString(chargeCurrent));
-             
-            
+                setAllbatterychargeCurrent();
+                if (dataFromMega[12] == 99) {
+                    resetGUIData();
+                }
+                /*if (dataFromMega[11] == 99) {
+                    batteryIsDetachedResetGUI();
+                }*/
 
+                semaphore.release();
+
+                //    System.out.println( Arrays.toString(chargeCurrent));
             } catch (InterruptedException ex) {
                 Logger.getLogger(BatteryStationLogic.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -77,19 +87,8 @@ public class BatteryStationLogic implements Runnable {
         for (int i = 0; i < 16; i++) {
             battery = new BatteryStation(i);
             batteries.add(battery);
-
         }
-        batteries.get(1).setPercentageCharged(99);
-        batteries.get(3).setPercentageCharged(30);
-        batteries.get(4).setPercentageCharged(75);
-        batteries.get(5).setPercentageCharged(55);
-        batteries.get(6).setPercentageCharged(72);
-        batteries.get(7).setPercentageCharged(70);
-        batteries.get(8).setPercentageCharged(40);
-        //  batteries.get(6).setBatteryCycles(22);
-        //  batteries.get(6).setLimiSwitch(true);
-
-    }
+      }
 
     /**
      * get the complete list of all batterys
@@ -110,8 +109,23 @@ public class BatteryStationLogic implements Runnable {
         int i = 1;
 
         for (int x = 0; x < 16; x++) {
-            //setting percentage of charge
-            batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+
+            if (incomingDataFromArduino[i] != 0) {
+                batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+            } else if ((incomingDataFromArduino[i] == 0) && (batteries.get(x).getChargedPercentage() == 100)) {
+                batteries.get(x).setPercentageCharged(100);
+            } 
+           else if ((incomingDataFromArduino[i] == 0) && (batteries.get(x).getChargedPercentage() >= 10)) {
+                batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+            } else if ((incomingDataFromArduino[i] == 0) && (batteries.get(x).getChargedPercentage() <= 10)) {
+                batteries.get(x).setPercentageCharged(0);
+            } else if ((incomingDataFromArduino[i] == 0)) {
+                zeroPercentageMessureAmount++;
+            } else if ((incomingDataFromArduino[i] == 0) && (zeroPercentageMessureAmount >= 16)) {
+                zeroPercentageMessureAmount = 0;
+                batteries.get(x).setPercentageCharged(0);
+            }
+            ////
             i = i + 1;
 
             //Setting the charging voltage
@@ -122,26 +136,39 @@ public class BatteryStationLogic implements Runnable {
             batteries.get(x).setChargingVoltage(voltage + (voltageDesc / 100));
 
             //Setting minutest to fully charged
-            batteries.get(x).setTimeToMaxBattery(incomingDataFromArduino[i]);
-            //setTimeToMaxChargingLevel(x, dataFromArduino[i]);
+            if ((incomingDataFromArduino[i] == 0) || (incomingDataFromArduino[i] == 120)) {
+                batteries.get(x).setTimeToMaxBattery(0);
+            } else {
+
+                batteries.get(x).setTimeToMaxBattery(incomingDataFromArduino[i]);
+            }
+//setTimeToMaxChargingLevel(x, dataFromArduino[i]);
             i++;
 
             //Setting Temperatur on station
             float temperature = incomingDataFromArduino[i]; // whole number temperature
             i = i + 1;                                      // increment the byte placement
-            float tempDesc = incomingDataFromArduino[i];    // temperatur descimal 
+            float tempDesc = incomingDataFromArduino[i];    // temperatur descimal
             // find the spesific battery, sett the temperature with combined whole number and the descimal
-            batteries.get(x).setTemperature((temperature + (tempDesc / 100)));
-            //setActiveBatteryTemperature(x, dataFromArduino[i]);
+            if (temperature != 120) {
+                batteries.get(x).setTemperature((temperature + (tempDesc / 100)));
+            } else {
+               // batteries.get(x).setTemperature(0);
+            }
+
+//setActiveBatteryTemperature(x, dataFromArduino[i]);
             i = i + 1;
 
             //setting cycle count on batteries
             float cyclecount = incomingDataFromArduino[i];
             i = i + 1;
             float cycleDesc = incomingDataFromArduino[i];
+           
+            if(cyclecount!=1.0)
+            {
             batteries.get(x).setBatteryCycles((cyclecount + (cycleDesc / 100)) * 100);
+            }
             i = i + 1;
-
             //setting staus on batteries
             batteries.get(x).setBatteryStatus(incomingDataFromArduino[i]);
             i = i + 1;
@@ -153,41 +180,38 @@ public class BatteryStationLogic implements Runnable {
             }
              batteries.get(x).setLimiSwitch(limitSwitch);
              */
-            batteries.get(x).setChargingLevelOnBatteries(incomingDataFromArduino[i]);
-
+            if (incomingDataFromArduino[i] == 0) {
+               }
+            if (incomingDataFromArduino[i] != 0) {
+                batteries.get(x).setChargingLevelOnBatteries(incomingDataFromArduino[i]);
+            }
             i = i + 1;
             i = i + 1;
         }
-        //System.out.println("ute av update battery");
+        //resetBateryStatus++;
 
     }
-    
-    
-    public void setAllbatterychargeCurrent()
-    {
-      //  chargeCurrent = null;
-       if (batteries.size()!=0)
-       {
-            for (int x = 0; x < 16; x++) {
-            chargeCurrent[x] = (byte) batteries.get(x).getChargingLevelOnBatteries();
+
+    public void setAllbatterychargeCurrent() {
+        chargeCurrent[0] = (byte) 101; //FlagByte
+        if (batteries.size() != 0) {
+            for (int x = 0; x < 8; x++) {
+                chargeCurrent[x + 1] = (byte) batteries.get(x).getChargingLevelOnBatteries();
+            }
         }
-       }
     }
-    
-     
-        
-        
-    
-    
 
     public byte[] getAllbatterychargeCurrent() {
-            
+
         return chargeCurrent;
-           
-      
-            
+
     }
 
+    public int getSpecificbatterychargeCurrent(int x) {
+        int batteryCurrent = batteries.get(x).getChargingLevelOnBatteries();
+
+        return batteryCurrent;
+    }
 
     /**
      * find the next battery in line to be used
@@ -209,7 +233,7 @@ public class BatteryStationLogic implements Runnable {
      * @return the battery number
      */
     public int getNextBatteryToChange() {
-        int nextBatteryNumber = 0;
+     
         int lastBatteryPercentage = 0;
 
         for (int x = 0; x < 16; x++) {
@@ -221,75 +245,14 @@ public class BatteryStationLogic implements Runnable {
         }
         nextBatteryNumber = nextBatteryNumber + 1;
 
-        if ((dataFromArduino[10] == 0) && (lastBatteryPercentage <= 80)) {
-            nextBatteryNumber = 0;
-        }
         // System.out.println("nextBatteryNumber: " + nextBatteryNumber);
         //  System.out.println("nextBatteryPercentage: " + lastBatteryPercentage);
+        //  batteries.get(nextBatteryNumber).setPercentageCharged(0);
+        if ((dataFromArduino[10] == 0) && (lastBatteryPercentage <= 30)) {
+            nextBatteryNumber = 99;
+        }
 
         return nextBatteryNumber;
-    }
-
-    /**
-     * setting spesific battery to docking
-     *
-     * @param x
-     * @param value
-     */
-    public void setBatteriesDocking(int x, boolean value) {
-        batteries.get(x).setDocked(value);
-    }
-
-    /**
-     * checking if battery is in docking station
-     *
-     * @param x number of the batteryStation
-     * @return the boolean value if the battery is docked at station
-     */
-    public boolean isBatteriesDocked(int x) {
-        return batteries.get(x).isDocked();
-    }
-
-    /**
-     * gives the XYZ location of the batterystation
-     *
-     * @param x X is the number of the batterystation in the list
-     * @return a byte[] where first byte is X-value, second is Y-Value and last
-     * i z-Value
-     */
-    public byte[] getActiveBatteryXYZLocation(int x) {
-        this.batteriStationLocation = new byte[3];
-        batteriStationLocation = batteries.get(x).getBatteryStationLocation();
-        return batteriStationLocation;
-    }
-
-    /**
-     * get the charging level of the active battery
-     *
-     * @param x the number of the batterystation
-     * @return the int of the charging level in percentage
-     */
-    public int getActiveBatteryChargingLevel(int x) {
-        return batteries.get(x).getBatteryLevel();
-
-    }
-
-    /**
-     * setting the spesific battery to charging station
-     *
-     * @param x the number of the batterystation
-     */
-    public void settBatteryToChargeInStation(int x) {
-        batteries.get(x).setDocked(true);
-    }
-
-    /**
-     * setting the spesific battery to charging station
-     *
-     * @param x the number of the batterystation
-     */
-    public void releaseBatteryFromChargeInStation(int x) {
-        batteries.get(x).setDocked(false);
     }
 
     /**
@@ -433,4 +396,90 @@ public class BatteryStationLogic implements Runnable {
         batteries.get(x).setLimiSwitch(value);
     }
 
+    public void resetGUIData() {
+
+        for (int x = 0; x < 16; x++) {
+            batteries.get(x).setPercentageCharged(1);
+            batteries.get(x).setChargingVoltage(1);
+            batteries.get(x).setTimeToMaxBattery(1);
+            batteries.get(x).setTemperature(1);
+            batteries.get(x).setBatteryCycles(1);
+            batteries.get(x).setBatteryStatus(1);
+            batteries.get(x).setChargingLevelOnBatteries(1);
+
+        }
+        //resetBateryStatus++;
+
+    }
+/*
+    public void batteryIsDetachedResetGUI() {
+        batteries.get(nextBatteryNumber).setPercentageCharged(0);
+        batteries.get(nextBatteryNumber).setChargingVoltage(0);
+        batteries.get(nextBatteryNumber).setTimeToMaxBattery(0);
+        batteries.get(nextBatteryNumber).setTemperature(0);
+        batteries.get(nextBatteryNumber).setBatteryCycles(0);
+        batteries.get(nextBatteryNumber).setBatteryStatus(0);
+        batteries.get(nextBatteryNumber).setChargingLevelOnBatteries(0);
+
+    }
+    */
 }
+
+//////////////////////////////////////SE OM KAN TAS BORT
+/**
+ * setting spesific battery to docking
+ *
+ * @param x
+ * @param value
+ */
+/*  public void setBatteriesDocking(int x, boolean value) {
+        batteries.get(x).setDocked(value);
+    }*/
+/**
+ * checking if battery is in docking station
+ *
+ * @param x number of the batteryStation
+ * @return the boolean value if the battery is docked at station
+ */
+/*   public boolean isBatteriesDocked(int x) {
+        return batteries.get(x).isDocked();
+    }
+ */
+/**
+ * gives the XYZ location of the batterystation
+ *
+ * @param x X is the number of the batterystation in the list
+ * @return a byte[] where first byte is X-value, second is Y-Value and last i
+ * z-Value
+ */
+/*    public byte[] getActiveBatteryXYZLocation(int x) {
+        this.batteriStationLocation = new byte[3];
+        batteriStationLocation = batteries.get(x).getBatteryStationLocation();
+        return batteriStationLocation;
+    }*/
+/**
+ * get the charging level of the active battery
+ *
+ * @param x the number of the batterystation
+ * @return the int of the charging level in percentage
+ */
+/*   public int getActiveBatteryChargingLevel(int x) {
+        return batteries.get(x).getBatteryLevel();
+
+    }*/
+/**
+ * setting the spesific battery to charging station
+ *
+ * @param x the number of the batterystation
+ */
+/*  public void settBatteryToChargeInStation(int x) {
+        batteries.get(x).setDocked(true);
+    }*/
+/**
+ * setting the spesific battery to charging station
+ *
+ * @param x the number of the batterystation
+ */
+/* public void releaseBatteryFromChargeInStation(int x) {
+        batteries.get(x).setDocked(false);
+    }*/

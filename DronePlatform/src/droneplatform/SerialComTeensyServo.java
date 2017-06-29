@@ -77,7 +77,7 @@ public class SerialComTeensyServo implements Runnable {
                     System.out.println("send");
                     byte[] dataToTeensy = new byte[5];
                     semaphore.acquire();
-                    dataToTeensy = dataHandler.getDataToTeensy();
+                    dataToTeensy = dataHandler.getDataToMega();
                     semaphore.release();
                     increment1++;
                     System.out.println("Serialsend:" + Arrays.toString(dataToTeensy));

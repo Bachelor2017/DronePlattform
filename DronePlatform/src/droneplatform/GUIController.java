@@ -132,11 +132,8 @@ public class GUIController extends TimerTask {
     public void setXAxisStatus(boolean value, int direction) {
         this.datahandler.motorStatus(2, value, direction);
     }
-    
-    
-    
-    
-    
    
-
+    
+    
+  
 }

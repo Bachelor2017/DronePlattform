@@ -10,7 +10,7 @@ import java.util.concurrent.Semaphore;
  * and open the template in the editor.
  */
 ////////////PROTOCOLLS///////////////
-////Data from GU to be sendt to Teensy (stepper engine controller) -dataToTeensy
+////Data from GU to be sendt to MEGA (stepper engine controller) -dataToMega
 //byte[0] - 101    (flagbyte)
 //byte[1] - 0-1    (auto/manual mode)
 //byte[2] - 1-10   (motor number)
@@ -18,10 +18,13 @@ import java.util.concurrent.Semaphore;
 //byte[4] - 0-1    (start calibration ,1 = true     
 //byte[5] - neste batteri klart til bytte
 //byte[6] - drone on platform 1 = drone sent signal 
+//byte[7] - fixed the error with drone attached on battery under change
+//
+//
+//
 /////Data from arduino controller to GUI   - dataFromArduino//  Battery information
 //
-//byte[0] - 0-15   (BatteryNumber)
-//
+///byte[0] - 0-15   (BatteryNumber)
 //Repeat x16 batteries  total of byte[176]
 //byte[1] - 0-100% (Relative charge)
 //byte[2] - Voltage
@@ -34,7 +37,7 @@ import java.util.concurrent.Semaphore;
 //byte[9] - Battery Status
 
 
-//Data from Teensy controller to GUI   - dataFromTeensy//   Stepper controller information
+//Data from Mega controller to GUI   - dataFromMega//   Stepper controller information
 //
 //byte[0] motor 1 (lift)   position
 //byte[1] motor 1 (lift)   position
@@ -46,13 +49,15 @@ import java.util.concurrent.Semaphore;
 //byte[7] Fault number/Motor guard
 //byte[8] calibrationStatus   0= idle, 1 = calibrating slider, 2 = calibrating lift, 3 = calibrating arm, 4 = calibration done
 //byte[9] drone located     0 = no drone on platform, 1 = drone located on platform
-
+//byte[10] number of batteries changed
+//byte[11] battery is detached from station
+//byte[12] resett GUI batteryinformation
 
 public class DataHandler {
 
     private byte[] dataFromArduino;     //The byteArray retrieved from Arduino 
-    private byte[] dataToTeensy;        //The byteArray to be sendt to Teensy 
-    private byte[] dataFromTeensy;      //The byteArray retrieved from Teensy 
+    private byte[] dataToMega;        //The byteArray to be sendt to Teensy 
+    private byte[] dataFromMega;      //The byteArray retrieved from Teensy 
     private byte[] chargeCurrent;       //The charge current for each battery
     /// for testing
     private java.util.Timer timer;
@@ -67,11 +72,11 @@ public class DataHandler {
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToTeensy = new byte[7];
-        dataFromTeensy = new byte[11];
-        dataToTeensy[0] = 101;
-        dataToTeensy[1] = 1; //setting to manual from start
-        dataFromTeensy[5] = 1;  //????????????????????????????????????????????????????
+        dataToMega = new byte[7];
+        dataFromMega = new byte[13];
+        dataToMega[0] = 101;
+        dataToMega[1] = 1; //setting to manual from start
+        dataFromMega[5] = 1;  //????????????????????????????????????????????????????
         chargeCurrent = new byte[8];
         
         for(int i = 0; i < 8; i++){
@@ -105,18 +110,18 @@ public class DataHandler {
      *
      * @return retuns a byte[] retrieved from the mikrocontroller
      */
-    public byte[] getDataFromTeensy() {     //byte[1] er case
+    public byte[] getDataFromMega() {     //byte[1] er case
    
-        return dataFromTeensy;
+        return dataFromMega;
     }
 
     /**
      * setting the data from the teensyController
      *
-     * @param newData the data updating the dataFromTeensy byte[]
+     * @param newData the data updating the dataFromMega byte[]
      */
-    public void setDataFromTeensy(byte[] serialData) {
-        this.dataFromTeensy = serialData;
+    public void setDataFromMega(byte[] serialData) {
+        this.dataFromMega = serialData;
 
     }
     
@@ -129,7 +134,7 @@ public class DataHandler {
      */
     public void droneOnPlatform(int value)
     {
-        this.dataToTeensy[6] = (byte)value;
+        this.dataToMega[6] = (byte)value;
 
     }
 
@@ -145,33 +150,33 @@ public class DataHandler {
      * rev, 2=forward)
      */
     public void motorStatus(int motorNumber, boolean status, int direction) {
-        int modeNumber = dataToTeensy[1];
+        int modeNumber = dataToMega[1];
       //  if (modeNumber == 1) {
 
             //the number of the motor to be activated
-            dataToTeensy[2] = (byte) motorNumber;    //Setting engine number to the bytearray
-            dataToTeensy[3] = (byte) direction;    //setting the direction to byte 3 in  the bytearray
+            dataToMega[2] = (byte) motorNumber;    //Setting engine number to the bytearray
+            dataToMega[3] = (byte) direction;    //setting the direction to byte 3 in  the bytearray
       //  }
     }
 
     public void setIdleMotorNumber() {
-        dataToTeensy[2] = 0;
+        dataToMega[2] = 0;
     }
 
  
     public void setCalibrationStatus(boolean value) {
         if (value == true) {
-            dataToTeensy[4] = 106;
+            dataToMega[4] = 106;
         } else {
-            dataToTeensy[4] = 0;
+            dataToMega[4] = 0;
         }
-        System.out.println(Arrays.toString(dataToTeensy));
+        System.out.println(Arrays.toString(dataToMega));
     }
 
     public void setSpesificDataFromGUI(int byteNumber, int value) {
-        dataToTeensy[byteNumber] = (byte) value;
-     //   System.out.println("data to Teensy controller: " + Arrays.toString(dataToTeensy));
-     //   System.out.println("data From Teensy controller: " + Arrays.toString(dataFromTeensy));
+        dataToMega[byteNumber] = (byte) value;
+     //   System.out.println("data to Teensy controller: " + Arrays.toString(dataToMega));
+     //   System.out.println("data From Teensy controller: " + Arrays.toString(dataFromMega));
      
     }
 
@@ -184,13 +189,13 @@ public class DataHandler {
         platformMode = value;
         getPlatformMode();
         if (value) {
-            dataToTeensy[1] = 0;      //auto mode
+            dataToMega[1] = 99;      //auto mode
 
         } else if (!value) {
 
-            dataToTeensy[1] = 1;      //Manuel mode
+            dataToMega[1] = 1;      //Manuel mode
         }
-      //  System.out.println(Arrays.toString(dataToTeensy));
+      //  System.out.println(Arrays.toString(dataToMega));
   //  System.out.println(platformMode);
    
     }
@@ -207,8 +212,8 @@ public class DataHandler {
      * @param speed 0-100, (percentage)
      */
     public void setSpeedValue(int speed) {
-        //  dataToTeensy[4] = (byte) speed;
-        //    System.out.println(Arrays.toString(dataToTeensy));
+        //  dataToMega[4] = (byte) speed;
+        //    System.out.println(Arrays.toString(dataToMega));
     }
 
     /**
@@ -216,22 +221,22 @@ public class DataHandler {
      *
      * @return retuns a byte[] to be sendt to the teensy controller
      */
-    public byte[] getDataToTeensy() {
+    public byte[] getDataToMega() {
 
-        return dataToTeensy;
+        return dataToMega;
     }
 
     /**
      * setting the data to the TeensyController
      *
-     * @param newData the data updating the dataToTeensy byte[]
+     * @param newData the data updating the dataToMega byte[]
      */
     public void setDataToTeensy(byte[] newData) {
-        this.dataToTeensy = newData;
+        this.dataToMega = newData;
     }
 
     public void setNextBatteryNumberToChange(int batteryNumber) {
-        this.dataToTeensy[5] = (byte) batteryNumber;
+        this.dataToMega[5] = (byte) batteryNumber;
 
     }
     

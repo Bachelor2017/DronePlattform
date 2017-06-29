@@ -24,7 +24,7 @@ public class SerialComMega implements Runnable {
     private Thread t;
     private boolean hasReceived;
     private byte[] oldData = new byte[4];
-    byte[] dataFromTeensynoToDH = new byte[11];
+    byte[] dataFromTeensynoToDH = new byte[13];
 
     /**
      *
@@ -72,9 +72,9 @@ public class SerialComMega implements Runnable {
                 if (hasReceived) {
                     byte[] dataToTeensy = new byte[6];
                     semaphore.acquire();
-                    dataToTeensy = dataHandler.getDataToTeensy();
+                    dataToTeensy = dataHandler.getDataToMega();
                     semaphore.release();
-                    System.out.println("Read Arranged MEGA " + Arrays.toString(dataToTeensy));
+                   // System.out.println("Read Arranged MEGA " + Arrays.toString(dataToTeensy));
                     increment1++;
                     serialPort.writeBytes(dataToTeensy);
                     hasReceived = false;
@@ -83,16 +83,16 @@ public class SerialComMega implements Runnable {
                 if (!hasReceived) {
                     byte[] data = serialPort.readBytes(1);
                     if (data[0] == 101) {
-                        byte[] dataFromTeensynoToDH = serialPort.readBytes(11);
+                        byte[] dataFromTeensynoToDH = serialPort.readBytes(13);
                          byte[] testTeensy = new byte[10];
-                        
+                        // System.out.println("Read Arranged MEGA " + Arrays.toString(dataFromTeensynoToDH));
                         semaphore.acquire();
-                        dataHandler.setDataFromTeensy(dataFromTeensynoToDH);
+                        dataHandler.setDataFromMega(dataFromTeensynoToDH);
                         semaphore.release();
                      
                        
                         if (testTeensy != dataFromTeensynoToDH) {
-                         System.out.println("Send Arranged MEGA" + Arrays.toString(dataFromTeensynoToDH));
+                   //     System.out.println("Send Arranged MEGA" + Arrays.toString(dataFromTeensynoToDH));
                         }
                         testTeensy = dataFromTeensynoToDH;
 
