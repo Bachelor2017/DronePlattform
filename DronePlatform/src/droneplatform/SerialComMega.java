@@ -74,7 +74,7 @@ public class SerialComMega implements Runnable {
                     semaphore.acquire();
                     dataToTeensy = dataHandler.getDataToMega();
                     semaphore.release();
-                    System.out.println("Read Arranged MEGA " + Arrays.toString(dataToTeensy));
+                   // System.out.println("Read Arranged MEGA " + Arrays.toString(dataToTeensy));
                     increment1++;
                     serialPort.writeBytes(dataToTeensy);
                     hasReceived = false;
@@ -85,7 +85,7 @@ public class SerialComMega implements Runnable {
                     if (data[0] == 101) {
                         byte[] dataFromTeensynoToDH = serialPort.readBytes(13);
                          byte[] testTeensy = new byte[10];
-                        // System.out.println("Read Arranged MEGA " + Arrays.toString(dataFromTeensynoToDH));
+                        System.out.println("Read Arranged MEGA " + Arrays.toString(dataFromTeensynoToDH));
                         semaphore.acquire();
                         dataHandler.setDataFromMega(dataFromTeensynoToDH);
                         semaphore.release();
