@@ -1,3 +1,0 @@
-System powered on  Time: 13:36:57
-Number of total batteryChanges:   0
-Total time used:  0
