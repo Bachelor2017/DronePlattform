@@ -75,6 +75,11 @@ public class GUIController extends TimerTask {
         this.datahandler.setSpesificDataFromGUI(byteNumber,value);
     }
     
+    public void resetAfterDroneAttached()
+    {
+        this.datahandler.resetAfterDroneAttached();
+    }
+    
     
     
     /**
