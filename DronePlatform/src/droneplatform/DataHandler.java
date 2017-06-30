@@ -72,7 +72,7 @@ public class DataHandler {
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToMega = new byte[7];
+        dataToMega = new byte[8];
         dataFromMega = new byte[13];
         dataToMega[0] = 101;
         dataToMega[1] = 1; //setting to manual from start
@@ -125,6 +125,11 @@ public class DataHandler {
 
     }
     
+    
+    public void resetAfterDroneAttached()
+    {
+         this.dataToMega[7] = (byte) 99;
+    }
     
 
    
