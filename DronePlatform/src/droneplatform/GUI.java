@@ -4165,11 +4165,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }//GEN-LAST:event_jButton7MouseReleased
 
     private void droneOnPlatformMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_droneOnPlatformMousePressed
-    
+    controller.resetAfterDroneAttached();
     }//GEN-LAST:event_droneOnPlatformMousePressed
 
     private void droneOnPlatformMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_droneOnPlatformMouseReleased
-        controller.setDataToDataHandler(6, 0);
+        controller.setDataToDataHandler(7, 0);
     }//GEN-LAST:event_droneOnPlatformMouseReleased
 
     /**
