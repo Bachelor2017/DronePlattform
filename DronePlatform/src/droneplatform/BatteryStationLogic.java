@@ -248,7 +248,7 @@ public class BatteryStationLogic implements Runnable {
         // System.out.println("nextBatteryNumber: " + nextBatteryNumber);
         //  System.out.println("nextBatteryPercentage: " + lastBatteryPercentage);
         //  batteries.get(nextBatteryNumber).setPercentageCharged(0);
-        if ((dataFromArduino[10] == 0) && (lastBatteryPercentage <= 30)) {
+        if ((dataFromArduino[10] == 0) && (lastBatteryPercentage <= 60)) {
             nextBatteryNumber = 99;
         }
 
