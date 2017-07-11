@@ -21,6 +21,7 @@ public class BatteryStationLogic implements Runnable {
     private int batteryStationYPossition;
     private byte[] dataFromArduino;
     private byte[] dataFromMega;
+    private byte[] zeroPercentMeasument;
     private DataHandler dh;
     private Thread t;
     private byte[] chargeCurrent;
@@ -28,6 +29,7 @@ public class BatteryStationLogic implements Runnable {
     private TimerTask tTask;
     public int secondsPassed;
     boolean limitSwitch;
+    private boolean hasNewValue;
     int resetBateryStatus = 0;
     private int zeroPercentageMessureAmount = 0;
        int nextBatteryNumber = 0;
@@ -39,10 +41,14 @@ public class BatteryStationLogic implements Runnable {
         this.semaphore = semaphore;
         chargeCurrent = new byte[16];
         batteries = new ArrayList<>();
+        zeroPercentMeasument = new byte[16];
         batteryStationNumberPossition = 0;
         this.dh = dh;
         fillList();
         limitSwitch = false;
+        for(int i = 0; i<16; i++ ){
+        zeroPercentMeasument[i]=0;
+        }
 
     }
 
@@ -59,19 +65,23 @@ public class BatteryStationLogic implements Runnable {
         while (true) {
             try {
                 semaphore.acquire();
+                 hasNewValue = dh.hasNewValues();
                 dataFromArduino = dh.getDataFromArduino();
                 dataFromMega = dh.getDataFromMega();
+               
+                semaphore.release();
                 dh.setNextBatteryNumberToChange(getNextBatteryToChange());
+                if(hasNewValue){
                 updateBatteryInformation(dataFromArduino);
                 setAllbatterychargeCurrent();
+                }
+                
                 if (dataFromMega[12] == 99) {
-                    resetGUIData();
+                   // resetGUIData();
                 }
                 /*if (dataFromMega[11] == 99) {
                     batteryIsDetachedResetGUI();
                 }*/
-
-                semaphore.release();
 
                 //    System.out.println( Arrays.toString(chargeCurrent));
             } catch (InterruptedException ex) {
@@ -109,21 +119,32 @@ public class BatteryStationLogic implements Runnable {
         int i = 1;
 
         for (int x = 0; x < 16; x++) {
+            
+            
 
             if (incomingDataFromArduino[i] != 0) {
                 batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+                zeroPercentMeasument[x]=0;
+                 if(x==10){
+                //System.out.println("update ");
+                }
+       
             } else if ((incomingDataFromArduino[i] == 0) && (batteries.get(x).getChargedPercentage() == 100)) {
                 batteries.get(x).setPercentageCharged(100);
-            } 
-           else if ((incomingDataFromArduino[i] == 0) && (batteries.get(x).getChargedPercentage() >= 10)) {
-                batteries.get(x).setPercentageCharged(incomingDataFromArduino[i]);
+            } else if ((incomingDataFromArduino[i] == 0) && (batteries.get(x).getChargedPercentage() >= 10)) {
+                batteries.get(x).setPercentageCharged(batteries.get(x).getChargedPercentage());
             } else if ((incomingDataFromArduino[i] == 0) && (batteries.get(x).getChargedPercentage() <= 10)) {
                 batteries.get(x).setPercentageCharged(0);
-            } else if ((incomingDataFromArduino[i] == 0)) {
-                zeroPercentageMessureAmount++;
-            } else if ((incomingDataFromArduino[i] == 0) && (zeroPercentageMessureAmount >= 16)) {
-                zeroPercentageMessureAmount = 0;
+            } 
+            if ((incomingDataFromArduino[i] == 0)) {
+                zeroPercentMeasument[x]++;
+            } 
+            if ((incomingDataFromArduino[i] == 0) && (zeroPercentMeasument[x] >= 10)) {
+                zeroPercentMeasument[x]=0;
                 batteries.get(x).setPercentageCharged(0);
+                if(x==10){
+               // System.out.println("zero ");
+                }
             }
             ////
             i = i + 1;
