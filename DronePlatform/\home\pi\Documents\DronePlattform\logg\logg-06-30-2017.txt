@@ -1,0 +1,23 @@
+Battery attached to station, going to idle pos  Time: 11:23:08
+Attaching battery to drone  Time: 11:23:04
+Detaching battery from drone  Time: 11:22:53
+Starting drone detection  Time: 11:22:40
+signal received, running lift up for batterychange  Time: 11:22:07
+idle pos await signal from drone  Time: 11:22:00
+Battery retreived, going to idle pos  Time: 11:21:45
+going for new battery  Time: 11:21:35
+Battery attached to station, going to idle pos  Time: 11:21:26
+Retreive battery to charging station  Time: 11:21:01
+Attaching battery to drone  Time: 11:20:37
+Battery attached to station, going to idle pos  Time: 11:20:35
+Attaching battery to drone  Time: 11:20:30
+Detaching battery from drone  Time: 11:20:19
+Starting drone detection  Time: 11:20:06
+signal received, running lift up for batterychange  Time: 11:19:34
+idle pos await signal from drone  Time: 11:18:52
+Battery retreived, going to idle pos  Time: 11:18:38
+going for new battery  Time: 11:18:11
+Calibration Complete  Time: 11:17:55
+Calibrating slider  Time: 11:17:37
+Calibrating lift  Time: 11:17:25
+System powered on  Time: 11:17:06

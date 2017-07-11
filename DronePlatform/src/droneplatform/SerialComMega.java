@@ -73,7 +73,7 @@ public class SerialComMega implements Runnable {
             while (true) {
                 if (hasReceived) {
                     byte[] dataToTeensy = new byte[8];
-                    wait(20);
+                    
                     semaphore.acquire();
                     dataToTeensy = dataHandler.getDataToMega();
                     //boolean flag = dataHandler.isMessageDeliveredToMega();
