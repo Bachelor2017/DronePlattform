@@ -471,6 +471,13 @@ public class SystemLogic implements Runnable {
     public int getTotalTimeUsed() {
         return totalTimeUsed;
     }
+    
+     public int getCurrentState() {
+        return dataFromTeensy[6];
+    }
+        public int getCurrentDebugNumber() {
+        return dataFromTeensy[14];
+    }
 
     /**
      * get the time used in the cycle

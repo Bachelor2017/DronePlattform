@@ -69,7 +69,7 @@ public class UDPReceive extends Thread {
     }
 
     private void processData(byte[] b) {
-        System.out.println(b);
+     
         int value = 0;
         if (b[0] == 1) {
             value = 1;

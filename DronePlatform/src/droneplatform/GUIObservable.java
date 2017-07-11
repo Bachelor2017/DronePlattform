@@ -113,6 +113,12 @@ public class GUIObservable extends Observable {
     public int getTotalTimeUsed() {
         return events.getTotalTimeUsed();
     }
+    public int getCurrentState() {
+        return events.getCurrentState();
+    }
+     public int getCurrentDebugNumber() {
+        return events.getCurrentDebugNumber();
+    }
     
     /**
      * get the total time left in the total process
@@ -274,6 +280,8 @@ public class GUIObservable extends Observable {
     public String getTimeStamp(){
         return events.getTimeStamp();
     }
+
+ 
     
 }
 

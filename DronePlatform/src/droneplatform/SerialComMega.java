@@ -24,7 +24,9 @@ public class SerialComMega implements Runnable {
     private Thread t;
     private boolean hasReceived;
     private byte[] oldData = new byte[4];
-    byte[] dataFromTeensynoToDH = new byte[13];
+    byte[] dataFromTeensynoToDH = new byte[15];
+    private byte lastInt;
+    private byte lastInt2;
 
     /**
      *
@@ -70,36 +72,84 @@ public class SerialComMega implements Runnable {
 
             while (true) {
                 if (hasReceived) {
-                    byte[] dataToTeensy = new byte[7];
+                    byte[] dataToTeensy = new byte[8];
+                    wait(20);
                     semaphore.acquire();
                     dataToTeensy = dataHandler.getDataToMega();
+                    //boolean flag = dataHandler.isMessageDeliveredToMega();
                     semaphore.release();
-                   // System.out.println("Read Arranged MEGA " + Arrays.toString(dataToTeensy));
+                   //System.out.println("Read Arranged MEGA " + Arrays.toString(dataToTeensy));
                     increment1++;
+                    /*
+                    String stringToSend = "<";
+                    for(int i = 0; i<dataToTeensy.length; i++){
+                        stringToSend = (stringToSend + (dataToTeensy[i]) + ",");
+                        if(dataToTeensy[7] != 0){
+                            System.out.println(dataToTeensy[7]);
+                        }
+                    }
+                    stringToSend = stringToSend + ">";
+*/
+                   // if(!flag){
                     serialPort.writeBytes(dataToTeensy);
+                    //dataHandler.setMessageDeliveredToMega(true);
+                    //serialPort.writeString(stringToSend);
+                  // System.out.println(" sent: " + stringToSend);
+                
+                    
                     hasReceived = false;
+                    //}
                 }
+                
 
                 if (!hasReceived) {
+                    
                     byte[] data = serialPort.readBytes(1);
+                    //System.out.print("From MEGA: " + Arrays.toString(data));
                     if (data[0] == 101) {
-                        byte[] dataFromTeensynoToDH = serialPort.readBytes(13);
-                         byte[] testTeensy = new byte[10];
-                        System.out.println("Read Arranged MEGA " + Arrays.toString(dataFromTeensynoToDH));
+                        
+                        byte[] dataFromTeensynoToDH = new byte[20];
+                        
+                        dataFromTeensynoToDH = serialPort.readBytes(15);
+                      
+                    
+                     //   System.out.println("Read Arranged MEGA " + Arrays.toString(dataFromTeensynoToDH));
+                    
                         semaphore.acquire();
                         dataHandler.setDataFromMega(dataFromTeensynoToDH);
                         semaphore.release();
+                        
+                       
+                        
+                       // System.out.println(" Recieved: " +dataFromTeensynoToDH[0] + ", "+dataFromTeensynoToDH[1] + ", "+dataFromTeensynoToDH[2] + ", "+dataFromTeensynoToDH[3] + ", "+dataFromTeensynoToDH[4] + ", "+dataFromTeensynoToDH[5] + ", "+dataFromTeensynoToDH[6] + ", "+dataFromTeensynoToDH[7] + ", "+dataFromTeensynoToDH[8] + ", " );
                      
                        
-                        if (testTeensy != dataFromTeensynoToDH) {
+                        if(dataFromTeensynoToDH[14]!= lastInt) {
+                            System.out.println(" debugnumber = " +dataFromTeensynoToDH[14]);
+                            lastInt = dataFromTeensynoToDH[14];
                    //     System.out.println("Send Arranged MEGA" + Arrays.toString(dataFromTeensynoToDH));
                         }
-                        testTeensy = dataFromTeensynoToDH;
+                         if(dataFromTeensynoToDH[12]!= lastInt2) {
+                            System.out.println(" ErrorState = " +dataFromTeensynoToDH[12]);
+                            lastInt2 = dataFromTeensynoToDH[12];
+                   //     System.out.println("Send Arranged MEGA" + Arrays.toString(dataFromTeensynoToDH));
+                        }
+                         
+                        
+                     
 
                         hasReceived = true;
+                       
 
                     }
+                 
+                   // System.out.println(data[0]);
+
+                //
+                
+        
                 }
+
             }
 
         } catch (SerialPortException ex) {
@@ -133,6 +183,10 @@ public class SerialComMega implements Runnable {
             System.out.println(portNames[i]);
         }
         return portNames;
+    }
+
+    private void makeString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

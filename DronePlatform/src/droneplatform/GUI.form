@@ -808,9 +808,9 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonDown1MouseClicked"/>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonDown1MousePressed"/>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonDown1MouseReleased"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="liftButtonDown1MouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="liftStatus1">
@@ -1105,9 +1105,9 @@
                 <Property name="text" type="java.lang.String" value="Attach to station"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="attach1Station1MouseClicked"/>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="attach1Station1MousePressed"/>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="attach1Station1MouseReleased"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="attach1Station1MouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -1488,39 +1488,33 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="droneAttachedToBatteryWarning">
+      <Events>
+        <EventHandler event="componentHidden" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="droneAttachedToBatteryWarningComponentHidden"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jLabel58" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                          <Component id="jLabel60" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
-                          <Component id="confirmDroneFixedButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel58" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel60" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="confirmDroneFixedButton" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="102" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel58" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel60" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="confirmDroneFixedButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="109" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1548,40 +1542,70 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="batteryNotAttachedWarning">
+      <Events>
+        <EventHandler event="componentHidden" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="batteryNotAttachedWarningComponentHidden"/>
+        <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="batteryNotAttachedWarningWindowClosed"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jLabel62" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                          <Component id="jLabel63" min="-2" max="-2" attributes="0"/>
-                      </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel62" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel64" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="confirmBatteryIsAttachedButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel65" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="LiftToTopButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="confirmBatteryIsAttachedButton4" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel63" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="confirmBatteryIsAttachedButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="batteryAttachedConfirm" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="goToSearchButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel66" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="160" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                  <Component id="jLabel62" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="jLabel62" min="-2" pref="16" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel64" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jLabel63" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="confirmBatteryIsAttachedButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="104" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="confirmBatteryIsAttachedButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="batteryAttachedConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jLabel65" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="LiftToTopButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="confirmBatteryIsAttachedButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel66" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="goToSearchButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1589,25 +1613,100 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel62">
           <Properties>
-            <Property name="text" type="java.lang.String" value="The system is receiving a signal that the battery is not connected to the arm "/>
+            <Property name="text" type="java.lang.String" value="The system is receiving a signal that"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel63">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Make sure the battery is propperly connected to the arm"/>
+            <Property name="text" type="java.lang.String" value="When the problem is at the battery station:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="confirmBatteryIsAttachedButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Confirm"/>
+            <Property name="text" type="java.lang.String" value="Go to idle"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButtonMousePressed"/>
             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButtonMouseReleased"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="batteryAttachedConfirm">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Try again"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="batteryAttachedConfirmMousePressed"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="batteryAttachedConfirmMouseReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel64">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="the battery is not connected to the arm."/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="LiftToTopButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Lift to top"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LiftToTopButtonMousePressed"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LiftToTopButtonMouseReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel65">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="When the problem is at the drone:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="confirmBatteryIsAttachedButton4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="not in use"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButton4MousePressed"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButton4MouseReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="goToSearchButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Go to search"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goToSearchButtonMousePressed"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goToSearchButtonMouseReleased"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goToSearchButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel66">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Try again:"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="batteriesChanged1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="confirmBatteryIsAttachedButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Go to idle"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButton1MousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButton1MouseReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="confirmBatteryIsAttachedButton3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lift to top"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButton3MousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmBatteryIsAttachedButton3MouseReleased"/>
+      </Events>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -1697,14 +1796,21 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel37" min="-2" pref="245" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel26" min="-2" pref="351" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel26" min="-2" pref="351" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="jLabel44" min="-2" pref="319" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Component id="jLabel44" min="-2" pref="319" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="showState" alignment="1" min="-2" pref="61" max="-2" attributes="0"/>
+                                  <Component id="debugNumber" alignment="1" min="-2" pref="61" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jProgressBar1" alignment="0" max="32767" attributes="0"/>
@@ -1762,7 +1868,14 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="tabPanels" pref="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jLabel44" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel44" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="showState" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="debugNumber" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -3696,7 +3809,7 @@
                                       <Component id="voltcharg16" alignment="3" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="364" max="32767" attributes="0"/>
+                              <EmptySpace pref="55" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -4169,7 +4282,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="609" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="294" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -4215,7 +4328,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                              <Component id="droneOnPlatform" min="-2" pref="290" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="debug1toggle" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="debug2toggle" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="droneOnPlatform" min="-2" pref="290" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace pref="578" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -4225,7 +4345,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                               <Component id="droneOnPlatform" min="-2" pref="174" max="-2" attributes="0"/>
-                              <EmptySpace pref="395" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="debug1toggle" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="debug2toggle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="49" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -4239,6 +4364,19 @@
                         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="droneOnPlatformMousePressed"/>
                         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="droneOnPlatformMouseReleased"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JToggleButton" name="debug1toggle">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Debug 1"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="debug1toggleStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JToggleButton" name="debug2toggle">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Debug 2"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -4296,7 +4434,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane11" pref="573" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane11" pref="258" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -4331,6 +4469,16 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="batteriesChanged">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="showState">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="debugNumber">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>

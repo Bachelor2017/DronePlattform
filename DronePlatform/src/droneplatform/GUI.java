@@ -58,6 +58,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private boolean calibrated = false;
     private String newState = null;
     private String newError = null;
+     boolean windowIsClosed = true;
+    
+    private boolean debug1state = false;
+    private boolean droneFaultWindowIsClosed = true;
 
     /**
      * Creates new form GUI
@@ -91,6 +95,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jLabel53.setText(Integer.toString(receive.getCycleTimeUsed()));
             calibrationTime.setText(Integer.toString(receive.getCycleTimeUsed()));
             jLabel55.setText(Integer.toString(receive.getCycleTimeLeft()));
+            showState.setText(Integer.toString(receive.getCurrentState()));
+            debugNumber.setText(Integer.toString(receive.getCurrentDebugNumber()));
             this.setFaultMessages(receive);
             this.setStepperEnginePostiotions();
             this.setCalibrationValues();
@@ -239,6 +245,16 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jLabel62 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
         confirmBatteryIsAttachedButton = new javax.swing.JButton();
+        batteryAttachedConfirm = new javax.swing.JButton();
+        jLabel64 = new javax.swing.JLabel();
+        LiftToTopButton = new javax.swing.JButton();
+        jLabel65 = new javax.swing.JLabel();
+        confirmBatteryIsAttachedButton4 = new javax.swing.JButton();
+        goToSearchButton = new javax.swing.JButton();
+        jLabel66 = new javax.swing.JLabel();
+        batteriesChanged1 = new javax.swing.JLabel();
+        confirmBatteryIsAttachedButton1 = new javax.swing.JButton();
+        confirmBatteryIsAttachedButton3 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -433,12 +449,16 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         jTextArea8 = new javax.swing.JTextArea();
         jPanel10 = new javax.swing.JPanel();
         droneOnPlatform = new javax.swing.JButton();
+        debug1toggle = new javax.swing.JToggleButton();
+        debug2toggle = new javax.swing.JToggleButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTextArea9 = new javax.swing.JTextArea();
         jLabel48 = new javax.swing.JLabel();
         batteriesChanged = new javax.swing.JLabel();
+        showState = new javax.swing.JLabel();
+        debugNumber = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -999,14 +1019,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         liftButtonDown1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/down.PNG"))); // NOI18N
         liftButtonDown1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                liftButtonDown1MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 liftButtonDown1MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 liftButtonDown1MouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                liftButtonDown1MouseClicked(evt);
             }
         });
 
@@ -1276,14 +1296,14 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         attach1Station1.setText("Attach to station");
         attach1Station1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                attach1Station1MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 attach1Station1MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 attach1Station1MouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                attach1Station1MouseClicked(evt);
             }
         });
 
@@ -1600,6 +1620,12 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
+        droneAttachedToBatteryWarning.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                droneAttachedToBatteryWarningComponentHidden(evt);
+            }
+        });
+
         jLabel58.setText("The system is receiving a signal on the Rotational arm sensor. ");
 
         jLabel60.setText("Make sure the drone is not stuck on the arm");
@@ -1619,35 +1645,40 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         droneAttachedToBatteryWarningLayout.setHorizontalGroup(
             droneAttachedToBatteryWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(droneAttachedToBatteryWarningLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(droneAttachedToBatteryWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(droneAttachedToBatteryWarningLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel58))
-                    .addGroup(droneAttachedToBatteryWarningLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel60))
-                    .addGroup(droneAttachedToBatteryWarningLayout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(confirmDroneFixedButton)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addComponent(jLabel58)
+                    .addComponent(jLabel60)
+                    .addComponent(confirmDroneFixedButton)))
         );
         droneAttachedToBatteryWarningLayout.setVerticalGroup(
             droneAttachedToBatteryWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(droneAttachedToBatteryWarningLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addContainerGap()
                 .addComponent(jLabel58)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel60)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(confirmDroneFixedButton)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jLabel62.setText("The system is receiving a signal that the battery is not connected to the arm ");
+        batteryNotAttachedWarning.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                batteryNotAttachedWarningComponentHidden(evt);
+            }
+        });
+        batteryNotAttachedWarning.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                batteryNotAttachedWarningWindowClosed(evt);
+            }
+        });
 
-        jLabel63.setText("Make sure the battery is propperly connected to the arm");
+        jLabel62.setText("The system is receiving a signal that");
 
-        confirmBatteryIsAttachedButton.setText("Confirm");
+        jLabel63.setText("When the problem is at the battery station:");
+
+        confirmBatteryIsAttachedButton.setText("Go to idle");
         confirmBatteryIsAttachedButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 confirmBatteryIsAttachedButtonMousePressed(evt);
@@ -1657,35 +1688,130 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             }
         });
 
+        batteryAttachedConfirm.setText("Try again");
+        batteryAttachedConfirm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                batteryAttachedConfirmMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                batteryAttachedConfirmMouseReleased(evt);
+            }
+        });
+
+        jLabel64.setText("the battery is not connected to the arm.");
+
+        LiftToTopButton.setText("Lift to top");
+        LiftToTopButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                LiftToTopButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                LiftToTopButtonMouseReleased(evt);
+            }
+        });
+
+        jLabel65.setText("When the problem is at the drone:");
+
+        confirmBatteryIsAttachedButton4.setText("not in use");
+        confirmBatteryIsAttachedButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                confirmBatteryIsAttachedButton4MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                confirmBatteryIsAttachedButton4MouseReleased(evt);
+            }
+        });
+
+        goToSearchButton.setText("Go to search");
+        goToSearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                goToSearchButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                goToSearchButtonMouseReleased(evt);
+            }
+        });
+        goToSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goToSearchButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel66.setText("Try again:");
+
         javax.swing.GroupLayout batteryNotAttachedWarningLayout = new javax.swing.GroupLayout(batteryNotAttachedWarning.getContentPane());
         batteryNotAttachedWarning.getContentPane().setLayout(batteryNotAttachedWarningLayout);
         batteryNotAttachedWarningLayout.setHorizontalGroup(
             batteryNotAttachedWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, batteryNotAttachedWarningLayout.createSequentialGroup()
+                .addGroup(batteryNotAttachedWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel62, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(batteryNotAttachedWarningLayout.createSequentialGroup()
                 .addGroup(batteryNotAttachedWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(batteryNotAttachedWarningLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel62))
-                    .addGroup(batteryNotAttachedWarningLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel63)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, batteryNotAttachedWarningLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(confirmBatteryIsAttachedButton)
-                .addGap(255, 255, 255))
+                    .addComponent(jLabel65)
+                    .addGroup(batteryNotAttachedWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, batteryNotAttachedWarningLayout.createSequentialGroup()
+                            .addComponent(LiftToTopButton)
+                            .addGap(95, 95, 95)
+                            .addComponent(confirmBatteryIsAttachedButton4))
+                        .addComponent(jLabel63, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, batteryNotAttachedWarningLayout.createSequentialGroup()
+                            .addComponent(confirmBatteryIsAttachedButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(batteryAttachedConfirm)))
+                    .addComponent(goToSearchButton)
+                    .addComponent(jLabel66))
+                .addGap(0, 160, Short.MAX_VALUE))
         );
         batteryNotAttachedWarningLayout.setVerticalGroup(
             batteryNotAttachedWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(batteryNotAttachedWarningLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabel62)
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel64)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel63)
-                .addGap(34, 34, 34)
-                .addComponent(confirmBatteryIsAttachedButton)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(batteryNotAttachedWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmBatteryIsAttachedButton)
+                    .addComponent(batteryAttachedConfirm))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel65)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(batteryNotAttachedWarningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LiftToTopButton)
+                    .addComponent(confirmBatteryIsAttachedButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel66)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(goToSearchButton)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        batteriesChanged1.setText("0");
+
+        confirmBatteryIsAttachedButton1.setText("Go to idle");
+        confirmBatteryIsAttachedButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                confirmBatteryIsAttachedButton1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                confirmBatteryIsAttachedButton1MouseReleased(evt);
+            }
+        });
+
+        confirmBatteryIsAttachedButton3.setText("Lift to top");
+        confirmBatteryIsAttachedButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                confirmBatteryIsAttachedButton3MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                confirmBatteryIsAttachedButton3MouseReleased(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -2189,8 +2315,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 82, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 82, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
@@ -3062,7 +3188,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addComponent(mintofull16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(status16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(voltcharg16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         tabPanels.addTab("Bat 9-16", jPanel6);
@@ -3087,7 +3213,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 294, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel9Layout.createSequentialGroup()
                     .addContainerGap()
@@ -3120,13 +3246,27 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             }
         });
 
+        debug1toggle.setText("Debug 1");
+        debug1toggle.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                debug1toggleStateChanged(evt);
+            }
+        });
+
+        debug2toggle.setText("Debug 2");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addComponent(droneOnPlatform, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(debug1toggle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(debug2toggle))
+                    .addComponent(droneOnPlatform, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(578, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -3134,7 +3274,11 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(droneOnPlatform, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(debug1toggle)
+                    .addComponent(debug2toggle))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         tabPanels.addTab("x", jPanel10);
@@ -3159,7 +3303,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3185,6 +3329,10 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
         batteriesChanged.setText("0");
 
+        showState.setText("0");
+
+        debugNumber.setText("0");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -3196,13 +3344,18 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                         .addComponent(jLabel31)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addGap(32, 32, 32)
-                            .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(showState, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(debugNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -3244,7 +3397,12 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(tabPanels, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(showState)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(debugNumber)))
                         .addGap(5, 5, 5)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel31)
@@ -4269,20 +4427,108 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     }//GEN-LAST:event_droneOnPlatformMouseReleased
 
     private void confirmDroneFixedButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmDroneFixedButtonMousePressed
-       controller.setDataToDataHandler(7,99);
+       controller.setDataToDataHandler(7,120);
+        //System.out.println("Confirmation sent");
+       droneAttachedToBatteryWarning.setVisible(false);
+        
+        
     }//GEN-LAST:event_confirmDroneFixedButtonMousePressed
 
     private void confirmDroneFixedButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmDroneFixedButtonMouseReleased
          //  controller.setDataToDataHandler(7, 0);
     }//GEN-LAST:event_confirmDroneFixedButtonMouseReleased
 
-    private void confirmBatteryIsAttachedButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButtonMousePressed
-        controller.setDataToDataHandler(7,98);
-    }//GEN-LAST:event_confirmBatteryIsAttachedButtonMousePressed
+    private void debug1toggleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_debug1toggleStateChanged
+        // TODO add your handling code here:
+        
+        controller.setDataToDataHandler(8,88);
+        System.out.println("Debug 1");
+
+       
+    }//GEN-LAST:event_debug1toggleStateChanged
+
+    private void batteryAttachedConfirmMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_batteryAttachedConfirmMouseReleased
+        // TODO add your handling code here:
+        controller.setDataToDataHandler(7,0);
+    }//GEN-LAST:event_batteryAttachedConfirmMouseReleased
+
+    private void batteryAttachedConfirmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_batteryAttachedConfirmMousePressed
+        controller.setDataToDataHandler(7,73);
+    }//GEN-LAST:event_batteryAttachedConfirmMousePressed
 
     private void confirmBatteryIsAttachedButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButtonMouseReleased
-       //controller.setDataToDataHandler(7, 0);
+        controller.setDataToDataHandler(7, 0);
     }//GEN-LAST:event_confirmBatteryIsAttachedButtonMouseReleased
+
+    private void confirmBatteryIsAttachedButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButtonMousePressed
+        controller.setDataToDataHandler(7,72);
+
+    }//GEN-LAST:event_confirmBatteryIsAttachedButtonMousePressed
+
+    private void confirmBatteryIsAttachedButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButton1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmBatteryIsAttachedButton1MousePressed
+
+    private void confirmBatteryIsAttachedButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButton1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmBatteryIsAttachedButton1MouseReleased
+
+    private void LiftToTopButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LiftToTopButtonMousePressed
+        // TODO add your handling code here:
+         controller.setDataToDataHandler(7,74);
+    }//GEN-LAST:event_LiftToTopButtonMousePressed
+
+    private void LiftToTopButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LiftToTopButtonMouseReleased
+        // TODO add your handling code here:
+        controller.setDataToDataHandler(7,0);
+    }//GEN-LAST:event_LiftToTopButtonMouseReleased
+
+    private void confirmBatteryIsAttachedButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButton3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmBatteryIsAttachedButton3MousePressed
+
+    private void confirmBatteryIsAttachedButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButton3MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmBatteryIsAttachedButton3MouseReleased
+
+    private void confirmBatteryIsAttachedButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButton4MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmBatteryIsAttachedButton4MousePressed
+
+    private void confirmBatteryIsAttachedButton4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmBatteryIsAttachedButton4MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmBatteryIsAttachedButton4MouseReleased
+
+    private void goToSearchButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToSearchButtonMousePressed
+        // TODO add your handling code here:
+        controller.setDataToDataHandler(7,75);
+    }//GEN-LAST:event_goToSearchButtonMousePressed
+
+    private void goToSearchButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToSearchButtonMouseReleased
+        // TODO add your handling code here:
+        controller.setDataToDataHandler(7,0);
+    }//GEN-LAST:event_goToSearchButtonMouseReleased
+
+    private void goToSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToSearchButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goToSearchButtonActionPerformed
+
+    private void batteryNotAttachedWarningWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_batteryNotAttachedWarningWindowClosed
+        // TODO add your handling code here:
+
+        
+    }//GEN-LAST:event_batteryNotAttachedWarningWindowClosed
+
+    private void batteryNotAttachedWarningComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_batteryNotAttachedWarningComponentHidden
+        // TODO add your handling code here:
+        windowIsClosed = true;
+     
+    }//GEN-LAST:event_batteryNotAttachedWarningComponentHidden
+
+    private void droneAttachedToBatteryWarningComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_droneAttachedToBatteryWarningComponentHidden
+        // TODO add your handling code here:
+        droneFaultWindowIsClosed = true;
+    }//GEN-LAST:event_droneAttachedToBatteryWarningComponentHidden
 
     /**
      * @param args the command line arguments
@@ -4337,6 +4583,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel BatteryButton8;
     private javax.swing.JLabel BatteryButton9;
     private javax.swing.JPanel ErrorMessagePanel;
+    private javax.swing.JButton LiftToTopButton;
     private javax.swing.JPanel Section;
     private javax.swing.JButton advancedButton;
     private javax.swing.JButton arm0;
@@ -4354,6 +4601,8 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel autoStatus;
     private javax.swing.JPanel autoTab;
     private javax.swing.JLabel batteriesChanged;
+    private javax.swing.JLabel batteriesChanged1;
+    private javax.swing.JButton batteryAttachedConfirm;
     private javax.swing.JLabel batteryNo2Label6;
     private javax.swing.JDialog batteryNotAttachedWarning;
     private javax.swing.JLabel beltStatus;
@@ -4368,6 +4617,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JButton closeAdvanced1;
     private javax.swing.JButton conBelt1Down;
     private javax.swing.JButton confirmBatteryIsAttachedButton;
+    private javax.swing.JButton confirmBatteryIsAttachedButton1;
+    private javax.swing.JButton confirmBatteryIsAttachedButton3;
+    private javax.swing.JButton confirmBatteryIsAttachedButton4;
     private javax.swing.JButton confirmDroneFixedButton;
     private javax.swing.JCheckBox confirmedLiftButton;
     private javax.swing.JCheckBox confirmedRotationButton;
@@ -4393,6 +4645,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel cycle7;
     private javax.swing.JLabel cycle8;
     private javax.swing.JLabel cycle9;
+    private javax.swing.JToggleButton debug1toggle;
+    private javax.swing.JToggleButton debug2toggle;
+    private javax.swing.JLabel debugNumber;
     private javax.swing.JButton detach1Button;
     private javax.swing.JButton detach1Button1;
     private javax.swing.JButton detach1Station;
@@ -4401,6 +4656,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JButton droneOnPlatform;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JPanel eventInfoPanel;
+    private javax.swing.JButton goToSearchButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
@@ -4482,6 +4738,9 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel82;
@@ -4604,6 +4863,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
     private javax.swing.JLabel rotationPostiotionLabel;
     private javax.swing.JLabel rotationPostiotionLabel1;
     private javax.swing.JButton setIdlePos;
+    private javax.swing.JLabel showState;
     private javax.swing.JCheckBox sliderCalCheck;
     private javax.swing.JButton sliderCenter;
     private javax.swing.JButton sliderLeft;
@@ -5093,7 +5353,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             String reportDate = df.format(today);
 
             String filename = "Sumary-" + reportDate + ".txt";
-            File file = new File("\\home\\pi\\Documents\\DronePlattform\\logg\\" + filename);
+            File file = new File("/home/pi/Documents/DronePlattform/logfiles/" + filename);
 
             // if file doesnt exists, then create it
             if (!file.exists()) {
@@ -5132,7 +5392,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
 
             String filename = "logg-" + reportDate + ".txt";
             
-            File file = new File("\\home\\pi\\Documents\\DronePlattform\\logg\\" + filename);
+            File file = new File("/home/pi/Documents/DronePlattform/logfiles/" + filename);
 
             // if file doesnt exists, then create it
             if (!file.exists()) {
@@ -5162,7 +5422,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
             String reportDate = df.format(today);
 
             String filename = "Error-" + reportDate + ".txt";
-            File file = new File("C:\\Users\\dd\\Documents\\NetBeansProjects\\" + filename);
+            File file = new File("/home/pi/Documents/DronePlattform/logfiles/" + filename);
 
             // if file doesnt exists, then create it
             if (!file.exists()) {
@@ -5179,24 +5439,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         }
     }
 
-    /*
-    public void saveText() {
-
-        try {
-            FileWriter writer = new FileWriter("C:\\Users\\dd\\testing.txt");
-            BufferedWriter bw = BufferedWriter(writer);
-            writer.write("her er teksten");
-            bw.close();
-            jtextarea.setText("");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("feili ");
-        }
-    }
-    
-    
-    
-     */
+ 
     private void hasEventChanged() {
         String lastState = receive.getLastEventState();
         String errorState = receive.getLastErrorMessage();
@@ -5217,7 +5460,7 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void showGif() throws MalformedURLException {
+   /* public void showGif() throws MalformedURLException {
         URL url = new URL("<https://articulate-heroes.s3.amazonaws.com/uploads/rte/kgrtehja_DancingBannana.gif>");
         Icon icon = new ImageIcon(url);
         calibrationTime.setIcon(icon);
@@ -5228,29 +5471,36 @@ public class GUI extends javax.swing.JFrame implements KeyListener, Observer {
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
-    }
+    }*/
     
     
     
     public void checkifErrorAccure()
     {
-        if(receive.getSpesificValueFromByte(7)==10)
+       
+      
+        if((receive.getSpesificValueFromByte(12)==10)&&(windowIsClosed)) //&&(!batteryNotAttachedWarning.isVisible()))
         {
+           
+              
         batteryNotAttachedWarning.setSize(600, 400);
         batteryNotAttachedWarning.setLocationRelativeTo(jPanel2);
         batteryNotAttachedWarning.setVisible(true);
+        windowIsClosed = false;
+            
         }
   
-        if(receive.getSpesificValueFromByte(7)==11)
+        if((receive.getSpesificValueFromByte(12)==11)&&(droneFaultWindowIsClosed))
         {
         droneAttachedToBatteryWarning.setSize(600, 400);
         droneAttachedToBatteryWarning.setLocationRelativeTo(jPanel2);
         droneAttachedToBatteryWarning.setVisible(true);
+        droneFaultWindowIsClosed = false;
         }
         
         
         if(receive.getSpesificValueFromByte(7)<=9){
-        controller.setDataToDataHandler(7,0);
+        //controller.setDataToDataHandler(7,0);
         }
     }
 

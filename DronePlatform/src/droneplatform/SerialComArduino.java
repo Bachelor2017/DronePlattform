@@ -9,10 +9,11 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /*
  * Creates the new SerialCom class. creates a new Semaphore wich is shared
  * between serial read and send to make sure on is running at the time
- *
+ *x
  */
 public class SerialComArduino implements Runnable {
 
@@ -53,7 +54,7 @@ public class SerialComArduino implements Runnable {
         try {
             if (!serialPort.isOpened()) {
                 serialPort.openPort();
-                getSerialPort().setParams(19200, 8, 1, 0);
+                getSerialPort().setParams(9600, 8, 1, 0);
                 // reader = new Thread(new SerialReadArduino(this, semaPhore, serialPort, dataHandler));         
                 // reader.start();
             }
@@ -67,17 +68,35 @@ public class SerialComArduino implements Runnable {
         try {
            
             while (true) {
+                
                 byte[] data = serialPort.readBytes(1);
+               // System.out.println(data[0]);
             
                 if (data[0] == -128) {
                     byte[] dataFromArduionoToDH = serialPort.readBytes(176);
-                    //  increment++;
+                    /*
+                    System.out.println("Starting array: ");
+                   System.out.println(dataFromArduionoToDH[110]);
+                   System.out.println(dataFromArduionoToDH[111]);
+                    System.out.println(dataFromArduionoToDH[112]);
+                   System.out.println(dataFromArduionoToDH[113]);
+                    System.out.println(dataFromArduionoToDH[114]);
+                    System.out.println(dataFromArduionoToDH[115]);
+                   System.out.println(dataFromArduionoToDH[116]);
+                   System.out.println(dataFromArduionoToDH[117]);
+                   System.out.println(dataFromArduionoToDH[118]);
+                  System.out.println(dataFromArduionoToDH[119]);
+                    System.out.println(dataFromArduionoToDH[120]);
+*/
+                    // increment++;
                     semaphore.acquire();
                     dataHandler.setDataFromArduino(dataFromArduionoToDH);
                     semaphore.release();
             //       System.out.println("Read Arranged " + Arrays.toString(dataFromArduionoToDH));
                  }
             }
+
+           
 
         } catch (SerialPortException ex) {
             System.out.println("SerialPortException i SerialRead");

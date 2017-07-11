@@ -5,23 +5,36 @@
  */
 package droneplatform;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.googlecode.jsonrpc4j.JsonRpcClient;
+import com.googlecode.jsonrpc4j.JsonRpcServer;
+import com.googlecode.jsonrpc4j.StreamServer;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Olav Rune
  */
 public class DronePlatform {
+
+   
     //private SerialComArduino serialComArduino;
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws InterruptedException, SocketException {
+    public static void main(String[] args) throws InterruptedException, SocketException, UnknownHostException, IOException {
 
         Semaphore semaphore = new Semaphore(1, true);
         DataHandler dataHandler = new DataHandler();
@@ -59,11 +72,33 @@ public class DronePlatform {
 
         UDPReceive udp = new UDPReceive(1111,dataHandler,semaphore);
         udp.start();
- 
-        // Charging current to teensy
-        //SerialComTeensyTransistor transistorTeensy = new SerialComTeensyTransistor("COM NOE", dataHandler, semaphore, bsg);
-        //transistorTeensy.start();
-       
+        /*
+        
+        ObjectMapper userService = new ObjectMapper();
+      //  UserService userService = new UserServiceImpl();
+        JsonRpcServer server = new JsonRpcServer(userService, UserService.class);
+        int maxThreads = 2;
+        int port = 1234;
+        InetAddress bindAdress = InetAddress.getByName("localhost");
+        try {
+            ServerSocket serverSocket = new ServerSocket(port);
+            StreamServer streamServer = new StreamServer(server, maxThreads, serverSocket);
+            streamServer.start();
+        } catch (IOException ex) {
+            Logger.getLogger(DronePlatform.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+        
+        JsonRpcClient client = new JsonRpcClient(userService);
+        client.invoke("getState", new Object[]{}, new OutputStream() {
+            @Override
+            public void write(int b) {
+            }
+        });
+        
+
+      */
 
         while (true) {
             observable.setData();

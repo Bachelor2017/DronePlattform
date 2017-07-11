@@ -67,3 +67,5 @@ DronePlatform/nbproject/project.properties
 *.properties
 *.class
 *.class
+/DronePlatform/nbproject/
+/DronePlatform/test/
