@@ -67,13 +67,23 @@ public class DataHandler {
     public boolean platformMode = false;
     public boolean droneOnPlatform = false;
     /// testing slutt
+    private boolean valueFlag;
+    private boolean messageDeliveredToMega;
+
+    public boolean isMessageDeliveredToMega() {
+        return messageDeliveredToMega;
+    }
+
+    public void setMessageDeliveredToMega(boolean messageDeliveredToMega) {
+        this.messageDeliveredToMega = messageDeliveredToMega;
+    }
    
 
     public DataHandler() {
 
         dataFromArduino = new byte[176];
-        dataToMega = new byte[8];
-        dataFromMega = new byte[13];
+        dataToMega = new byte[9];
+        dataFromMega = new byte[20];
         dataToMega[0] = 101;
         dataToMega[1] = 1; //setting to manual from start
         dataFromMega[5] = 1;  //????????????????????????????????????????????????????
@@ -93,7 +103,9 @@ public class DataHandler {
      * @return retuns a byte[] retrieved from the mikrocontroller
      */
     public byte[] getDataFromArduino() {
+         valueFlag = false;
         return dataFromArduino;
+       
     }
 
     /**
@@ -103,6 +115,7 @@ public class DataHandler {
      */
     public void setDataFromArduino(byte[] newData) {
         this.dataFromArduino = newData;
+        valueFlag = true;
     }
 
     /**
@@ -122,7 +135,8 @@ public class DataHandler {
      */
     public void setDataFromMega(byte[] serialData) {
         this.dataFromMega = serialData;
-
+        
+       
     }
     
     
@@ -140,6 +154,7 @@ public class DataHandler {
     public void droneOnPlatform(int value)
     {
         this.dataToMega[6] = (byte)value;
+        messageDeliveredToMega = false;
 
     }
 
@@ -171,11 +186,11 @@ public class DataHandler {
  
     public void setCalibrationStatus(boolean value) {
         if (value == true) {
-            dataToMega[4] = 106;
+            dataToMega[4] = 107;
         } else {
             dataToMega[4] = 0;
         }
-        System.out.println(Arrays.toString(dataToMega));
+       
     }
 
     public void setSpesificDataFromGUI(int byteNumber, int value) {
@@ -243,6 +258,10 @@ public class DataHandler {
     public void setNextBatteryNumberToChange(int batteryNumber) {
         this.dataToMega[5] = (byte) batteryNumber;
 
+    }
+
+    boolean hasNewValues() {
+       return valueFlag;
     }
     
   
