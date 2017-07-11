@@ -76,7 +76,7 @@ public class SerialComMega implements Runnable {
                     
                     semaphore.acquire();
                     dataToTeensy = dataHandler.getDataToMega();
-                    //boolean flag = dataHandler.isMessageDeliveredToMega();
+                    boolean flag = dataHandler.isMessageDeliveredToMega();
                     semaphore.release();
                    //System.out.println("Read Arranged MEGA " + Arrays.toString(dataToTeensy));
                     increment1++;

@@ -69,6 +69,7 @@ public class DataHandler {
     /// testing slutt
     private boolean valueFlag;
     private boolean messageDeliveredToMega;
+    private int HighestBattery;
 
     public boolean isMessageDeliveredToMega() {
         return messageDeliveredToMega;
@@ -262,6 +263,15 @@ public class DataHandler {
 
     boolean hasNewValues() {
        return valueFlag;
+    }
+
+    void setBatteryWithHighestPercent(int nextBatteryNumber) {
+        
+        HighestBattery = nextBatteryNumber;
+    }
+    public int getBatteryWithHighestPercent() {
+        
+        return HighestBattery;
     }
     
   

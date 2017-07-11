@@ -69,8 +69,9 @@ public class BatteryStationLogic implements Runnable {
                 dataFromArduino = dh.getDataFromArduino();
                 dataFromMega = dh.getDataFromMega();
                
-                semaphore.release();
+          
                 dh.setNextBatteryNumberToChange(getNextBatteryToChange());
+                semaphore.release();
                 if(hasNewValue){
                 updateBatteryInformation(dataFromArduino);
                 setAllbatterychargeCurrent();
@@ -265,6 +266,7 @@ public class BatteryStationLogic implements Runnable {
 
         }
         nextBatteryNumber = nextBatteryNumber + 1;
+        dh.setBatteryWithHighestPercent(nextBatteryNumber);
 
         // System.out.println("nextBatteryNumber: " + nextBatteryNumber);
         //  System.out.println("nextBatteryPercentage: " + lastBatteryPercentage);
