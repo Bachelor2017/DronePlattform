@@ -78,7 +78,7 @@ public class UDPReceive extends Thread {
         }
         try {
             semaphore.acquire();
-            dh.droneOnPlatform(value);
+            dh.startCommandToMega(value);
             semaphore.release();
         } catch (InterruptedException ex) {
             Logger.getLogger(UDPReceive.class.getName()).log(Level.SEVERE, null, ex);

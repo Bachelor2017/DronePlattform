@@ -5,6 +5,7 @@
  */
 package droneplatform;
 
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,11 +20,14 @@ public class CommunicationClass {
     private final Semaphore semapore;
     private Thread t;
     private byte[] data;
+     private BatteryStationLogic batteryStationLogic;
+      private ArrayList<BatteryStation> batteries;
     
-    public CommunicationClass(DataHandler dh, Semaphore semapore){
+    public CommunicationClass(DataHandler dh, Semaphore semapore, BatteryStationLogic batteryStationLogic){
         
         this.dh = dh;
         this.semapore = semapore;
+          this.batteryStationLogic = batteryStationLogic;
         
     }
     
@@ -32,7 +36,7 @@ public class CommunicationClass {
         updateData();
         int returnNumb = 0;
         // Checking if drone is in waiting position
-        // data{6[ = 1: waiting with battery. 2: waiting for battery. 3: picking up battery. 4: changing battery. 5: finished changing but still working.
+        // data[9] = 1: waiting with battery. 2: waiting for battery. 3: picking up battery. 4: changing battery. 5: finished changing but still working.
         
         /*
         if(data[6] == 2){
@@ -41,16 +45,49 @@ public class CommunicationClass {
         }
 */
         
-        if(data[6] == 1){
-            dh.droneOnPlatform(1);
+        if(data[9] == 1){
+            dh.startCommandToMega(1);
             returnNumb = 1;
         }
         else {
-            returnNumb = 2;
+            returnNumb = data[9];
         }
         
         return returnNumb;
     }
+    public int dispose(){
+        updateData();
+        int returnNumb = 0;
+        if(data[9] ==1){
+            dh.startCommandToMega(3);
+        }
+        
+        return returnNumb;
+    }
+    public byte[] getData(){
+        byte[] returnByte = new byte[40];
+        returnByte[0] = 1;
+        
+        // get battery percent
+         batteries = batteryStationLogic.getArrayListBatteries();
+         for(int i = 1; i <=16; i++){
+             returnByte[i] = (byte)batteries.get(i).getChargedPercentage();
+         }
+         
+         returnByte[17] = data[6];          //Platform case number
+         returnByte[18] = data[9];  //Status number     1: waiting with battery. 2: waiting for battery. 3: picking up battery. 4: changing battery. 5: finished changing but still working.
+         returnByte[19] = data[10]; //number of battery changed
+         returnByte[20] = data[13]; // fault code from platform.    0 - ok. 10 - Battery stuck on either drone or charging station. 11 - drone stuck on arm
+         
+         
+        
+        
+        
+        
+        return returnByte;
+    }
+    
+    
 
     private void updateData() {
         try {

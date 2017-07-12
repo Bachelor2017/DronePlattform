@@ -152,7 +152,7 @@ public class DataHandler {
      * if the drone signal is received, the byte is sett to 1. 
      * @param value the value of the signal from drone. 1= drone located, 0 = no drone on platform
      */
-    public void droneOnPlatform(int value)
+    public void startCommandToMega(int value)
     {
         this.dataToMega[6] = (byte)value;
         messageDeliveredToMega = false;

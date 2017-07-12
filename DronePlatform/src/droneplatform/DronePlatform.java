@@ -66,7 +66,7 @@ public class DronePlatform {
          SerialComMega serialComTeensy = new SerialComMega("/dev/ttyACM0", dataHandler, semaphore);
         serialComTeensy.start();
         
-          CommunicationClass com = new CommunicationClass(dataHandler, semaphore);
+          CommunicationClass com = new CommunicationClass(dataHandler, semaphore, bsg);
         
         
 
