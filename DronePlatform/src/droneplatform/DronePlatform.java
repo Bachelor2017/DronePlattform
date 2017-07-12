@@ -70,6 +70,7 @@ public class DronePlatform {
         Semaphore semaphoreCom = new Semaphore(1, true);
         DataHandlerCom dataHandlerCom= new DataHandlerCom();
         CommunicationClass com = new CommunicationClass(dataHandler, semaphore, bsg, dataHandlerCom,semaphoreCom);
+        com.start();
         
         UDPSend udpSend = new UDPSend(dataHandlerCom,semaphoreCom);
         udpSend.start();
@@ -77,7 +78,7 @@ public class DronePlatform {
          
         
 
-        UDPReceive udpRecive = new UDPReceive(1111,dataHandler,semaphore);
+        UDPReceive udpRecive = new UDPReceive(1111,dataHandler,semaphore, dataHandlerCom,semaphoreCom);
         udpRecive.start();
         /*
         

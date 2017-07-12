@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class UDPReceive extends Thread {
 
-    Semaphore semaphore = new Semaphore(1, true);
+
     private DataHandler dh;
     private int consumerID;
     private int numberOfProducerThreads;
@@ -29,34 +29,43 @@ public class UDPReceive extends Thread {
     private static final int PARAMS = 10;
     private DatagramSocket socket;
     private DatagramPacket datagram;
+    private final DataHandlerCom dhCom;
+    private final Semaphore semaphore;
+     private final Semaphore semaphoreCom;
 
-    public UDPReceive(int PORT, DataHandler dh, Semaphore semapore) throws SocketException {
+    public UDPReceive(int PORT, DataHandler dh, Semaphore semapore, DataHandlerCom dhCom, Semaphore semaphoreCom) throws SocketException {
 
         this.sleepTime = 1;
         stop = false;
         this.dh = dh;
-        this.semaphore = semaphore;
+        this.semaphore = semapore;
         this.PORT = PORT;
         byte[] buf = new byte[PARAMS];
         datagram = new DatagramPacket(buf, buf.length);
         socket = new DatagramSocket(this.PORT);
+        this.dhCom = dhCom;
+        this.semaphoreCom = semaphoreCom;
 
     }
 
     public void run() {
 
         while (!stop) {
-            System.out.println("i run");
-            byte[] b = new byte[10];    // size of byte to be received
+            //System.out.println("i run");
+            byte[] b = new byte[3];    // size of byte to be received
             try {
                 b = receiveParam();
 
             } catch (IOException ex) {
                 Logger.getLogger(UDPReceive.class.getName()).log(Level.SEVERE, null, ex);
             }
-          //  System.out.println(Arrays.toString(b));
-          //  System.out.println("prosess");
-            processData(b);
+            try {
+                //  System.out.println(Arrays.toString(b));
+                //  System.out.println("prosess");
+                processData(b);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(UDPReceive.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
 
@@ -68,7 +77,7 @@ public class UDPReceive extends Thread {
         return datagramData;
     }
 
-    private void processData(byte[] b) {
+    private void processData(byte[] b) throws InterruptedException {
      
         int value = 0;
         if (b[0] == 1) {
@@ -83,6 +92,12 @@ public class UDPReceive extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(UDPReceive.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        semaphoreCom.acquire();
+        dhCom.setCommands(b);
+     
+        semaphoreCom.release();
+        
 
     }
 
