@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author pi
  */
-public class CommunicationClass {
+public class CommunicationClass extends Thread{
 
     private final DataHandler dh;
     private final Semaphore semapore;
@@ -22,12 +22,30 @@ public class CommunicationClass {
     private byte[] data;
      private BatteryStationLogic batteryStationLogic;
       private ArrayList<BatteryStation> batteries;
+    private final DataHandlerCom dhCom;
+    private final Semaphore semaporeCom;
     
-    public CommunicationClass(DataHandler dh, Semaphore semapore, BatteryStationLogic batteryStationLogic){
+    public CommunicationClass(DataHandler dh, Semaphore semapore, BatteryStationLogic batteryStationLogic, DataHandlerCom dhCom, Semaphore semaphoreCom){
         
         this.dh = dh;
         this.semapore = semapore;
           this.batteryStationLogic = batteryStationLogic;
+          this.dhCom = dhCom;
+          this.semaporeCom = semaphoreCom;
+        
+    }
+    public void run(){
+        while(true){
+            try {
+                semaporeCom.acquire();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CommunicationClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+           semaporeCom.release();
+            
+        }
         
     }
     

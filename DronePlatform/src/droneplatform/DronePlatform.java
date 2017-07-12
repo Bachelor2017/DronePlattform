@@ -66,15 +66,19 @@ public class DronePlatform {
          SerialComMega serialComTeensy = new SerialComMega("/dev/ttyACM0", dataHandler, semaphore);
         serialComTeensy.start();
         
-          CommunicationClass com = new CommunicationClass(dataHandler, semaphore, bsg);
         
+        Semaphore semaphoreCom = new Semaphore(1, true);
+        DataHandlerCom dataHandlerCom= new DataHandlerCom();
+        CommunicationClass com = new CommunicationClass(dataHandler, semaphore, bsg, dataHandlerCom,semaphoreCom);
         
+        UDPSend udpSend = new UDPSend(dataHandlerCom,semaphoreCom);
+        udpSend.start();
 
          
         
 
-        UDPReceive udp = new UDPReceive(1111,dataHandler,semaphore);
-        udp.start();
+        UDPReceive udpRecive = new UDPReceive(1111,dataHandler,semaphore);
+        udpRecive.start();
         /*
         
         ObjectMapper userService = new ObjectMapper();
